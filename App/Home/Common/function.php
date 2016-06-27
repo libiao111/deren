@@ -22,7 +22,7 @@ function pullCode($data){
 	$to = $data['phone'];
 	$templateId = "1623";
 	$param="您的,$code,3";
-	$ucpass->templateSMS($appId,$to,$templateId,$param);
-	echo '1';
-
+	$result = $ucpass->templateSMS($appId,$to,$templateId,$param);
+	echo 'q1';
+	return $result;
 }

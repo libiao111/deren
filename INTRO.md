@@ -1,3 +1,5 @@
+ThinkPHP 3.2.3
+
 1.CSS、JS、IMG、QITA文件：
     样式表JS、JQ路径：./Public/
 

@@ -45,19 +45,17 @@ class LoginController extends Controller {
 		if(IS_AJAX){
 			$this->error('页面不存在!');die;
 		}
-		//获取手机号
+		/*赋值变量*/
 		$phone = I('phone');
-		//生成六位随机数
-		$chars = str_repeat('0123456789',6);
-		//打乱重组
-		$str = str_shuffle($chars);
-		session('str',$str);
-		//$str = substr($chars,0,6);
+		/*生成六位随机数*/
+		$str = rand('100000','999999');
 		$data['code'] = $str;
 		$data['phone'] = $phone;
-		pullCode($data);
-		if($data){
+		$code = pullCode($data);
+		/*返回状态*/
+		if($code){
 			$data = array('status'=>1);
+			session('str',md5($str));
 		}else{
 			$data = array('status'=>0);
 		}
@@ -66,26 +64,36 @@ class LoginController extends Controller {
 	/*
 	用户注册
 	*/
-	public function register(){
-		if(IS_AJAX){
+	public function register()
+	{
+		if (IS_AJAX) {
 			$this->error('页面不存在!');die;
 		}
-		//session 获取验证码
-		$str = session('str');
+		/*session 获取验证码*/
+		$str = (session('str'));
+		/*赋值变量*/
+		$code = md5(I('code'));
+		$password = I('password');
+		$user_mobi = I('user_mobi');
+		/*查询手机号是否存在*/
 		$sql = M('users')->where(array('user_mobi'=>$user_mobi))->select();
-		if($sql){
+		/*判断验证码是否正确*/
+		if($code !=$str){
 			$data = array('status'=>2);
-			$this->ajaxReturn($data,'json');
-		}else if(I('code')==$str || I('password')==I('password2'){
+			$this = ajaxReturn($data,'json');
+		}
+		/*判断条件成立，添加记录*/
+		if (!$sql && $password !="") {
 			$arr = array(
-				'password' 		=>md5(I('password')),
-				'user_mobi'		=>I('user_mobi'),
+				'password' 		=>md5($password),
+				'user_mobi'		=>$user_mobi,
 			);
 			$result = M('users')->add($arr);
 		}
-		if($result){
+		/*返回状态*/
+		if ($result) {
 			$data = array('status'=>1);
-		}else{
+		} else {
 			$data = array('status'=>0);
 		}
 		$this->ajaxReturn($data,'json');

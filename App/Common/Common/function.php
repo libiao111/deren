@@ -5,7 +5,20 @@
 function p($array) {
 	dump($array, 1, '', 0);
 }
-
+/*rbac节点递归重组*/ 
+function node_merge($node,$access = null, $pid = 0){
+    $arr = array();
+    foreach($node as $v){
+        if(is_array($access)){
+            $v['access']= in_array($v['id'],$access) ? 1 : 0;
+        }
+        if($v['parent_id']==$pid){
+            $v['child'] = node_merge($node,$access,$v['id']);
+            $arr[]=$v;
+        }
+    }
+    return $arr;
+}
 /*裁剪字符*/
 function substr_cut($str, $start, $len = '', $type = 0)
 {
@@ -115,4 +128,5 @@ function uploadHandle($file, $width, $height = null)
         $result = $upload->getError();
     }
     return $result;
+
 }
