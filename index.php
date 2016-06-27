@@ -21,7 +21,7 @@ define('APP_DEBUG',True);
 define('APP_PATH','./App/');
 
 // 应用运行时目录（可写）
-define('RUNTIME_PATH','./Runtime/');
+define('RUNTIME_PATH','../runtime/deren/');
 
 // 引入ThinkPHP入口文件
-require './ThinkPHP/ThinkPHP.php';
+require '../think/ThinkPHP/ThinkPHP.php';
