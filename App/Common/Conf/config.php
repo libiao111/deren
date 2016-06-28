@@ -22,7 +22,7 @@ return array(
     'DB_HOST' => 'localhost',
     'DB_USER' => 'root',
     'DB_PWD'  => '',
-    'DB_NAME' => '',
+    'DB_NAME' => 'deren',
 
     'RBAC_SUPERADMIN' => 'admin',               // 超级管理员名称
     'ADMIN_AUTH_KEY'  => 'superadmin',          // 超级管理员识别

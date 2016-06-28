@@ -5,6 +5,8 @@ function home()
 {
     echo '客户端';
 }
+
+
 function pullCode($data){
 	//载入ucpass类
 	require_once('./Public/code/lib/Ucpaas.class.php');
