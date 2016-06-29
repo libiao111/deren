@@ -7,21 +7,26 @@ class LoginController extends Controller {
 	用户登录
 	*/
 	public function login(){
-		if(IS_AJAX){
-			$this->error('页面不存在!');die;
+		if(!session('user')){
+			if(IS_AJAX){
+				$this->error('页面不存在!');die;
+			}
+			$arr = array(
+				'user_mobi' =>I('user_mobi'),
+				'password'	=>I('password'),
+			);
+			$result = M('users')->where($arr)->find();
+			if($result){
+				$data = array('status' =>1);
+				session('user',$result);
+			}else{
+				$data = array('status'=>0);
+			}
+			$this->ajaxReturn($data,'json');
+		} else {
+			$this->dispaly('login');die;
 		}
-		$arr = array(
-			'user_mobi' =>I('user_mobi'),
-			'password'	=>I('password'),
-		);
-		$result = M('users')->where($arr)->find();
-		if($result){
-			$data = array('status' =>1);
-		}else{
-			$data = array('status'=>0);
-		}
-		$this->ajaxReturn($data,'json');
-	} 
+	}
 	/*
 	注册时失去焦点验证手机号是否存在
 	*/
@@ -42,9 +47,6 @@ class LoginController extends Controller {
 	获取验证码
 	*/
 	public function sms(){
-		if(IS_AJAX){
-			$this->error('页面不存在!');die;
-		}
 		/*赋值变量*/
 		$phone = I('phone');
 		/*生成六位随机数*/
@@ -99,7 +101,77 @@ class LoginController extends Controller {
 		$this->ajaxReturn($data,'json');
 	}
 
-
+ 	/*修改密码*/
+    public function xiugai(){
+    	if(IS_AJAX){
+    		$this->error('页面不存在');die;
+    	}
+        /*获取session中的验证码*/
+        $str = (session('str'));
+        /*获取值*/
+    	$id = I('id');
+        $code = md5(I('code'));
+        $phone = I('phone');
+        $password = I('password');
+        /*查询手机号是否存在*/
+        $arr = array(
+            'user_mobi' =>$phone
+        );
+        $sql = M('users')->where($arr)->select();
+        /*判断验证码是否正确*/
+		if(!$code = $str){
+        	$data = array('status'=>2);
+			$this = ajaxReturn($data,'json');
+        }
+        /*执行修改操作*/
+        if(!$sql && $password!=""){
+            $arr['id']=$id;
+            $arr['password']=md5($password);
+            $result = M('users')->save($arr);
+        }
+        /*返回值*/
+        if($result){
+        	$data = array('status'=>1);
+        } else {
+        	$data = array('status'=>0);
+        }
+    	$this->ajaxReturn($data,'json')
+    }
+    /*修改手机号*/
+    public function mobi(){
+    	if(IS_AJAX){
+    		$this->error('页面不存在');die;
+    	}
+    	/*获取session中的验证码*/
+        $str = (session('str'));
+        /*获取值*/
+    	$id = I('id');
+        $code = md5(I('code'));
+        $phone = I('phone');
+        /*查询手机号是否存在*/
+        $arr = array(
+            'user_mobi' =>$phone
+        );
+        $sql = M('users')->where($arr)->select();
+        /*判断验证码是否正确*/
+		if(!$code = $str){
+        	$data = array('status'=>2);
+			$this = ajaxReturn($data,'json');
+        }
+        /*执行修改*/
+        if($sql){
+        	$arr['id']=>$id;
+        	$arr['user_mobi']=>$phone;
+        	$result = M('users')->save($arr);
+        }
+        /*返回值*/
+        if($result){
+        	$data = array('status'=>1);
+        }else{
+        	$data = array('status'=>0);
+        }
+        $this->ajaxReturn($data,'json');
+    }
 
 }
 ?>
