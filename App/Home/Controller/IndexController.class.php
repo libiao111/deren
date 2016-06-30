@@ -4,15 +4,13 @@ use Think\Controller;
 /**
 * 用户端
 */
-
-header('content-type:text/html;charset =utf-8');
 class IndexController extends Controller
 {
     public function index()
     {
         /*查询所有课程*/
     	$arr = D("course")->order('id')->select();
-		$this->assign('course',$arr);
+        $this->assign('course',$arr);
         $this->display();
     }
     /*线下课*/
@@ -71,8 +69,9 @@ class IndexController extends Controller
         );
         /*关联查询*/
 		$result = D("course")->relation($arr1)->where($arr)->order('id')->select();
+        p($result);
         $this->assign('course',$result);
-        $this->display();
+        //$this->display();
     }
     /*订单表*/
     public function ordera()
