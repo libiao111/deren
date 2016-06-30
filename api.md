@@ -27,6 +27,7 @@
 <!-- ------------------------------------------------------------------- -->
 
 二、接口信息
+
 	1、用户注册-----------------------------------------------------------------
 		1)请求路径：{:U('Login/register')}
 		2)提交方式：$.post();
@@ -40,7 +41,8 @@
 			data {
 				status： value 0 注册失败，1 注册成功，2 验证码错误
 			};
-	
+
+
 	2、 失去焦点验证手机是否被注册-----------------------------------------------
 		1)提交路径：{:U('Login/register1')}
 		2)提交方式：$.post();
@@ -53,6 +55,8 @@
 			data {
 				status:value 0 可以注册，1 手机已被注册
 			}
+
+
 	3、 生成短信验证码 ---------------------------------------------------------
 		1)提交路径：{:U('Login/sms')}
 		2)提交方式：$.post();
@@ -65,6 +69,8 @@
 			data {
 				status:value 0 生成验证码失败，1 生成验证码成功
 			}
+
+
 	4、用户登录 ---------------------------------------------------
 		1)提交路径:{:U('Login/login')}
 		2)提交方式：$.post()
@@ -77,7 +83,6 @@
 			{
 				status => value 0 手机或密码不正确，1 登录成功
 			}
-
 
 
 	5、修改密码------------------------------------------------------
@@ -95,10 +100,7 @@
 			}
 
 
-
-
 	6、修改手机 ------------------------------------------------------
-
 		1)提交路径:{:U('Login/mobi')}
 		2)提交方式：$.post()
 		3)提交数据：
@@ -111,27 +113,30 @@
 			{
 				status => value 0 手机修改失败，1 手机修改成功， 2 验证码不正确
 			}
+
+
 	7、查询线下课，视频课，音频课 -------------------------------------
 		1) 注：$course 为php分配命名。
-        2) 页面名称：offline.html video.html voice.html
+        2) 页面名称：offline.html, video.html, voice.html
         3) 反馈数据：
 			$couse = array(	
 				[0] => array(
 		            [id] => value (课程id),
-		            [type] => value (1,2,3),
-		            [course_name] => value (课程名),
-		            [course_photo] => value (课程缩略图),
-		            [course_intro] => value (课程简介),
-		            [course_price] => value (课程价格),
-		            [teach_name] => value (老师名),
-		            [teach_mobi] => value (老师手机),
-		            [teach_add] => value (老师地址),
-		            [teach_intro] => value (老师简介),
-		            [classtime] => value (课时总长),
-		            [offline] => value (线下课图片路径),
-		            [addtime] =>value (添加时间)
-		            [video_url] => value (音视频路径),
-		            [class_num] => value (总课节),
+		            [type] 			=> value (1:线下课, 2:视频课, 3:音频课),
+		            [course_name] 	=> value (课程名),
+		            [course_photo] 	=> value (课程缩略图),
+		            [course_intro] 	=> value (课程简介),
+		            [course_price] 	=> value (课程价格),
+		            [teach_name] 	=> value (老师名),
+		            [teach_mobi] 	=> value (老师手机),
+		            [teach_add] 	=> value (老师地址),
+		            [teach_intro] 	=> value (老师简介),
+		            [classtime] 	=> value (课时总长),
+		            [offline] 		=> value (线下课图片路径),
+		            [addtime] 		=> value (添加时间)
+		            [video_url] 	=> value (音视频路径),
+		            [class_num] 	=> value (总课节),
+		            [status] 		=> value (0:未购买, 1:已购买)
 		        ),
 				.....
 			);
@@ -139,7 +144,8 @@
 		<foreach name="course" item="v">
 			# code...
 		</foreach>
-		
+
+
 	8、课程详情---------------------------------------------------------------->
 		1)注：$course 为php分配命名。
         2)页面名称：offlinedetails.html, videodetails.html, voicedetails.html
@@ -160,20 +166,20 @@
 		            [offline] => value (线下课图片路径),
 		            [video_url] => value (音视频路径),
 		            [class_num] => value (总课节),
-		            [addtime] => value (添加时间)
-		            [class] => array(
-		                    [0] => array(
-	                            [id] => 1
-	                            [class_name] => value (课时名),
-	                            [class_time] => value (上课时间),
-	                            [class_add] => vlaue (课时地址),
-	                            [course_id] => value (课程id),
-	                            [class_mins] => value (课时长),
-	                            [paixu] => value (课时排序)
-	                        )
-							...
-	                )
-					[bigpho] => Array(
+		            [addtime] => value (添加时间),
+		            [class] => array( //课时
+	                    [0] => array(
+                            [id] => 1
+                            [class_name] => value (课时名),
+                            [class_time] => value (上课时间),
+                            [class_add] => vlaue (课时地址),
+                            [course_id] => value (课程id),
+                            [class_mins] => value (课时长),
+                            [paixu] => value (课时排序)
+                        ),
+						...
+	                ),
+					[bigpho] => Array( //大图
 						[0]=>array(
 							[id] =>value (图片id)
 							[course_id] =>value (课程id)
@@ -189,6 +195,8 @@
 		<foreach name="course" item="va">
 			# code...
 		</foreach>
+
+
 	9、订单 ---------------------------------------------------------
 		1)提交路径:{:U('Index/ordera')}
 		2)提交方式：$.post()
