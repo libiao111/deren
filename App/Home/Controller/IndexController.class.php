@@ -9,7 +9,7 @@ class IndexController extends Controller
     public function index()
     {
         /*查询所有课程*/
-    	$arr = D("course")->order('id')->select();
+    	$arr = M("course")->order('id')->select();
         $this->assign('course',$arr);
         $this->display();
     }
@@ -20,7 +20,7 @@ class IndexController extends Controller
     		'type'=>1
 		);
         /*查询所有线下课*/
-		$result = D("course")->where($arr)->order('id desc')->select();
+		$result = M("course")->where($arr)->order('id desc')->select();
         $this->assign('course',$result);
     	$this->display();
     }
@@ -31,7 +31,7 @@ class IndexController extends Controller
     		'type'=>2
 		);
         /*查询所有视频课*/
-		$result = D("course")->where($arr)->order('id desc')->select();
+		$result = M("course")->where($arr)->order('id desc')->select();
 		$this->assign('course',$result);
     	$this->display();
     }
@@ -42,9 +42,9 @@ class IndexController extends Controller
     		'type'=>3
 		);
 		/*查询所有音频课*/
-		$result = D("course")->where($arr)->order('id desc')->select();
+		$result = M("course")->where($arr)->order('id desc')->select();
 		$this->assign('course',$result);
-    	$this->display();
+        $this->display();
     }
     /*线下课详情*/
     public function offlinedetails()
@@ -57,7 +57,7 @@ class IndexController extends Controller
             'bigpho','class'
         );
         /*关联查询*/
-		$result = D("course")->relation($arr1)->where($arr)->order('id')->select();
+		$result = M("course")->relation($arr1)->where($arr)->order('id')->select();
         $this->assign('course',$result);
         $this->display();
     }
@@ -72,7 +72,7 @@ class IndexController extends Controller
             'bigpho','class'
         );
         /*关联查询*/
-        $result = D("course")->relation($arr1)->where($arr)->order('id')->select();
+        $result = M("course")->relation($arr1)->where($arr)->order('id')->select();
         $this->assign('course',$result);
         $this->display();
     } 
@@ -87,7 +87,7 @@ class IndexController extends Controller
             'bigpho','class'
         );
         /*关联查询*/
-        $result = D("course")->relation($arr1)->where($arr)->order('id')->select();
+        $result = M("course")->relation($arr1)->where($arr)->order('id')->select();
         $this->assign('course',$result);
         $this->display();
     }

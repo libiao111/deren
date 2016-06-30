@@ -26,7 +26,7 @@ class LoginController extends Controller
 			}
 			$this->ajaxReturn($data,'json');
 		} else {
-			$this->dispaly('login');die;
+			$this->display('login');die;
 		}
 	}
 	/*
@@ -67,6 +67,7 @@ class LoginController extends Controller
 		}
 		
 	}
+
 	/*
 	用户注册
 	*/
@@ -86,7 +87,7 @@ class LoginController extends Controller
 		/*判断验证码是否正确*/
 		if($code !=$str){
 			$data = array('status'=>2);
-			$this = ajaxReturn($data,'json');
+			$this -> ajaxReturn($data,'json');
 		}
 		/*判断条件成立，添加记录*/
 		if (!$sql && $password !="") {
@@ -116,20 +117,21 @@ class LoginController extends Controller
         /*获取值*/
     	$id = I('id');
         $code = md5(I('code'));
-        $phone = I('phone');
+        $phone = I('user_mobi');
         $password = I('password');
         /*查询手机号是否存在*/
         $arr = array(
             'user_mobi' =>$phone
         );
         $sql = M('users')->where($arr)->select();
+        p($sql);
         /*判断验证码是否正确*/
 		if(!$code = $str){
         	$data = array('status'=>2);
-			$this = ajaxReturn($data,'json');
+			$this ->ajaxReturn($data,'json');
         }
         /*执行修改操作*/
-        if(!$sql && $password!=""){
+        if($sql && $password!=""){
             $arr['id']=$id;
             $arr['password']=md5($password);
             $result = M('users')->save($arr);
@@ -140,7 +142,7 @@ class LoginController extends Controller
         } else {
         	$data = array('status'=>0);
         }
-    	$this->ajaxReturn($data,'json')
+    	$this->ajaxReturn($data,'json');
     }
     /*修改手机号*/
     public function mobi()
@@ -153,22 +155,23 @@ class LoginController extends Controller
         /*获取值*/
     	$id = I('id');
         $code = md5(I('code'));
-        $phone = I('phone');
+        $phone1 = I('user_mobi');
+        $phone2 = I('phone');
         /*查询手机号是否存在*/
         $arr = array(
-            'user_mobi' =>$phone
+            'user_mobi' =>$phone1
         );
         $sql = M('users')->where($arr)->select();
         /*判断验证码是否正确*/
 		if(!$code = $str){
         	$data = array('status'=>2);
-			$this = ajaxReturn($data,'json');
+			$this -> ajaxReturn($data,'json');
         }
         /*执行修改*/
         if($sql){
-        	$arr['id']=>$id;
-        	$arr['user_mobi']=>$phone;
-        	$result = M('users')->save($arr);
+        	$arr1['id']= $id;
+        	$arr1['user_mobi']= $phone2;
+        	$result = M('users')->save($arr1);
         }
         /*返回值*/
         if($result){

@@ -106,8 +106,8 @@
 		3)提交数据：
 			{	
 				id:value (用户id),
-				user_mobi:value (手机号),
-				password:value (密码)
+				user_mobi:value (旧手机号),
+				phone:value (新手机号),
 			}
 		4)反馈数据：
 			{
@@ -153,7 +153,6 @@
 			$couse array{	
 				[0] => array(
 		            [id] => value (课程id),
-		            [type] =>value (分类名),
 		            [course_name] => value (课程名),
 		            [course_photo] => value (课程缩略图),
 		            [course_intro] => value (课程简介),
