@@ -116,7 +116,7 @@
 		2)提交方式：$.post();
 		3)数据类型：
 			{	
-				'type'=>value(分类名)
+				'type'=>value(1,2,3)
 			};
 		4) 注：$course 为php分配命名。
         5) 页面名称：offline.html video.html voice.html
@@ -124,7 +124,7 @@
 			$couse = array(	
 				[0] => array(
 		            [id] => value (课程id),
-		            [type] => value (分类名),
+		            [type] => value (1,2,3),
 		            [course_name] => value (课程名),
 		            [course_photo] => value (课程缩略图),
 		            [course_intro] => value (课程简介),
@@ -146,9 +146,15 @@
 			# code...
 		</foreach>
 		
-	8、课程详情-------------------------------------------------------------- -->
+	8、课程详情---------------------------------------------------------------->
+		1)请求路径：{:U('Index/offlinedetails ,videodetails voicedetails')}
+		2)提交方式：$.post();
+		3)数据类型：
+			{	
+				'id'=>value(课程id)
+			};
 		1)注：$course 为php分配命名。
-        2)页面名称：课程详情.html
+        2)页面名称：offlinedetails.html, videodetails.html, voicedetails.html
         3)反馈数据：
 			$couse array{	
 				[0] => array(

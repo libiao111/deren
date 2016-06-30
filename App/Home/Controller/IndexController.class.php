@@ -14,23 +14,19 @@ class IndexController extends Controller
         $this->display();
     }
     /*线下课*/
-    public function offLine()
+    public function offline()
     {
-    	$arr = array(
+        $arr = array(
     		'type'=>1
 		);
         /*查询所有线下课*/
 		$result = D("course")->where($arr)->order('id desc')->select();
-		$this->assign('course',$result);
+        $this->assign('course',$result);
     	$this->display();
     }
     /*视频课*/
     public function video()
     {
-    	if(IS_AJAX){
-    		$this->error('页面不存在');die;
-    	}
-    	/*获取id*/
     	$arr = array(
     		'type'=>2
 		);
@@ -42,10 +38,6 @@ class IndexController extends Controller
     /*音频课*/
     public function voice()
     {
-    	if(IS_AJAX){
-    		$this->error('页面不存在');die;
-    	}
-    	/*获取id*/
     	$arr = array(
     		'type'=>3
 		);
@@ -54,13 +46,10 @@ class IndexController extends Controller
 		$this->assign('course',$result);
     	$this->display();
     }
-    /*课程详情*/
-    public function details()
+    /*线下课详情*/
+    public function offlinedetails()
     {
-    	if(IS_AJAX){
-    		$this->error('页面不存在');die;
-    	}
-        $id = I('id');
+    	$id = I('id');
     	$arr = array(
     		'id'=>$id
 		);
@@ -69,9 +58,38 @@ class IndexController extends Controller
         );
         /*关联查询*/
 		$result = D("course")->relation($arr1)->where($arr)->order('id')->select();
-        p($result);
         $this->assign('course',$result);
-        //$this->display();
+        $this->display();
+    }
+     /*视频课详情*/
+    public function videodetails()
+    {
+        $id = I('id');
+        $arr = array(
+            'id'=>$id
+        );
+        $arr1 = array(
+            'bigpho','class'
+        );
+        /*关联查询*/
+        $result = D("course")->relation($arr1)->where($arr)->order('id')->select();
+        $this->assign('course',$result);
+        $this->display();
+    } 
+    /*音频课详情*/
+    public function voicedetails()
+    {
+        $id = I('id');
+        $arr = array(
+            'id'=>$id
+        );
+        $arr1 = array(
+            'bigpho','class'
+        );
+        /*关联查询*/
+        $result = D("course")->relation($arr1)->where($arr)->order('id')->select();
+        $this->assign('course',$result);
+        $this->display();
     }
     /*订单表*/
     public function ordera()
