@@ -30,7 +30,7 @@
 	1、用户注册-----------------------------------------------------------------
 		1)请求路径：{:U('Login/register')}
 		2)提交方式：$.post();
-		3)数据类型：
+		3)提交数据：
 			{	
 				password :value (密码),
 				code:value(验证码),
@@ -44,7 +44,7 @@
 	2、 失去焦点验证手机是否被注册-----------------------------------------------
 		1)提交路径：{:U('Login/register1')}
 		2)提交方式：$.post();
-		3)数据类型：
+		3)提交数据：
 			{	
 				user_mobi：value (手机号)
 			}
@@ -56,7 +56,7 @@
 	3、 生成短信验证码 ---------------------------------------------------------
 		1)提交路径：{:U('Login/sms')}
 		2)提交方式：$.post();
-		3)数据类型：
+		3)提交数据：
 			{	
 				user_mobi:value (手机号)
 			}
@@ -68,10 +68,10 @@
 	4、用户登录 ---------------------------------------------------
 		1)提交路径:{:U('Login/login')}
 		2)提交方式：$.post()
-		3)数据类型：
+		3)提交数据：
 			{	
 				password:value (密码),
-				user_mobi:value (手机号),
+				user_mobi:value (手机号)
 			}
 		4)、反馈数据：
 			{
@@ -83,7 +83,7 @@
 	5、修改密码------------------------------------------------------
 		1)提交路径:{:U('Login/xiugai')}
 		2)提交方式：$.post()
-		3)数据类型：
+		3)提交数据：
 			{	
 				id:value (用户id),
 				user_mobi:value (手机号),
@@ -101,7 +101,7 @@
 
 		1)提交路径:{:U('Login/mobi')}
 		2)提交方式：$.post()
-		3)数据类型：
+		3)提交数据：
 			{	
 				id:value (用户id),
 				user_mobi:value (手机号),
@@ -112,15 +112,9 @@
 				status => value 0 手机修改失败，1 手机修改成功， 2 验证码不正确
 			}
 	7、查询线下课，视频课，音频课 -------------------------------------
-		1)请求路径：{:U('Login/offline video voice')}
-		2)提交方式：$.post();
-		3)数据类型：
-			{	
-				'type'=>value(1,2,3)
-			};
-		4) 注：$course 为php分配命名。
-        5) 页面名称：offline.html video.html voice.html
-        6) 反馈数据：
+		1) 注：$course 为php分配命名。
+        2) 页面名称：offline.html video.html voice.html
+        3) 反馈数据：
 			$couse = array(	
 				[0] => array(
 		            [id] => value (课程id),
@@ -141,18 +135,12 @@
 		        ),
 				.....
 			);
-		显示方式：
+		4)显示方式：
 		<foreach name="course" item="v">
 			# code...
 		</foreach>
 		
 	8、课程详情---------------------------------------------------------------->
-		1)请求路径：{:U('Index/offlinedetails ,videodetails voicedetails')}
-		2)提交方式：$.post();
-		3)数据类型：
-			{	
-				'id'=>value(课程id)
-			};
 		1)注：$course 为php分配命名。
         2)页面名称：offlinedetails.html, videodetails.html, voicedetails.html
         3)反馈数据：
@@ -197,14 +185,14 @@
 		        )
 			...
 			}
-		显示方式：
+		4)显示方式：
 		<foreach name="course" item="va">
 			# code...
 		</foreach>
 	9、订单 ---------------------------------------------------------
 		1)提交路径:{:U('Index/ordera')}
 		2)提交方式：$.post()
-		3)数据类型：
+		3)提交数据：
 			{	
 				ordera_name: value (购买人名),
 		        order_mobi: value (购买人手机),
