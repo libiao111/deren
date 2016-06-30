@@ -22,7 +22,7 @@ class IndexController extends Controller
     		'type'=>1
 		);
         /*查询所有线下课*/
-		$result = D("course")->where($arr)->order('id')->select();
+		$result = D("course")->where($arr)->order('id desc')->select();
 		$this->assign('course',$result);
     	$this->display();
     }
@@ -37,7 +37,7 @@ class IndexController extends Controller
     		'type'=>2
 		);
         /*查询所有视频课*/
-		$result = D("course")->where($arr)->order('id')->select();
+		$result = D("course")->where($arr)->order('id desc')->select();
 		$this->assign('course',$result);
     	$this->display();
     }
@@ -52,7 +52,7 @@ class IndexController extends Controller
     		'type'=>3
 		);
 		/*查询所有音频课*/
-		$result = D("course")->where($arr)->order('id')->select();
+		$result = D("course")->where($arr)->order('id desc')->select();
 		$this->assign('course',$result);
     	$this->display();
     }
@@ -66,12 +66,13 @@ class IndexController extends Controller
     	$arr = array(
     		'id'=>$id
 		);
+        $arr1 = array(
+            'bigpho','class'
+        );
         /*关联查询*/
-		$result = D("course")->relation('bigpho')->where($arr)->order('id')->select();
-        $result2 = D("course")->relation('class')->where($arr)->order('id')->select();
-		$this->assign('course',$result);
-        $this->assign('keshi',$result2);
-    	$this->display();
+		$result = D("course")->relation($arr1)->where($arr)->order('id')->select();
+        $this->assign('course',$result);
+        $this->display();
     }
     /*订单表*/
     public function ordera()
