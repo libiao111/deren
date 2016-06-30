@@ -2,11 +2,13 @@
 namespace Home\Controller;
 use Think\Controller;
 
-class LoginController extends Controller {
+class LoginController extends Controller 
+{
 	/*
 	用户登录
 	*/
-	public function login(){
+	public function login()
+	{
 		if(!session('user')){
 			if(IS_AJAX){
 				$this->error('页面不存在!');die;
@@ -30,7 +32,8 @@ class LoginController extends Controller {
 	/*
 	注册时失去焦点验证手机号是否存在
 	*/
-	public function register1(){
+	public function register1()
+	{
 		if(IS_AJAX){
 			$this->error('页面不存在!');die;
 		}
@@ -46,7 +49,8 @@ class LoginController extends Controller {
 	/*
 	获取验证码
 	*/
-	public function sms(){
+	public function sms()
+	{
 		/*赋值变量*/
 		$phone = I('phone');
 		/*生成六位随机数*/
@@ -102,7 +106,8 @@ class LoginController extends Controller {
 	}
 
  	/*修改密码*/
-    public function xiugai(){
+    public function xiugai()
+    {
     	if(IS_AJAX){
     		$this->error('页面不存在');die;
     	}
@@ -138,7 +143,8 @@ class LoginController extends Controller {
     	$this->ajaxReturn($data,'json')
     }
     /*修改手机号*/
-    public function mobi(){
+    public function mobi()
+    {
     	if(IS_AJAX){
     		$this->error('页面不存在');die;
     	}

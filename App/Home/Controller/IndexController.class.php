@@ -8,17 +8,18 @@ use Think\Controller;
 header('content-type:text/html;charset =utf-8');
 class IndexController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         /*查询所有课程*/
     	$arr = D("course")->order('id')->select();
-		$arr = node_merge($arr);
-        $this->assign('course',$arr);
+		$this->assign('course',$arr);
         $this->display();
     }
     /*线下课*/
-    public function offLine(){
+    public function offLine()
+    {
     	$arr = array(
-    		'id'=>I('id')	
+    		'type'=>1
 		);
         /*查询所有线下课*/
 		$result = D("course")->where($arr)->order('id')->select();
@@ -26,13 +27,14 @@ class IndexController extends Controller
     	$this->display();
     }
     /*视频课*/
-    public function video(){
+    public function video()
+    {
     	if(IS_AJAX){
     		$this->error('页面不存在');die;
     	}
     	/*获取id*/
     	$arr = array(
-    		'id'=>I('id')	
+    		'type'=>2
 		);
         /*查询所有视频课*/
 		$result = D("course")->where($arr)->order('id')->select();
@@ -40,13 +42,14 @@ class IndexController extends Controller
     	$this->display();
     }
     /*音频课*/
-    public function voice(){
+    public function voice()
+    {
     	if(IS_AJAX){
     		$this->error('页面不存在');die;
     	}
     	/*获取id*/
     	$arr = array(
-    		'id'=>I('id')	
+    		'type'=>3
 		);
 		/*查询所有音频课*/
 		$result = D("course")->where($arr)->order('id')->select();
@@ -54,13 +57,14 @@ class IndexController extends Controller
     	$this->display();
     }
     /*课程详情*/
-    public function details(){
+    public function details()
+    {
     	if(IS_AJAX){
     		$this->error('页面不存在');die;
     	}
         $id = I('id');
     	$arr = array(
-    		'id'=>I('id')
+    		'id'=>$id
 		);
         /*关联查询*/
 		$result = D("course")->relation('bigpho')->where($arr)->order('id')->select();
@@ -70,7 +74,8 @@ class IndexController extends Controller
     	$this->display();
     }
     /*订单表*/
-    public function ordera(){
+    public function ordera()
+    {
         if(IS_AJAX){
             $this->error('页面不存在');die;
         }
@@ -88,7 +93,7 @@ class IndexController extends Controller
             'ordera_status'=>1
 
         );
-        $result = M('ordera'))->add($arr);
+        $result = M('ordera')->add($arr);
         /*返回状态*/
         if($result){
             $data = array('status'=>1);
@@ -98,23 +103,8 @@ class IndexController extends Controller
         $this->ajaxReturn($data,'json');
    }
 
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
 }
+
