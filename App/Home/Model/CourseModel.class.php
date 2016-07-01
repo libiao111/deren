@@ -12,11 +12,8 @@ class CourseModel extends RelationModel
 		'class'=>array(
 			'mapping_type'=>self::HAS_MANY,
 			'foreign_key'=>'course_id'
-		),
-		'bigpho'=>array(
-			'mapping_type'=>self::HAS_MANY,
-			'foreign_key'=>'course_id'
 		)
+		
 	);
 }
 

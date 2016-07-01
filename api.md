@@ -122,18 +122,16 @@
 		            [type] 			=> value (1:线下课, 2:视频课, 3:音频课),
 		            [course_name] 	=> value (课程名),
 		            [course_photo] 	=> value (课程缩略图),
-		            [course_intro] 	=> value (课程简介),
-		            [course_price] 	=> value (课程价格),
+		            [current_price] 	=> value (课程现价),
+		            [course_price] 	=> value (课程原价),
 		            [teach_name] 	=> value (老师名),
-		            [teach_mobi] 	=> value (老师手机),
-		            [teach_add] 	=> value (老师地址),
-		            [teach_intro] 	=> value (老师简介),
 		            [classtime] 	=> value (课时总长),
 		            [offline] 		=> value (线下课图片路径),
 		            [addtime] 		=> value (添加时间)
 		            [video_url] 	=> value (音视频路径),
 		            [class_num] 	=> value (总课节),
-		            [status] 		=> value (0:未购买, 1:已购买)
+		            [status] 		=> value (0:未购买, 1:已购买),
+		            [picture] 		=> value (图文简介)
 		        ),
 				.....
 			);
@@ -152,17 +150,16 @@
 		            [id] => value (课程id),
 		            [course_name] => value (课程名),
 		            [course_photo] => value (课程缩略图),
-		            [course_intro] => value (课程简介),
-		            [course_price] => value (课程价格),
+		            [current_price] => value (课程现价),
+		            [course_price] => value (课程原价),
 		            [teach_name] => value (老师名),
-		            [teach_mobi] => value (老师手机),
-		            [teach_add] => value (老师地址),
-		            [teach_intro] => value (老师简介),
 		            [classtime] => value (课时总长),
-		            [offline] => value (线下课图片路径),
+		            [offline_url] => value (线下课图片路径),
 		            [video_url] => value (音视频路径),
 		            [class_num] => value (总课节),
 		            [addtime] => value (添加时间),
+		            [status] 		=> value (0:未购买, 1:已购买),
+		            [picture] 		=> value (图文简介),
 		            [class] => array( //课时
 	                    [0] => array(
                             [id] => 1
@@ -175,36 +172,50 @@
                         ),
 						...
 	                ),
-					[bigpho] => Array( //大图
-						[0]=>array(
-							[id] =>value (图片id)
-							[course_id] =>value (课程id)
-							[bigpho_url] =>value (图片路径)
-						),
-						...
-	                )
-				
-		        )
+				)
 			...
 			}
 		4)显示方式：
 		<foreach name="course" item="va">
 			# code...
 		</foreach>
+	9、订单页面-------------------------------------------------------
+		1)跳转路径：{:U('Index/orderb',array('id'=>$id))}
+		2)提交数据:
+			{
+				id:value(课程id)
+			}
+		3)反馈数据:
+			$couse = array(	
+				[0] => array(
+		            [id] => value (课程id),
+		            [type] 			=> value (1:线下课, 2:视频课, 3:音频课),
+		            [course_name] 	=> value (课程名),
+		            [course_photo] 	=> value (课程缩略图),
+		            [current_price] 	=> value (课程现价),
+		            [course_price] 	=> value (课程原价),
+		            [teach_name] 	=> value (老师名),
+		            [classtime] 	=> value (课时总长),
+		            [offline_url] 		=> value (线下课图片路径),
+		            [addtime] 		=> value (添加时间)
+		            [video_url] 	=> value (音视频路径),
+		            [class_num] 	=> value (总课节),
+		            [status] 		=> value (0:未购买, 1:已购买),
+		            [picture] 		=> value (图文简介)
+		        ),
+			);
+		4)显示方式：
+		<foreach name="course" item="zz">
+			# code...
+		</foreach>
 
-
-	9、订单 ---------------------------------------------------------
+	10、提交订单(立即支付) ---------------------------------------------------------
 		1)提交路径:{:U('Index/ordera')}
-		2)提交方式：$.post()
+		2)提交方式：form
 		3)提交数据：
 			{	
 				ordera_name: value (购买人名),
 		        order_mobi: value (购买人手机),
-		        course_id: value (课程id),
-		        user_id：value (用户名)
-			}
+		    }
 		
-		4)反馈数据：
-			{
-				status =>value (1 购买成功 0 购买失败)
-			}
+		

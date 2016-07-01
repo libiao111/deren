@@ -91,16 +91,25 @@ class IndexController extends Controller
         $this->assign('course',$result);
         $this->display();
     }
+    /*立即购买*/
+    public function orderb()
+    {   $id = I('id');
+        session('id',$id);
+        $arr = array(
+            'id'=>$id
+        );
+        $result = M('course')->where($arr)->select();
+        $this->assign('course',$result);
+        $this->display();
+    }
     /*订单表*/
     public function ordera()
     {
-        if(IS_AJAX){
-            $this->error('页面不存在');die;
-        }
         /*获取数据*/
+
         $ordera_name  = I('ordera_name');
         $order_mobi = I('order_mobi');
-        $course_id = I('course_id');
+        $course_id = session('id');
         $user_id = I('user_id');
         /*数组赋值*/
         $arr = array(
@@ -112,14 +121,7 @@ class IndexController extends Controller
 
         );
         $result = M('ordera')->add($arr);
-        /*返回状态*/
-        if($result){
-            $data = array('status'=>1);
-        }else{
-            $data = array('status'=>0);
-        }
-        $this->ajaxReturn($data,'json');
-   }
+    }
 
 
 
