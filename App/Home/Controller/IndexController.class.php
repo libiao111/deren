@@ -57,7 +57,7 @@ class IndexController extends Controller
             'bigpho','class'
         );
         /*关联查询*/
-		$result = M("course")->relation($arr1)->where($arr)->order('id')->select();
+		$result = D("course")->relation($arr1)->where($arr)->order('id')->select();
         $this->assign('course',$result);
         $this->display();
     }
@@ -72,7 +72,7 @@ class IndexController extends Controller
             'bigpho','class'
         );
         /*关联查询*/
-        $result = M("course")->relation($arr1)->where($arr)->order('id')->select();
+        $result = D("course")->relation($arr1)->where($arr)->order('id')->select();
         $this->assign('course',$result);
         $this->display();
     } 
@@ -87,7 +87,7 @@ class IndexController extends Controller
             'bigpho','class'
         );
         /*关联查询*/
-        $result = M("course")->relation($arr1)->where($arr)->order('id')->select();
+        $result = D("course")->relation($arr1)->where($arr)->order('id')->select();
         $this->assign('course',$result);
         $this->display();
     }
