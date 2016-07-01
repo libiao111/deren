@@ -11,13 +11,13 @@ class LoginController extends Controller
 	{
 		if(!session('user')){
 			if(IS_AJAX){
-				$this->error('页面不存在!');die;
-			}
-			$arr = array(
-				'user_mobi' =>I('user_mobi'),
-				'password'	=>I('password'),
-			);
-			$result = M('users')->where($arr)->find();
+				$user = I('username');
+                $pass = I('password');
+				$arr = array(
+					'user_mobi' =>$user,
+					'password'	=>$pass,
+				);
+				$result = M('users')->where($arr)->find();
 			if($result){
 				$data = array('status' =>1);
 				session('user',$result);
@@ -29,6 +29,7 @@ class LoginController extends Controller
 			$this->display('login');die;
 		}
 	}
+}
 	/*
 	注册时失去焦点验证手机号是否存在
 	*/
