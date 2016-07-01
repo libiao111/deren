@@ -12,17 +12,14 @@
             <img src="__IMG__/index.png" alt="" />
             <link href="__CSS__/index.css" />
             <script src="__JQ__/index.js"></script>
-        3) 页面访问路径：http://localhost/根目录/index.php/home/index/页面名称
-        4) 根目录：index.php 所在文件夹
-
-
+        3) 根目录：index.php 所在文件夹
+        4) 页面访问路径：http://localhost/根目录/index.php/home/index/页面名称
 
     4.html页面命名统一小写
 
-    5.html页面title写明页面名称：如《首页》《首页详情》《展示列表》《展示详情》等
+    5.html页面title写明页面名称：如 <title>首页</title> 等
 
-    6.html页面文件内不能写内联样式：
-        1) 错误写法：<a href="" style="width:100px;">错误</a> 不能写style内联样式
+    6.html页面文件内不能写内联样式：style=""
 
 <!-- ------------------------------------------------------------------- -->
 
