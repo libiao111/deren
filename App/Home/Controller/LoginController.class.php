@@ -9,10 +9,8 @@ class LoginController extends Controller
 	*/
 	public function login()
 	{
-		if(!session('user')){
-			if(IS_AJAX){
+		if(IS_AJAX){
 				$this->error('页面不存在!');die;
-			}
 			$arr = array(
 				'user_mobi' =>I('user_mobi'),
 				'password'	=>I('password'),
@@ -26,7 +24,7 @@ class LoginController extends Controller
 			}
 			$this->ajaxReturn($data,'json');
 		} else {
-			$this->display('login');die;
+			$this->display('login');
 		}
 	}
 	/*
