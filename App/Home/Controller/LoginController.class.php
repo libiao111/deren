@@ -31,7 +31,7 @@ class LoginController extends Controller
 		
 	}
 	/*
-	注册时失去焦点验证手机号是否存在
+	验证手机号是否存在
 	*/
 	public function register1()
 	{

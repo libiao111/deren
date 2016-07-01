@@ -146,39 +146,36 @@
         2)页面名称：offlinedetails.html, videodetails.html, voicedetails.html
         3)反馈数据：
 			$couse array{	
-				[0] => array(
-		            [id] => value (课程id),
-		            [course_name] => value (课程名),
-		            [course_photo] => value (课程缩略图),
-		            [current_price] => value (课程现价),
-		            [course_price] => value (课程原价),
-		            [teach_name] => value (老师名),
-		            [classtime] => value (课时总长),
-		            [offline_url] => value (线下课图片路径),
-		            [video_url] => value (音视频路径),
-		            [class_num] => value (总课节),
-		            [addtime] => value (添加时间),
-		            [status] 		=> value (0:未购买, 1:已购买),
-		            [picture] 		=> value (图文简介),
-		            [class] => array( //课时
-	                    [0] => array(
-                            [id] => 1
-                            [class_name] => value (课时名),
-                            [class_time] => value (上课时间),
-                            [class_add] => vlaue (课时地址),
-                            [course_id] => value (课程id),
-                            [class_mins] => value (课时长),
-                            [paixu] => value (课时排序)
-                        ),
-						...
-	                ),
-				)
-			...
+				[id] => value (课程id),
+	            [course_name] => value (课程名),
+	            [course_photo] => value (课程缩略图),
+	            [current_price] => value (课程现价),
+	            [course_price] => value (课程原价),
+	            [teach_name] => value (老师名),
+	            [classtime] => value (课时总长),
+	            [offline_url] => value (线下课图片路径),
+	            [video_url] => value (音视频路径),
+	            [class_num] => value (总课节),
+	            [addtime] => value (添加时间),
+	            [status] 		=> value (0:未购买, 1:已购买),
+	            [picture] 		=> value (图文简介),
+	            [class] => array( //课时
+                    [0] => array(
+                        [id] => 1
+                        [class_name] => value (课时名),
+                        [class_time] => value (上课时间),
+                        [class_add] => vlaue (课时地址),
+                        [course_id] => value (课程id),
+                        [class_mins] => value (课时长),
+                        [paixu] => value (课时排序)
+                    ),
+					...
+                ),
 			}
 		4)显示方式：
-		<foreach name="course" item="va">
-			# code...
-		</foreach>
+		<a>{$v.id}</a>
+
+
 	9、订单页面-------------------------------------------------------
 		1)跳转路径：{:U('Index/orderb',array('id'=>$id))}
 		2)提交数据:
@@ -187,27 +184,16 @@
 			}
 		3)反馈数据:
 			$couse = array(	
-				[0] => array(
-		            [id] => value (课程id),
-		            [type] 			=> value (1:线下课, 2:视频课, 3:音频课),
-		            [course_name] 	=> value (课程名),
-		            [course_photo] 	=> value (课程缩略图),
-		            [current_price] 	=> value (课程现价),
-		            [course_price] 	=> value (课程原价),
-		            [teach_name] 	=> value (老师名),
-		            [classtime] 	=> value (课时总长),
-		            [offline_url] 		=> value (线下课图片路径),
-		            [addtime] 		=> value (添加时间)
-		            [video_url] 	=> value (音视频路径),
-		            [class_num] 	=> value (总课节),
-		            [status] 		=> value (0:未购买, 1:已购买),
-		            [picture] 		=> value (图文简介)
-		        ),
-			);
+				[id] => value (课程id),
+	            [type] 			=> value (1:线下课, 2:视频课, 3:音频课),
+	            [course_name] 	=> value (课程名),
+	            [course_photo] 	=> value (课程缩略图),
+	            [current_price] => value (课程现价),
+		    );
+		
 		4)显示方式：
-		<foreach name="course" item="zz">
-			# code...
-		</foreach>
+			<a>{$v.id}</a> 
+
 
 	10、提交订单(立即支付) ---------------------------------------------------------
 		1)提交路径:{:U('Index/ordera')}
