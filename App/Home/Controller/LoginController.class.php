@@ -7,17 +7,17 @@ class LoginController extends Controller
 	/*
 	用户登录
 	*/
-	public function login()
+	public function loginhandle()
 	{
-		if(!session('user')){
-			if(IS_AJAX){
-				$user = I('username');
-                $pass = I('password');
-				$arr = array(
-					'user_mobi' =>$user,
-					'password'	=>$pass,
-				);
-				$result = M('users')->where($arr)->find();
+		
+		if(IS_AJAX){
+			$user = I('username');
+            $pass = I('password');
+			$arr = array(
+				'user_mobi' =>$user,
+				'password'	=>$pass,
+			);
+			$result = M('users')->where($arr)->find();
 			if($result){
 				$data = array('status' =>1);
 				session('user',$result);
@@ -26,10 +26,10 @@ class LoginController extends Controller
 			}
 			$this->ajaxReturn($data,'json');
 		} else {
-			$this->display('login');
+			$this->error('页面不存在!');die;
 		}
+		
 	}
-}
 	/*
 	注册时失去焦点验证手机号是否存在
 	*/
