@@ -9,7 +9,11 @@ class IndexController extends Controller
     public function index()
     {
         /*查询所有课程*/
+<<<<<<< HEAD
     	$arr = M("course")->where(array('id'=>1))->order('id')->find();
+=======
+    	$arr = M("course")->order('id')->select();
+>>>>>>> b380375c28ea52cde4d2276d1ab68d4eb4238c00
         $this->assign('course',$arr);
         $this->display();
     }
@@ -98,7 +102,7 @@ class IndexController extends Controller
         $arr = array(
             'id'=>$id
         );
-        $result = M('course')->where($arr)->select();
+        $result = M('course')->where($arr)->find();
         $this->assign('course',$result);
         $this->display();
     }
