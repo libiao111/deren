@@ -10,7 +10,6 @@ class IndexController extends Controller
     {
         /*查询所有课程*/
     	$arr = M("course")->where(array('id'=>1))->order('id')->find();
-        p($arr);
         $this->assign('course',$arr);
         $this->display();
     }

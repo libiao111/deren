@@ -114,7 +114,7 @@
 
 	7、查询线下课，视频课，音频课 -------------------------------------
 		1) 注：$course 为php分配命名。
-        2) 页面名称：offline.html, video.html, voice.html
+        2) 页面名称：offlinelist.html, videolist.html, audiolist.html
         3) 反馈数据：
 			$couse = array(	
 				[0] => array(
@@ -143,7 +143,7 @@
 		
 	8、线下课，视频课，音频课详情---------------------------------------------------------------->
 		1)注：$course 为php分配命名。
-        2)页面名称：offlinedetails.html, videodetails.html, voicedetails.html
+        2)页面名称：offline.html, video.html, audio.html
         3)反馈数据：
 			$couse array{	
 				[id] => value (课程id),
@@ -177,7 +177,7 @@
 
 
 	9、订单页面-------------------------------------------------------
-		1)跳转路径：{:U('Index/orderb',array('id'=>$id))}
+		1)跳转路径：{:U('Index/order',array('id'=>$id))}
 		2)提交数据:
 			{
 				id:value(课程id)

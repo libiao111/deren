@@ -12,9 +12,9 @@ return array(
 
     'TMPL_PARSE_STRING' => array(                       // public模板路径
         '__QITA__' => __ROOT__.'/Public/qita',
-        '__CSS__'  => __ROOT__.'/Public/css',
-        '__IMG__'  => __ROOT__.'/Public/img',
-        '__JS__'   => __ROOT__.'/Public/js'
+        '__CSS__'  => __ROOT__.'/Public/home/css',
+        '__IMG__'  => __ROOT__.'/Public/home/img',
+        '__JS__'   => __ROOT__.'/Public/home/js'
     ),
 
     'DB_TYPE' => 'mysql',

@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>订单页</title>
+	<link rel="stylesheet" type="text/css" href="__CSS__/weui.min.css">
+	<link rel="stylesheet" type="text/css" href="__CSS__/main.css">
+	<link rel="stylesheet" type="text/css" href="__CSS__/phocus.css">
+</head>
+<body class="bfa">
+
+	<div class="weui_cells_title">确认个人信息</div>
+	<div class="weui_cells weui_cells_form">
+		<div class="weui_cell">
+			<div class="weui_cell_hd">
+				<label class="weui_label">
+					姓名
+				</label>
+			</div>
+			<div class="weui_cell_bd weui_cell_primary">
+				<input class="weui_input" type="text" placeholder="请输入姓名">
+			</div>
+		</div>
+		<div class="weui_cell">
+			<div class="weui_cell_hd">
+				<label class="weui_label">
+					手机号
+				</label>
+			</div>
+			<div class="weui_cell_bd weui_cell_primary">
+				<input class="weui_input" type="number" pattern="[0-9]*" value="1354949494">
+			</div>
+		</div>
+	</div>
+
+	<div class="weui_cells_title">确认订单信息</div>
+	<div class="weui_cells weui_cells_form">
+		<div class="weui_cell">
+			<div class="thumb_sm bg mr10" style="background-image:url(__IMG__/thumb.jpg)"></div>
+			<div>
+				<p class="f14 mb2">思维口才50天速成</p>
+				<p class="f14 mb2">课程类型：视频课</p>
+				<p class="f14">价格：￥500</p>
+			</div>
+		</div>
+		<div class="weui_cell">
+			<div class="weui_cell_hd">
+				<span>收款方:</span>
+			</div>
+			<div class="weui_cell_bd weui_cell_primary ml15">
+				北京市德仁商学院有限公司
+			</div>
+		</div>
+		<div class="weui_cell">
+			<div class="weui_cell_hd">
+				<span>共支付:</span>
+			</div>
+			<div class="weui_cell_bd weui_cell_primary ml15">
+				<span class="f20 red">￥500</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="weui_cells_title">选择支付方式</div>
+		<div class="weui_cells weui_cells_radio">
+	        <label class="weui_cell weui_check_label" for="x11">
+	            <div class="weui_cell_bd weui_cell_primary">
+	                <p>微信支付</p>
+	            </div>
+	            <div class="weui_cell_ft">
+	                <input type="radio" class="weui_check" name="radio1" id="x11">
+	                <span class="weui_icon_checked"></span>
+	            </div>
+	        </label>
+	        <label class="weui_cell weui_check_label" for="x12">
+
+	            <div class="weui_cell_bd weui_cell_primary">
+	                <p>支付宝支付</p>
+	            </div>
+	            <div class="weui_cell_ft">
+	                <input type="radio" name="radio1" class="weui_check" id="x12" checked="checked">
+	                <span class="weui_icon_checked"></span>
+	            </div>
+	        </label>
+	    </div>
+	</div>
+
+	<div class="weui_btn_area">
+		<a href="all.html" class="weui_btn weui_btn_primary">确认支付</a>
+	</div>
+
+	
+</body>
+</html>

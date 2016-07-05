@@ -1,0 +1,113 @@
+@purple:#B7469D;
+
+.bfa{
+	background-color: #fafafa;
+}
+.red{
+	color:#ff4444;
+}
+.purple{
+	color:@purple;
+}
+.thumb_sm{
+	width:56px;
+	height:56px;
+	display: inline-block;
+}
+.thumb_lg{
+	width:100px;
+	height:100px;
+	display: inline-block;
+}
+*{
+	color:#555;
+	margin:0;
+	box-sizing: border-box;
+}
+.br4{
+	border-radius: 4px;
+}
+.tc{
+	text-align: center;
+}
+.pt50{
+	padding-top: 50px;
+}
+
+// weui样式重置
+.weui_cells_title{
+	font-size: 18px;
+	color:#333;
+}
+a.weui_btn_primary{
+	background-color: @purple;
+	&:active{
+		background-color: @purple;
+	}
+}
+.weui_cells{
+	font-size: 16px;
+}
+.weui_navbar{
+	background-color: #fff;
+}
+.bar_item_on{
+	color:#fff;
+	background-color: @purple;
+}
+
+/* 表单板块 */
+div.getValidate{
+	width:110px;
+	height:44px;line-height: 44px;
+	text-align: center;
+	background-color: #e5e5e5;
+	position: absolute;
+	top:0;right:0;
+	font-size: 14px;
+	&:active{
+		background-color: #ccc;
+	}
+}
+label.wayofpay div.weui_cell_ft{
+	padding-left: 0;
+}
+label.wayofpay div.weui_check_label div.zhifu{
+	display: inline-block;
+	width:80%;
+	float: right;
+}
+
+/* 课程板块 */
+.course_item{
+	width:100%;
+	height:130px;
+	background-color: #fff;
+	padding:10px;
+	.left{
+		width:33%;
+		float: left;
+	}
+	.right{
+		padding-left: 5px;
+		width:66%;
+		float: right;
+		.leftspan{
+			display: inline-block;
+			width:100px;
+		}
+	}
+}
+
+/* 局部样式 */
+.entry_info{
+	padding:15px;
+	text-align: center;
+	p{
+		line-height: 1.8;
+	}
+}
+img.erweima{
+	margin-top: 80px;
+	margin-bottom: 40px;
+}

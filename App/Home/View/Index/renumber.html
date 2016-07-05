@@ -3,20 +3,20 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>登录页</title>
+	<title>修改手机号</title>
 	<link rel="stylesheet" type="text/css" href="__CSS__/weui.min.css">
 	<link rel="stylesheet" type="text/css" href="__CSS__/main.css">
 	<link rel="stylesheet" type="text/css" href="__CSS__/phocus.css">
 </head>
 <body class="bfa">
 
-	<div class="weui_cells_title">欢迎来到德仁微课</div>
+	<div class="weui_cells_title">修改手机号</div>
 	<div class="weui_cells weui_cells_form">
 		<div class="weui_cell">
 			<div class="weui_cell_hd">
 				<label class="weui_label">
 					<img src="__IMG__/shoujihao.svg" width="16px" class="vm mr2">
-					手机号
+					旧手机号
 				</label>
 			</div>
 			<div class="weui_cell_bd weui_cell_primary">
@@ -26,22 +26,32 @@
 		<div class="weui_cell">
 			<div class="weui_cell_hd">
 				<label class="weui_label">
-					<img src="__IMG__/mima.svg" width="16px" class="vm mr2">
-					密码
+					<img src="__IMG__/shoujihao.svg" width="16px" class="vm mr2">
+					新手机号
 				</label>
 			</div>
 			<div class="weui_cell_bd weui_cell_primary">
-				<input class="weui_input" type="text" placeholder="请输入密码">
+				<input class="weui_input" type="number" pattern="[0-9]*" placeholder="请输入手机号">
+			</div>
+		</div>
+		<div class="weui_cell">
+			<div class="weui_cell_hd">
+				<label class="weui_label">
+					<img src="__IMG__/yanzhengma.svg" width="16px" class="vm mr2">
+					验证码
+				</label>
+			</div>
+			<div class="weui_cell_bd weui_cell_primary">
+				<input class="weui_input" type="number" pattern="[0-9]*" placeholder="请输入验证码">
+			</div>
+			<div class="getValidate">
+				获取验证码
 			</div>
 		</div>
 	</div>
-	<div class="mt10">
-		<a href="re-pass.html" class="pl15 f999">忘记密码</a>
-		<a href="re-pass.html" class="r pr15">用户注册</a>
-	</div>
 
 	<div class="weui_btn_area">
-		<a href="all.html" class="weui_btn weui_btn_primary">登录</a>
+		<a href="gotoindex.html" class="weui_btn weui_btn_primary">完成</a>
 	</div>
 	
 </body>
