@@ -33,7 +33,32 @@
 .pt50{
 	padding-top: 50px;
 }
-
+.pb80{
+	padding-bottom: 80px;
+}
+.mt-3{
+	margin-top: -3px;
+}
+/* 按钮 */
+.button{
+	display: inline-block;
+	outline: none;
+	border:1px solid;
+	text-align: center;
+	height:32px;line-height: 30px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.btn_primary{
+	background-color: @purple;
+	color:#fff;
+	border-radius: 4px;
+}
+.btn_empty{
+	border:1px solid @purple;
+	color:@purple;
+	border-radius: 4px;
+}
 // weui样式重置
 .weui_cells_title{
 	font-size: 18px;
@@ -54,6 +79,15 @@ a.weui_btn_primary{
 .bar_item_on{
 	color:#fff;
 	background-color: @purple;
+}
+.weui_dialog_ft a.primary{
+	color:@purple;
+}
+.weui_dialog_confirm{
+	display: none;
+}
+.weui_dialog_confirm .weui_dialog .weui_dialog_bd{
+	text-align: center;
 }
 
 /* 表单板块 */
@@ -84,17 +118,153 @@ label.wayofpay div.weui_check_label div.zhifu{
 	height:130px;
 	background-color: #fff;
 	padding:10px;
+	margin-top: 10px;
 	.left{
 		width:33%;
 		float: left;
 	}
 	.right{
-		padding-left: 5px;
-		width:66%;
+		padding-left: 10px;
 		float: right;
+		width: 66%;
 		.leftspan{
 			display: inline-block;
-			width:100px;
+			width:80px;
+		}
+		span.f888{
+			font-size: 13px;
+		}
+	}
+}
+@media (min-width:360px) and (max-width:400px) {
+	.course_item .left{
+		width:30%;
+	}
+	.course_item .right{
+		width: 70%;
+	}
+}
+@media (min-width:400px) {
+	.course_item .left{
+		width:27%;
+	}
+	.course_item .right{
+		width: 73%;
+	}
+}
+
+.btn_user{
+	display: inline-block;
+	width:36px;height:36px;
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	border-radius: 50%;
+	text-align: center;
+}
+
+a.a-mask{
+	display: inline-block;
+	width: 100%;height:100%;
+	position: absolute;
+	top:0;left:0;
+	z-index: 2;
+}
+
+.content_wrap .title{
+	display: inline-block;
+	width: 75%;
+}
+.content_wrap .poster{
+	width:100%;
+	height:180px;
+}
+@media (min-width:400px) {
+	.content_wrap .poster{
+		height:220px;
+	}
+}
+
+.info_container{
+	width:100%;
+	.tab_nav_box{
+		width:100%;
+		height:50px;
+		border-bottom: 1px solid #e2e2e2;
+		border-top: 1px solid #e2e2e2;
+		.tab_nav_item{
+			display: inline-block;
+			width:50%;
+			height:50px;line-height: 50px;
+			text-align: center;
+			&:first-child{
+				border-right: 1px solid #e2e2e2;
+			}
+			i{
+				display: inline-block;
+				width:18px;height:18px;
+				margin-right: 3px;
+				vertical-align: middle;
+			}
+			i.jianjie{
+				background-image: url(../img/kechengjianjiehui.svg);
+			}
+			i.kebiao{
+				background-image: url(../img/kebiaohui.svg)
+			}
+		}
+		.tab_nav_item_on{
+			color:@purple;
+			border-bottom:2px solid @purple;
+			i.jianjie{
+				background-image: url(../img/kechengjianjiehong.svg);
+			}
+			i.kebiao{
+				background-image: url(../img/kebiaohong.svg)
+			}
+		}
+	}
+	.tab_container{
+		width:100%;
+		position: relative;
+		.tab_content{
+			position: absolute;
+			width:100%;
+			top:0;
+			&:last-child{
+				display: none;
+			}
+			.timetable{
+				width:100%;
+				border-bottom: 1px solid #e2e2e2;
+				padding: 10px;
+				padding-bottom: 5px;
+				position: relative;
+				.left{
+					display: inline-block;
+					width:60px;
+					vertical-align: top;
+					.xuhao{
+						display: inline-block;
+						width:50px;
+						height:50px;
+						line-height: 50px;
+						text-align: center;
+						border:2px solid #eee;
+						border-radius: 50%;
+						color:#ddd;
+						font-size: 24px;
+					}
+				}
+				.right{
+					display: inline-block;
+					overflow: hidden;
+					.leftspan{
+						display: inline-block;
+						width:80px;
+					}
+				}
+			}
 		}
 	}
 }
@@ -110,4 +280,11 @@ label.wayofpay div.weui_check_label div.zhifu{
 img.erweima{
 	margin-top: 80px;
 	margin-bottom: 40px;
+}
+.btn_fixed{
+	position: fixed;
+	bottom:20px;
+	width:90%;
+	left: 0;right:0;
+	margin:0 auto;
 }
