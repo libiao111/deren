@@ -12,11 +12,10 @@
 
 	<!-- 课程内容 -->
 	<div class="content_wrap">
-		<div class="poster bg" style="background-image:url(__IMG__/thumb.jpg)">			
-		</div>
+		<div class="poster bg" style="background-image:url(__UPFILE__/{$course.offline_url})"></div>
 		<div class="mt8 mb8 pl10 pr10">
-			<span class="f18">思维口才U型内联</span>
-			<strong class="red f18 dib r">￥8888</strong>
+			<span class="f18">{$course.course_name}</span>
+			<strong class="red f18 dib r">￥{$course.current_price}</strong>
 		</div>
 	</div>
 
@@ -73,9 +72,13 @@
 	</div>
 
 	<!-- 购买按钮 在已购买状态下隐藏此按钮 -->
+	<if condition="$course['status']">
+	<else/>
 	<div class="weui_btn_area btn_fixed">
-		<a href="" class="weui_btn weui_btn_primary">立即购买</a>
+		<a href="{:U('Index/order', array('id' => $val['id']))}" class="weui_btn weui_btn_primary">立即购买
+		</a>
 	</div>
+	</if>
 
 <script src="__JS__/jquery.js"></script>
 <script src="__JS__/main.js"></script>

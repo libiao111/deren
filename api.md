@@ -112,7 +112,7 @@
 			}
 
 
-	7、查询线下课，视频课，音频课 -------------------------------------
+	7、线下课，视频课，音频课列表 -------------------------------------
 		1) 注：$course 为php分配命名。
         2) 页面名称：offlinelist.html, videolist.html, audiolist.html
         3) 反馈数据：
@@ -122,7 +122,7 @@
 		            [type] 			=> value (1:线下课, 2:视频课, 3:音频课),
 		            [course_name] 	=> value (课程名),
 		            [course_photo] 	=> value (课程缩略图),
-		            [current_price] 	=> value (课程现价),
+		            [current_price] => value (课程现价),
 		            [course_price] 	=> value (课程原价),
 		            [teach_name] 	=> value (老师名),
 		            [classtime] 	=> value (课时总长),
@@ -145,7 +145,7 @@
 		1)注：$course 为php分配命名。
         2)页面名称：offline.html, video.html, audio.html
         3)反馈数据：
-			$couse array{	
+			$course = array{	
 				[id] => value (课程id),
 	            [course_name] => value (课程名),
 	            [course_photo] => value (课程缩略图),
@@ -183,7 +183,7 @@
 				id:value(课程id)
 			}
 		3)反馈数据:
-			$couse = array(	
+			$course = array(	
 				[id] => value (课程id),
 	            [type] 			=> value (1:线下课, 2:视频课, 3:音频课),
 	            [course_name] 	=> value (课程名),

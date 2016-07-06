@@ -25,6 +25,21 @@
 			</p>
 		</div>
 	</div>
-	
+
+<script>
+(function(){
+	var sec = document.querySelector(".daojishi")
+	setTimeout(function(){
+		sec.textContent = 2;
+	},1000);
+	setTimeout(function(){
+		sec.textContent = 1;
+	},2000);
+	setTimeout(function(){
+		sec.textContent = 0;
+		window.location.href = "{:U('video')}";
+	},3000)		
+})();
+</script>	
 </body>
 </html>

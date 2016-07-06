@@ -37,11 +37,17 @@
 	<div class="weui_cells_title">确认订单信息</div>
 	<div class="weui_cells weui_cells_form">
 		<div class="weui_cell">
-			<div class="thumb_sm bg mr10" style="background-image:url(__IMG__/thumb.jpg)"></div>
+			<div class="thumb_sm bg mr10" style="background-image:url(__UPFILE__/{$course.course_photo})"></div>
 			<div>
-				<p class="f14 mb2">思维口才50天速成</p>
-				<p class="f14 mb2">课程类型：视频课</p>
-				<p class="f14">价格：￥500</p>
+				<p class="f14 mb2">{$course.course_name}</p>
+				<p class="f14 mb2">课程类型：
+					<switch name="$course.type"> 
+						<case value="1">线下课</case>
+						<case value="2">视频课</case>
+						<case value="3">音频课</case>
+					</switch>
+				</p>
+				<p class="f14">价格：￥{$course.current_price}</p>
 			</div>
 		</div>
 		<div class="weui_cell">
@@ -57,7 +63,7 @@
 				<span>共支付:</span>
 			</div>
 			<div class="weui_cell_bd weui_cell_primary ml15">
-				<span class="f20 red">￥500</span>
+				<span class="f20 red">￥{$course.current_price}</span>
 			</div>
 		</div>
 	</div>
@@ -74,7 +80,6 @@
 	            </div>
 	        </label>
 	        <label class="weui_cell weui_check_label" for="x12">
-
 	            <div class="weui_cell_bd weui_cell_primary">
 	                <p>支付宝支付</p>
 	            </div>
@@ -87,7 +92,7 @@
 	</div>
 
 	<div class="weui_btn_area">
-		<a href="all.html" class="weui_btn weui_btn_primary">确认支付</a>
+		<a href="{:U('Index/ordera')}" class="weui_btn weui_btn_primary">确认支付</a>
 	</div>
 
 	

@@ -14,6 +14,7 @@ return array(
         '__QITA__' => __ROOT__.'/Public/qita',
         '__CSS__'  => __ROOT__.'/Public/home/css',
         '__IMG__'  => __ROOT__.'/Public/home/img',
+        '__UPFILE__'  => __ROOT__.'/Public/upfile',
         '__JS__'   => __ROOT__.'/Public/home/js'
     ),
 

@@ -4,8 +4,92 @@
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>音频课详情</title>
+	<link rel="stylesheet" type="text/css" href="__CSS__/weui.min.css">
+	<link rel="stylesheet" type="text/css" href="__CSS__/main.css">
+	<link rel="stylesheet" type="text/css" href="__CSS__/phocus.css">
 </head>
 <body>
-	
+
+	<!-- 课程内容 -->
+	<div class="content_wrap">
+		<div class="poster bg" style="background-image:url(__IMG__/thumb.jpg)">			
+		</div>
+		<audio controls="controls" src=""></audio>
+		<div class="mt8 mb8 pl10 pr10">
+			<span class="f18">{$course.course_name}</span>
+			<strong class="red f18 dib r">￥{$course.current_price}</strong>
+		</div>
+	</div>
+
+	<!-- 课程信息 -->
+	<div class="info_container">
+		<!-- 标签 -->
+		<div class="tab_nav_box">
+			<div class="tab_nav_item tab_nav_item_on" name="1">
+				<i class="bg jianjie"></i>
+				课程简介
+			</div><!-- 用于清除inlineblock之间的空隙
+			--><div class="tab_nav_item" name="2">
+				<i class="bg kebiao"></i>
+				课程表
+			</div>
+		</div>
+		<!-- 标签页 -->
+		<div class="tab_container">
+			<!-- 简介 -->
+			<div class="tab_content pb80" role="1">
+				<p>此处信息由后台编辑上传</p>
+			</div>
+			<!-- 课表 -->
+			<div class="tab_content pb80" role="2">
+				<foreach name="course.class" item="val">
+					<div class="timetable">
+						<a href="" class="a-mask"></a>
+						<div class="left">
+							<img src="__IMG__/bofanghui.svg" width="50px">
+						</div>
+						<div class="right">
+							<p>{$val.class_name}</p>
+							<span class="leftspan">
+								<img src="__IMG__/laoshi.svg" width="16px" class="vm mr2">
+								<span class="f14 f999">{$course.teach_name}</span>
+							</span>
+							<span>
+								<img src="__IMG__/shichang.svg" width="16px" class="vm mr2">
+								<span class="f14 f999">{$val.class_mins}</span>
+							</span>
+						</div>
+					</div>
+				</foreach>
+			</div>
+		</div>
+	</div>
+
+	<!-- 购买按钮 在已购买状态下隐藏此按钮 -->
+	<if condition="$course['status']">
+	<else/>
+	<div class="weui_btn_area btn_fixed">
+		<a href="{:U('Index/order', array('id' => $val['id']))}" class="weui_btn weui_btn_primary">立即购买
+		</a>
+	</div>
+	</if>
+
+	<!-- 购买提示 -->
+	<div class="weui_dialog_confirm" id="dialog1">
+	    <div class="weui_mask"></div>
+	    <div class="weui_dialog">
+	    	<div class='weui_dialog_hd'></div>
+	    	<div class='weui_dialog_hd'></div>
+	        <div class="weui_dialog_bd">此课程需要购买才能观看，是否立即购买</div>
+	        <div class='weui_dialog_hd'></div>
+	        <div class="weui_dialog_ft">
+	            <a href="javascript:;" class="weui_btn_dialog default">取消</a>
+	            <a href="javascript:;" class="weui_btn_dialog primary">确定</a>
+	        </div>
+	    </div>
+	</div>
+
+<script src="__JS__/jquery.js"></script>
+<script src="__JS__/main.js"></script>	
 </body>
 </html>

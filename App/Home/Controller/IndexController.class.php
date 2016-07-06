@@ -6,6 +6,11 @@ use Think\Controller;
 */
 class IndexController extends Controller
 {
+
+    public function _initialize() {
+        $this->login = session('user') ? 1: 0;
+    }
+
     public function index()
     {
         /*查询所有课程*/
@@ -15,7 +20,7 @@ class IndexController extends Controller
         $this->display();
     }
     /*线下课*/
-    public function offline()
+    public function offlinelist()
     {
         $arr = array(
     		'type'=>1
@@ -26,7 +31,7 @@ class IndexController extends Controller
     	$this->display();
     }
     /*视频课*/
-    public function video()
+    public function videolist()
     {
     	$arr = array(
     		'type'=>2
@@ -37,7 +42,7 @@ class IndexController extends Controller
     	$this->display();
     }
     /*音频课*/
-    public function voice()
+    public function audiolist()
     {
     	$arr = array(
     		'type'=>3
@@ -48,7 +53,7 @@ class IndexController extends Controller
         $this->display();
     }
     /*线下课详情*/
-    public function offlinedetails()
+    public function offline()
     {
     	$id = I('id');
     	$arr = array(
@@ -58,12 +63,12 @@ class IndexController extends Controller
             'bigpho','class'
         );
         /*关联查询*/
-		$result = D("course")->relation($arr1)->where($arr)->order('id')->select();
+		$result = D("course")->relation($arr1)->where($arr)->order('id')->find();
         $this->assign('course',$result);
         $this->display();
     }
      /*视频课详情*/
-    public function videodetails()
+    public function video()
     {
         $id = I('id');
         $arr = array(
@@ -73,12 +78,12 @@ class IndexController extends Controller
             'bigpho','class'
         );
         /*关联查询*/
-        $result = D("course")->relation($arr1)->where($arr)->order('id')->select();
+        $result = D("course")->relation($arr1)->where($arr)->order('id')->find();
         $this->assign('course',$result);
         $this->display();
     } 
     /*音频课详情*/
-    public function voicedetails()
+    public function audio()
     {
         $id = I('id');
         $arr = array(
@@ -88,12 +93,12 @@ class IndexController extends Controller
             'bigpho','class'
         );
         /*关联查询*/
-        $result = D("course")->relation($arr1)->where($arr)->order('id')->select();
+        $result = D("course")->relation($arr1)->where($arr)->order('id')->find();
         $this->assign('course',$result);
         $this->display();
     }
     /*立即购买*/
-    public function orderb()
+    public function order()
     {   $id = I('id');
         session('id',$id);
         $arr = array(

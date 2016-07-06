@@ -89,9 +89,19 @@ a.weui_btn_primary{
 .weui_dialog_confirm .weui_dialog .weui_dialog_bd{
 	text-align: center;
 }
+.weui_icon_checked:before{
+	color:#fff !important;
+	background-color: #09bb07;
+	border-radius: 50%;
+	width:20px;
+	height:20px;line-height: 20px;
+	font-size: 13px !important;
+}
 
 /* 表单板块 */
-div.getValidate{
+input.getValidate{
+	display: inline-block;
+	border:none;
 	width:110px;
 	height:44px;line-height: 44px;
 	text-align: center;
@@ -178,6 +188,10 @@ a.a-mask{
 .content_wrap .poster{
 	width:100%;
 	height:180px;
+}
+.content_wrap audio{
+	width:100%;
+	background-color: #555;
 }
 @media (min-width:400px) {
 	.content_wrap .poster{
@@ -269,6 +283,10 @@ a.a-mask{
 	}
 }
 
+.video_wrap{
+	background-color: #333;
+}
+
 /* 局部样式 */
 .entry_info{
 	padding:15px;
@@ -287,4 +305,8 @@ img.erweima{
 	width:90%;
 	left: 0;right:0;
 	margin:0 auto;
+}
+.vali_wrap{
+	width:125px;
+	display: inline-block;
 }
