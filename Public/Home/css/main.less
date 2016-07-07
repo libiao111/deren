@@ -65,10 +65,7 @@
 	color:#333;
 }
 a.weui_btn_primary{
-	background-color: @purple;
-	&:active{
-		background-color: @purple;
-	}
+	background-color: @purple !important;
 }
 .weui_cells{
 	font-size: 16px;
@@ -185,8 +182,7 @@ a.a-mask{
 	display: inline-block;
 	width: 75%;
 }
-.content_wrap .poster{
-	width:100%;
+.content_wrap .ppt{
 	height:180px;
 }
 .content_wrap audio{
@@ -194,8 +190,8 @@ a.a-mask{
 	background-color: #555;
 }
 @media (min-width:400px) {
-	.content_wrap .poster{
-		height:220px;
+	.content_wrap .ppt{
+		height:240px;
 	}
 }
 
@@ -241,6 +237,11 @@ a.a-mask{
 	.tab_container{
 		width:100%;
 		position: relative;
+		.tab_content[role="1"]{
+			padding-top: 10px;
+			padding-left: 10px;
+			padding-right: 10px;
+		}
 		.tab_content{
 			position: absolute;
 			width:100%;

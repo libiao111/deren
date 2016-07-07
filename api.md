@@ -116,7 +116,7 @@
 		1) 注：$course 为php分配命名。
         2) 页面名称：offlinelist.html, videolist.html, audiolist.html
         3) 反馈数据：
-			$couse = array(	
+			$course = array(	
 				[0] => array(
 		            [id] => value (课程id),
 		            [type] 			=> value (1:线下课, 2:视频课, 3:音频课),
@@ -171,6 +171,15 @@
                     ),
 					...
                 ),
+                [bigpho]=>array( //轮播图
+						[0]=>array(
+							[id] => value (轮播图id),
+							[pho_url] =>value (图片路径),
+							[course] =>value (课程id)
+							),
+						...
+					)
+				}
 			}
 		4)显示方式：
 		<a>{$v.id}</a>

@@ -7,13 +7,22 @@
 	<link rel="stylesheet" type="text/css" href="__CSS__/weui.min.css">
 	<link rel="stylesheet" type="text/css" href="__CSS__/main.css">
 	<link rel="stylesheet" type="text/css" href="__CSS__/phocus.css">
+	<link rel="stylesheet" type="text/css" href="__CSS__/swiper.css">
 </head>
 <body>
 
 	<!-- 课程内容 -->
 	<div class="content_wrap">
-		<div class="poster bg" style="background-image:url(__IMG__/thumb.jpg)">			
+		<!-- ppt -->
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<foreach name="course.bigpho" item="val">
+					<div class="ppt bg swiper-slide" style="background-image:url(__IMG__/$val.pho_url)"></div>
+			    </foreach>
+			</div>
 		</div>
+		
+		<!-- 音频 -->
 		<audio controls="controls" src=""></audio>
 		<div class="mt8 mb8 pl10 pr10">
 			<span class="f18">{$course.course_name}</span>
@@ -84,12 +93,18 @@
 	        <div class='weui_dialog_hd'></div>
 	        <div class="weui_dialog_ft">
 	            <a href="javascript:;" class="weui_btn_dialog default">取消</a>
-	            <a href="javascript:;" class="weui_btn_dialog primary">确定</a>
+	            <a href="{:U('Index/order', array('id' => $val['id']))}" class="weui_btn_dialog primary">确定</a>
 	        </div>
 	    </div>
 	</div>
 
 <script src="__JS__/jquery.js"></script>
-<script src="__JS__/main.js"></script>	
+<script src="__JS__/main.js"></script>
+<script src="__JS__/swiper.min.js"></script>	
+<script>
+window.onload = function() {
+  var mySwiper = new Swiper('.swiper-container');  
+}
+</script>
 </body>
 </html>

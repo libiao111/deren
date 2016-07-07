@@ -20,10 +20,10 @@
 				</label>
 			</div>
 			<div class="weui_cell_bd weui_cell_primary">
-				<input class="weui_input" type="number" pattern="[0-9]*" placeholder="请输入手机号">
+				<input class="weui_input" type="number" pattern="[0-9]*" placeholder="请输入手机号" id="phone">
 			</div>
 			<div class="weui_cell_ft">
-				<i class="weui_icon_warn"></i>
+				<i class="weui_icon_warn" id="phoneIsWrong"></i>
 			</div>
 		</div>
 		<div class="weui_cell">
@@ -34,10 +34,10 @@
 				</label>
 			</div>
 			<div class="weui_cell_bd weui_cell_primary">
-				<input class="weui_input" type="text" placeholder="请输入密码">
+				<input class="weui_input" type="text" placeholder="请输入密码" id="password">
 			</div>
 			<div class="weui_cell_ft">
-				<i class="weui_icon_warn"></i>
+				<i class="weui_icon_warn" id="passwordIsWrong"></i>
 			</div>
 		</div>
 	</div>
@@ -47,8 +47,10 @@
 	</div>
 
 	<div class="weui_btn_area">
-		<a href="all.html" class="weui_btn weui_btn_primary">登录</a>
+		<a class="weui_btn weui_btn_primary" onclick="checkPhone(event)">登录</a>
 	</div>
-	
+
+<script src="__JS__/jquery.js"></script>
+<script src="__JS__/login.js"></script>	
 </body>
 </html>

@@ -35,13 +35,13 @@
 					<div class="left">
 						<div class="thumb_lg bg rel"
 						style="background-image:url(__UPFILE__/{$val.course_photo})">
-							<a href="" class="a-mask"></a>
+							<a href="{:U('offline', array('id' => $val['id']))}" class="a-mask"></a>
 						</div>
 					</div>
 					<!-- 信息 -->
 					<div class="right">
 						<div class="rel">
-							<a href="" class="a-mask"></a>
+							<a href="{:U('offline', array('id' => $val['id']))}" class="a-mask"></a>
 							<p class="ell f18">{$val.course_name}</p>
 							<p class="mt-3">
 								<span class="f888 leftspan">
@@ -68,7 +68,7 @@
 							<strong class="f18 red">￥{$val.current_price}</strong>
 							<del class="f999 ml8 f14">{$val.course_price}</del>
 							<if condition="$val['status']">
-								<a href="{:U('offline')}" class="button btn_empty r">立即观看</a>
+								<a href="{:U('offline', array('id' => $val['id']))}" class="button btn_empty r">立即观看</a>
 							<else/>
 								<a href="{:U('Index/order', array('id' => $val['id']))}" class="button btn_primary r">立即购买</a>
 							</if>
@@ -82,13 +82,13 @@
 					<!-- 图片 -->
 					<div class="left">
 						<div class="thumb_lg bg rel" style="background-image:url(__UPFILE__/{$val.course_photo})">
-							<a href="" class="a-mask"></a>
+							<a href="{:U('video', array('id' => $val['id']))}" class="a-mask"></a>
 						</div>
 					</div>
 					<!-- 信息 -->
 					<div class="right">
 						<div class="rel">
-							<a href="" class="a-mask"></a>
+							<a href="{:U('video', array('id' => $val['id']))}" class="a-mask"></a>
 							<p class="ell f18">{$val.course_name}</p>
 							<p class="mt-3">
 								<span class="f888 leftspan">
@@ -115,7 +115,7 @@
 							<strong class="f18 red">￥{$val.current_price}</strong>
 							<del class="f999 ml8 f14">{$val.course_price}</del>
 							<if condition="$val['status']">
-								<a href="{:U('video')}" class="button btn_empty r">立即观看</a>
+								<a href="{:U('video', array('id' => $val['id']))}" class="button btn_empty r">立即观看</a>
 							<else/>
 								<a href="{:U('Index/order', array('id' => $val['id']))}" class="button btn_primary r">立即购买</a>
 							</if>
@@ -129,13 +129,13 @@
 					<!-- 图片 -->
 					<div class="left">
 						<div class="thumb_lg bg rel" style="background-image:url(__UPFILE__/{$val.course_photo})">
-							<a href="" class="a-mask"></a>
+							<a href="{:U('audio', array('id' => $val['id']))}" class="a-mask"></a>
 						</div>
 					</div>
 					<!-- 信息 -->
 					<div class="right">
 						<div class="rel">
-							<a href="" class="a-mask"></a>
+							<a href="{:U('audio', array('id' => $val['id']))}" class="a-mask"></a>
 							<p class="ell f18">{$val.course_name}</p>
 							<p class="mt-3">
 								<span class="f888 leftspan">
@@ -162,7 +162,7 @@
 							<strong class="f18 red">￥{$val.current_price}</strong>
 							<del class="f999 ml8 f14">{$val.course_price}</del>
 							<if condition="$val['status']">
-								<a href="{:U('audio')}" class="button btn_empty r">立即观看</a>
+								<a href="{:U('audio', array('id' => $val['id']))}" class="button btn_empty r">立即观看</a>
 							<else/>
 								<a href="{:U('Index/order', array('id' => $val['id']))}" class="button btn_primary r">立即购买</a>
 							</if>
@@ -175,9 +175,15 @@
 
 	<!-- 用户中心按钮 -->
 	<!-- 未登录前跳转到登录页面 -->
-	<a class="btn_user" >
-		<img src="__IMG__/wode.svg" width="36px">
-	</a>
+	<if condition="$login">
+		<a href="{:U('user')}" class="btn_user" >
+			<img src="__IMG__/wode.svg" width="36px">
+		</a>
+	<else/>
+		<a href="{:U('login')}" class="btn_user" >
+			<img src="__IMG__/wode.svg" width="36px">
+		</a>
+	</if>
 
 	
 </body>
