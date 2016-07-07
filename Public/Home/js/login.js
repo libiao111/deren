@@ -12,12 +12,15 @@ function checkPhone(event){
     	// 验证手机号
     	phoneIsWrong.style.display = "block";
         phone.focus();
-        phone.removeEventListener("change",clear);
-        phone.addEventListener("change",clear);
+        phone.removeEventListener("blur",clear);
+        phone.addEventListener("blur",clear);
         return false; 
     } else if(passwordNum == ""){
     	// 验证密码是否为空
     	passwordIsWrong.style.display = "block";
+    	password.focus();
+        password.removeEventListener("blur",clear);
+        password.addEventListener("blur",clear);
     } else{
     	// 发送手机号和密码
     	$.post("{:U('Login/loginhandle')}",{
@@ -36,9 +39,13 @@ function checkPhone(event){
     }
 
     function clear(){
-    	console.log(1);
+    	phoneNum = phone.value;
     	if ((/^1[3|4|5|7|8]\d{9}$/.test(phoneNum))){
     		phoneIsWrong.style.display = "none";   		
+    	}
+    	passwordNum = password.value;
+    	if (passwordNum){
+    		passwordIsWrong.style.display = "none"; 
     	}
     }
 }
