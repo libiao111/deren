@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2016-07-07 14:52:38
+Date: 2016-07-07 15:51:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -126,11 +126,13 @@ CREATE TABLE `users` (
   `password` varchar(26) NOT NULL COMMENT '密码',
   `user_mobi` varchar(11) NOT NULL COMMENT '用户手机',
   `logintime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '注册时间',
+  `username` varchar(28) NOT NULL COMMENT '用户名',
+  `sex` int(1) NOT NULL COMMENT '性别',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', '68053af2923e00204c3ca7c6a3', '13693251022', '2016-06-30 16:55:24');
-INSERT INTO `users` VALUES ('2', '456', '18734832258', '2016-06-30 16:29:10');
+INSERT INTO `users` VALUES ('1', '68053af2923e00204c3ca7c6a3', '13693251022', '2016-07-07 15:51:42', '张三', '1');
+INSERT INTO `users` VALUES ('2', '456', '18734832258', '2016-07-07 15:48:51', '李四', '0');
