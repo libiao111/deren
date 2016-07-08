@@ -29,7 +29,7 @@ function checkPhone(){
     	},function(status){
     		if(status){
     			// 验证成功，跳转到首页
-    			window.location.href = "{:U('index')}";
+    			window.location.href = goToIndex;
     		}else{
     			// 验证失败，显示提示图标
     			phoneIsWrong.style.display = "block";

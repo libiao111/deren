@@ -120,7 +120,7 @@ function vali(){
 		},function(status){
 			if(status){
 				// 验证成功，跳转到提示页面
-				window.location.href = "{:U('index')}"; // **********有问题**********//
+				window.location.href = goToIndex; // ********* 两种情况 *********//
 			}else{
 				// 验证失败，显示提示图标
 				phone_w.style.display = "block";

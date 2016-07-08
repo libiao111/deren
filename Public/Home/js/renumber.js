@@ -92,7 +92,7 @@ function getValidation() {
                 if(status == 0){
 
                 }else{
-                    window.location.href = "{:U('gotouser')}"; // 这里需要传入用户id
+                    window.location.href = goToUser; 
                 }
             })
         }

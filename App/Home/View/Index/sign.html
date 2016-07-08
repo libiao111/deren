@@ -75,7 +75,16 @@
 		<a class="weui_btn weui_btn_primary" onclick="vali()">注册</a>
 	</div>
 
-
+<script>
+	// 验证手机号是否被注册
+	var register1 = "{:U('Login/register1')}";
+	// 点击获取验证码，发送手机号
+	var sms = "{:U('Login/sms')}";
+	// 发送注册信息
+	var register = "{:U('Login/register')}";
+	// 跳转到提示页面
+	var goToIndex = "{:U('gotoindex')}";
+</script>
 <script src="__JS__/jquery.js"></script>
 <script src="__JS__/sign.js"></script>	
 </body>

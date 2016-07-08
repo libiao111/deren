@@ -28,7 +28,7 @@ function getValidation() {
 	if((/^1[3|4|5|7|8]\d{9}$/.test(phoneNum))){
 
 		// 验证手机号是否被注册
-    	$.post("{:U('Login/register1')}",{
+    	$.post(register1,{
 
     		// 提交信息
     		user_mobi:phoneNum
@@ -39,7 +39,7 @@ function getValidation() {
 				phone.value = "该手机号已被注册";
     		}else{
     			// 发送手机号
-				$.post("{:U('Login/sms')}",{user_mobi:phoneNum},function(status){
+				$.post(sms,{user_mobi:phoneNum},function(status){
 					if(status == 0){
 						// 生成验证码失败
 
@@ -119,14 +119,14 @@ function vali(){
     } else {
 
     	// 发送信息 	
-		$.post("{:U('Login/register')}",{
+		$.post(register,{
 			user_mobi:phoneNum,
 			password:passwordNum,
 			code:validateNum
 		},function(status){
 			if(status){
 				// 验证成功，跳转到提示页面
-				window.location.href = "{:U('gotoindex')}";
+				window.location.href = goToIndex;
 			}else{
 				// 验证失败，显示提示图标
 				phone_w.style.display = "block";
