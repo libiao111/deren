@@ -64,10 +64,10 @@ function getValidation() {
     } else {
 
 		// 验证旧手机号是否存在
-    	$.post("{:U('Login/register1')}",{user_mobi:oldPhoneNum},function(status){
+    	$.post(register1,{user_mobi:oldPhoneNum},function(status){
     		if(status){
 				// 旧手机存在，发送手机号以获取验证码
-				$.post("{:U('Login/sms')}",{user_mobi:phoneNum},function(status){
+				$.post(sms,{user_mobi:phoneNum},function(status){
 					if(status == 0){
 						// 生成验证码失败
 
@@ -84,17 +84,17 @@ function getValidation() {
 
         // 发送信息
         function sendMsg(){
-            $.post("{:U('Login/mobi')}",{
+            $.post(mobi,{
                 user_mobi:oldPhoneNum,
                 phone:phoneNum,
-                id:
+                id:  //****************************
             },function(status){
                 if(status == 0){
 
                 }else{
                     window.location.href = goToUser; 
                 }
-            })
+            });
         }
 
     }
@@ -115,37 +115,3 @@ function getValidation() {
         }
     }
 }
-
-
-
-    } else if (validateNum == ""){
-
-    	// 验证码是否为空
-    	validate_w.style.display = "block";
-    	validate.focus();
-        validate.removeEventListener("blur",clear);
-        validate.addEventListener("blur",clear);
-        return false;
-
-
-    	// 发送信息  	
-		$.post("{:U('Login/xiugai')}",{
-			user_mobi:phoneNum,
-			password:passwordNum,
-			code:validateNum
-		},function(status){
-			if(status){
-				// 验证成功，跳转到首页
-				window.location.href = "{:U('index')}";
-			}else{
-				// 验证失败，显示提示图标
-				phone_w.style.display = "block";
-				password_w.style.display = "block";
-			}
-		}); 	   	
-    }
-
-}
-
-
-

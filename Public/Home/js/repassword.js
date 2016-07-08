@@ -28,10 +28,10 @@ function getValidation() {
 	if((/^1[3|4|5|7|8]\d{9}$/.test(phoneNum))){
 
 		// 验证手机号是否存在
-    	$.post("{:U('Login/register1')}",{user_mobi:phoneNum},function(status){
+    	$.post(register1,{user_mobi:phoneNum},function(status){
     		if(status){
 				// 发送手机号
-				$.post("{:U('Login/sms')}",{user_mobi:phoneNum},function(status){
+				$.post(sms,{user_mobi:phoneNum},function(status){
 					if(status == 0){
 						// 生成验证码失败
 
@@ -113,7 +113,7 @@ function vali(){
     } else {
 
     	// 发送信息  	
-		$.post("{:U('Login/xiugai')}",{
+		$.post(xiugai,{
 			user_mobi:phoneNum,
 			password:passwordNum,
 			code:validateNum
