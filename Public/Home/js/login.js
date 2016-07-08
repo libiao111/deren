@@ -1,4 +1,4 @@
-function checkPhone(event){ 
+function checkPhone(){ 
     var phone = document.getElementById('phone'),
     	phoneNum = phone.value,
     	phoneIsWrong = document.getElementById('phoneIsWrong'),
