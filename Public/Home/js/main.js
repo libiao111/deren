@@ -21,18 +21,4 @@ $(document).ready(function(){
 		});
 	})();
 
-	/* 未购买课程时，点击课表弹出购买提示 */
-	(function(){
-		$(".timetable .a-mask").click(function(e){
-			e.preventDefault();
-			$("#dialog1").fadeIn();
-		});
-		// 确认
-
-		// 取消
-		$("#dialog1 .default").click(function(){
-			$("#dialog1").fadeOut();
-		})
-	})();
-
 }); // ready end

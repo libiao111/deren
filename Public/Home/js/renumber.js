@@ -86,8 +86,7 @@ function getValidation() {
         function sendMsg(){
             $.post(mobi,{
                 user_mobi:oldPhoneNum,
-                phone:phoneNum,
-                id:  //****************************
+                phone:phoneNum
             },function(status){
                 if(status == 0){
 

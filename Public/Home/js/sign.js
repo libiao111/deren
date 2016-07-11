@@ -29,10 +29,7 @@ function getValidation() {
 
 		// 验证手机号是否被注册
     	$.post(register1,{
-
-    		// 提交信息
     		user_mobi:phoneNum
-
     	},function(status){
     		// 已被注册
     		if(status){

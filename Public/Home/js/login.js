@@ -9,7 +9,7 @@ function checkPhone(){
    
     /* 验证 */
     if(!(/^1[3|4|5|7|8]\d{9}$/.test(phoneNum))){ 
-    	// 验证手机号
+    	// 验证手机号格式
     	phoneIsWrong.style.display = "block";
         phone.focus();
         phone.removeEventListener("blur",clear);
@@ -23,7 +23,7 @@ function checkPhone(){
         password.addEventListener("blur",clear);
     } else{
     	// 发送手机号和密码
-    	$.post("{:U('Login/loginhandle')}",{
+    	$.post(loginHandle,{
     		user_mobi:phoneNum,
     		password:passwordNum
     	},function(status){

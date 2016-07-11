@@ -10,6 +10,7 @@
 </head>
 <body class="bfa">
 
+<form action="{:U('Index/ordera')}" method="get" id="orderInfo">
 	<div class="weui_cells_title">确认个人信息</div>
 	<div class="weui_cells weui_cells_form">
 		<div class="weui_cell">
@@ -19,7 +20,10 @@
 				</label>
 			</div>
 			<div class="weui_cell_bd weui_cell_primary">
-				<input class="weui_input" type="text" placeholder="请输入姓名">
+				<input class="weui_input" type="text" placeholder="请输入姓名" id="name">
+			</div>
+			<div class="weui_cell_ft">
+				<i class="weui_icon_warn" id="nameRequired"></i>
 			</div>
 		</div>
 		<div class="weui_cell">
@@ -29,7 +33,10 @@
 				</label>
 			</div>
 			<div class="weui_cell_bd weui_cell_primary">
-				<input class="weui_input" type="number" pattern="[0-9]*" value="">
+				<input class="weui_input" type="number" pattern="[0-9]*" value="" id="phone">
+			</div>
+			<div class="weui_cell_ft">
+				<i class="weui_icon_warn" id="phoneIsWrong"></i>
 			</div>
 		</div>
 	</div>
@@ -75,7 +82,7 @@
 	                <p>微信支付</p>
 	            </div>
 	            <div class="weui_cell_ft">
-	                <input type="radio" class="weui_check" name="radio1" id="x11">
+	                <input type="radio" class="weui_check" name="radio1" id="x11" checked="checked" value="微信支付">
 	                <span class="weui_icon_checked"></span>
 	            </div>
 	        </label>
@@ -84,7 +91,7 @@
 	                <p>支付宝支付</p>
 	            </div>
 	            <div class="weui_cell_ft">
-	                <input type="radio" name="radio1" class="weui_check" id="x12" checked="checked">
+	                <input type="radio" name="radio1" class="weui_check" id="x12" value="支付宝">
 	                <span class="weui_icon_checked"></span>
 	            </div>
 	        </label>
@@ -92,9 +99,13 @@
 	</div>
 
 	<div class="weui_btn_area">
-		<a href="{:U('Index/ordera')}" class="weui_btn weui_btn_primary">确认支付</a>
+		<a class="weui_btn weui_btn_primary" onclick="submitOrder()">确认支付</a>
 	</div>
+</form>
 
-	
+<script src="__JS__/order.js"></script>
+<script>
+	var ordera = "{:U('Index/ordera')}";
+</script>	
 </body>
 </html>

@@ -70,7 +70,7 @@
 	<if condition="$course['status']">
 	<else/>
 	<div class="weui_btn_area btn_fixed">
-		<a href="{:U('Index/order', array('id' => $val['id']))}" class="weui_btn weui_btn_primary">立即购买
+		<a href="{:U('Index/order', array('id' => $course['id']))}" class="weui_btn weui_btn_primary">立即购买
 		</a>
 	</div>
 	</if>
@@ -84,21 +84,38 @@
 	        <div class="weui_dialog_bd">此课程需要购买才能观看，是否立即购买</div>
 	        <div class='weui_dialog_hd'></div>
 	        <div class="weui_dialog_ft">
-	            <a href="javascript:;" class="weui_btn_dialog default">取消</a>
-	            <a href="javascript:;" class="weui_btn_dialog primary">确定</a>
+	            <a class="weui_btn_dialog default">取消</a>
+	            <a href="{:U('Index/order', array('id' => $course['id']))}" class="weui_btn_dialog primary">确定</a>
 	        </div>
 	    </div>
 	</div>
 
 <script src="__JS__/jquery.js"></script>
 <script src="__JS__/main.js"></script>	
-<script>
-	
+<script>	
 window.onload = function(){
 	/* 设置视频高度 */
 	var wid = Math.min(window.screen.width,640);
 	var h = wid*9/16;
 	$(".video_wrap").css("height",h + "px");
+
+	/* 课程是否已购买 */
+	var isPurchased = {$course.status};
+
+	/* 未购买课程时，点击课表弹出购买提示 */
+	if(isPurchased == 0){
+		$(".timetable .a-mask").click(function(e){
+			e.preventDefault();
+			$("#dialog1").fadeIn();
+		});
+		// 确认
+		
+
+		// 取消
+		$("#dialog1 .default").click(function(){
+			$("#dialog1").fadeOut();
+		})
+	}
 }
 </script>
 </body>
