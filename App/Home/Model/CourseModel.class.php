@@ -11,13 +11,12 @@ class CourseModel extends RelationModel
 		),
 		'class'=>array(
 			'mapping_type'=>self::HAS_MANY,
-			'foreign_key'=>'course_id_ccc'
+			'foreign_key'=>'course_id'
 		),
-		'class_sds'=>array(
+		'bigpho'=>array(
 			'mapping_type'=>self::HAS_MANY,
-			'foreign_key'=>'course_id_ccc'
+			'foreign_key'=>'course_id'
 		)
-		
 	);
 }
 

@@ -94,6 +94,7 @@ class IndexController extends Controller
         );
         /*关联查询*/
         $result = D("course")->relation($arr1)->where($arr)->order('id')->find();
+        p($result);
         $this->assign('course',$result);
         $this->display();
     }
