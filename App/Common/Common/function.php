@@ -1,5 +1,7 @@
 <?php
 /* ---------------------------------------Common公用函数--------------------------------------- */
+/* ---------------------------------------Common公用函数--------------------------------------- */
+/* ---------------------------------------Common公用函数--------------------------------------- */
 
 /*打印方法*/
 function p($array) {
@@ -128,4 +130,170 @@ function uploadHandle($file, $width, $height = null)
     }
     return $result;
 
+}
+
+
+/* --------------------------------------------------------------------------------------- */
+/* ---------------------------------------微信支付---------------------------------------- */
+/* --------------------------------------------------------------------------------------- */
+
+    /* 提交生成订单 */
+    /*public function newBills() {
+        #code ...
+        $this->redirect('home/index/bill');
+    }*/
+
+    /* 微信支付页面 */
+    /*public function bill() {
+        $this->jsApiParameters = submit_pay($note['bills'], $note['xiwei']);
+        $this->display();
+    }*/
+
+
+    /* 微信支付页面调用JS */
+    /*$(window).ready(function () {
+        var codeUrl = "__CHAJIAN__/code/succeed.php";
+        var successUrl =  "{:U('success')}";
+        function jsApiCall() {
+            WeixinJSBridge.invoke(
+                'getBrandWCPayRequest',
+                {$jsApiParameters},
+                function(res){
+                    if (res.err_msg == "get_brand_wcpay_request:ok") {
+                        var arr = {
+                            phone: '{$showinfo.phone}',
+                            fuwu: '{$showinfo.time} {$showinfo.fuwu}'
+                        };
+                        $.post(codeUrl, arr, function (data) {
+                            window.location.href = successUrl;
+                        });
+                    }
+                }
+            );
+        }
+        $('#callpay').click(function () {
+            if (typeof WeixinJSBridge == "undefined"){
+                if( document.addEventListener ){
+                    document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+                }else if (document.attachEvent){
+                    document.attachEvent('WeixinJSBridgeReady', jsApiCall); 
+                    document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+                }
+            }else{
+                jsApiCall();
+            }
+        });
+    });*/
+
+
+    /* 支付成功通告 */
+    /*public function notify() {
+        notify();
+    }*/
+
+
+    /* 支付成功页面 */
+    /*public function success() {
+        $this->display();
+    }*/
+
+
+
+/*微信支付*/
+function submit_pay($bills = null, $xiwei) {
+
+    ini_set('date.timezone','Asia/Shanghai');
+    error_reporting(E_ERROR);
+
+    require_once("./Public/Plugin/wxp/lib/WxPay.Api.php");
+    require_once("./Public/Plugin/wxp/example/WxPay.JsApiPay.php");
+    require_once('./Public/Plugin/wxp/example/log.php');
+
+    /*初始化日志*/
+    $logHandler= new CLogFileHandler("./Public/Plugin/wxp/logs/".date('Y-m-d').'.log');
+    $log = Log::Init($logHandler, 15);
+
+    /*获取用户openid*/
+    $tools = new JsApiPay();
+    $openId = $tools->GetOpenid();
+
+    /*通告回调路径*/
+    $notify_url = "http://wozaiyuntian.com/index.php/home/index/notify.ogv";
+    if (!$bills) {
+        $bills = WxPayConfig::MCHID.date("YmdHis");
+    }
+
+    /*统一下单*/
+    $input = new WxPayUnifiedOrder();
+    $input->SetBody("【云相馆】摄影服务");                  /*商品名称*/
+    $input->SetAttach("test");                              /*数据包，原样返回*/
+    $input->SetOut_trade_no($bills);                        /*订单号*/
+    $input->SetTotal_fee(3000*$xiwei);                      /*金额*/
+    $input->SetTime_start(date("YmdHis"));                  /*支付开始时间*/
+    $input->SetTime_expire(date("YmdHis", time() + 600));   /*支付过期时间*/
+    $input->SetGoods_tag("我在云天");                       /*商品签名*/
+    $input->SetNotify_url($notify_url);                     /*回调路径*/    
+    $input->SetTrade_type("JSAPI");                         /*支付方式*/
+    $input->SetOpenid($openId);                             /*openid*/
+
+    $order = WxPayApi::unifiedOrder($input);
+    return $tools->GetJsApiParameters($order);
+}
+
+/*微信支付成功通告*/
+function notify() {
+    ini_set('date.timezone','Asia/Shanghai');
+    error_reporting(E_ERROR);
+
+    require_once "./Public/Plugin/wxp/lib/WxPay.Api.php";
+    require_once './Public/Plugin/wxp/lib/WxPay.Notify.php';
+    require_once './Public/Plugin/wxp/example/log.php';
+
+    /*初始化日志*/
+    $logHandler= new CLogFileHandler("./Public/Plugin/wxp/logs/".date('Y-m-d').'.log');
+    $log = Log::Init($logHandler, 15);
+
+    class PayNotifyCallBack extends WxPayNotify
+    {
+        /*查询订单*/
+        public function Queryorder($transaction_id)
+        {
+            $input = new WxPayOrderQuery();
+            $input->SetTransaction_id($transaction_id);
+            $result = WxPayApi::orderQuery($input);
+            Log::DEBUG("query:" . json_encode($result));
+            if(array_key_exists("return_code", $result)
+                && array_key_exists("result_code", $result)
+                && $result["return_code"] == "SUCCESS"
+                && $result["result_code"] == "SUCCESS")
+            {
+                $cd = array('bills' => $result["out_trade_no"]);
+                M('client_yuyue')->where($cd)->save(array('pay' => 1));
+                return true;
+            }
+            return false;
+        }
+        
+        /*重写回调处理函数*/
+        public function NotifyProcess($data, &$msg)
+        {
+            Log::DEBUG("call back:" . json_encode($data));
+            $notfiyOutput = array();
+            
+            if(!array_key_exists("transaction_id", $data)){
+                $msg = "输入参数不正确";
+                return false;
+            }
+            /*查询订单，判断订单真实性*/
+            if(!$this->Queryorder($data["transaction_id"])){
+                $msg = "订单查询失败";
+                return false;
+            }
+            return true;
+        }
+    }
+
+    Log::DEBUG("begin notify");
+    $notify = new PayNotifyCallBack();
+    $notify->Handle(false);
 }
