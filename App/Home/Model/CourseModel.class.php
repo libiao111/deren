@@ -11,7 +11,11 @@ class CourseModel extends RelationModel
 		),
 		'class'=>array(
 			'mapping_type'=>self::HAS_MANY,
-			'foreign_key'=>'course_id'
+			'foreign_key'=>'course_id_ccc'
+		),
+		'class_sds'=>array(
+			'mapping_type'=>self::HAS_MANY,
+			'foreign_key'=>'course_id_ccc'
 		)
 		
 	);
