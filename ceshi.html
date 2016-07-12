@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<button class="a">aaa</button>
+	<button class="b">sss</button>
+</body>
+<script type="text/javascript"src="__PUBLIC__/js/jquery.js"></script>
+<script type="text/javascript">
+	$('.a').click(function(){
+		$.post({:U('Index/sms')}),{},function(){
+			
+		}
+	});
+	$('.b').click(function(){
+		$.post({:U('Index/register')}),{},function(){
+			
+		}
+	})
+</script>
+</html>
