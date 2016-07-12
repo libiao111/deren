@@ -14,7 +14,7 @@ function submitOrder(){
 		nameIpt.focus();
 		nameIpt.removeEventListener("blur",clear);
         nameIpt.addEventListener("blur",clear);
-	}else if(!(/^1[3|4|5|7|8]\d{9}$/.test(phoneNum))){
+	}else if(!(/^1[3|4|5|7|8]\d{9}$/.test(phone))){
 		// 手机号格式错误
 		phoneIsWrong.style.display = "block";
 		phoneIpt.focus();
@@ -28,7 +28,7 @@ function submitOrder(){
 	// 清除警告图标
 	function clear(){
     	phoneNum = phoneIpt.value;
-    	if ((/^1[3|4|5|7|8]\d{9}$/.test(phoneNum))){
+    	if ((/^1[3|4|5|7|8]\d{9}$/.test(phone))){
     		phoneIsWrong.style.display = "none";   		
     	}
     	name = nameIpt.value;

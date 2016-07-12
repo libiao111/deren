@@ -1,7 +1,7 @@
 
 // 验证码倒计时
+var countdown = 60;
 function count(val){
-	var countdown = 60;
 	if (countdown == 0) { 
 		val.removeAttribute("disabled");    
 		val.value = "获取验证码"; 
@@ -68,34 +68,13 @@ function getValidation() {
     		if(status){
 				// 旧手机存在，发送手机号以获取验证码
 				$.post(sms,{user_mobi:phoneNum},function(status){
-					if(status == 0){
-						// 生成验证码失败
-
-					}else{
-                        submit.addEventListener('click',sendMsg);
-                    }
-				});
-				// 开始倒计时
-				count(btnValidate);
+					// 开始倒计时
+                    count(btnValidate);
+				});				
     		}else{
     			phone.value = "该手机号不存在";
     		}
     	});	
-
-        // 发送信息
-        function sendMsg(){
-            $.post(mobi,{
-                user_mobi:oldPhoneNum,
-                phone:phoneNum
-            },function(status){
-                if(status == 0){
-
-                }else{
-                    window.location.href = goToUser; 
-                }
-            });
-        }
-
     }
 
     // 清除警告图标
@@ -113,4 +92,21 @@ function getValidation() {
             validate_w.style.display = "none"; 
         }
     }
+
+    // 发送信息 ************应该是验证码验证正确后的回调函数
+    submit.addEventListener("click",sendMsg);
+    function sendMsg(){
+        if((/^1[3|4|5|7|8]\d{9}$/.test(oldPhoneNum)) && (/^1[3|4|5|7|8]\d{9}$/.test(phoneNum)) && (phoneNum !== oldPhoneNum) && validateNum){
+            $.post(xiugai,{
+                user_mobi:oldPhoneNum,
+                phone:phoneNum
+            },function(status){
+                if(status == 0){
+
+                }else{
+                    window.location.href = goToUser; 
+                }
+            });
+        }        
+    }   
 }

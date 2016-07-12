@@ -102,9 +102,10 @@
 		2)提交方式：$.post()
 		3)提交数据：
 			{	
-				id:value (用户id),
+				
 				user_mobi:value (旧手机号),
 				phone:value (新手机号),
+				code:value (验证码)
 			}
 		4)反馈数据：
 			{
