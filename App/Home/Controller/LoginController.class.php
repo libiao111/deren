@@ -11,13 +11,13 @@ class LoginController extends Controller
 	{
 		
 		if(IS_AJAX){
-			$user = I('username');
+			$user = I('user_mobi');
             $pass = I('password');
 			$arr = array(
 				'user_mobi' =>$user,
-				'password'	=>$pass,
+				'password'	=>md5($pass),
 			);
-			$result = M('users')->where($arr)->find();
+			$result = M('users')->where($arr)->field('password', true)->find();
 			if($result){
 				$data = array('status' =>1);
 				session('user',$result);
