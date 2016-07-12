@@ -10,7 +10,7 @@ class LoginController extends Controller
 	public function loginhandle()
 	{
 		
-		if(IS_AJAX){
+		if(!IS_AJAX){
 			$user = I('username');
             $pass = I('password');
 			$arr = array(
@@ -35,7 +35,7 @@ class LoginController extends Controller
 	*/
 	public function register1()
 	{
-		if(IS_AJAX){
+		if(!IS_AJAX){
 			$this->error('页面不存在!');die;
 		}
 		$arr = array('user_mobi'=>I('user_mobi'));
@@ -53,7 +53,7 @@ class LoginController extends Controller
 	public function sms()
 	{
 		/*赋值变量*/
-		$phone = I('phone');
+		$phone = '13693251022';
 		/*生成六位随机数*/
 		$str = rand('100000','999999');
 		$data['code'] = $str;
@@ -66,7 +66,7 @@ class LoginController extends Controller
 		}else{
 			$data = array('status'=>0);
 		}
-		
+		$this->ajaxReturn($data,'json');
 	}
 
 	/*
@@ -74,7 +74,7 @@ class LoginController extends Controller
 	*/
 	public function register()
 	{
-		if (IS_AJAX) {
+		if (!IS_AJAX) {
 			$this->error('页面不存在!');die;
 		}
 		/*session 获取验证码*/
@@ -83,6 +83,7 @@ class LoginController extends Controller
 		$code = md5(I('code'));
 		$password = I('password');
 		$user_mobi = I('user_mobi');
+		$username = '李飞飞';
 		/*查询手机号是否存在*/
 		$sql = M('users')->where(array('user_mobi'=>$user_mobi))->select();
 		/*判断验证码是否正确*/
@@ -95,9 +96,11 @@ class LoginController extends Controller
 			$arr = array(
 				'password' 		=>md5($password),
 				'user_mobi'		=>$user_mobi,
+				'username'		=>$username
 			);
 			$result = M('users')->add($arr);
 		}
+		p($result);
 		/*返回状态*/
 		if ($result) {
 			$data = array('status'=>1);
@@ -110,7 +113,7 @@ class LoginController extends Controller
  	/*修改密码*/
     public function xiugai()
     {
-    	if(IS_AJAX){
+    	if(!IS_AJAX){
     		$this->error('页面不存在');die;
     	}
         /*获取session中的验证码*/
@@ -125,7 +128,6 @@ class LoginController extends Controller
             'user_mobi' =>$phone
         );
         $sql = M('users')->where($arr)->select();
-        p($sql);
         /*判断验证码是否正确*/
 		if(!$code = $str){
         	$data = array('status'=>2);
@@ -148,7 +150,7 @@ class LoginController extends Controller
     /*修改手机号*/
     public function mobi()
     {
-    	if(IS_AJAX){
+    	if(!IS_AJAX){
     		$this->error('页面不存在');die;
     	}
     	/*获取session中的验证码*/
