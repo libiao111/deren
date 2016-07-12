@@ -30,9 +30,9 @@ function getValidation() {
 
 		// 验证手机号是否存在
     	$.post(register1,{user_mobi:phoneNum},function(status){
-    		if(status){
-				// 发送手机号
-				$.post(sms,{user_mobi:phoneNum},function(status){
+    		if(status.status){
+				// status=1,手机号存在，发送手机号
+				$.post(sms,{user_mobi:phoneNum},function(){
     				// 开始倒计时
     				count(btnValidate);
                 });

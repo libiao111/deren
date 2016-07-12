@@ -27,13 +27,17 @@ function checkPhone(){
     		user_mobi:phoneNum,
     		password:passwordNum
     	},function(status){
-    		if(status){
+    		if(status.status){
     			// 验证成功，跳转到首页
     			window.location.href = goToIndex;
     		}else{
     			// 验证失败，显示提示图标
     			phoneIsWrong.style.display = "block";
     			passwordIsWrong.style.display = "block";
+                phone.removeEventListener("blur",clear);
+                phone.addEventListener("blur",clear);
+                password.removeEventListener("blur",clear);
+                password.addEventListener("blur",clear);
     		}
     	});
     }
