@@ -127,6 +127,7 @@ class IndexController extends Controller
             'ordera_num'=>$order_num,
             'pay_type' =>I('pay_type')
         );
+        $this->redirect(U('Pay/index'));
         //$result = M('ordera')->add($arr);
     }
 

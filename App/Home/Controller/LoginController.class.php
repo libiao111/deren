@@ -10,7 +10,7 @@ class LoginController extends Controller
 	public function loginhandle()
 	{
 		
-		if(!IS_AJAX){
+		if(IS_AJAX){
 			$user = I('username');
             $pass = I('password');
 			$arr = array(
@@ -52,6 +52,9 @@ class LoginController extends Controller
 	*/
 	public function sms()
 	{
+		if(!IS_AJAX){
+			$this->error('页面不存在!');die;
+		}
 		/*赋值变量*/
 		$phone = I('phone');
 		/*生成六位随机数*/
