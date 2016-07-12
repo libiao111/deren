@@ -209,9 +209,13 @@
 		2)提交方式：form
 		3)提交数据：
 			{	
-				ordera_name: value (购买人名),
-		        order_mobi: value (购买人手机),
+				[ordera_name] =>value (购买人名),
+		        [order_mobi] =>value (购买人手机),
+		        [course_id] =>value(课程id)
+		    	[pay_type] =>value(1:微信 0：支付宝)
 		    }
+
+		
 	11、1)全部页面反馈数据：
 			$login = array(
 				1=>已经登录
