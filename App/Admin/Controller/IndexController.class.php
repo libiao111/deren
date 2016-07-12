@@ -9,41 +9,34 @@ class IndexController extends Controller
     
     public function index(){
         /*查询所有课程*/
-    	//$arr = M("course")->where(array('id'=>1))->order('id')->find();
-    	$result =D('course')->relation('bigpho')->select();
-    	p($result);
-    	/*$arr = M("course")->order('id')->select();
-    	p($arr);*/
-        $this->assign('course',$arr);
+    	$arr = M("course")->order('id')->select();
+    	$this->assign('course',$arr);
         $this->display();
     }
     //添加或修改线下课
     public function addcourse()
     {
-    	/*if(!IS_AJAX){
+    	if(!IS_AJAX){
       		  $this->error('页面不存在!');die; 
-      	}*/
+      	}
       	/*获取值*/
     	$id =I('id');
-    	/*$video_url =I('video_url');
+    	$video_url =I('video_url');
     	$classtime =I('classtime');
     	$course_id =I('course_id');
     	$offline_url =I('offline_url');
     	$type =I('type');
-    	*/
-    	$video_url ='r2y';
+    	
+    	/*$video_url ='r2y';
     	$classtime =45;
     	$course_id =7;
     	$offline_url ='sdf';
     	$id=3;
-    	$type =3;
+    	$type =3;*/
     	/*获取图片路径*/
     	$a =session('arr');
-    	$a = array(
-    		'rgt','yuy','dfrt'
-		);
     	//数组赋值
-    	/*$arr =array(
+    	$arr =array(
 			'type'=>I('type'),
 	    	'course_name'=>I('course_name'),
 	    	'course_photo'=>I('course_photo'),
@@ -52,8 +45,8 @@ class IndexController extends Controller
 	    	'teach_name'=>I('teach_name'),
 	    	'picture'=>I('picture'),
 	    	'class_num'=>I('class_num')
-		);*/
-		$arr =array(
+		);
+		/*$arr =array(
 			'type'=>$type,
 	    	'course_name'=>'ty',
 	    	'course_photo'=>'df',
@@ -62,7 +55,7 @@ class IndexController extends Controller
 	    	'teach_name'=>'ae',
 	    	'picture'=>'ry7',
 	    	'class_num'=>5
-		);
+		);*/
 		if($id){
 			if($type==1){
 				/*修改线下课*/
@@ -88,7 +81,6 @@ class IndexController extends Controller
 						'pho_url'=>$va
 					);
 				}
-				p($arr);
 				/*先删除对应的图片*/
 				$sql = M('bigpho')->where(array('course_id'=>$id))->delete();
 				/*执行修改操作*/
@@ -127,6 +119,7 @@ class IndexController extends Controller
 		}
 		$this->ajaxReturn($data,json);
     }
+    //删除
     //搜索
     public function search(){
     	$type = I('type');
