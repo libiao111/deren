@@ -18,13 +18,11 @@ function pullCode($data){
 	$ucpass = new Ucpaas($options);
 	//开发者账号信息查询默认为json或xml
 	//$ucpass->getDevinfo('xml');
-	$data=$_POST['data'];
-	//print_r($data);
 	$code = $data['code'];
 	$to = $data['phone'];
 	$templateId = "1623";
 	$param="您的,$code,3";
 	$result = $ucpass->templateSMS($appId,$to,$templateId,$param);
-	echo 'q1';
+	
 	return $result;
 }

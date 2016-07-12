@@ -23,10 +23,10 @@ class WxPayConfig
 	 * @var string
 	 */
 
-	const MCHID = '1299198401';
-	const KEY = 'wozaiyuntian20151111cloudskywzyt';
-	const APPID = 'wxc63ba4ea39b99925';
-	const APPSECRET = '9d7e5c8f58dbc90b174d1ec36caec962';
+	const MCHID = '10029104';
+	const KEY = 'sunraineeducationandtech20140723';
+	const APPID = 'wxdf873d378532a1ca';
+	const APPSECRET = 'b79b9814cff2229a9a216b2e64c27f54';
 
 	//=======【证书路径设置】=====================================
 	/**

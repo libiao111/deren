@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="__PUBLIC__/css/temp.css">
+    <title>选择图片</title>
+    <style type="text/css" media="screen">
+       /*  html, body, form{width: 80%; height: 80%; margin: 0; } 
+       input[type=file]{width: 80%; height: 80%; opacity: 0; filter:alpha(opacity=0); position: relative; z-index: 5; cursor: pointer; } 
+       span{width: 100%; height: 28px; line-height: 28px; text-align: center; margin: auto; color: #999; position: absolute; z-index: 3; bottom: 0; right: 0; left: 0; top: 0; } */
+    </style>
+</head>
+
+<body>
+    <span>上传大图</span>
+    <form action="{:U('uploadImg')}" method="post" enctype="multipart/form-data"
+    onsubmit="return submitTest();">
+        <input type="hidden" name="name" value="{$name}">
+        <input type="hidden" name="imgnum" value="{$imgnum}">
+        <input type="file" name="file">
+        <button class="upload btn btn-default">上传</button>
+    </form>
+
+    <script type="text/javascript" src=""></script>
+    <script src="__PUBLIC__/js/jquery.js"></script>
+    <script type="text/javascript">
+         function submitTest(){
+            if($('form input[name="file"]').val()==""){
+                //alert('不跳!')
+            return false;
+            }
+        }
+           $('.upload').click(function(){
+            //alert()        
+        $(this).siblings('input[name=file]').click()
+              $('form input[name=file]').change(function() {
+                $('form').submit(); 
+            });
+        });
+</script>
+</body>
+</html>

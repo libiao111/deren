@@ -23,7 +23,11 @@ function checkPhone(){
         password.addEventListener("blur",clear);
     } else{
     	// 发送手机号和密码
+<<<<<<< HEAD
     	$.post(loginHandle,{
+=======
+    	$.post(codeUrl,{
+>>>>>>> c72a61238968467cdad188fd2a11f5a5a8807758
     		user_mobi:phoneNum,
     		password:passwordNum
     	},function(status){

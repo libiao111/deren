@@ -9,6 +9,7 @@ class IndexController extends Controller
 
     public function _initialize() {
         $this->login = session('user') ? 1: 0;
+        $this->user_content = session('user');
     }
 
     public function index()
@@ -94,14 +95,12 @@ class IndexController extends Controller
         );
         /*关联查询*/
         $result = D("course")->relation($arr1)->where($arr)->order('id')->find();
-        p($result);
         $this->assign('course',$result);
         $this->display();
     }
-    /*立即购买*/
+    /*确认订单*/
     public function order()
     {   $id = I('id');
-        session('id',$id);
         $arr = array(
             'id'=>$id
         );
@@ -113,21 +112,22 @@ class IndexController extends Controller
     public function ordera()
     {
         /*获取数据*/
-
-        $ordera_name  = I('ordera_name');
-        $order_mobi = I('order_mobi');
-        $course_id = session('id');
-        $user_id = I('user_id');
-        /*数组赋值*/
+        $user_id = session('id');
+        //生成订单号
+        $time = time();
+        $str = rand('1000','9999');
+        $ordera_num = 'Deren'.$time.$str;
+        //数组赋值
         $arr = array(
-            'ordera_name' =>$ordera_name,
-            'order_mobi' =>$order_mobi,
-            'course_id' =>$course_id,
+            'ordera_name' =>I('ordera_name'),
+            'order_mobi' =>I('order_mobi'),
+            'course_id' =>I('course_id'),
             'user_id' =>$user_id,
-            'ordera_status'=>1
-
+            'status'=>1,
+            'ordera_num'=>$order_num,
+            'pay_type' =>I('pay_type')
         );
-        $result = M('ordera')->add($arr);
+        //$result = M('ordera')->add($arr);
     }
 
 
