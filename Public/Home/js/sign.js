@@ -1,7 +1,7 @@
 
 // 验证码倒计时
+var countdown = 60;
 function count(val){
-	var countdown = 60;
 	if (countdown == 0) { 
 		val.removeAttribute("disabled");    
 		val.value = "获取验证码"; 
@@ -33,17 +33,13 @@ function getValidation() {
     	},function(status){
     		// 已被注册
     		if(status){
-				phone.value = "该手机号已被注册";
+				phone.value = 1;
     		}else{
     			// 发送手机号
 				$.post(sms,{user_mobi:phoneNum},function(status){
-					if(status == 0){
-						// 生成验证码失败
-
-					}
-				});
-				// 开始倒计时
-				count(btnValidate);
+    				// 开始倒计时
+    				count(btnValidate);
+                });
     		}
     	});	
 	} else {
