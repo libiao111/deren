@@ -18,7 +18,6 @@ class LoginController extends Controller
 				'password'	=>$pass,
 			);
 			$result = M('users')->where($arr)->find();
-			
 			if($result){
 				$data = array('status' =>1);
 				session('user',$result);
