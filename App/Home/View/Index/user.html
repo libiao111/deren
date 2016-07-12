@@ -12,14 +12,18 @@
 
 	<div class="weui_cells">
 		<div class="weui_cell">
-			<div class="thumb_sm bg mr10 br4" style="background-image:url(__IMG__/thumb.jpg)"></div>
+			<div class="thumb_sm bg mr10 br4" style="background-image:url(__UPFILE__/{$user_content.user_photo})"></div>
 			<div>
 				<p class="f18 mb4">
-                    用户名
+                    {$user_content.username}
                     <!-- 图标表示用户性别 男nan.svg 女nv.svg -->
-                    <img src="__IMG__/nan.svg" width="16px" class="vm ml2">
+                    <if condition="$user_content['sex']">
+                        <img src="__IMG__/nan.svg" width="16px" class="vm ml2">
+                    <else/>
+                        <img src="__IMG__/nv.svg" width="16px" class="vm ml2">
+                    </if>
                 </p>
-				<p class="f16">TEL:135656556</p>
+				<p class="f16">TEL:{$user_content.user_mobi}</p>
 			</div>
 		</div>
 	</div>

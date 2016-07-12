@@ -20,7 +20,7 @@
 				</label>
 			</div>
 			<div class="weui_cell_bd weui_cell_primary">
-				<input class="weui_input" type="number" pattern="[0-9]*" placeholder="请输入手机号" id="oldPhone">
+				<input class="weui_input" type="text" placeholder="请输入手机号" id="oldPhone">
 			</div>
 			<div class="weui_cell_ft">
 				<i class="weui_icon_warn" id="oldPhone_w"></i>
@@ -34,7 +34,7 @@
 				</label>
 			</div>
 			<div class="weui_cell_bd weui_cell_primary">
-				<input class="weui_input" type="number" pattern="[0-9]*" placeholder="请输入新手机号" id="phone">
+				<input class="weui_input" type="text" placeholder="请输入新手机号" id="phone">
 			</div>
 			<div class="weui_cell_ft">
 				<i class="weui_icon_warn" id="phone_w"></i>
@@ -49,6 +49,9 @@
 			</div>
 			<div class="weui_cell_bd weui_cell_primary">
 				<input class="weui_input" type="text" placeholder="请输入验证码" id="validate">
+			</div>
+			<div class="weui_cell_ft">
+				<i class="weui_icon_warn" id="vali_w"></i>
 			</div>
 			<div class="weui_cell_ft vali_wrap">
 				<i class="weui_icon_warn l" id="validate_w"></i>
@@ -67,7 +70,7 @@
 	// 点击获取验证码，发送手机号
 	var sms = "{:U('Login/sms')}";
 	// 发送信息
-	var xiugai = "{:U('Login/xiugai')}";
+	var mobi = "{:U('Login/mobi')}";
 	// 跳转到提示页面
 	var goToUser = "{:U('gotouser')}"; // 这里需要传入用户id
 </script>

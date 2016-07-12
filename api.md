@@ -87,9 +87,9 @@
 		2)提交方式：$.post()
 		3)提交数据：
 			{	
-				id:value (用户id),
 				user_mobi:value (手机号),
 				password:value (密码)
+				code:value (验证码)
 			}
 		4)反馈数据：
 			{

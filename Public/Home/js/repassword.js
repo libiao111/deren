@@ -1,7 +1,7 @@
 
 // 验证码倒计时
+var countdown = 60;
 function count(val){
-	var countdown = 60;
 	if (countdown == 0) { 
 		val.removeAttribute("disabled");    
 		val.value = "获取验证码"; 
@@ -22,6 +22,7 @@ function getValidation() {
 
 	var phone = document.getElementById('phone'),
 	    phoneNum = phone.value,
+        phone_w = document.getElementById('phone_w'),
 	    btnValidate = document.getElementById('btnValidate');
 
 	// 验证手机号格式
@@ -32,26 +33,29 @@ function getValidation() {
     		if(status){
 				// 发送手机号
 				$.post(sms,{user_mobi:phoneNum},function(status){
-					if(status == 0){
-						// 生成验证码失败
-
-					}
-				});
-				// 开始倒计时
-				count(btnValidate);
+    				// 开始倒计时
+    				count(btnValidate);
+                });
     		}else{
     			phone.value = "该手机号不存在";
     		}
     	});	
 	} else {
 		// 手机号格式错误
-		$("#newPhone_w").show();
-		$("#newPhone").unbind("blur").blur(function(){
-			if((/^1[3|4|5|7|8]\d{9}$/.test(phoneNum))){
-				$("#newPhone_w").hide();
-			}
-		});
+        phone_w.style.display = "block";
+        phone.focus();
+        phone.removeEventListener("blur",clear);
+        phone.addEventListener("blur",clear);
+        return false; 
 	}	
+
+    // 清除警告图标
+    function clear(){       
+        phoneNum = phone.value;
+        if ((/^1[3|4|5|7|8]\d{9}$/.test(phoneNum))){
+            phone_w.style.display = "none";         
+        }
+    }
 }
 
 // 点击提交，验证表单信息
@@ -122,9 +126,12 @@ function vali(){
 				// 验证成功，跳转到提示页面
 				window.location.href = goToIndex; // ********* 两种情况 *********//
 			}else{
-				// 验证失败，显示提示图标
-				phone_w.style.display = "block";
+				// 验证失败，显示验证码错误提示图标
 				password_w.style.display = "block";
+                password.focus();
+                password.removeEventListener("blur",clear);
+                password.addEventListener("blur",clear);
+                return false;
 			}
 		}); 	   	
     }
