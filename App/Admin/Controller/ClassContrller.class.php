@@ -28,7 +28,7 @@ class IndexController extends Controller
 	       	'paixu'=>I('paixu')
        	);
        	$sql = M('course')->where(array('id'=>$course_id))->field('type')->find();
-       	p($sql);
+       	
        	
     }
 
