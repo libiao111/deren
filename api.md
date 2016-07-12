@@ -212,5 +212,19 @@
 				ordera_name: value (购买人名),
 		        order_mobi: value (购买人手机),
 		    }
-		
+	11、登录前自动调用(index前执行)-----------------------------------------------------------------
+		1)请求路径：{:U('Login/_initialize')}
+		2)反馈数据：
+			login array(
+				1=>已经登录
+				0=>未登录
+			);
+        user_content array
+        {
+			username =>value(用户名),
+			user_mobi =>value(用户手机),
+			sex =>value(0:女，1:男),
+			user_photo=>value(用户头像路径)
+        }
+
 		

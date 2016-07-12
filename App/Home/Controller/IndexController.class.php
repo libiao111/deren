@@ -9,6 +9,7 @@ class IndexController extends Controller
 
     public function _initialize() {
         $this->login = session('user') ? 1: 0;
+        $this->user_content = session('user');
     }
 
     public function index()

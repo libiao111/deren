@@ -18,6 +18,7 @@ class LoginController extends Controller
 				'password'	=>$pass,
 			);
 			$result = M('users')->where($arr)->find();
+
 			if($result){
 				$data = array('status' =>1);
 				session('user',$result);
@@ -53,7 +54,7 @@ class LoginController extends Controller
 	public function sms()
 	{
 		/*赋值变量*/
-		$phone = '13693251022';
+		$phone = I('phone');
 		/*生成六位随机数*/
 		$str = rand('100000','999999');
 		$data['code'] = $str;
@@ -81,8 +82,6 @@ class LoginController extends Controller
 		$str = (session('str'));
 		/*赋值变量*/
 		$code = md5(I('code'));
-		$password = I('password');
-		$user_mobi = I('user_mobi');
 		$username = '李飞飞';
 		/*查询手机号是否存在*/
 		$sql = M('users')->where(array('user_mobi'=>$user_mobi))->select();
@@ -94,13 +93,14 @@ class LoginController extends Controller
 		/*判断条件成立，添加记录*/
 		if (!$sql && $password !="") {
 			$arr = array(
-				'password' 		=>md5($password),
-				'user_mobi'		=>$user_mobi,
-				'username'		=>$username
+				'password' 		=>md5(I('password')),
+				'user_mobi'		=>I('user_mobi'),
+				'username'		=>$username,
+				'user_photo'	=>'http://www.gkdao.cn/resource/2016-07-05/20160705183330-9879.png'
 			);
 			$result = M('users')->add($arr);
 		}
-		p($result);
+		
 		/*返回状态*/
 		if ($result) {
 			$data = array('status'=>1);
@@ -119,24 +119,21 @@ class LoginController extends Controller
         /*获取session中的验证码*/
         $str = (session('str'));
         /*获取值*/
-    	$id = I('id');
-        $code = md5(I('code'));
-        $phone = I('user_mobi');
-        $password = I('password');
+    	$code = md5(I('code'));
         /*查询手机号是否存在*/
         $arr = array(
-            'user_mobi' =>$phone
+            'user_mobi' =>I('user_mobi')
         );
         $sql = M('users')->where($arr)->select();
         /*判断验证码是否正确*/
-		if(!$code = $str){
+		if($code !=$str){
         	$data = array('status'=>2);
 			$this ->ajaxReturn($data,'json');
         }
         /*执行修改操作*/
         if($sql && $password!=""){
-            $arr['id']=$id;
-            $arr['password']=md5($password);
+            $arr['id']=I('id');
+            $arr['password']=md5(I('password'));
             $result = M('users')->save($arr);
         }
         /*返回值*/
@@ -156,23 +153,29 @@ class LoginController extends Controller
     	/*获取session中的验证码*/
         $str = (session('str'));
         /*获取值*/
-    	$id = I('id');
-        $code = md5(I('code'));
+    	$code = md5(I('code'));
+    	/*原手机号*/
         $phone1 = I('user_mobi');
+        /*要改的手机号*/
         $phone2 = I('phone');
-        /*查询手机号是否存在*/
+        /*查询原手机号是否存在*/
         $arr = array(
             'user_mobi' =>$phone1
         );
         $sql = M('users')->where($arr)->select();
+        /*查询新手机号是否存在*/
+        $arr2 = array(
+        	'user_mobi' =>$phone2
+    	);
+    	$sql2 = M('users')->where($arr2)->select();
         /*判断验证码是否正确*/
-		if(!$code = $str){
+		if($code !=$str){
         	$data = array('status'=>2);
 			$this -> ajaxReturn($data,'json');
         }
         /*执行修改*/
-        if($sql){
-        	$arr1['id']= $id;
+        if($sql && !$sql2){
+        	$arr1['id']= I('id');
         	$arr1['user_mobi']= $phone2;
         	$result = M('users')->save($arr1);
         }
