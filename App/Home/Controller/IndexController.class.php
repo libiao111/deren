@@ -15,7 +15,6 @@ class IndexController extends Controller
     public function index()
     {
         /*查询所有课程*/
-    	$arr = M("course")->where(array('id'=>1))->order('id')->find();
     	$arr = M("course")->order('id')->select();
         $this->assign('course',$arr);
         $this->display();
@@ -127,7 +126,7 @@ class IndexController extends Controller
             'ordera_num'=>$order_num,
             'pay_type' =>I('pay_type')
         );
-        $this->redirect(U('Pay/index'));
+        $this->redirect(U('Pay/Index/index'));
         //$result = M('ordera')->add($arr);
     }
 
