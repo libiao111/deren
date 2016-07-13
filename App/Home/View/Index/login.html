@@ -53,6 +53,11 @@
 <script>
 	var goToIndex = "{:U('index')}";
 	var loginHandle = "{:U('Login/loginhandle')}";
+	// 记录页面名称
+	var url = window.location.href.toString().split("/");
+	var pageName = ((url.slice(url.length -1,url.length))[0].split("."))[0];
+	localStorage.pageName = pageName;
+	
 </script>
 <script src="__JS__/jquery.js"></script>
 <script src="__JS__/login.js"></script>	

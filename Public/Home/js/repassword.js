@@ -23,7 +23,8 @@ function getValidation() {
 	var phone = document.getElementById('phone'),
 	    phoneNum = phone.value,
         phone_w = document.getElementById('phone_w'),
-	    btnValidate = document.getElementById('btnValidate');
+	    btnValidate = document.getElementById('btnValidate'),
+        btnSubmit = document.getElementById('submit');
 
 	// 验证手机号格式
 	if((/^1[3|4|5|7|8]\d{9}$/.test(phoneNum))){
@@ -35,6 +36,8 @@ function getValidation() {
 				$.post(sms,{user_mobi:phoneNum},function(){
     				// 开始倒计时
     				count(btnValidate);
+                    // 给提交按钮绑定提交事件处理程序
+                    btnSubmit.addEventListener("click",vali);
                 });
     		}else{
     			phone.value = "该手机号不存在";
@@ -74,7 +77,9 @@ function vali(){
 
     	repassword = document.getElementById('repassword'),
     	repasswordNum = repassword.value;
-    	repassword_w = document.getElementById('repassword_w');
+    	repassword_w = document.getElementById('repassword_w'),
+
+        pageName = localStorage.pageName;
    
     /* 验证 */
     if (!(/^1[3|4|5|7|8]\d{9}$/.test(phoneNum))){ 
@@ -124,7 +129,11 @@ function vali(){
 		},function(status){
 			if(status){
 				// 验证成功，跳转到提示页面
-				window.location.href = goToIndex; // ********* 两种情况 *********//
+                if(pageName == "user"){
+                    window.location.href = goToIndex;
+                }else if(pageName == "login"){
+                    window.location.href = goToLogin;
+                }
 			}else{
 				// 验证失败，显示验证码错误提示图标
 				password_w.style.display = "block";
