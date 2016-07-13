@@ -15,7 +15,7 @@ class IndexController extends Controller
     public function index()
     {
         /*查询所有课程*/
-    	$arr = M("course")->order('id')->select();
+    	$arr = D("course")->relation('ordera')->order('id')->select();
         $this->assign('course',$arr);
         $this->display();
     }
@@ -26,7 +26,7 @@ class IndexController extends Controller
     		'type'=>1
 		);
         /*查询所有线下课*/
-		$result = M("course")->where($arr)->order('id desc')->select();
+		$result = D("course")->relation('ordera')->where($arr)->order('id desc')->select();
         $this->assign('course',$result);
     	$this->display();
     }
@@ -37,7 +37,7 @@ class IndexController extends Controller
     		'type'=>2
 		);
         /*查询所有视频课*/
-		$result = M("course")->where($arr)->order('id desc')->select();
+		$result = D("course")->relation('ordera')->where($arr)->order('id desc')->select();
 		$this->assign('course',$result);
     	$this->display();
     }
@@ -48,7 +48,7 @@ class IndexController extends Controller
     		'type'=>3
 		);
 		/*查询所有音频课*/
-		$result = M("course")->where($arr)->order('id desc')->select();
+		$result = D("course")->relation('ordera')->where($arr)->order('id desc')->select();
 		$this->assign('course',$result);
         $this->display();
     }
@@ -112,13 +112,13 @@ class IndexController extends Controller
     {
         /*获取数据*/
         $user_id = session('id');
-        //以id= course_id查询课程表
-        $sql = M('course')->where(array('id'=>1))->field('id','ordera_name','current_price')->find();
-        //生成订单号
+        /*以id= course_id查询课程表*/
+        $sql = M('course')->where(array('id'=>2))->field('id','course_name','current_price')->find();
+        /*生成订单号*/
         $time = time();
         $str = rand('1000','9999');
         $ordera_num = 'Deren'.$time.$str;
-        //数组赋值订单表
+        /*数组赋值订单表*/
         $arr = array(
             'ordera_name' =>I('ordera_name'),
             'order_mobi' =>I('order_mobi'),
@@ -128,17 +128,18 @@ class IndexController extends Controller
             'ordera_num'=>$ordera_num,
             'pay_type' =>I('pay_type'),
         );
-        //传递到支付数组
+        $result = M('ordera')->add($arr);
+        /*传递到支付数组*/
         $arr1 = array(
             'sign'=>'德仁商学院',
-            'title' =>$sql['ordera_name'],
+            'title' =>$sql['course_name'],
             'bills'=>$ordera_num,
             'price' =>$sql['current_price'],
             'realm'=>'http://gkdao.com/temps/heroslider/deren',
             'successurl'=>'http://gkdao.com/temps/heroslider/deren/index.php/Home/Index/gotocourse'
         );
-        redirect(U("Pay/Index/index",$arr1));
-        //$result = M('ordera')->add($arr);
+        session('arr',$arr1);
+        redirect(U("Pay/Index/index"));
     }
 
 
