@@ -15,7 +15,7 @@ class IndexController extends Controller
     public function index()
     {
         /*查询所有课程*/
-    	$arr = M("course"))->relation('ordera')->order('id')->select();
+    	$arr = M("course")->order('id')->select();
         $this->assign('course',$arr);
         $this->display();
     }
@@ -26,7 +26,7 @@ class IndexController extends Controller
     		'type'=>1
 		);
         /*查询所有线下课*/
-		$result = M("course")->relation('ordera')->where($arr)->order('id desc')->select();
+		$result = M("course")->where($arr)->order('id desc')->select();
         $this->assign('course',$result);
     	$this->display();
     }
@@ -37,7 +37,7 @@ class IndexController extends Controller
     		'type'=>2
 		);
         /*查询所有视频课*/
-		$result = M("course")->relation('ordera')->where($arr)->order('id desc')->select();
+		$result = M("course")->where($arr)->order('id desc')->select();
 		$this->assign('course',$result);
     	$this->display();
     }
@@ -48,7 +48,7 @@ class IndexController extends Controller
     		'type'=>3
 		);
 		/*查询所有音频课*/
-		$result = M("course")->relation('ordera')->where($arr)->order('id desc')->select();
+		$result = M("course")->where($arr)->order('id desc')->select();
 		$this->assign('course',$result);
         $this->display();
     }
@@ -90,7 +90,7 @@ class IndexController extends Controller
             'id'=>$id
         );
         $arr1 = array(
-            'bigpho','class'，'ordera'
+            'bigpho','class','ordera'
         );
         /*关联查询*/
         $result = D("course")->relation($arr1)->where($arr)->order('id')->find();
@@ -113,7 +113,7 @@ class IndexController extends Controller
         /*获取数据*/
         $user_id = session('id');
         //以id= course_id查询课程表
-        $sql = M('course')->where(array('id')=>$course_id))->field('id','ordera_name','current_price')->find();
+        $sql = M('course')->where(array('id'=>1))->field('id','ordera_name','current_price')->find();
         //生成订单号
         $time = time();
         $str = rand('1000','9999');
