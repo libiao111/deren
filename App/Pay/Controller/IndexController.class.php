@@ -30,13 +30,16 @@ class IndexController extends Controller
         $arr['successurl'] ? $arr['successurl'] : $this->error('缺少支付成功跳转路径');
         $arr['data'] ? $arr['data'] : '';
 
-        $this->assign('jsApiParameters',logHand($arr));
+        /* 下单 */
+        $result = logHand($arr);
+        $this->assign('jsApiParameters', $result);
+
         /* 支付成功跳转路径 */
         $this->assign('successurl', $successurl);
 
         /* 显示页面 */
         $this->display();
-        p($tools->GetJsApiParameters($order));
+        p($result);
     }
 
 
