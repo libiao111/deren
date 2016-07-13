@@ -16,6 +16,15 @@ class IndexController extends Controller
     {
         /*查询所有课程*/
     	$arr = D("course")->relation('ordera')->order('id')->select();
+        foreach ($arr as $k => $v) {
+            foreach ($v as $ke => $va) {
+                foreach ($va as $key => $val) {
+                $v['status']=$val['status'];
+                   //p($v); 
+                }
+             }
+             $arr[$k]=$v;
+        }
         $this->assign('course',$arr);
         $this->display();
     }
@@ -27,6 +36,15 @@ class IndexController extends Controller
 		);
         /*查询所有线下课*/
 		$result = D("course")->relation('ordera')->where($arr)->order('id desc')->select();
+        foreach ($result as $k => $v) {
+            foreach ($v as $ke => $va) {
+                foreach ($va as $key => $val) {
+                $v['status']=$val['status'];
+                   //p($v); 
+                }
+             }
+             $result[$k]=$v;
+        }
         $this->assign('course',$result);
     	$this->display();
     }
@@ -38,6 +56,15 @@ class IndexController extends Controller
 		);
         /*查询所有视频课*/
 		$result = D("course")->relation('ordera')->where($arr)->order('id desc')->select();
+        foreach ($result as $k => $v) {
+            foreach ($v as $ke => $va) {
+                foreach ($va as $key => $val) {
+                $v['status']=$val['status'];
+                   //p($v); 
+                }
+             }
+             $result[$k]=$v;
+        }
 		$this->assign('course',$result);
     	$this->display();
     }
@@ -49,13 +76,22 @@ class IndexController extends Controller
 		);
 		/*查询所有音频课*/
 		$result = D("course")->relation('ordera')->where($arr)->order('id desc')->select();
+        foreach ($result as $k => $v) {
+            foreach ($v as $ke => $va) {
+                foreach ($va as $key => $val) {
+                    $v['status']=$val['status'];
+                }
+             }
+             $result[$k]=$v;
+        }
 		$this->assign('course',$result);
         $this->display();
     }
     /*线下课详情*/
     public function offline()
     {
-    	$id = I('id');
+    	
+        $id = I('id');
     	$arr = array(
     		'id'=>$id
 		);
@@ -64,6 +100,11 @@ class IndexController extends Controller
         );
         /*关联查询*/
 		$result = D("course")->relation($arr1)->where($arr)->order('id')->find();
+        foreach ($result as $k => $v) {
+            foreach ($v as $ke => $va) {
+               $result['status']=$va['status'];
+             }
+        }
         $this->assign('course',$result);
         $this->display();
     }
@@ -79,6 +120,11 @@ class IndexController extends Controller
         );
         /*关联查询*/
         $result = D("course")->relation($arr1)->where($arr)->order('id')->find();
+        foreach ($result as $k => $v) {
+            foreach ($v as $ke => $va) {
+                $result['status']=$va['status'];
+             }
+        }
         $this->assign('course',$result);
         $this->display();
     } 
@@ -94,6 +140,11 @@ class IndexController extends Controller
         );
         /*关联查询*/
         $result = D("course")->relation($arr1)->where($arr)->order('id')->find();
+        foreach ($result as $k => $v) {
+            foreach ($v as $ke => $va) {
+                $result['status']=$va['status'];
+             }
+        }
         $this->assign('course',$result);
         $this->display();
     }
@@ -109,7 +160,7 @@ class IndexController extends Controller
     }
     /*订单表*/
     public function ordera()
-    {
+    {   
         /*获取数据*/
         $user_id = session('id');
         /*以id= course_id查询课程表*/

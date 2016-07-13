@@ -30,18 +30,18 @@ class ClassController extends Controller
             'course_id'   =>5,
             'paixu'   =>2
         );
-       	if($id){
+       	if ($id) {
             //修改操作
             $arr[id]=$id;
             $arr['class_time']=$class_time;
             $result = M('class')->save($arr);
         }
-        else{
+        else {
             //添加操作
             $arr['class_mins']=$class_mins;
             $result = M('class')->add($arr);
         }
-        if($result){
+        if ($result) {
             $data = array('status'=>1);
         } 
         else {
