@@ -117,16 +117,37 @@ class IndexController extends Controller
         $str = rand('1000','9999');
         $ordera_num = 'Deren'.$time.$str;
         //数组赋值
+        
         $arr = array(
             'ordera_name' =>I('ordera_name'),
             'order_mobi' =>I('order_mobi'),
             'course_id' =>I('course_id'),
             'user_id' =>$user_id,
             'status'=>1,
-            'ordera_num'=>$order_num,
-            'pay_type' =>I('pay_type')
+            'ordera_num'=>$ordera_num,
+            'pay_type' =>I('pay_type'),
+            'sign'=>I('sign'),
+            'current_price' => I('current_price')
         );
-        $this->redirect(U('Pay/Index/index'));
+        /*$arr1 = array(
+            'title' =>I('ordera_name'),
+            'bills'=>$order_num,
+            'pay_type' =>I('pay_type'),
+            'proce' => I('current_price'),
+            'sign'=>I('sign'),
+            'realm'=>3,
+            'successurl'=>4
+        );*/
+        $arr1 = array(
+            'title' =>4,
+            'bills'=>$ordera_num,
+            'pay_type' =>8,
+            'price' => 9,
+            'sign'=>56,
+            'realm'=>3,
+            'successurl'=>4
+        );
+        redirect(U("Pay/Index/index",$arr1));
         //$result = M('ordera')->add($arr);
     }
 

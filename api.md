@@ -212,7 +212,8 @@
 			{	
 				[ordera_name] =>value (购买人名),
 		        [order_mobi] =>value (购买人手机),
-		        [course_id] =>value(课程id)
+		        [course_id] =>value(课程id),
+		        [current_price] => value (课程现价),
 		    	[pay_type] =>value(1:微信 0：支付宝)
 		    }
 
