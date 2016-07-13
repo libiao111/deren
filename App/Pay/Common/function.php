@@ -58,7 +58,10 @@ function notify(){
         $notify = new PayNotifyCallBack();
         $notify->Handle(false);
 }
-function logHand(){
+
+
+/* 生成支付信息 */
+function logHand($arr){
     
     ini_set('date.timezone','Asia/Shanghai');
     error_reporting(E_ERROR);
@@ -68,6 +71,15 @@ function logHand(){
     require_once("$url/lib/WxPay.Api.php");
     require_once("$url/example/WxPay.JsApiPay.php");
     require_once("$url/example/log.php");
+
+    /* 取值 */
+    $sign       = $arr['sign'];
+    $title      = $arr['title'];
+    $bills      = $arr['bills'];
+    $price      = $arr['price'];
+    $realm      = $arr['realm'];
+    $successurl = $arr['successurl'];
+    $data       = $arr['data'] ? $arr['data'] : '';
 
     /*初始化日志*/
     $logHandler= new CLogFileHandler("$url/logs/".date('Y-m-d').'.log');
@@ -79,9 +91,9 @@ function logHand(){
 
      /*通告回调路径*/
     $notify_url = "$realm/index.php/pay/index/notifyHandle.ogv";
-    if (!$bills) {
-        $bills = WxPayConfig::MCHID.date("YmdHis");
-    }
+    // if (!$bills) {
+    //     $bills = WxPayConfig::MCHID.date("YmdHis");
+    // }
 
     /*统一下单*/
     $input = new WxPayUnifiedOrder();
