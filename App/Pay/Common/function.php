@@ -27,9 +27,9 @@ function notify(){
                 {
                     /*修改支付状态 $result["out_trade_no"]订单号*/
                     $cd = array(
-                        'bills' => $result["out_trade_no"]
+                        'ordera_num' => $result["out_trade_no"]
                     );
-                    M('client_yuyue')->where($cd)->save(array('pay' => 1));
+                    M('ordera')->where($cd)->save(array('status' => 1));
                     return true;
                 }
                 return false;
