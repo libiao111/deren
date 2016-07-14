@@ -110,6 +110,6 @@ function logHand($arr){
 
     /* 下单信息 */
     $order = WxPayApi::unifiedOrder($input);
-    return GetJsApiParameters($order);
+    return $tools->GetJsApiParameters($order);
 
 }
