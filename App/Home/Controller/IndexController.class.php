@@ -16,9 +16,7 @@ class IndexController extends Controller
     public function index()
     {
         //获取用户id
-        // $users_id = session('user')['id'];
-        $users_id = 1;
-
+        $users_id = session('user')['id'];
         // 查询课程表
         $course = M("course")->where()->order('id')->select();
         // 查询已支付订单
@@ -39,9 +37,7 @@ class IndexController extends Controller
     public function offlinelist()
     {
         //获取用户id
-        // $users_id = session('user')['id'];
-        $users_id = 1;
-
+        $users_id = session('user')['id'];
         /*查询所有线下课*/
         $where['type'] = 1;
         $result = M("course")->where($where)->order('id desc')->select();
@@ -65,9 +61,7 @@ class IndexController extends Controller
     public function videolist()
     {
     	//获取用户id
-        // $users_id = session('user')['id'];
-        $users_id = 1;
-
+        $users_id = session('user')['id'];
         /*查询所有线下课*/
         $where['type'] = 2;
         $result = M("course")->where($where)->order('id desc')->select();
@@ -90,9 +84,7 @@ class IndexController extends Controller
     public function audiolist()
     {
     	//获取用户id
-        // $users_id = session('user')['id'];
-        $users_id = 1;
-
+        $users_id = session('user')['id'];
         /*查询所有线下课*/
         $where['type'] = 3;
         $result = M("course")->where($where)->order('id desc')->select();
@@ -115,8 +107,7 @@ class IndexController extends Controller
     public function offline()
     {
     	//获取用户id
-        // $users_id = session('user')['id'];
-        $users_id = 1;
+        $users_id = session('user')['id'];
         $id = I('id');
     	$arr = array(
     		'id'=>$id
@@ -139,8 +130,7 @@ class IndexController extends Controller
     public function video()
     {
         //获取用户id
-        // $users_id = session('user')['id'];
-        $users_id = 1;
+        $users_id = session('user')['id'];
         $id = I('id');
         $arr = array(
             'id'=>$id
@@ -163,8 +153,7 @@ class IndexController extends Controller
     public function audio()
     {
         //获取用户id
-        // $users_id = session('user')['id'];
-        $users_id = 1;
+        $users_id = session('user')['id'];
         $id = I('id');
         $arr = array(
             'id'=>$id
@@ -198,7 +187,6 @@ class IndexController extends Controller
     {   
         /*获取数据*/
         $users_id = session('user')['id'];
-        $users_id = 1;
         /*以id= course_id查询课程表*/
         $sql = M('course')->where(array('id'=>2))->field('id','course_name','current_price')->find();
         /*生成订单号*/
