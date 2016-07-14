@@ -204,7 +204,7 @@ class IndexController extends Controller
         /*生成订单号*/
         $time = time();
         $str = rand('1000','9999');
-        $ordera_num = 'Deren'.$time.$str;
+        $ordera_num = 'DR'.$time.$str;
         /*数组赋值订单表*/
         $arr = array(
             'ordera_name' => I('ordera_name'),
