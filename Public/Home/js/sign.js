@@ -33,7 +33,7 @@ function getValidation() {
     	},function(status){
     		// 已被注册
     		if(status){
-				phone.value = 1;
+				phone.value = "手机号已被注册";
     		}else{
     			// 发送手机号
 				$.post(sms,{user_mobi:phoneNum},function(status){
