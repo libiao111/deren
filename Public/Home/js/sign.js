@@ -32,7 +32,7 @@ function getValidation() {
     		user_mobi:phoneNum
     	},function(status){
     		// 已被注册
-    		if(status){
+    		if(status.status){
 				phone.value = "手机号已被注册";
     		}else{
     			// 发送手机号

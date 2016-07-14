@@ -95,14 +95,14 @@ function getValidation() {
                                     phone:phoneNum,
                                     code:validateNum
                                 },function(status){
-                                    if(status == 2){
+                                    if(status.status == 2){
                                         // 验证码错误
                                         validate_w.style.display = "block";
                                         validate.focus();
                                         validate.removeEventListener("blur",clear);
                                         validate.addEventListener("blur",clear);
                                         return false;
-                                    }else if(status = 0){
+                                    }else if(status.status = 0){
                                         // 验证失败
                                         validate_w.style.display = "block";
                                         validate.focus();

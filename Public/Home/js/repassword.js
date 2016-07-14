@@ -127,7 +127,7 @@ function vali(){
 			password:passwordNum,
 			code:validateNum
 		},function(status){
-			if(status){
+			if(status.status){
 				// 验证成功，跳转到提示页面
                 if(pageName == "user"){
                     window.location.href = goToIndex;
