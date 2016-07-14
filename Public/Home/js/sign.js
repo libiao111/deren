@@ -33,7 +33,7 @@ function getValidation() {
     	},function(status){
     		// 已被注册
     		if(status.status){
-				phone.value = "手机号已被注册";
+				// phone.value = "手机号已被注册";
     		}else{
     			// 发送手机号
 				$.post(sms,{user_mobi:phoneNum},function(status){
@@ -117,7 +117,7 @@ function vali(){
 			password:passwordNum,
 			code:validateNum
 		},function(status){
-			if(status){
+			if(status.status){
 				// 验证成功，跳转到提示页面
 				window.location.href = goToIndex;
 			}else{
