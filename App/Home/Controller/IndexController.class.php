@@ -122,7 +122,7 @@ class IndexController extends Controller
         /*关联查询*/
         $result = D("course")->relation($arr1)->where($arr)->find();
         $bills = M('ordera')->where($arr2)->find();
-        $result['status'] = $bills['status'];
+        $result['status'] = $bills['status'] ? 1: 0;
         $this->assign('course',$result);
         $this->display();
     }
@@ -145,7 +145,7 @@ class IndexController extends Controller
         /*关联查询*/
         $result = D("course")->relation($arr1)->where($arr)->find();
         $bills = M('ordera')->where($arr2)->find();
-        $result['status'] = $bills['status'];
+        $result['status'] = $bills['status'] ? 1: 0;
         $this->assign('course',$result);
         $this->display();
     } 
@@ -168,7 +168,7 @@ class IndexController extends Controller
         /*关联查询*/
         $result = D("course")->relation($arr1)->where($arr)->find();
         $bills = M('ordera')->where($arr2)->find();
-        $result['status'] = $bills['status'];
+        $result['status'] = $bills['status'] ? 1: 0;
         $this->assign('course',$result);
         $this->display();
     }

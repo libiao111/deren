@@ -19,7 +19,7 @@ function pullCode($data){
 	//开发者账号信息查询默认为json或xml
 	//$ucpass->getDevinfo('xml');
 	$code = $data['code'];
-	$to = $data['phone'];
+	$to = $data['user_mobi'];
 	$templateId = "1623";
 	$param="您的,$code,3";
 	$result = $ucpass->templateSMS($appId,$to,$templateId,$param);
