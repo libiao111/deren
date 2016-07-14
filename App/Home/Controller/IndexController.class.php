@@ -12,139 +12,174 @@ class IndexController extends Controller
         $this->user_content = session('user');
     }
 
+    /*查询所有课程*/
     public function index()
     {
-        /*查询所有课程*/
-    	$arr = D("course")->relation('ordera')->order('id')->select();
-        foreach ($arr as $k => $v) {
-            foreach ($v as $ke => $va) {
-                foreach ($va as $key => $val) {
-                $v['status']=$val['status'];
-                   //p($v); 
+        //获取用户id
+        // $users_id = session('user')['id'];
+        $users_id = 1;
+
+        // 查询课程表
+        $course = M("course")->where()->order('id')->select();
+        // 查询已支付订单
+        $bills = M('ordera')->where(array('users_id' => $users_id, 'status' => 1))->field('course_id')->select();
+        foreach ($course as $k => $kc) {
+            $kc['status'] = 0;
+            foreach ($bills as $dd) {
+                if ($kc['id'] == $dd['course_id']) {
+                    $kc['status'] = 1;
                 }
-             }
-             $arr[$k]=$v;
+            }
+            $course[$k]=$kc;
         }
-        $this->assign('course',$arr);
+        $this->assign('course',$course);
         $this->display();
     }
     /*线下课*/
     public function offlinelist()
     {
-        $arr = array(
-    		'type'=>1
-		);
+        //获取用户id
+        // $users_id = session('user')['id'];
+        $users_id = 1;
+
         /*查询所有线下课*/
-		$result = D("course")->relation('ordera')->where($arr)->order('id desc')->select();
-        foreach ($result as $k => $v) {
-            foreach ($v as $ke => $va) {
-                foreach ($va as $key => $val) {
-                $v['status']=$val['status'];
-                   //p($v); 
+        $where['type'] = 1;
+        $result = M("course")->where($where)->order('id desc')->select();
+        //查询已支付订单
+        $bills = M('ordera')->where(array('users_id' => $users_id, 'status' => 1))->field('course_id')->select();
+        foreach ($result as $k => $kc) {
+            $kc['status'] = 0;
+            foreach ($bills as $dd) {
+                if ($kc['id'] == $dd['course_id']) {
+                    $kc['status'] = 1;
                 }
-             }
-             $result[$k]=$v;
+            }
+            $result[$k]=$kc;
         }
+
         $this->assign('course',$result);
     	$this->display();
     }
+
     /*视频课*/
     public function videolist()
     {
-    	$arr = array(
-    		'type'=>2
-		);
-        /*查询所有视频课*/
-		$result = D("course")->relation('ordera')->where($arr)->order('id desc')->select();
-        foreach ($result as $k => $v) {
-            foreach ($v as $ke => $va) {
-                foreach ($va as $key => $val) {
-                $v['status']=$val['status'];
-                   //p($v); 
+    	//获取用户id
+        // $users_id = session('user')['id'];
+        $users_id = 1;
+
+        /*查询所有线下课*/
+        $where['type'] = 2;
+        $result = M("course")->where($where)->order('id desc')->select();
+        //查询已支付订单
+        $bills = M('ordera')->where(array('users_id' => $users_id, 'status' => 1))->field('course_id')->select();
+        foreach ($result as $k => $kc) {
+            $kc['status'] = 0;
+            foreach ($bills as $dd) {
+                if ($kc['id'] == $dd['course_id']) {
+                    $kc['status'] = 1;
                 }
-             }
-             $result[$k]=$v;
+            }
+            $result[$k]=$kc;
         }
-		$this->assign('course',$result);
-    	$this->display();
+
+        $this->assign('course',$result);
+        $this->display();
     }
     /*音频课*/
     public function audiolist()
     {
-    	$arr = array(
-    		'type'=>3
-		);
-		/*查询所有音频课*/
-		$result = D("course")->relation('ordera')->where($arr)->order('id desc')->select();
-        foreach ($result as $k => $v) {
-            foreach ($v as $ke => $va) {
-                foreach ($va as $key => $val) {
-                    $v['status']=$val['status'];
+    	//获取用户id
+        // $users_id = session('user')['id'];
+        $users_id = 1;
+
+        /*查询所有线下课*/
+        $where['type'] = 3;
+        $result = M("course")->where($where)->order('id desc')->select();
+        //查询已支付订单
+        $bills = M('ordera')->where(array('users_id' => $users_id, 'status' => 1))->field('course_id')->select();
+        foreach ($result as $k => $kc) {
+            $kc['status'] = 0;
+            foreach ($bills as $dd) {
+                if ($kc['id'] == $dd['course_id']) {
+                    $kc['status'] = 1;
                 }
-             }
-             $result[$k]=$v;
+            }
+            $result[$k]=$kc;
         }
-		$this->assign('course',$result);
+
+        $this->assign('course',$result);
         $this->display();
     }
     /*线下课详情*/
     public function offline()
     {
-    	
+    	//获取用户id
+        // $users_id = session('user')['id'];
+        $users_id = 1;
         $id = I('id');
     	$arr = array(
     		'id'=>$id
 		);
         $arr1 = array(
-            'bigpho','class','ordera'
+            'bigpho','class'
+        );
+        $arr2 = array(
+            'course_id'=>$id,
+            'users_id'=>$users_id
         );
         /*关联查询*/
-		$result = D("course")->relation($arr1)->where($arr)->order('id')->find();
-        foreach ($result as $k => $v) {
-            foreach ($v as $ke => $va) {
-               $result['status']=$va['status'];
-             }
-        }
+        $result = D("course")->relation($arr1)->where($arr)->find();
+        $bills = M('ordera')->where($arr2)->find();
+        $result['status'] = $bills['status'];
         $this->assign('course',$result);
         $this->display();
     }
      /*视频课详情*/
     public function video()
     {
+        //获取用户id
+        // $users_id = session('user')['id'];
+        $users_id = 1;
         $id = I('id');
         $arr = array(
             'id'=>$id
         );
         $arr1 = array(
-            'bigpho','class','ordera'
+            'bigpho','class'
+        );
+        $arr2 = array(
+            'course_id'=>$id,
+            'users_id'=>$users_id
         );
         /*关联查询*/
-        $result = D("course")->relation($arr1)->where($arr)->order('id')->find();
-        foreach ($result as $k => $v) {
-            foreach ($v as $ke => $va) {
-                $result['status']=$va['status'];
-             }
-        }
+        $result = D("course")->relation($arr1)->where($arr)->find();
+        $bills = M('ordera')->where($arr2)->find();
+        $result['status'] = $bills['status'];
         $this->assign('course',$result);
         $this->display();
     } 
     /*音频课详情*/
     public function audio()
     {
+        //获取用户id
+        // $users_id = session('user')['id'];
+        $users_id = 1;
         $id = I('id');
         $arr = array(
             'id'=>$id
         );
         $arr1 = array(
-            'bigpho','class','ordera'
+            'bigpho','class'
+        );
+        $arr2 = array(
+            'course_id'=>$id,
+            'users_id'=>$users_id
         );
         /*关联查询*/
-        $result = D("course")->relation($arr1)->where($arr)->order('id')->find();
-        foreach ($result as $k => $v) {
-            foreach ($v as $ke => $va) {
-                $result['status']=$va['status'];
-             }
-        }
+        $result = D("course")->relation($arr1)->where($arr)->find();
+        $bills = M('ordera')->where($arr2)->find();
+        $result['status'] = $bills['status'];
         $this->assign('course',$result);
         $this->display();
     }
@@ -162,7 +197,8 @@ class IndexController extends Controller
     public function ordera()
     {   
         /*获取数据*/
-        $user_id = session('id');
+        $users_id = session('user')['id'];
+        $users_id = 1;
         /*以id= course_id查询课程表*/
         $sql = M('course')->where(array('id'=>2))->field('id','course_name','current_price')->find();
         /*生成订单号*/
@@ -171,13 +207,13 @@ class IndexController extends Controller
         $ordera_num = 'Deren'.$time.$str;
         /*数组赋值订单表*/
         $arr = array(
-            'ordera_name' =>I('ordera_name'),
-            'order_mobi' =>I('order_mobi'),
-            'course_id' =>I('course_id'),
-            'user_id' =>$user_id,
-            'status'=>1,
-            'ordera_num'=>$ordera_num,
-            'pay_type' =>I('pay_type'),
+            'ordera_name' => I('ordera_name'),
+            'ordera_mobi' => I('order_mobi'),
+            'course_id' => I('course_id'),
+            'users_id' => $users_id,
+            'status' => 0,
+            'ordera_num' => $ordera_num,
+            'pay_type' => I('radio1')
         );
         $result = M('ordera')->add($arr);
         /*传递到支付数组*/

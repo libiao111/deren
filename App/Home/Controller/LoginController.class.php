@@ -28,7 +28,6 @@ class LoginController extends Controller
 		} else {
 			$this->error('页面不存在!');die;
 		}
-		
 	}
 	/*
 	验证手机号是否存在
