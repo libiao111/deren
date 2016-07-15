@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="__ACSS__/phocus.dajun.css" />
+    <link rel="stylesheet" href="__ACSS__/font-awesome.min.css" />
+</head>
+
+<body>
+    <div id="login"></div>
+    <script src="__AJS__/jquery.js"></script>
+    <script>
+        $(function () {
+            function WebKit(datawrap) {
+                this.Login = () => {
+                    let target = datawrap.renderAt, //组件插入位置
+                        styleType = datawrap.style, //组件样式
+                        theme = datawrap.theme, //组件主题
+                        type = datawrap.type, //组件的样式类型
+                        width = datawrap.width, //组件宽度
+                        height = datawrap.height, //组件高度
+                        login_head = datawrap.data.login_header,
+                        login_submint = datawrap.data.login_submit,
+                        tar = document.getElementById(target);
+
+                    if (this.style !== "") {
+                        document.getElementById(target).className += styleType;
+                    }
+
+                    tar.style.width = width; //设置组件宽度
+                    tar.style.height = height; //设置组件高度
+
+                    tar.innerHTML = "<div><h2></h2><div><i></i><input></div><div><i></i><input></div><span></span</div>";
+
+                    let t_c_d = tar.querySelector('div');
+
+                    let h2 = t_c_d.childNodes[0],
+                        userbox = t_c_d.childNodes[1],
+                        passwordbox = t_c_d.childNodes[2],
+                        submit = t_c_d.childNodes[3];
+                    let username = userbox.childNodes[1],
+                        passeord = passwordbox.childNodes[1];
+
+                    h2.innerHTML = login_head;
+                    userbox.childNodes[0].setAttribute('class', 'fa fa-user');
+                    userbox.childNodes[1].setAttribute('type', 'text');
+                    userbox.children[1].setAttribute('placeholder', '用户名');
+                    userbox.children[1].setAttribute('class', 'user');
+                    passwordbox.childNodes[0].setAttribute('class', 'fa fa-lock');
+                    passwordbox.childNodes[1].setAttribute('type', 'password');
+                    passwordbox.childNodes[1].setAttribute('placeholder', '密码');
+                    passwordbox.children[1].setAttribute('class', 'psd');
+                    submit.setAttribute('id', "log_in");
+                    submit.innerHTML = login_submint;
+
+                    submit.onclick = () => {
+                        var arr = {},
+                            a = $('.user').val(),
+                            b = $('.psd').val();
+                        arr['password'] = b;
+                        arr['username'] = a;
+                        $.post("{:U('Index')}", arr, function (data) {
+                            if (data.status) {
+                                submit.innerHTML = "登录成功，请稍后……";
+                                setTimeout(function () {
+                                    window.location.reload();
+                                }, 1000)
+                            } else {
+                                submit.innerHTML = "账号或密码不正确";
+                                setTimeout(function () {
+                                    submit.innerHTML = "登录";
+                                }, 1000)
+                            }
+                        });
+                    }
+                }
+            }
+
+            //登录框
+            var login = new WebKit({
+                "renderAt": "login",
+                "style": "loginstyle",
+                theme: "", //备选参数（？）
+                "type": "default", //default、
+                "width": "360px",
+                "height": "320px",
+                "data": {
+                    login_header: "数据表SQL生成器",
+                    login_submit: "登录"
+                }
+            })
+            login.Login();
+        })
+    </script>
+</body>
+
+</html>
