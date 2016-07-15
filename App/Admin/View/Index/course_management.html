@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>组件</title>
+    <link rel="stylesheet" href="__ACSS__/main.css">
+    <link rel="stylesheet" href="__ACSS__/index.css" />
+    <link rel="stylesheet" type="text/css" href="__ACSS__/font-awesome.min.css">
+    <style>
+        /*
+        .modal {
+            display: none
+        }
+        .modal>.back{
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255,255,255,0.8)
+        }
+*/
+    </style>
+</head>
+
+<body class="bf2">
+
+    <!-- sub nav -->
+    <div class="sub_nav pl20 pt10">
+        <span class="route">
+            <a href="dash.html" target="frame"><i class="fa fa-home fa-lg"></i></a>
+            <span class="slashes slashes1 ml8 mr8 rel"></span>
+        <span class="router router1">内容管理/课程管理</span>
+        </span>
+    </div>
+    <section class="widget_wrp">
+        <!--		<h2>表格</h2>-->
+        <!-- 头部 -->
+        <div class="table_header mt30">
+            <!-- 下拉列表组件 -->
+            <span class="select_wrap ml30 mt15 dib">
+        		<span>课程分类：</span>
+            <select class="ipt_default btn_large">
+                <option>产品经理</option>
+                <option>UI设计师</option>
+                <option>前端工程师</option>
+                <option>后端工程师</option>
+            </select>
+            <i class="fa fa-caret-down"></i>
+            </span>
+            <span class="select_wrap ml10 mt15 dib">
+        		<span>课程状态：</span>
+            <select class="ipt_default btn_middle">
+                <option>易</option>
+                <option>中</option>
+                <option>难</option>
+            </select>
+            <i class="fa fa-caret-down"></i>
+            </span>
+            <!-- 按钮 -->
+            <a href="">
+                <input type="button" class="add_course button btn_middle btn_primary r mr30 mt15 pointer" value="添加课程">
+            </a>
+        </div>
+
+        <!-- 表格主体 -->
+        <table class="table_default">
+            <tr>
+                <th width="6%">
+                    <input type="checkbox">
+                </th>
+                <th width="12%">课程封面</th>
+                <th width="15%">课程名称</th>
+                <th width="10%">课程分类</th>
+                <th width="10%">课程数量</th>
+                <th width="8%">讲师姓名</th>
+                <th width="10%">开始上课时间</th>
+                <th width="10%">课程总时长</th>
+                <th width="8%">状态</th>
+                <th width="11%">操作</th>
+            </tr>
+            <tr>
+                <td width="6%">
+                    <input type="checkbox">
+                </td>
+                <td><img src="__AIMG__/4.png" height="60px" class="mt8 mb8"></td>
+                <td>思维口才50天速成课程</td>
+                <td>线下课</td>
+                <td>10</td>
+                <td>王自健</td>
+                <td>2016-8-9</td>
+                <td>1hour</td>
+                <td>启用</td>
+                <td class="operation">
+                    <a href="" class="mr2 edit">
+                        <i class="fa fa-edit vm"></i> 编辑
+                    </a>
+                    <!--
+                    <span class="ccc">|</span>
+                    <span class="pointer ml2 remove">
+    					<i class="fa fa-trash vm"></i>
+    					删除
+    				</span>
+                     删除提示 
+                    <div class="deleConfirm">
+                        <p>Are You Sure?</p>
+                        <span class="mbutton trans confirm"><i class="fa fa-check mr4"></i>确认</span>
+                        <span class="mbutton trans cancel"><i class="fa fa-times mr4"></i>取消</span>
+                    </div>
+-->
+                </td>
+            </tr>
+        </table>
+
+        <!-- 尾部 -->
+        <div class="table_footer mb30">
+            <div class="operate_btn_box">
+                <input type="button" class="button btn_middle btn_primary trans pointer enable" value="启用">
+                <input type="button" class="button btn_middle btn_primary trans pointer disable" value="停用">
+                <input type="button" class="button btn_middle btn_primary trans pointer delete" value="删除">
+            </div>
+            <!-- 分页 -->
+            <div class="pagination mr30">
+                <span class="pagination_item pagination_item_on">1</span>
+                <span class="pagination_item">2</span>
+                <span class="pagination_item">3</span>
+                <span class="pagination_item">4</span>
+                <span class="pagination_item">5</span>
+                <span class="pagination_item">6</span>
+                <span class="pagination_item">7</span>
+            </div>
+        </div>
+    </section>
+    <div class="modal">
+        <div class="back"></div>
+        <div class="modal_main_edit">
+            <h2>编辑课节</h2>
+
+            <div class="m_m_video">
+                <p><span></span>
+                    <input type="text">
+                </p>
+                <p>
+                    <span></span>
+                    <input type="text" class="w80">
+                    <span class=""></span>
+                    <input type="text" class="w80">
+                </p>
+                <p><span></span><span></span><span class=""></span></p>
+            </div>
+
+            <div class="m_m_offline">
+                <p><span></span>
+                    <input type="text">
+                </p>
+                <p><span></span>
+                    <input type="text" id="startTime" class="am-form-field w250" data-am-datepicker>
+                </p>
+            </div>
+
+            <div class="m_m_audio">
+                <p><span></span>
+                    <input type="text">
+                </p>
+                <p>
+                    <span></span>
+                    <input type="text" class="w80">
+                    <span class=""></span>
+                    <input type="text" class="w80">
+                </p>
+                <p><span></span><span></span><span class=""></span></p>
+                <p><span></span></p>
+            </div>
+
+            <span>保存</span><span>取消</span>
+        </div>
+
+
+        <!--        table底部三个按钮-->
+        <div class="modal_main_three">
+            <p></p>
+            <div>
+                <span class="cancel">取消</span>
+                <span class="confirm">确认</span>
+            </div>
+        </div>
+
+        <div class="modal_add_course">
+            <div class="top">
+                <span>选择课程分类：</span>
+                <select name="" id="">
+                    <option value="">1</option>
+                    <option value="">2</option>
+                    <option value="">3</option>
+                </select>
+            </div>
+            <div class="bottom">
+                <span class="cancel">取消</span>
+                <span class="confirm">确认</span>
+            </div>
+        </div>
+        <div class="modal_mian_add">
+            <h2></h2>
+
+            <div class="add_audio">
+                <p><span></span>
+                    <input type="text">
+                </p>
+                <p>
+                    <span></span>
+                    <input type="text" class="w80">
+                    <span class=""></span>
+                    <input type="text" class="w80">
+                </p>
+                <p>
+                    <span></span>
+                    <input type="file" class="w80">
+                </p>
+                <p>
+                    <span></span>
+                    <input type="file" class="w80">
+                </p>
+            </div>
+
+            <div class="add_video">
+                <p><span></span>
+                    <input type="text">
+                </p>
+                <p>
+                    <span></span>
+                    <input type="text" class="w80">
+                    <span class=""></span>
+                    <input type="text" class="w80">
+                </p>
+                <p>
+                    <span></span>
+                    <input type="file" class="w80">
+                </p>
+            </div>
+
+            <div class="add_offline">
+                <p><span></span>
+                    <input type="text">
+                </p>
+                <p><span></span>
+                    <input type="text" id="startTime" class="am-form-field w250" data-am-datepicker>
+                </p>
+            </div>
+
+            <div><span></span><span></span></div>
+        </div>
+    </div>
+
+    <script src="__AJS__/jquery.js"></script>
+    <script src="__AJS__/jquery.easing.js"></script>
+    <script src="__AJS__/deleconfirm.js"></script>
+    <script>
+        let add_cour_btn = document.querySelector('.add_course'),
+            modal_add_course = document.querySelector('.modal_add_course'),
+            modal_add_course_cancel = document.querySelector('.modal_add_course').querySelector('.bottom').querySelector('.cancel'),
+            modal_add_course_confirm = document.querySelector('.modal_add_course').querySelector('.bottom').querySelector('.confirm'),
+            modal = document.querySelector('.modal'),
+            modal_back = document.querySelector('.back'),
+            modal_main_three = document.querySelector('.modal_main_three'),
+            iframe = document.querySelector('iframe');
+        //        console.log(iframe)
+
+        add_cour_btn.onclick = function (event) {
+            event.preventDefault();
+            modal.style.display = 'block';
+            modal_add_course.style.display = 'block'
+        }
+        modal_add_course_cancel.onclick = function () {
+            modal.style.display = 'none';
+            modal_add_course.style.display = 'none'
+        }
+        
+        //modal back operation
+        modal_back.onclick = function () {
+            modal.style.display = 'none';
+            modal_add_course.style.display = 'none'
+        }
+        
+        modal_add_course_confirm.onclick = function () {
+            location.href = "{:U('cousrse_edit')}"
+        }
+
+
+        //table中编辑按钮操作
+        let edit = document.querySelector('.operation').querySelector('.edit');
+        edit.onclick = function (e) {
+            e.preventDefault();
+            location.href = "{:U('cousrse_edit')}"
+        }
+
+        //table底部三个按钮操作
+        let enable_btn = document.querySelector('.operate_btn_box').querySelector('.enable'),
+            disable_btn = document.querySelector('.operate_btn_box').querySelector('.disable'),
+            delete_btn = document.querySelector('.operate_btn_box').querySelector('.delete'),
+            three_box = document.querySelector('.modal_main_three');
+        //enable operation
+        enable_btn.onclick = function () {
+                modal.style.display = "block";
+                three_box.style.display = "block";
+                three_box.children[0].innerHTML = "您确定启用该课程吗？"
+            }
+        //disable operation
+        disable_btn.onclick = function () {
+                modal.style.display = "block";
+                three_box.style.display = "block";
+                three_box.children[0].innerHTML = "您确定停用该课程吗？"
+            }
+        //delete operation
+        delete_btn.onclick = function () {
+            modal.style.display = "block";
+            three_box.style.display = "block";
+            three_box.children[0].innerHTML = "您确定删除该课程吗？"
+        }
+
+        let modal_main_three_cancel = document.querySelector('.modal_main_three').querySelector('div').querySelector('.cancel'),
+            modal_main_three_confirm = document.querySelector('.modal_main_three').querySelector('div').querySelector('.confirm');
+        
+        modal_main_three_cancel.onclick = function () {
+            modal.style.display = 'none';
+            modal_add_course.style.display = 'none'
+        }
+        modal_main_three_confirm.onclick = function () {
+            //to do
+        }
+    </script>
+</body>
+
+</html>

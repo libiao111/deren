@@ -12,10 +12,15 @@ return array(
 
     'TMPL_PARSE_STRING' => array(                       // public模板路径
         '__QITA__' => __ROOT__.'/Public/qita',
-        '__CSS__'  => __ROOT__.'/Public/Home/css',
-        '__IMG__'  => __ROOT__.'/Public/Home/img',
+        '__CSS__'  => __ROOT__.'/Public/home/css',
+        '__IMG__'  => __ROOT__.'/Public/home/img',
         '__UPFILE__'  => __ROOT__.'/Public/upfile',
-        '__JS__'   => __ROOT__.'/Public/Home/js'
+        '__JS__'   => __ROOT__.'/Public/home/js',
+        '__ACSS__'  => __ROOT__.'/Public/admin/css',
+        '__AIMG__'  => __ROOT__.'/Public/admin/img',
+        '__AJS__'   => __ROOT__.'/Public/admin/js',
+        '__AEDITOR__'   => __ROOT__.'/Public/admin/editor',
+        '__ADATEPICK__'   => __ROOT__.'/Public/admin/datepick'
     ),
 
     'DB_TYPE' => 'mysql',

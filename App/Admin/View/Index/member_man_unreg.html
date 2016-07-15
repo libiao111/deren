@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>组件</title>
+    <link rel="stylesheet" href="__ACSS__/main.css">
+    <link rel="stylesheet" href="__ACSS__/index.css" />
+    <link rel="stylesheet" type="text/css" href="__ACSS__/font-awesome.min.css">
+</head>
+
+<body class="bf2">
+
+    <!-- sub nav -->
+    <div class="sub_nav pl20 pt10">
+        <span class="route">
+            <a href="dash.html" target="frame"><i class="fa fa-home fa-lg"></a></i>
+            <span class="slashes slashes1 ml8 mr8 rel"></span>
+        <span class="router router1">业务管理/学员管理</span>
+        </span>
+    </div>
+
+    <section class="widget_wrp">
+        <div class="table_header mt30">
+            <!-- 下拉列表组件 -->
+            <span class="select_wrap ml30 mt15 dib">
+        		<span>用户：</span>
+            <select class="ipt_default btn_large">
+                <option>产品经理</option>
+                <option>UI设计师</option>
+                <option>前端工程师</option>
+                <option>后端工程师</option>
+            </select>
+            <i class="fa fa-caret-down"></i>
+            </span>
+            <!-- 按钮 -->
+            <a href="">
+                <input type="button" class="button btn_middle btn_primary r mr30 mt15 pointer" value="+添加">
+            </a>
+            <!-- 搜索栏组件 -->
+            <div class="input_wrap r mt15 mr10">
+                <input type="text" class="ipt_default trans pl6" placeholder="请输入标题名称">
+                <span class="button btn_small btn_primary vt pointer">
+        			<i class="fa fa-search"></i>
+        		</span>
+            </div>
+        </div>
+
+        <!-- 表格主体 -->
+        <table class="table_default">
+            <tr>
+                <th width="10%">
+                    <input type="checkbox">
+                </th>
+                <th width="15%">头像</th>
+                <th width="12%">昵称</th>
+                <th width="12%">性别</th>
+                <th width="12%">电话</th>
+                <th width="12%">登录时间</th>
+                <th width="12%">状态</th>
+                <th width="15%">操作</th>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox">
+                </td>
+                <td><img src="__AIMG__/4.png" height="60px" class="mt8 mb8"></td>
+                <td>飞翔的荷兰人</td>
+                <td>男</td>
+                <td>12345678912</td>
+                <td>2016-06-23 15:30:23</td>
+                <td>启用</td>
+                <td>详情</td>
+            </tr>
+        </table>
+
+        <!-- 尾部 -->
+        <div class="table_footer mb30">
+            <div class="operate_btn_box">
+                <input type="button" class="button btn_middle btn_primary trans pointer" value="启用">
+                <input type="button" class="button btn_middle btn_primary trans pointer" value="停用">
+                <input type="button" class="button btn_middle btn_primary trans pointer" value="导出excel表格">
+                <input type="button" class="button btn_middle btn_primary trans pointer" value="回复初始密码">
+            </div>
+            <div class="pagination mr30">
+                <span class="pagination_item pagination_item_on">1</span>
+                <span class="pagination_item">2</span>
+                <span class="pagination_item">3</span>
+                <span class="pagination_item">4</span>
+                <span class="pagination_item">5</span>
+                <span class="pagination_item">6</span>
+                <span class="pagination_item">7</span>
+            </div>
+        </div>
+    </section>
+
+    <script src="__AJS__/jquery.js"></script>
+    <script src="__AJS__/jquery.easing.js"></script>
+    <script src="__AJS__/deleconfirm.js"></script>
+</body>
+
+</html>
