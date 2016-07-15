@@ -8,31 +8,23 @@ class IndexController extends Controller
 {
     
     public function index(){
+    	$table = 'course';
+    	$tiao = 5;
+    	pageHandle($table,$tiao);
         /*查询所有课程*/
     	$arr = M("course")->order('id')->select();
+    	$this->assign('course',$data);
     	$this->assign('course',$arr);
         $this->display();
     }
     //添加或修改线下课
-    public function addcourse()
+    public function offline()
     {
     	if(!IS_AJAX){
       		  $this->error('页面不存在!');die; 
       	}
       	/*获取值*/
     	$id =I('id');
-    	$video_url =I('video_url');
-    	$classtime =I('classtime');
-    	$course_id =I('course_id');
-    	$offline_url =I('offline_url');
-    	$type =I('type');
-    	
-    	/*$video_url ='r2y';
-    	$classtime =45;
-    	$course_id =7;
-    	$offline_url ='sdf';
-    	$id=3;
-    	$type =3;*/
     	/*获取图片路径*/
     	$a =session('arr');
     	//数组赋值
@@ -44,72 +36,108 @@ class IndexController extends Controller
 	    	'course_price'=>I('course_price'),
 	    	'teach_name'=>I('teach_name'),
 	    	'picture'=>I('picture'),
+			'offline_url'=>I('offline_url'),
 	    	'class_num'=>I('class_num')
 		);
-		/*$arr =array(
-			'type'=>$type,
-	    	'course_name'=>'ty',
-	    	'course_photo'=>'df',
-	    	'current_price'=>57,
-	    	'course_price'=>40,
-	    	'teach_name'=>'ae',
-	    	'picture'=>'ry7',
-	    	'class_num'=>5
-		);*/
-		if($id){
-			if($type==1){
-				/*修改线下课*/
-				$arr['id']=$id;
-				$arr['offline_url'] =$offline_url;
-				$result = M('course')->save($arr);
-			}
-			else if($type==2){
-				/*修改视频课*/
-				$arr['id']=$id;
-				$arr['video_url']=$video_url;
-				$arr['classtime']=$classtime;
-				$result = M('course')->save($arr);
-			}else if($type==3){
-				/*修改音频课*/
-				$arr['id']=$id;
-				$arr['video_url']=$video_url;
-				$arr['classtime']=$classtime;
-				/*图片路径赋值给数组$arr*/
-				foreach ($a as $va) {
-					$arr['bigpho'][]= array(
-						'course_id'=>$id,
-						'pho_url'=>$va
-					);
-				}
-				/*先删除对应的图片*/
-				$sql = M('bigpho')->where(array('course_id'=>$id))->delete();
-				/*执行修改操作*/
-				$result =D('course')->relation('bigpho')->save($arr);
-			}
+		if ($id) {
+			/*修改线下课*/
+			$arr['id']=$id;
+			$result = M('course')->save($arr);
+		} else {
+			/*添加线下课*/
+			$result = M('course')->add($arr);
+		}
+		if($result){
+			$data = array('status'=>1);
 		}
 		else{
-			if($type==1){
-				/*添加线下课*/
-				$arr['offline_url'] =$offline_url;
-				$result = M('course')->add($arr);
+			$data = array('status'=>0);
+		}
+		$this->ajaxReturn($data,json);
+    }
+     //添加或修改视频课
+    public function addcourse()
+    {
+    	if(!IS_AJAX){
+      		  $this->error('页面不存在!');die; 
+      	}
+      	/*获取值*/
+    	$id =I('id');
+    	/*获取图片路径*/
+    	$a =session('arr');
+    	//数组赋值
+    	$arr =array(
+			'type'=>I('type'),
+	    	'course_name'=>I('course_name'),
+	    	'course_photo'=>I('course_photo'),
+	    	'current_price'=>I('current_price'),
+	    	'course_price'=>I('course_price'),
+	    	'teach_name'=>I('teach_name'),
+	    	'video_url' =I('video_url'),
+	    	'classtime' =I('classtime'),
+	    	'picture'=>I('picture'),
+	    	'class_num'=>I('class_num')
+		);
+		if($id){
+			/*修改视频课*/
+			$arr['id']=$id;
+			$result = M('course')->save($arr);
+		}else{
+			/*添加视频课*/
+			$result = M('course')->add($arr);
+		}
+		if($result){
+			$data = array('status'=>1);
+		}
+		else{
+			$data = array('status'=>0);
+		}
+		$this->ajaxReturn($data,json);
+    }
+     //添加或修改线下课
+    public function addcourse()
+    {
+    	if(!IS_AJAX){
+      		  $this->error('页面不存在!');die; 
+      	}
+      	/*获取值*/
+    	$id =I('id');
+    	/*获取图片路径*/
+    	$a =session('arr');
+    	//数组赋值
+    	$arr =array(
+			'type'=>I('type'),
+	    	'course_name'=>I('course_name'),
+	    	'course_photo'=>I('course_photo'),
+	    	'current_price'=>I('current_price'),
+	    	'course_price'=>I('course_price'),
+	    	'teach_name'=>I('teach_name'),
+	    	'picture'=>I('picture'),
+	    	'video_url'=>I('video_url'),
+			'classtime'=>I('classtime'),
+	    	'class_num'=>I('class_num')
+		);
+		if($id){
+			$arr['id']=$id;
+			/*图片路径赋值给数组$arr*/
+			foreach ($a as $va) {
+				$arr['bigpho'][]= array(
+					'course_id'=>$id,
+					'pho_url'=>$va
+				);
 			}
-			else if($type==2){
-				/*添加视频课*/
-				$arr['video_url'] = $video_url;
-				$arr['classtime'] = $classtime;
-				$result = M('course')->add($arr);
-			}else if($type==3){
-				/*添加音频课*/
-				$arr['video_url']=$video_url;
-				$arr['classtime']=$classtime;
-				/*图片路径赋值给数组$arr*/
-				foreach ($a as $va) {
-					$arr['bigpho'][] = array(
-						'pho_url' => $va
-					);
-				}
-				$result = D('course')->relation('bigpho')->add($arr);
+			/*先删除对应的图片*/
+			$sql = M('bigpho')->where(array('course_id'=>$id))->delete();
+			/*执行修改操作*/
+			$result =D('course')->relation('bigpho')->save($arr);
+		}else{
+			/*图片路径赋值给数组$arr*/
+			foreach ($a as $va) {
+				$arr['bigpho'][] = array(
+					'pho_url' => $va
+				);
 			}
+			$result = D('course')->relation('bigpho')->add($arr);
 		}
 		if($result){
 			$data = array('status'=>1);
