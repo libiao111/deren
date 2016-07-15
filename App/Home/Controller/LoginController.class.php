@@ -4,6 +4,15 @@ use Think\Controller;
 
 class LoginController extends Controller 
 {
+    public function _initialize() {
+        $user = session('openid');
+        if (count($user) == 0) {
+            if (getOpenID()['status'] == 0) {
+                $this->redirect('open/entry');
+            }
+        }
+    }
+
 	/*
 	用户登录
 	*/
