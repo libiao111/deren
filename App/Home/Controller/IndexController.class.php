@@ -16,7 +16,6 @@ class IndexController extends Controller
     /*查询所有课程*/
     public function index()
     {   
-        redirect(U("Pay/Index/aa"));
         //获取用户id
         $users_id = session('user')['id'];
         // 查询课程表

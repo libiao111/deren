@@ -170,16 +170,5 @@ function logHand($arr){
     return $tools->GetJsApiParameters($order);
 
 }
-function getid(){
-    
-    ini_set('date.timezone','Asia/Shanghai');
-    error_reporting(E_ERROR);
 
-    $url = './Public/wxp';
-    require_once "$url/example/WxPay.JsApiPay.php";
-    require_once "$url/example/log.php";
-     /*获取用户openid*/
-    $tools = new JsApiPay();
-    $openId = $tools->GetOpenid();
-}
 
