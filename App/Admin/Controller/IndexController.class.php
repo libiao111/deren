@@ -150,7 +150,7 @@ class IndexController extends Controller
     //删除
     public function deleteCourse(){
     	$id = I('id');
-    	$sql = D('course')->relation()->where()->
+    	//$sql = D('course')->relation()->where()->
     }
     //搜索
     public function search(){

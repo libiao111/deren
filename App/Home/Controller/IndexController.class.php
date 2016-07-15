@@ -8,7 +8,12 @@ class IndexController extends Controller
 {
 
     public function _initialize() {
-        
+        $user = session('openid');
+        if (count($user) == 0) {
+            if (getOpenID()['status'] == 0) {
+                $this->redirect('open/entry');
+            }
+        }
         $this->login = session('user') ? 1: 0;
         $this->user_content = session('user');
     }
@@ -216,7 +221,7 @@ class IndexController extends Controller
             'successurl' => U('gotocourse')
         );
         session('arr',$arr1);
-        redirect(U("Pay/Index/index"));
+        $this->redirect(U("Pay/Index/index"));
     }
 
 

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>PHOCUSAdmin</title>
+    <link rel="stylesheet" type="text/css" href="__ACSS__/main.css">
+    <link rel="stylesheet" type="text/css" href="__ACSS__/font-awesome.min.css">
+</head>
+
+<body style="overflow:hidden">
+
+    <!-- header bar -->
+    <div class="header_bar pl20 pr30">
+
+        <!-- logo -->
+        <img src="__AIMG__/logo.png" alt="Oops!" height="28px" class="vm">
+
+        <!-- administrator's head -->
+        <div class="admin_head" status="0">
+<!--            <img src="__AIMG__/head.png" alt="Oops!">-->
+            <span class="vm ell">您好，李总</span>
+            <i class="fa fa-caret-down ml4"></i>
+        </div>
+
+        <!-- administrator's menu -->
+        <div class="menu_box">
+            <!-- 小指针 -->
+            <div class="indicator_top"></div>
+            <!-- default -->
+            <ul class="menu_list_default">
+                <li>
+                    <a href="">
+                        <i class="fa fa-paw mr6"></i> 样式一（链接）
+                        <i class="fa fa-angle-right r mt10"></i>
+                    </a>
+                </li>
+                <li>
+                    <i class="fa fa-paw mr6"></i> 样式二
+                    <span class="badge r mt10">3</span>
+                </li>
+                <li>
+                    <i class="fa fa-paw mr6"></i> 样式三
+                </li>
+            </ul>
+            <!-- horizontal -->
+            <div class="menu_list_horiz">
+                <ul>
+                    <!-- 预设是三个，宽度为33.3% -->
+                    <li>
+                        <div class="icon icon-1 bg mt15 mb8"></div>
+                        <p>功能一</p>
+                    </li>
+                    <!--
+				 -->
+                    <li>
+                        <div class="icon icon-2 bg mt15 mb8"></div>
+                        <p>功能二</p>
+                    </li>
+                    <!--
+				 -->
+                    <li>
+                        <div class="icon icon-3 bg mt15 mb8"></div>
+                        <p>功能三</p>
+                    </li>
+                </ul>
+            </div>
+            <!-- table -->
+            <table class="menu_list_table">
+                <tr>
+                    <td>
+                        <div class="icon icon-1 bg"></div>
+                        <p>功能一</p>
+                    </td>
+                    <td>
+                        <div class="icon icon-2 bg"></div>
+                        <p>功能二</p>
+                    </td>
+                    <td>
+                        <div class="icon icon-3 bg"></div>
+                        <p>功能三</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="icon icon-4 bg"></div>
+                        <p>功能四</p>
+                    </td>
+                    <td>
+                        <div class="icon icon-5 bg"></div>
+                        <p>功能五</p>
+                    </td>
+                </tr>
+            </table>
+            <!-- sign out -->
+            <div class="sign_out trans bte">
+                <i class="fa fa-power-off vm mr4"></i> 退出
+            </div>
+        </div>
+
+    </div>
+
+    <!-- side menu -->
+    <div class="side_menu l">
+        <div class="handler">
+            <strong class="pl15">Menu</strong>
+            <i class="fa fa-arrow-left r trans" status="1"></i>
+        </div>
+        <!-- 展开状态 -->
+        <ul class="first_level" id="first_level">
+            <li class="first_level_li" type="second_level" status="0" name="2">
+                <i class="fa fa-paw mr10 ml15"></i>内容管理
+                <i class="fa fa-caret-right r mr15" role="caret"></i>
+            </li>
+            <ul class="second_level">
+                <li class="second_level_li">
+                    <a href="{:U('course_management')}" target="frame">
+                        <i class="fa fa-paw mr10"></i>课程管理
+                    </a>
+                </li>
+                <li class="second_level_li">
+                    <a href="404.html" target="frame">
+                        <i class="fa fa-paw mr10"></i>信息管理
+                    </a>
+                </li>
+                <li class="second_level_li">
+                    <a href="404.html" target="frame">
+                        <i class="fa fa-paw mr10"></i>专家团队
+                    </a>
+                </li>
+            </ul>
+            <li class="first_level_li" type="second_level" status="0" name="2">
+                <i class="fa fa-paw mr10 ml15"></i>业务管理
+                <i class="fa fa-caret-right r mr15" role="caret"></i>
+            </li>
+            <ul class="second_level">
+                <li class="second_level_li">
+                    <a href="{:U('member_man_reg')}" target="frame">
+                        <i class="fa fa-paw mr10"></i>学员管理
+                    </a>
+                </li>
+                <li class="second_level_li">
+                    <a href="{:U('bill_management')}" target="frame">
+                        <i class="fa fa-paw mr10"></i>订单管理
+                    </a>
+                </li>
+            </ul>
+        </ul>
+        <!-- 收起状态 -->
+        <ul class="first_level_shrink" id="first_level_shrink">
+            <li class="first_level_shrink_li" name="1">
+                <a href="{:U('dash')}" target="frame">
+                    <i class="fa fa-home mr10 ml15"></i>
+                </a>
+            </li>
+
+            <div class="bounding_box">
+                <h3>内容管理</h3>
+                <ul class="second_level">
+                    <li class="second_level_li">
+                        <a href="{:U('course_management')}" target="frame">
+                            <i class="fa fa-paw mr10"></i>课程管理
+                        </a>
+                    </li>
+                    <li class="second_level_li">
+                        <a href="404.html" target="frame">
+                            <i class="fa fa-paw mr10"></i>信息管理
+                        </a>
+                    </li>
+                    <li class="second_level_li">
+                        <a href="404.html" target="frame">
+                            <i class="fa fa-paw mr10"></i>专家团队
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <li class="first_level_shrink_li" name="2">
+                <i class="fa fa-paw mr10 ml15"></i>
+            </li>
+            <div class="bounding_box">
+                <h3>业务管理</h3>
+                <ul class="second_level">
+                    <li class="second_level_li">
+                        <a href="{:U('member_man_reg')}" target="frame">
+                            <i class="fa fa-paw mr10"></i>学员管理
+                        </a>
+                    </li>
+                    <li class="second_level_li">
+                        <a href="{:U('bill_management')}" target="frame">
+                            <i class="fa fa-paw mr10"></i>订单管理
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </ul>
+    </div>
+
+    <!-- body -->
+    <div class="body_container r">
+
+        <!-- frame container -->
+        <div class="frame_container">
+            <iframe src="{:U('course_management')}" name="frame" width="100%" id="iframe" frameborder="0"></iframe>
+        </div>
+
+    </div>
+
+    <script src="__AJS__/require.js" data-main="__AJS__/main"></script>
+</body>
+
+</html>

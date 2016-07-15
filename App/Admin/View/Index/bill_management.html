@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>组件</title>
+    <link rel="stylesheet" href="__ACSS__/main.css">
+    <link rel="stylesheet" href="__ACSS__/index.css" />
+    <link rel="stylesheet" type="text/css" href="__ACSS__/font-awesome.min.css">
+</head>
+
+<body class="bf2">
+
+    <!-- sub nav -->
+    <div class="sub_nav pl20 pt10">
+        <span class="route">
+            <a href="dash.html" target="frame"><i class="fa fa-home fa-lg"></a></i>
+            <span class="slashes slashes1 ml8 mr8 rel"></span>
+        <span class="router router1">业务管理/订单管理</span>
+        </span>
+    </div>
+
+    <section class="widget_wrp">
+        <div class="table_header mt30">
+            <!-- 下拉列表组件 -->
+            <span class="select_wrap ml30 mt15 dib">
+        		<span>课程类型：</span>
+            <select class="ipt_default btn_large">
+                <option>产品经理</option>
+                <option>UI设计师</option>
+                <option>前端工程师</option>
+                <option>后端工程师</option>
+            </select>
+            <i class="fa fa-caret-down"></i>
+            </span>
+        </div>
+
+        <!-- 表格主体 -->
+        <table class="table_default">
+            <tr>
+                <th width="10%">
+                    <input type="checkbox">
+                </th>
+                <th width="25%">订单内容</th>
+                <th width="10%">课程类型</th>
+                <th width="12%">购买时间</th>
+                <th width="12%">购买人姓名</th>
+                <th width="12%">手机号码</th>
+                <th width="10%">金额</th>
+                <th width="11%">状态</th>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox">
+                </td>
+                <td><img src="__AIMG__/4.png" height="60px" class="mt8 mb8"><span class="in-span">思维口才50天速成课</span></td>
+                <td>线下课</td>
+                <td>2016-07-12 12:20:30</td>
+                <td>陈奕迅</td>
+                <td>112232132132132</td>
+                <td>500.00元</td>
+                <td>已支付</td>
+            </tr>
+        </table>
+
+        <!-- 尾部 -->
+        <div class="table_footer mb30">
+            <div class="operate_btn_box">
+                <input type="button" class="button btn_middle btn_primary trans pointer delete" value="删除订单">
+                <input type="button" class="button btn_middle btn_primary trans pointer refund" value="退款">
+                <input type="button" class="button btn_middle btn_primary trans pointer output_xls" value="导出excel表格">
+
+            </div>
+            <!-- 分页 -->
+            <div class="pagination mr30">
+                <span class="pagination_item pagination_item_on">1</span>
+                <span class="pagination_item">2</span>
+                <span class="pagination_item">3</span>
+                <span class="pagination_item">4</span>
+                <span class="pagination_item">5</span>
+                <span class="pagination_item">6</span>
+                <span class="pagination_item">7</span>
+            </div>
+        </div>
+    </section>
+    
+    <div class="modal">
+        <div class="back"></div>
+        <div class="modal_main_edit">
+            <h2>编辑课节</h2>
+
+            <div class="m_m_video">
+                <p><span></span>
+                    <input type="text">
+                </p>
+                <p>
+                    <span></span>
+                    <input type="text" class="w80">
+                    <span class=""></span>
+                    <input type="text" class="w80">
+                </p>
+                <p><span></span><span></span><span class=""></span></p>
+            </div>
+
+            <div class="m_m_offline">
+                <p><span></span>
+                    <input type="text">
+                </p>
+                <p><span></span>
+                    <input type="text" id="startTime" class="am-form-field w250" data-am-datepicker>
+                </p>
+            </div>
+
+            <div class="m_m_audio">
+                <p><span></span>
+                    <input type="text">
+                </p>
+                <p>
+                    <span></span>
+                    <input type="text" class="w80">
+                    <span class=""></span>
+                    <input type="text" class="w80">
+                </p>
+                <p><span></span><span></span><span class=""></span></p>
+                <p><span></span></p>
+            </div>
+
+            <span>保存</span><span>取消</span>
+        </div>
+
+
+        <!--        table底部三个按钮-->
+        <div class="modal_main_three">
+            <p></p>
+            <div>
+                <span class="cancel">取消</span>
+                <span class="confirm">确认</span>
+            </div>
+        </div>
+
+        <div class="modal_add_course">
+            <div class="top">
+                <span>选择课程分类：</span>
+                <select name="" id="">
+                    <option value="">1</option>
+                    <option value="">2</option>
+                    <option value="">3</option>
+                </select>
+            </div>
+            <div class="bottom">
+                <span class="cancel">取消</span>
+                <span class="confirm">确认</span>
+            </div>
+        </div>
+        <div class="modal_mian_add">
+            <h2></h2>
+
+            <div class="add_audio">
+                <p><span></span>
+                    <input type="text">
+                </p>
+                <p>
+                    <span></span>
+                    <input type="text" class="w80">
+                    <span class=""></span>
+                    <input type="text" class="w80">
+                </p>
+                <p>
+                    <span></span>
+                    <input type="file" class="w80">
+                </p>
+                <p>
+                    <span></span>
+                    <input type="file" class="w80">
+                </p>
+            </div>
+
+            <div class="add_video">
+                <p><span></span>
+                    <input type="text">
+                </p>
+                <p>
+                    <span></span>
+                    <input type="text" class="w80">
+                    <span class=""></span>
+                    <input type="text" class="w80">
+                </p>
+                <p>
+                    <span></span>
+                    <input type="file" class="w80">
+                </p>
+            </div>
+
+            <div class="add_offline">
+                <p><span></span>
+                    <input type="text">
+                </p>
+                <p><span></span>
+                    <input type="text" id="startTime" class="am-form-field w250" data-am-datepicker>
+                </p>
+            </div>
+
+            <div><span></span><span></span></div>
+        </div>
+    </div>
+
+    <script src="__AJS__/jquery.js"></script>
+    <script src="__AJS__/jquery.easing.js"></script>
+    <script src="__AJS__/deleconfirm.js"></script>
+    <script>
+        let delete_btn = document.querySelector('.operate_btn_box').querySelector('.delete'),
+            output_xls_btn = document.querySelector('.operate_btn_box').querySelector('.output_xls'),
+            refund_btn = document.querySelector('.operate_btn_box').querySelector('.refund'),
+            modal = document.querySelector('.modal'),
+            modal_back = document.querySelector('.back'),
+            three_box = document.querySelector('.modal_main_three');
+        
+        modal_back.onclick = function () {
+            modal.style.display = 'none';
+            three_box.style.display = 'none'
+        }
+
+        refund_btn.onclick = function () {
+                modal.style.display = "block";
+                three_box.style.display = "block";
+                three_box.children[0].innerHTML = "确认更换成退款状态吗？更改后不可恢复"
+            }
+            //disable operation
+        output_xls_btn.onclick = function () {
+               // to do
+            }
+            //delete operation
+        delete_btn.onclick = function () {
+            modal.style.display = "block";
+            three_box.style.display = "block";
+            three_box.children[0].innerHTML = "确定删除订单吗？删除后不可恢复"
+        }
+        
+        let modal_main_three_cancel = document.querySelector('.modal_main_three').querySelector('div').querySelector('.cancel'),
+            modal_main_three_confirm = document.querySelector('.modal_main_three').querySelector('div').querySelector('.confirm');
+        
+        modal_main_three_cancel.onclick = function () {
+            modal.style.display = 'none';
+            three_box.style.display = 'none';
+        }
+        modal_main_three_confirm.onclick = function () {
+            //to do
+        }
+    </script>
+</body>
+
+</html>
