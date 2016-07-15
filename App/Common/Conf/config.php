@@ -12,10 +12,10 @@ return array(
 
     'TMPL_PARSE_STRING' => array(                       // public模板路径
         '__QITA__' => __ROOT__.'/Public/qita',
-        '__CSS__'  => __ROOT__.'/Public/home/css',
-        '__IMG__'  => __ROOT__.'/Public/home/img',
+        '__CSS__'  => __ROOT__.'/Public/Home/css',
+        '__IMG__'  => __ROOT__.'/Public/Home/img',
         '__UPFILE__'  => __ROOT__.'/Public/upfile',
-        '__JS__'   => __ROOT__.'/Public/home/js'
+        '__JS__'   => __ROOT__.'/Public/Home/js'
     ),
 
     'DB_TYPE' => 'mysql',
@@ -24,6 +24,12 @@ return array(
     'DB_USER' => 'root',
     'DB_PWD'  => '',
     'DB_NAME' => 'deren',
+
+    // 'DB_HOST' => 'qdm100230239.my3w.com',
+    // 'DB_USER' => 'qdm100230239',
+    // 'DB_PWD'  => 'stevewins1023',
+    // 'DB_NAME' => 'qdm100230239_db',
+
 
     'RBAC_SUPERADMIN' => 'admin',               // 超级管理员名称
     'ADMIN_AUTH_KEY'  => 'superadmin',          // 超级管理员识别

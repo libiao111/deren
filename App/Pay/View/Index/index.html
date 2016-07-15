@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/> 
+	<title>支付测试</title>
+</head>
+<body>
+<button onclick="_submit()">立即支付</button>
+	<script type="text/javascript">
+        var successUrl =  "{$successurl}";
+        function jsApiCall() {
+            WeixinJSBridge.invoke(
+                'getBrandWCPayRequest',
+                {$jsApiParameters},
+                function(res){
+                    if (res.err_msg == "get_brand_wcpay_request:ok") {
+                        /* 跳转成功提示页面 */
+                        window.location.href = successUrl;
+                    }
+                }
+            );
+        }
+        function _submit() {
+            if (typeof WeixinJSBridge == "undefined"){
+                if( document.addEventListener ){
+                    document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+                }else if (document.attachEvent){
+                    document.attachEvent('WeixinJSBridgeReady', jsApiCall); 
+                    document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+                }
+            }else{
+                jsApiCall();
+            }
+        }
+	</script>
+</body>
+</html>

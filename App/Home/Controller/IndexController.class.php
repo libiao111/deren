@@ -174,7 +174,8 @@ class IndexController extends Controller
     }
     /*确认订单*/
     public function order()
-    {   $id = I('id');
+    {   
+        $id = I('id');
         $arr = array(
             'id'=>$id
         );
@@ -183,39 +184,39 @@ class IndexController extends Controller
         $this->display();
     }
     /*订单表*/
-    public function ordera()
-    {   
-        /*获取数据*/
-        $users_id = session('user')['id'];
-        /*以id= course_id查询课程表*/
-        $sql = M('course')->where(array('id'=>2))->field('id','course_name','current_price')->find();
-        /*生成订单号*/
-        $time = time();
-        $str = rand('1000','9999');
-        $ordera_num = 'DR'.$time.$str;
-        /*数组赋值订单表*/
-        $arr = array(
-            'ordera_name' => I('ordera_name'),
-            'ordera_mobi' => I('order_mobi'),
-            'course_id' => I('course_id'),
-            'users_id' => $users_id,
-            'status' => 0,
-            'ordera_num' => $ordera_num,
-            'pay_type' => I('radio1')
-        );
-        $result = M('ordera')->add($arr);
-        /*传递到支付数组*/
-        $arr1 = array(
-            'sign'=>'德仁商学院',
-            'title' =>$sql['course_name'],
-            'bills'=>$ordera_num,
-            'price' =>$sql['current_price'],
-            'realm'=>'http://gkdao.com/temps/heroslider/deren',
-            'successurl'=>'http://gkdao.com/temps/heroslider/deren/index.php/Home/Index/gotocourse'
-        );
-        session('arr',$arr1);
-        redirect(U("Pay/Index/index"));
-    }
+    // public function ordera()
+    // {   
+    //     /*获取数据*/
+    //     $users_id = session('user')['id'];
+    //     /*以id= course_id查询课程表*/
+    //     $sql = M('course')->where(array('id'=>2))->field('id','course_name','current_price')->find();
+    //     /*生成订单号*/
+    //     $time = time();
+    //     $str = rand('1000','9999');
+    //     $ordera_num = 'DR'.$time.$str;
+    //     /*数组赋值订单表*/
+    //     $arr = array(
+    //         'ordera_name' => I('ordera_name'),
+    //         'ordera_mobi' => I('order_mobi'),
+    //         'course_id' => I('course_id'),
+    //         'users_id' => $users_id,
+    //         'status' => 0,
+    //         'ordera_num' => $ordera_num,
+    //         'pay_type' => I('radio1')
+    //     );
+    //     $result = M('ordera')->add($arr);
+    //     /*传递到支付数组*/
+    //     $arr1 = array(
+    //         'sign'      => '[德仁商学院]',
+    //         'title'     => $sql['course_name'],
+    //         'bills'     => $ordera_num,
+    //         'price'     => $sql['current_price'],
+    //         'realm'      => 'http://www.gkdao.com/temps/heroslider/deren',
+    //         'successurl' => U('gotocourse')
+    //     );
+    //     session('arr',$arr1);
+    //     redirect(U("Pay/Index/index"));
+    // }
 
 
 
