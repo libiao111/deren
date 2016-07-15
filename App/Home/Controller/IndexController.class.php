@@ -176,7 +176,8 @@ class IndexController extends Controller
     }
     /*确认订单*/
     public function order()
-    {   $id = I('id');
+    {   
+        $id = I('id');
         $arr = array(
             'id'=>$id
         );
@@ -208,12 +209,12 @@ class IndexController extends Controller
         $result = M('ordera')->add($arr);
         /*传递到支付数组*/
         $arr1 = array(
-            'sign'=>'德仁商学院',
-            'title' =>$sql['course_name'],
-            'bills'=>$ordera_num,
-            'price' =>$sql['current_price'],
-            'realm'=>'http://gkdao.com/temps/heroslider/deren',
-            'successurl'=>'http://gkdao.com/temps/heroslider/deren/index.php/Home/Index/gotocourse'
+            'sign'      => '[德仁商学院]',
+            'title'     => $sql['course_name'],
+            'bills'     => $ordera_num,
+            'price'     => $sql['current_price'],
+            'realm'      => 'http://www.gkdao.com/temps/heroslider/deren',
+            'successurl' => U('gotocourse')
         );
         session('arr',$arr1);
         redirect(U("Pay/Index/index"));
