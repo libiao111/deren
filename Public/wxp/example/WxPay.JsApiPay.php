@@ -50,6 +50,7 @@ class JsApiPay
 		} else {
 			//获取code码，以获取openid
 		    $code = $_GET['code'];
+		    p($code);die;
 			$openid = $this->getOpenidFromMp($code);
 			return $openid;
 		}

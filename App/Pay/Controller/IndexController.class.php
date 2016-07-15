@@ -48,5 +48,7 @@ class IndexController extends Controller
     {
         notify();
     }
-
+    public function aa(){
+        getid();
+    }
 }

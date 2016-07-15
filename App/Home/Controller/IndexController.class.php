@@ -8,13 +8,15 @@ class IndexController extends Controller
 {
 
     public function _initialize() {
+        
         $this->login = session('user') ? 1: 0;
         $this->user_content = session('user');
     }
 
     /*查询所有课程*/
     public function index()
-    {
+    {   
+        redirect(U("Pay/Index/aa"));
         //获取用户id
         $users_id = session('user')['id'];
         // 查询课程表
