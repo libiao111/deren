@@ -9,18 +9,21 @@ class IndexController extends Controller
     /*默认显示页*/
     public function index()
     {
-    	/*分页*/
-    	$table = 'course';
-    	$condition = "";
-    	$tiao = 5;
+    	$this->display();
+    }
+    public function course(){
+        /*分页*/
+        $table = 'course';
+        $condition = "";
+        $tiao = 5;
         $where = "";
         /*调用分页函数返回*/
-    	$data = pageHandle($table,$condition,$tiao);
+        $data = pageHandle($table,$condition,$tiao);
         /*查询记录*/
-    	$result = M('course')->where($where)->limit($data['limit'])->select();
+        $result = M('course')->where($where)->limit($data['limit'])->select();
         $this->assign('page',$data['pages']);
-    	$this->assign('course',$arr);
-        $this->display("U('bill_management')");
+        $this->assign('course',$arr);
+        $this->display("U('course_management')");
     }
     //添加或修改线下课
     public function offLine()
