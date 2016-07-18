@@ -20,7 +20,7 @@ class IndexController extends Controller
     	$result = M('course')->where($where)->limit($data['limit'])->select();
         $this->assign('page',$data['pages']);
     	$this->assign('course',$arr);
-        $this->display('frame');
+        $this->display("U('bill_management')");
     }
     //添加或修改线下课
     public function offLine()
