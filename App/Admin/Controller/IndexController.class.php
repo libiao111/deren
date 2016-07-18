@@ -6,19 +6,21 @@ use Think\Controller;
 */
 class IndexController extends Controller
 {
-    
+    /*默认显示页*/
     public function index(){
+    	/*分页*/
     	$table = 'course';
+    	$condition = "";
     	$tiao = 5;
-    	pageHandle($table,$tiao);
-        /*查询所有课程*/
+    	$data = pageHandle($table,$condition,$tiao);
+    	/*查询所有课程*/
     	$arr = M("course")->order('id')->select();
-    	$this->assign('course',$data);
+    	$this->assign('page',$data['pages']);
     	$this->assign('course',$arr);
-        $this->display();
+        $this->display('frame');
     }
     //添加或修改线下课
-    public function offline()
+    public function offLine()
     {
     	if(!IS_AJAX){
       		  $this->error('页面不存在!');die; 
@@ -56,7 +58,7 @@ class IndexController extends Controller
 		$this->ajaxReturn($data,json);
     }
      //添加或修改视频课
-    public function addcourse()
+    public function addVideo()
     {
     	if(!IS_AJAX){
       		  $this->error('页面不存在!');die; 
@@ -73,8 +75,8 @@ class IndexController extends Controller
 	    	'current_price'=>I('current_price'),
 	    	'course_price'=>I('course_price'),
 	    	'teach_name'=>I('teach_name'),
-	    	'video_url' =I('video_url'),
-	    	'classtime' =I('classtime'),
+	    	'video_url' =>I('video_url'),
+	    	'classtime' =>I('classtime'),
 	    	'picture'=>I('picture'),
 	    	'class_num'=>I('class_num')
 		);
@@ -92,10 +94,10 @@ class IndexController extends Controller
 		else{
 			$data = array('status'=>0);
 		}
-		$this->ajaxReturn($data,json);
+		$this->ajaxReturn($data,'json');
     }
-     //添加或修改线下课
-    public function addcourse()
+     //添加或修改音频课
+    public function addAudio()
     {
     	if(!IS_AJAX){
       		  $this->error('页面不存在!');die; 
@@ -147,16 +149,81 @@ class IndexController extends Controller
 		}
 		$this->ajaxReturn($data,json);
     }
-    //删除
-    public function deleteCourse(){
+    //删除课时
+    public function delClass()
+    {
+        if(!IS_AJAX){
+            $this->error('页面不存在!');die;
+        }
     	$id = I('id');
-    	//$sql = D('course')->relation()->where()->
+    		$where=array(
+            	'id'  =>array('in',$id)
+           );
+    	$class = M('class')->where($where)->delete();
+    	
     }
-    //搜索
-    public function search(){
+    /*删除线下课与视频课课程*/
+    public function delcourse()
+    {
+        if(!IS_AJAX){
+            $this->error('页面不存在!');die;
+        }
+    	$id = I('id');
+    	$where=array(
+        	'id'  =>array('in',$id)
+  		);
+  		/*关联表*/
+      	$arr1 = array(
+            'class'
+        );	
+  		$result = D('course')->relation($arr1)->where($where)->delete();
+    }
+    /*删除音频课课程*/
+    public function delAudio()
+    {
+        if(!IS_AJAX){
+            $this->error('页面不存在!');die;
+        }
+    	$id = I('id');
+    	$where=array(
+        	'id'  =>array('in',$id)
+  		);
+  		/*关联表*/
+      	$arr1 = array(
+            'class','bigpho'
+        );
+  		$result = D('course')->relation($arr1)->where($where)->delete();
+	}
+    /*搜索*/
+    public function search()
+    {
+        if(!IS_AJAX){
+            $this->error('页面不存在!');die;
+        }
     	$type = I('type');
-    	$arr = array(
-    		'type'=>$type
-		);
-    }
+    	$status = I('status');
+    	if (!$type) {
+    		if (!$status) {
+    			$result = M('course')->select();
+    		} else {
+    			$arr['status'] =$status;
+    			$result = M('course')->where($arr)->select();
+			}
+    	} else {
+    		if (!$status) {
+    			$arr['type'] = $type;
+    			$result = M('course')->select();
+    		} else if ($status) {
+    			$arr['type']=$type;
+    			$arr['status'] =$status;
+    			$result = M('course')->where($arr)->select();
+			}
+    	}
+        $this->assign('course',$result);
+        
+	}
+
+
+
+
 }
