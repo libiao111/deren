@@ -22,7 +22,7 @@ class IndexController extends Controller
         /*查询记录*/
         $result = M('course')->where($where)->limit($data['limit'])->select();
         $this->assign('page',$data['pages']);
-        $this->assign('course',$arr);
+        $this->assign('course',$result);
         $this->display("course_management");
     }
     //添加或修改线下课
