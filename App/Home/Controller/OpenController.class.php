@@ -6,7 +6,6 @@ use Think\Controller;
 */
 class OpenController extends Controller
 {
-
 	public function index()
 	{
 		$this->entry();
