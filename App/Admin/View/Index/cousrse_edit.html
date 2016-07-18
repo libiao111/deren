@@ -80,6 +80,7 @@
     <div class="sub_nav pl20 pt10">
         <span class="route">
         <span class="router router1">课程表</span>
+        <span class="router router1 float_r mr20 red addvideo">添加课节</span>
         </span>
     </div>
 
@@ -91,7 +92,7 @@
                 <th width="10%">上课时间</th>
                 <th width="11%">操作</th>
             </tr>
-            <tr class="h50">
+            <tr class="h50 clone">
                 <td>思维口才50天速成课</td>
                 <td>2016-05-20 15:30</td>
                 <td class="operation">
@@ -110,6 +111,7 @@
                     </div>
                 </td>
             </tr>
+
         </table>
 
         <!-- 尾部 -->
@@ -126,16 +128,20 @@
             <h2>编辑课节</h2>
 
             <div class="m_m_video">
-                <p><span></span>
-                    <input type="text">
+                <p><span>课节名称：</span>
+                    <input type="text" class="w200 coursename">
                 </p>
                 <p>
-                    <span></span>
-                    <input type="text" class="w80">
-                    <span class=""></span>
-                    <input type="text" class="w80">
+                    <span>课节时长：</span>
+                    <input type="text" class="w50 hour">
+                    <span class="">小时</span>
+                    <input type="text" class="w50 minute">
+                    <span class="">分</span>
                 </p>
-                <p><span></span><span></span><span class=""></span></p>
+                <p>
+                    <span>上传视频：</span>
+                    <input type="file">
+                </p>
             </div>
 
             <div class="m_m_offline">
@@ -161,7 +167,7 @@
                 <p><span></span></p>
             </div>
 
-            <span>保存</span><span>取消</span>
+            <span class="videosave">保存</span><span class="videocancel">取消</span>
         </div>
         <div class="modal_main_delete">
             <p></p>
@@ -169,11 +175,11 @@
         </div>
         <div class="add_course">
             <div>
-            <select name="" id="">
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-            </select>
+                <select name="" id="">
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                </select>
             </div>
             <div><span></span><span></span></div>
         </div>
@@ -242,34 +248,65 @@
         };
         $("#startTime").datepicker(option);
         $("#endTime").datepicker(option);
-        
-        let courses_name=document.querySelector('.courses_name'),
-            teacher_name=document.querySelector('.teacher_name'),
-            courses_num=document.querySelector('.courses_num');
-        $(function(){
-            $('.courses_num').keyup(function(){
-                let num=$('.courses_num').val(),
-                strnum=num.split('');
-                if(strnum.length>=3){
-                    let newstr=num.split('',3).join('');
+
+        let courses_name = document.querySelector('.courses_name'),
+            teacher_name = document.querySelector('.teacher_name'),
+            courses_num = document.querySelector('.courses_num');
+        $(function() {
+            $('.courses_num').keyup(function() {
+                let num = $('.courses_num').val(),
+                    strnum = num.split('');
+                if (strnum.length >= 3) {
+                    let newstr = num.split('', 3).join('');
                     console.log(newstr)
                     $('.courses_num').val(newstr)
                 }
-            })
+            });
+
+            $('.addvideo').click(function() {
+                $('.modal').show();
+                $('.modal_main_edit').show();
+                $('.m_m_offline').hide()
+                $('.m_m_audio').hide()
+                $('.videocancel').click(function() {
+                    $('.modal').hide()
+                })
+                // let app = $('#cloned').eq(0).clone(true);
+            });
+            
+            $('.videosave').click(function() {
+                $('.modal').hide();
+                var app = $('.table_default tr.clone').eq(0).clone(true);
+                app.find('td').eq(0).text($('.coursename').val());
+                app.find('td').eq(1).text($('.hour').val() + '小时' + $('.minute').val() + '分');
+                console.log(app);
+                app.appendTo('.table_default');
+                return app = null;
+            });
+            
+            
+            $('.back').click(function() {
+                $('.modal').hide()
+            });
+
+            $('.operation .edit').click(function(e) {
+                e.preventDefault();
+                $('.modal').show();
+                $('.modal_main_edit').show();
+                $('.m_m_offline').hide()
+                $('.m_m_audio').hide()
+                $('.videocancel').click(function() {
+                    $('.modal').hide()
+                })
+                $('.videosave').click(function() {
+                    $('.modal').hide()
+                })
+            });
+
+            $('.table_footer input').click(function() {
+                location.href = "{:U('course_management')}"
+            });
         })
-        
-        let edit=document.querySelectorAll('.operation');
-        console.log(edit)
-//        edit.forEach()
-        for(let i=0;i<edit.length;i++){
-            let edit_btn[i]=edit[i].querySelector('.edit');
-            console.log(edit_btn[i].classList)
-        }
-//        for (let j=0,j<edit_btn.length;i++){
-//            edit_btn[j].onclick=function(){
-//                
-//            }
-//        }
     </script>
 </body>
 
