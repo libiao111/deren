@@ -9,7 +9,7 @@ class IndexController extends Controller
     /*默认显示页*/
     public function index()
     {
-    	$this->display();
+    	$this->display('frame');
     }
     public function course(){
         /*分页*/
@@ -23,7 +23,7 @@ class IndexController extends Controller
         $result = M('course')->where($where)->limit($data['limit'])->select();
         $this->assign('page',$data['pages']);
         $this->assign('course',$arr);
-        $this->display("U('course_management')");
+        $this->display("course_management");
     }
     //添加或修改线下课
     public function offLine()
@@ -64,7 +64,7 @@ class IndexController extends Controller
 		}
 		$this->ajaxReturn($data,'json');
     }
-     //添加或修改视频课
+    //添加或修改视频课
     public function addVideo()
     {
     	if (!IS_AJAX) {
