@@ -8,17 +8,6 @@
     <link rel="stylesheet" href="__ACSS__/index.css" />
     <link rel="stylesheet" type="text/css" href="__ACSS__/font-awesome.min.css">
     <style>
-        /*
-        .modal {
-            display: none
-        }
-        .modal>.back{
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255,255,255,0.8)
-        }
-*/
     </style>
 </head>
 
@@ -40,19 +29,19 @@
             <span class="select_wrap ml30 mt15 dib">
         		<span>课程分类：</span>
             <select class="ipt_default btn_large">
-                <option>产品经理</option>
-                <option>UI设计师</option>
-                <option>前端工程师</option>
-                <option>后端工程师</option>
+                <option>全部</option>
+                <option>线下课</option>
+                <option>音频课</option>
+                <option>视频课</option>
             </select>
             <i class="fa fa-caret-down"></i>
             </span>
             <span class="select_wrap ml10 mt15 dib">
         		<span>课程状态：</span>
             <select class="ipt_default btn_middle">
-                <option>易</option>
-                <option>中</option>
-                <option>难</option>
+                <option>全部</option>
+                <option>停用</option>
+                <option>启用</option>
             </select>
             <i class="fa fa-caret-down"></i>
             </span>
@@ -83,13 +72,13 @@
                     <td width="6%">
                         <input type="checkbox" id="{$v.id}" value="{$v.id}">
                     </td>
-                    <td><img src="__AIMG__/4.png" height="60px" class="mt8 mb8"></td>
+                    <td><img src="{$v.course_photo}" height="60px" class="mt8 mb8"></td>
                     <td>{$v.course_name}</td>
-                    <td>线下课</td>
-                    <td>10</td>
+                    <td></td>
+                    <td></td>
                     <td>{$v.teach_name}</td>
                     <td>2016-8-9</td>
-                    <td>1hour</td>
+                    <td>{$v.class_num}</td>
                     <td>启用</td>
                     <td class="operation">
                         <a href="" class="mr2 edit">
@@ -176,10 +165,10 @@
         <div class="modal_add_course">
             <div class="top">
                 <span>选择课程分类：</span>
-                <select name="" id="">
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
+                <select name="" id="select_course">
+                    <option value="1">线下课</option>
+                    <option value="2">音频课</option>
+                    <option value="3">视频课</option>
                 </select>
             </div>
             <div class="bottom">
@@ -270,7 +259,18 @@
         }
 
         modal_add_course_confirm.onclick = function () {
-            location.href = "{:U('cousrse_edit')}"
+            let select=document.querySelector('#select_course').value;
+        
+            if(select=="1"){
+                location.href = "{:U('offline_cousrse_edit')}"
+            }
+            else if(select=="2"){
+                location.href = "{:U('audio_cousrse_edit')}"
+            }
+            else if(select=='3'){
+                location.href = "{:U('video_cousrse_edit')}"
+            }
+//            location.href = "{:U('cousrse_edit')}"
         }
 
 
@@ -282,7 +282,7 @@
             //            console.log(ed);
 //            let edit=new Array();
             edit=document.querySelectorAll('.operation')[i].querySelector('.edit');
-            $('.opeartion>.edit';)
+//            $('.opeartion>.edit';)
             edit.onclick = function (e) {
                 e.preventDefault();
                 location.href = "{:U('cousrse_edit')}"
