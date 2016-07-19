@@ -108,6 +108,44 @@ body {
 	border-right: solid 1px #666;
 }
 
+.psd_modal_main_edit{
+	width: 400px;
+	height: 310px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+	background-color: white
+}
+.psd_modal_main_edit>h2{
+	height: 50px;
+	text-align: center;
+	line-height: 50px;
+	font-size: 20px;
+}
+.psd_modal_main_edit>div{
+	height: 210px;
+	width: 400px;
+	border-bottom: solid 1px #666;
+	border-top: solid 1px #666;
+}
+.psd_modal_main_edit .m_m_video>p{
+	margin: 30px 20px
+}
+.psd_modal_main_edit>span{
+	display: block;
+	width: 50%;
+	height: 50px;
+	text-align: center;
+	line-height: 50px;
+	float: left;
+}
+.psd_modal_main_edit>span.videosave{
+	border-right: solid 1px #666;
+}
+
 
 /*datepicker*/
 .content-days{
@@ -171,9 +209,9 @@ display: inline-block;
 	height: 100%;
 	text-align: center;
 	line-height: 50px;
-
+	font-size: 20px;
 }
-.modal_add_course>.bottom>span{
+.modal_add_course>.bottom>span:nth-child(1){
 	border-right: solid 1px
 }
 
@@ -548,7 +586,9 @@ section.about {
 }
 .inline-block{
 	display: inline-block
-
+}
+.pointer{
+	cursor: pointer;
 }
 .w70{
 	width: 70px
@@ -558,6 +598,9 @@ section.about {
 }
 .w100{
 	width: 100px
+}
+.w120{
+	width: 120px;
 }
 .w200{
 	width: 200px
@@ -576,4 +619,10 @@ section.about {
 }
 .red{
 	color: red
+}
+.f_s20{
+	font-size: 20px;
+}
+.border-r{
+	border-right: solid 1px;
 }

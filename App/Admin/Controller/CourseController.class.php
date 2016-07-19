@@ -29,7 +29,7 @@ class CourseController extends Controller
         /*查询记录*/
         $result = M('course')->where($where)->limit($data['limit'])->select();
         $this->assign('page',$data['pages']);
-        $this->assign('course',$arr);
+        $this->assign('course',$result);
         $this->display("index/course_management");
     }
      /*搜索*/

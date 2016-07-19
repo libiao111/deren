@@ -77,8 +77,8 @@
                     <td></td>
                     <td></td>
                     <td>{$v.teach_name}</td>
-                    <td>2016-8-9</td>
-                    <td>{$v.class_num}</td>
+                    <td>{$v.addtime}</td>
+                    <td>{$v.classtime}</td>
                     <td>启用</td>
                     <td class="operation">
                         <a href="" class="mr2 edit">
@@ -157,23 +157,23 @@
         <div class="modal_main_three">
             <p></p>
             <div>
-                <span class="cancel">取消</span>
-                <span class="confirm">确认</span>
+                <span class="cancel pointer">取消</span>
+                <span class="confirm pointer">确认</span>
             </div>
         </div>
 
         <div class="modal_add_course">
             <div class="top">
-                <span>选择课程分类：</span>
-                <select name="" id="select_course">
+                <span class="f_s20">选择课程分类：</span>
+                <select name="" id="select_course" class="f_s20">
                     <option value="1">线下课</option>
                     <option value="2">音频课</option>
                     <option value="3">视频课</option>
                 </select>
             </div>
             <div class="bottom">
-                <span class="cancel">取消</span>
-                <span class="confirm">确认</span>
+                <span class="cancel pointer">取消</span>
+                <span class="confirm pointer">确认</span>
             </div>
         </div>
         <div class="modal_mian_add">
@@ -232,6 +232,7 @@
     <script src="__AJS__/jquery.easing.js"></script>
     <script src="__AJS__/deleconfirm.js"></script>
     <script>
+        'use strict';
         let add_cour_btn = document.querySelector('.add_course'),
             modal_add_course = document.querySelector('.modal_add_course'),
             modal_add_course_cancel = document.querySelector('.modal_add_course').querySelector('.bottom').querySelector('.cancel'),
@@ -262,13 +263,13 @@
             let select=document.querySelector('#select_course').value;
         
             if(select=="1"){
-                location.href = "{:U('offline_cousrse_edit')}"
+                location.href = "{:U('index/offline_cousrse_edit')}"
             }
             else if(select=="2"){
-                location.href = "{:U('audio_cousrse_edit')}"
+                location.href = "{:U('index/audio_cousrse_edit')}"
             }
             else if(select=='3'){
-                location.href = "{:U('video_cousrse_edit')}"
+                location.href = "{:U('index/video_cousrse_edit')}"
             }
 //            location.href = "{:U('cousrse_edit')}"
         }
