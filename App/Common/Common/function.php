@@ -87,12 +87,12 @@ function pageHandle($table, $condition = null, $tiao = null)
 
 
 /*缩略切图*/
-function photo_cut($img, $width, $height = null)
+function photo_cut($result, $width, $height = null)
 {
     if (!$height) {
         $height = $width;
     }
-    $imgurl = '../think/resource/'.$img;
+    $imgurl = './Public/resource/'.$result;
     $imgs = new \Think\Image();
     // 获取需要处理的图片
     $imgs->open($imgurl);
@@ -100,7 +100,7 @@ function photo_cut($img, $width, $height = null)
     $imgs->thumb($width,$height,3);
     // 保存路径+名称
     $imgs->save($imgurl,'png');
-    return $img;
+    return $result;
 }
 
 
@@ -112,12 +112,12 @@ function uploadHandle($file, $width, $height = null)
         $height = $width;
     }
     $upload = new \Think\Upload();
-    $upload->mimes      = array('image/jpeg','image/png');
-    $upload->exts       = array('jpg','png');
-    $upload->maxSize    = '2097152';
-    $upload->hash       = false;
-    $upload->rootPath   = '../think/resource/';
-    $upload->saveExt    = 'png';
+    $upload->mimes      = array('image/jpeg','image/png');//允许上传的文件类型
+    $upload->exts       = array('jpg','png');// 设置附件上传类型
+    $upload->maxSize    = '2097152';// 设置附件上传大小
+    $upload->hash       = false;//是否生成文件的hash编码 默认为true
+    $upload->rootPath   = './Public/resource/';// 设置附件上传根目录
+    $upload->saveExt    = 'png';// 设置附件上传（子）目录
     $upload->saveName   = array('date', 'YmdHis-'.rand(1000,9999));
     $status = $upload->upload($file);
     if ($status) {
@@ -128,6 +128,6 @@ function uploadHandle($file, $width, $height = null)
     } else {
         $result = $upload->getError();
     }
-    return $result;
+   return $result;
 
 }
