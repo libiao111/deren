@@ -4,7 +4,7 @@ use Think\Controller;
 /**
 * 管理端
 */
-class IndexController extends Controller
+class LoginController extends Controller
 {
     
     public function index()

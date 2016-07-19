@@ -108,7 +108,7 @@ $course = Array(
         <table>
             <tr title="接口路径为相对路径(可根据不同的文件目录调整)，此为同级目录下路径">
                 <td>接口路径</td>
-                <td>var url = "./App/index.php?url=Admin/Index/offLine"</td>
+                <td>var url = "./App/index.php?url=Admin/OffLine/index"</td>
             </tr>
             <tr>
                 <td>提交数据</td>
@@ -167,7 +167,7 @@ data: {
         <table>
             <tr title="接口路径为相对路径(可根据不同的文件目录调整)，此为同级目录下路径">
                 <td>接口路径</td>
-                <td>var url = "./App/addVideo.php?url=Admin/Index/addVideo"</td>
+                <td>var url = "./App/addVideo.php?url=Admin/Video/index"</td>
             </tr>
             <tr>
                 <td>提交数据</td>
@@ -226,7 +226,7 @@ data: {
         <table>
             <tr title="接口路径为相对路径(可根据不同的文件目录调整)，此为同级目录下路径">
                 <td>接口路径</td>
-                <td>var url = "./App/index.php?url=Admin/Index/addAudio"</td>
+                <td>var url = "./App/index.php?url=Admin/Audio/index"</td>
             </tr>
             <tr>
                 <td>提交数据</td>
@@ -284,7 +284,7 @@ data: {
         <table>
             <tr title="接口路径为相对路径(可根据不同的文件目录调整)，此为同级目录下路径">
                 <td>接口路径</td>
-                <td>var url = "./App/index.php?url=Admin/Index/delClass"</td>
+                <td>var url = "./App/index.php?url=Admin/Class/delClass"</td>
             </tr>
             <tr>
                 <td>提交数据</td>
@@ -332,7 +332,7 @@ data: {
         <table>
             <tr title="接口路径为相对路径(可根据不同的文件目录调整)，此为同级目录下路径">
                 <td>接口路径</td>
-                <td>var url = "./App/index.php?url=Admin/Index/delCourse"</td>
+                <td>var url = "./App/index.php?url=Admin/OffLine/delCourse"</td>
             </tr>
             <tr>
                 <td>提交数据</td>
@@ -380,7 +380,7 @@ data: {
         <table>
             <tr title="接口路径为相对路径(可根据不同的文件目录调整)，此为同级目录下路径">
                 <td>接口路径</td>
-                <td>var url = "./App/index.php?url=Admin/Index/delAudio"</td>
+                <td>var url = "./App/index.php?url=Admin/Audio/delAudio"</td>
             </tr>
             <tr>
                 <td>提交数据</td>
@@ -428,7 +428,7 @@ data: {
         <table>
             <tr title="接口路径为相对路径(可根据不同的文件目录调整)，此为同级目录下路径">
                 <td>接口路径</td>
-                <td>var url = "./App/index.php?url=Admin/Index/search"</td>
+                <td>var url = "./App/index.php?url=Admin/Course/search"</td>
             </tr>
             <tr>
                 <td>提交数据</td>
@@ -487,6 +487,204 @@ result: true|false,
             </tr>
         </table>
 <!-- //////////////////////////////////////////  接口结束  ///////////////////////////////////// -->
+<!-- //////////////////////////////////////////  接口开始  ///////////////////////////////////// -->
+        <h3>添加或修改线下课课时</h3>
+        <table>
+            <tr title="接口路径为相对路径(可根据不同的文件目录调整)，此为同级目录下路径">
+                <td>接口路径</td>
+                <td>var url = "./App/index.php?url=Admin/Class/index"</td>
+            </tr>
+            <tr>
+                <td>提交数据</td>
+                <td>
+<xmp>
+{   
+    $arr = array(
+        'id'=>value(课时id),
+        'class_name'=>value(课时名称),
+        'class_time'=>value(上课时间),
+        'paixu'=>value(排序),
+        'course_id'=>value(课程id)
+        );
+}
+注:
+    1、如果有id为添加操作，如果没有为修改操作
+</xmp>
+                </td>
+            </tr>
+            <tr>
+                <td>提交方式</td>
+                <td>
+<xmp>
+$.post(url, {} ,function (arr) {
+    // arr 为反馈数据(可自定义)
+    // console.log(arr) 在控制台输出(打印)结果
+    // F12 开发者模式 Network 可见
+    console.log(arr);
+});
+</xmp>
+                </td>
+            </tr>
+            <tr>
+                <td>反馈数据</td>
+                <td>
+<xmp>
+
+result: true|false,
+ $course = Array(
+        [0] => Array
+            (
+                [id] => 1(课程id)
+                [type] => 1(课程类型)
+                [course_name] => 思维口才50天速成课(课程名称)
+                [course_photo] => 2016-05-27/20160527153420-8996.jpg(缩略图)
+                [current_price] => 122(现价)
+                [course_price] => 300(原价)
+                [teach_name] => 王老师(导师名)
+                [classtime] => 07-1(课程总时长)
+                [offline_url] => 2016-05-27/20160527153420-8996.jpg(线下课与视频大图)
+                [video_url] => video.mp4/video.webm(视频和音频路径)
+                [class_num] => 7(总课时)
+                [addtime] => 2016-07-06 18:00:41(线下课上课时间)
+                [picture] => <p>兔兔图图图</p><img src="2016-05-27/20160527153420-8996.jpg"/>(课程详情,图文简介)
+                [status] => value(课程难易程度)
+            )
+        ...
+    )
+</xmp>
+                </td>
+            </tr>
+        </table>
+<!-- //////////////////////////////////////////  接口结束  ///////////////////////////////////// -->
+<!-- //////////////////////////////////////////  接口开始  ///////////////////////////////////// -->
+        <h3>添加或修改视频课时</h3>
+        <table>
+            <tr title="接口路径为相对路径(可根据不同的文件目录调整)，此为同级目录下路径">
+                <td>接口路径</td>
+                <td>var url = "./App/index.php?url=Admin/Class/addVideoClass"</td>
+            </tr>
+            <tr>
+                <td>提交数据</td>
+                <td>
+<xmp>
+{   
+    $arr = array(
+        'type' =>value(1:线下课、2:视频课、3:音频课),
+        'status'=>value(1:易、2:中、3:难)
+    )
+}
+</xmp>
+                </td>
+            </tr>
+            <tr>
+                <td>提交方式</td>
+                <td>
+<xmp>
+$.post(url, {} ,function (arr) {
+    // arr 为反馈数据(可自定义)
+    // console.log(arr) 在控制台输出(打印)结果
+    // F12 开发者模式 Network 可见
+    console.log(arr);
+});
+</xmp>
+                </td>
+            </tr>
+            <tr>
+                <td>反馈数据</td>
+                <td>
+<xmp>
+
+result: true|false,
+ $course = Array(
+        [0] => Array
+            (
+                [id] => 1(课程id)
+                [type] => 1(课程类型)
+                [course_name] => 思维口才50天速成课(课程名称)
+                [course_photo] => 2016-05-27/20160527153420-8996.jpg(缩略图)
+                [current_price] => 122(现价)
+                [course_price] => 300(原价)
+                [teach_name] => 王老师(导师名)
+                [classtime] => 07-1(课程总时长)
+                [offline_url] => 2016-05-27/20160527153420-8996.jpg(线下课与视频大图)
+                [video_url] => video.mp4/video.webm(视频和音频路径)
+                [class_num] => 7(总课时)
+                [addtime] => 2016-07-06 18:00:41(线下课上课时间)
+                [picture] => <p>兔兔图图图</p><img src="2016-05-27/20160527153420-8996.jpg"/>(课程详情,图文简介)
+                [status] => value(课程难易程度)
+            )
+        ...
+    )
+</xmp>
+                </td>
+            </tr>
+        </table>
+<!-- //////////////////////////////////////////  接口结束  ///////////////////////////////////// -->
+<!-- //////////////////////////////////////////  接口开始  ///////////////////////////////////// -->
+        <h3>添加或修改音频课课时</h3>
+        <table>
+            <tr title="接口路径为相对路径(可根据不同的文件目录调整)，此为同级目录下路径">
+                <td>接口路径</td>
+                <td>var url = "./App/index.php?url=Admin/Class/addAudioClass"</td>
+            </tr>
+            <tr>
+                <td>提交数据</td>
+                <td>
+<xmp>
+{   
+    $arr = array(
+        'type' =>value(1:线下课、2:视频课、3:音频课),
+        'status'=>value(1:易、2:中、3:难)
+    )
+}
+</xmp>
+                </td>
+            </tr>
+            <tr>
+                <td>提交方式</td>
+                <td>
+<xmp>
+$.post(url, {} ,function (arr) {
+    // arr 为反馈数据(可自定义)
+    // console.log(arr) 在控制台输出(打印)结果
+    // F12 开发者模式 Network 可见
+    console.log(arr);
+});
+</xmp>
+                </td>
+            </tr>
+            <tr>
+                <td>反馈数据</td>
+                <td>
+<xmp>
+
+result: true|false,
+ $course = Array(
+        [0] => Array
+            (
+                [id] => 1(课程id)
+                [type] => 1(课程类型)
+                [course_name] => 思维口才50天速成课(课程名称)
+                [course_photo] => 2016-05-27/20160527153420-8996.jpg(缩略图)
+                [current_price] => 122(现价)
+                [course_price] => 300(原价)
+                [teach_name] => 王老师(导师名)
+                [classtime] => 07-1(课程总时长)
+                [offline_url] => 2016-05-27/20160527153420-8996.jpg(线下课与视频大图)
+                [video_url] => video.mp4/video.webm(视频和音频路径)
+                [class_num] => 7(总课时)
+                [addtime] => 2016-07-06 18:00:41(线下课上课时间)
+                [picture] => <p>兔兔图图图</p><img src="2016-05-27/20160527153420-8996.jpg"/>(课程详情,图文简介)
+                [status] => value(课程难易程度)
+            )
+        ...
+    )
+</xmp>
+                </td>
+            </tr>
+        </table>
+<!-- //////////////////////////////////////////  接口结束  ///////////////////////////////////// -->
+
 
 
 
