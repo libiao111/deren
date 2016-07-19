@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>PHOCUSAdmin</title>
     <link rel="stylesheet" type="text/css" href="__ACSS__/main.css">
+    <link rel="stylesheet" href="__ACSS__/index.css" />
     <link rel="stylesheet" type="text/css" href="__ACSS__/font-awesome.min.css">
 </head>
 
@@ -18,7 +19,7 @@
 
         <!-- administrator's head -->
         <div class="admin_head" status="0">
-<!--            <img src="__AIMG__/head.png" alt="Oops!">-->
+            <!--            <img src="__AIMG__/head.png" alt="Oops!">-->
             <span class="vm ell">您好，李总</span>
             <i class="fa fa-caret-down ml4"></i>
         </div>
@@ -27,11 +28,11 @@
         <div class="menu_box">
             <!-- 小指针 -->
             <div class="indicator_top"></div>
-            
-            <div class="sign_out trans bte">
+
+            <div class="sign_out trans bte modify_psd">
                 <i class="fa fa-power-off vm mr4"></i> 修改密码
             </div>
-            
+
             <div class="sign_out trans bte">
                 <i class="fa fa-power-off vm mr4"></i> 退出
             </div>
@@ -144,7 +145,56 @@
 
     </div>
 
+    <div class="modal">
+        <div class="back"></div>
+        <div class="psd_modal_main_edit">
+            <h2>安全设置</h2>
+
+            <div class="m_m_video">
+                <p>
+                    <span class="w120 inline-block f_s20 texy_a_r mr20">旧密码</span>
+                    <input type="text" class="w200">
+                </p>
+                <p>
+                    <span class="w120 inline-block f_s20 texy_a_r mr20">新密码</span>
+                    <input type="text" class="w200">
+                </p>
+                <p>
+                    <span class="w120 inline-block f_s20 texy_a_r mr20">确认新密码</span>
+                    <input type="text" class="w200">
+                </p>
+            </div>
+
+            <span class="pointer border-r f_s20 psdsave">保存</span><span class="pointer f_s20 psdcancel">取消</span>
+        </div>
+
+    </div>
+
     <script src="__AJS__/require.js" data-main="__AJS__/main"></script>
+    <script>
+        'use strict';
+        let psdbox = document.querySelector('.modify_psd'),
+            modal=document.querySelector('.modal'),
+            modal_main=document.querySelector('.psd_modal_main_edit'),
+            cancel=document.querySelector('.psdcancel'),
+            save=document.querySelector('.psdsave'),
+            back=document.querySelector('.back');
+
+        psdbox.onclick = function () {
+            modal.style.display="block";
+            modal_main.style.display="block";
+        }
+        back.onclick=function(){
+            modal.style.display="none";
+        }
+        cancel.onclick=function(){
+            modal.style.display="none";
+        }
+        save.onclick=function(){
+            modal.style.display="none";
+            //to do
+        }
+    </script>
 </body>
 
 </html>

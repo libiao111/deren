@@ -171,7 +171,7 @@
                 <p><span></span></p>
             </div>
 
-            <span class="videosave">保存</span><span class="videocancel">取消</span>
+            <span class="videosave pointer">保存</span><span class="videocancel pointer">取消</span>
         </div>
         <div class="modal_main_delete">
             <p></p>
@@ -245,6 +245,7 @@
     <script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.min.js"></script>
     <script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.zh-CN.js"></script>
     <script type="text/javascript">
+        'use strict';
         var option = {
             dateFormat: "yyyy-m-d",
             autoClose: true,
@@ -258,6 +259,7 @@
             courses_num = document.querySelector('.courses_num');
         $(function () {
             $('.courses_num').keyup(function () {
+                'use strict';
                 let num = $('.courses_num').val(),
                     strnum = num.split('');
                 if (strnum.length >= 3) {
