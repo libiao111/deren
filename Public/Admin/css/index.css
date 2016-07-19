@@ -30,7 +30,9 @@ body {
 	background-color: white
 
 }
-.modal_main_edit{
+
+/*video*/
+.video_modal_main_edit{
 	width: 400px;
 	height: 300px;
 	position: absolute;
@@ -41,22 +43,22 @@ body {
 	margin: auto;
 	background-color: white
 }
-.modal_main_edit>h2{
+.video_modal_main_edit>h2{
 	height: 50px;
 	text-align: center;
 	line-height: 50px;
 	font-size: 20px;
 }
-.modal_main_edit>div{
+.video_modal_main_edit>div{
 	height: 200px;
 	width: 400px;
 	border-bottom: solid 1px #666;
 	border-top: solid 1px #666;
 }
-.modal_main_edit .m_m_video>p{
+.video_modal_main_edit .m_m_video>p{
 	margin: 30px 20px
 }
-.modal_main_edit>span{
+.video_modal_main_edit>span{
 	display: block;
 	width: 50%;
 	height: 50px;
@@ -64,9 +66,54 @@ body {
 	line-height: 50px;
 	float: left;
 }
-.modal_main_edit>span.videosave{
+.video_modal_main_edit>span.videosave{
 	border-right: solid 1px #666;
 }
+/*audio*/
+.audio_modal_main_edit{
+	width: 400px;
+	height: 330px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+	background-color: white
+}
+.audio_modal_main_edit>h2{
+	height: 50px;
+	text-align: center;
+	line-height: 50px;
+	font-size: 20px;
+}
+.audio_modal_main_edit>div{
+	height: 230px;
+	width: 400px;
+	border-bottom: solid 1px #666;
+	border-top: solid 1px #666;
+}
+.audio_modal_main_edit .m_m_video>p{
+	margin: 30px 20px
+}
+.audio_modal_main_edit>span{
+	display: block;
+	width: 50%;
+	height: 50px;
+	text-align: center;
+	line-height: 50px;
+	float: left;
+}
+.audio_modal_main_edit>span.videosave{
+	border-right: solid 1px #666;
+}
+
+
+/*datepicker*/
+.content-days{
+	background-color: white
+}
+
 .modal_main_three>p{
 	display: block;
 	text-align: center;
@@ -498,6 +545,13 @@ section.about {
 }
 .w50{
 	width: 50px
+}
+.inline-block{
+	display: inline-block
+
+}
+.w70{
+	width: 70px
 }
 .w80{
 	width: 80px

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>audio</title>
+    <link rel="stylesheet" href="__ACSS__/main.css">
+    <link rel="stylesheet" href="__ACSS__/index.css" />
+    <link href="__ADATEPICK__/js/datetimepicker/datepicker.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="__ACSS__/font-awesome.min.css">
+    <script type="text/javascript" charset="utf-8" src="__AEDITOR__/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="__AEDITOR__/ueditor.all.min.js">
+    </script>
+    <script type="text/javascript" charset="utf-8" src="__AEDITOR__/lang/zh-cn/zh-cn.js"></script>
+
+</head>
+
+<body class="bf2">
+
+    <!-- sub nav -->
+    <div class="sub_nav pl20 pt10">
+        <span class="route">
+        <span class="router router1">业务管理/课程管理</span>
+        </span>
+    </div>
+
+    <div class="sub_nav pl20 pt10 mt20">
+        <span class="route">
+        <span class="router router1">课程信息</span>
+        </span>
+    </div>
+
+    <section class="widget_wrp h150">
+        <div class="f_l w500">
+            <div class="mb15">
+                <span class="i_block w100 texy_a_r ">课程名称:</span>
+                <input type="text" class="w250 courses_name">
+            </div>
+            <div class="mb15">
+                <span class="i_block w100 texy_a_r ">讲师姓名:</span>
+                <input type="text" class="w250 teacher_name">
+            </div>
+            <div>
+                <span class="i_block w100 texy_a_r">现价:</span>
+                <input type="text" class="w80">
+                <span class="ml50">原价:</span>
+                <input type="text" class="w80">
+            </div>
+        </div>
+
+        <div class="f_l w500">
+            <div class="mb15">
+                <span class="i_block w100 texy_a_r ">课节数量:</span>
+                <input type="text" class="w250 courses_num" maxlength="5">
+            </div>
+            <div class="mb15">
+                <span class="i_block w100 texy_a_r">开始上课时间:</span>
+                <input type="text" id="startTime" class="am-form-field w250" data-am-datepicker />
+            </div>
+            <div>
+                <span class="i_block w100 texy_a_r">上传封面:</span>
+                <input type="file" class="w250">
+            </div>
+        </div>
+    </section>
+
+    <div class="sub_nav pl20 pt10">
+        <span class="route">
+        <span class="router router1">课程简介</span>
+
+        </span>
+    </div>
+    <section class="widget_wrp h460">
+        <script id="editor" type="text/plain" style="width:800px;height:300px;"></script>
+        <script type="text/javascript">
+            var ue = UE.getEditor('editor');
+        </script>
+    </section>
+
+    <div class="sub_nav pl20 pt10">
+        <span class="route">
+        <span class="router router1">课程表</span>
+        <span class="router router1 float_r mr20 red addvideo">添加课节</span>
+        </span>
+    </div>
+
+    <section class="widget_wrp">
+        <!-- 表格主体 -->
+        <table class="table_default">
+            <tr>
+                <th width="12%">课程名称</th>
+                <th width="10%">上课时间</th>
+                <th width="11%">操作</th>
+            </tr>
+            <tr class="h50 clone">
+                <td>思维口才50天速成课</td>
+                <td>2016-05-20 15:30</td>
+                <td class="operation">
+                    <a href="" class="mr2 edit">
+                        <i class="fa fa-edit vm"></i> 编辑
+                    </a>
+                    <span class="ccc">|</span>
+                    <span class="pointer ml2 remove">
+    					<i class="fa fa-trash vm"></i>
+    					删除
+    				</span>
+                    <!-- 删除提示 -->
+                    <div class="deleConfirm">
+                        <span class="mbutton trans confirm mt10"><i class="fa fa-check mr4"></i>确认</span>
+                        <span class="mbutton trans cancel"><i class="fa fa-times mr4"></i>取消</span>
+                    </div>
+                </td>
+            </tr>
+
+        </table>
+
+        <!-- 尾部 -->
+        <div class="table_footer mb30">
+            <div class="operate_btn_box f_r mr30">
+                <input type="button" class="button btn_middle btn_primary trans pointer" value="保存">
+            </div>
+        </div>
+    </section>
+
+    <div class="modal">
+        <div class="back"></div>
+        <div class="audio_modal_main_edit">
+            <h2>编辑课节</h2>
+
+            <div class="m_m_video">
+                <p><span>课节名称：</span>
+                    <input type="text" class="w200 coursename">
+                </p>
+                <p>
+                    <span>课节时长：</span>
+                    <input type="text" class="w50 hour">
+                    <span class="">小时</span>
+                    <input type="text" class="w50 minute">
+                    <span class="">分</span>
+                </p>
+                <p>
+                    <span>上传视频：</span>
+                    <input type="file">
+                </p>
+                <p>
+                    <span>上传图片：</span>
+                    <input type="file">
+                </p>
+            </div>
+
+            <div class="m_m_offline">
+                <p><span></span>
+                    <input type="text">
+                </p>
+                <p><span></span>
+                    <input type="text" id="startTime" class="am-form-field w250" data-am-datepicker>
+                </p>
+            </div>
+
+            <div class="m_m_audio">
+                <p><span></span>
+                    <input type="text">
+                </p>
+                <p>
+                    <span></span>
+                    <input type="text" class="w80">
+                    <span class=""></span>
+                    <input type="text" class="w80">
+                </p>
+                <p><span></span><span></span><span class=""></span></p>
+                <p><span></span></p>
+            </div>
+
+            <span class="videosave">保存</span><span class="videocancel">取消</span>
+        </div>
+        <div class="modal_main_delete">
+            <p></p>
+            <div><span></span><span></span></div>
+        </div>
+        <div class="add_course">
+            <div>
+                <select name="" id="">
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                </select>
+            </div>
+            <div><span></span><span></span></div>
+        </div>
+        <div class="modal_mian_add">
+            <h2></h2>
+
+            <div class="add_audio">
+                <p><span></span>
+                    <input type="text">
+                </p>
+                <p>
+                    <span></span>
+                    <input type="text" class="w80">
+                    <span class=""></span>
+                    <input type="text" class="w80">
+                </p>
+                <p>
+                    <span></span>
+                    <input type="file" class="w80">
+                </p>
+                <p>
+                    <span></span>
+                    <input type="file" class="w80">
+                </p>
+            </div>
+
+            <div class="add_video">
+                <p><span></span>
+                    <input type="text">
+                </p>
+                <p>
+                    <span></span>
+                    <input type="text" class="w80">
+                    <span class=""></span>
+                    <input type="text" class="w80">
+                </p>
+                <p>
+                    <span></span>
+                    <input type="file" class="w80">
+                </p>
+            </div>
+
+            <div class="add_offline">
+                <p><span></span>
+                    <input type="text">
+                </p>
+                <p><span></span>
+                    <input type="text" id="startTime" class="am-form-field w250" data-am-datepicker>
+                </p>
+            </div>
+
+            <div><span></span><span></span></div>
+        </div>
+    </div>
+
+    <script src="__AJS__/jquery.js"></script>
+    <script src="__AJS__/jquery.easing.js"></script>
+    <script src="__AJS__/deleconfirm.js"></script>
+    <script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.min.js"></script>
+    <script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.zh-CN.js"></script>
+    <script type="text/javascript">
+        var option = {
+            dateFormat: "yyyy-m-d",
+            autoClose: true,
+            weekStart: 7
+        };
+        $("#startTime").datepicker(option);
+        $("#endTime").datepicker(option);
+
+        let courses_name = document.querySelector('.courses_name'),
+            teacher_name = document.querySelector('.teacher_name'),
+            courses_num = document.querySelector('.courses_num');
+        $(function () {
+            $('.courses_num').keyup(function () {
+                let num = $('.courses_num').val(),
+                    strnum = num.split('');
+                if (strnum.length >= 3) {
+                    let newstr = num.split('', 3).join('');
+                    console.log(newstr)
+                    $('.courses_num').val(newstr)
+                }
+            });
+
+            $('.addvideo').click(function () {
+                $('.modal').show();
+                $('.audio_modal_main_edit').show();
+                $('.m_m_offline').hide()
+                $('.m_m_audio').hide()
+                $('.videocancel').click(function () {
+                    $('.modal').hide()
+                })
+            });
+
+            $('.videosave').click(function () {
+                $('.modal').hide();
+                var app = $('.table_default tr.clone').eq(0).clone(true);
+                app.find('td').eq(0).text($('.coursename').val());
+                app.find('td').eq(1).text($('.hour').val() + '小时' + $('.minute').val() + '分');
+                console.log(app);
+                app.appendTo('.table_default');
+                return app = null;
+            });
+
+
+            $('.back').click(function () {
+                $('.modal').hide()
+            });
+
+            $('.operation .edit').click(function (e) {
+                e.preventDefault();
+                $('.modal').show();
+                $('.audio_modal_main_edit').show();
+                $('.m_m_offline').hide()
+                $('.m_m_audio').hide()
+                $('.videocancel').click(function () {
+                    $('.modal').hide()
+                })
+                $('.videosave').click(function () {
+                    $('.modal').hide()
+                })
+            });
+
+            $('.table_footer input').click(function () {
+                location.href = "{:U('index/course')}"
+            });
+        })
+    </script>
+</body>
+
+</html>
