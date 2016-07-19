@@ -7,7 +7,7 @@ use Think\Controller;
 class VideoController extends Controller
 {
  	//添加或修改视频课
-    public function addVideo()
+    public function index()
     {
     	if (!IS_AJAX) {
       		  $this->error('页面不存在!');die; 

@@ -31,7 +31,8 @@ class AudioController extends Controller
 	    	'picture'=>I('picture'),
 	    	'video_url'=>$video_url,
 			'classtime'=>I('classtime'),
-	    	'class_num'=>I('class_num')
+	    	'class_num'=>I('class_num'),
+	    	'status'=>I('status')
 		);
 		if($id){
 			$arr['id']=$id;

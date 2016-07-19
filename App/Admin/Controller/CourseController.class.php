@@ -6,17 +6,17 @@ use Think\Controller;
 */
 class CourseController extends Controller
 {
-    /*public function index()
+    public function index()
     {
-        $type = I('type');
+        /*$type = I('type');
         if($type==1){
 
         }else if($type==2){
 
         }else if($type==3){
 
-        }
-    }*/
+        }*/
+    }
     /*默认显示所有*/
     public function course(){
         /*分页*/
@@ -30,7 +30,7 @@ class CourseController extends Controller
         $result = M('course')->where($where)->limit($data['limit'])->select();
         $this->assign('page',$data['pages']);
         $this->assign('course',$arr);
-        $this->display("course_management");
+        $this->display("index/course_management");
     }
      /*搜索*/
     public function search()
@@ -71,47 +71,37 @@ class CourseController extends Controller
         );
         $result = M('course')->save($arr);
     }
-    /*删除线下课与视频课课程*/
+    /*删除课程*/
     public function delCourse()
     {
-        /*if(!IS_AJAX){
+        if(!IS_AJAX){
             $this->error('页面不存在!');die;
-        }*/
+        }
         /*$id = I('id');*/
         $id= array(1,2,3,5,6);
         $where=array(
             'id'  =>array('in',$id)
         );
-        p($where);
         /*关联表*/
         $arr = array(
           'class'
-        );    
-        $result = D('course')->relation($arr)->where($where)->field()->select();
-        p($result);
-        /*反馈数据*/
-        /*if ($result) {
-            $data = array('status'=>1); 
-        } else {
-            $data = array('status'=>0);
-        }
-        $this->ajaxReturn('$data','json');*/
-    }
-    /*删除音频课课程*/
-    public function delAudio()
-    {
-        if(!IS_AJAX){
-            $this->error('页面不存在!');die;
-        }
-        $id = I('id');
-        $where=array(
-            'id'  =>array('in',$id)
         );
-        /*关联表*/
-        $arr1 = array(
-            'class'
+        /*关联查询课时表id*/    
+        $sql = D('course')->relation($arr)->where($where)->select();
+        foreach ($sql as $k => $v) {
+            foreach ($v['class'] as $key => $va) {
+                /*课时id赋值数组*/
+               $arr1[] = $va['id'];
+            }
+        }
+        $where1= array(
+            'id'=>array('in',$arr1)
         );
-        $result = D('course')->relation($arr1)->where($where)->delete();
+        $sql2 = D('class')->relation('bigpho')->where($where1)->delete();
+        /*先删除子类*/
+        if($sql2){
+            $result = M('course')->where($where)->delete();
+        }
         /*反馈数据*/
         if ($result) {
             $data = array('status'=>1); 
@@ -120,4 +110,5 @@ class CourseController extends Controller
         }
         $this->ajaxReturn('$data','json');
     }
+   
 }

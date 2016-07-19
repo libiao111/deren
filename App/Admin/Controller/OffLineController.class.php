@@ -26,8 +26,10 @@ class OffLineController extends Controller
 	    	'course_price'=>I('course_price'),
 	    	'teach_name'=>I('teach_name'),
 	    	'picture'=>I('picture'),
+	    	'addtime'=>I('addtime'),
 			'offline_url'=>I('offline_url'),
-	    	'class_num'=>I('class_num')
+	    	'class_num'=>I('class_num'),
+	    	'status'=>I('status')
 		);
 		if ($id) {
 			/*修改线下课*/

@@ -125,11 +125,14 @@ $course = Array(
         'teach_name'=>value(导师名),
         'picture'=>value(编辑器图文信息),
         'offline_url'=>value(展图大图),
-        'class_num'=>value(总课时)
+        'class_num'=>value(总课时数),
+        'addtime'=>value(上课时间),
+        'status'=>value(是否启用)
     );
 }
 注: 1、如果有id 为修改操作，没有则为添加操作。
-    2、type => 1 (线下课) ,2 (视频课),3 (音频课)
+    2、type => 1 (线下课) ,2 (视频课),3 (音频课)。
+    2、status =>1(启用),0(停用)。
 </xmp>
                 </td>
             </tr>
@@ -182,13 +185,16 @@ data: {
         'current_price'=>value(原价),
         'course_price'=>value(现价),
         'teach_name'=>value(导师名),
+        'video_url' => value(‘video_url),
         'picture'=>value(编辑器图文信息),
-        'offline_url'=>value(展图大图),
-        'class_num'=>value(总课时)
+        'class_num'=>value(总课时数),
+        'classtime'=>value(总时长),
+        'status'=>value(是否启用)
     );
 }
 注: 1、如果有id 为修改操作，没有则为添加操作。
-    2、type => 1 (线下课) ,2 (视频课),3 (音频课)
+    2、type => 1 (线下课) ,2 (视频课),3 (音频课)。
+    2、status =>1(启用), 0 (停用)。
 </xmp>
                 </td>
             </tr>
@@ -242,11 +248,15 @@ data: {
         'course_price'=>value(现价),
         'teach_name'=>value(导师名),
         'picture'=>value(编辑器图文信息),
-        'offline_url'=>value(展图大图),
-        'class_num'=>value(总课时)
+        'class_num'=>value(总课时数),
+        'classtime'=>value(总时长),
+        'video_url'=>value(路径),
+        'status'=>value(课程状态)
     );
 }
-注:如果有id 为修改操作，没有则为添加操作。
+注: 1、如果有id 为修改操作，没有则为添加操作。
+    2、type => 1 (线下课) ,2 (视频课),3 (音频课)。
+    2、status =>1(启用), 0 (停用)。
 </xmp>
                 </td>
             </tr>
@@ -280,107 +290,11 @@ data: {
         </table>
 <!-- //////////////////////////////////////////  接口结束  ///////////////////////////////////// -->
 <!-- //////////////////////////////////////////  接口开始  ///////////////////////////////////// -->
-        <h3>删除课时</h3>
+        <h3>删除课程</h3>
         <table>
             <tr title="接口路径为相对路径(可根据不同的文件目录调整)，此为同级目录下路径">
                 <td>接口路径</td>
-                <td>var url = "./App/index.php?url=Admin/Class/delClass"</td>
-            </tr>
-            <tr>
-                <td>提交数据</td>
-                <td>
-<xmp>
-{
-    $id =array(
-        1,2,3,....
-    );
-}
-</xmp>
-                </td>
-            </tr>
-            <tr>
-                <td>提交方式</td>
-                <td>
-<xmp>
-$.post(url, {} ,function (arr) {
-    // arr 为反馈数据(可自定义)
-    // console.log(arr) 在控制台输出(打印)结果
-    // F12 开发者模式 Network 可见
-    console.log(arr);
-});
-</xmp>
-                </td>
-            </tr>
-            <tr>
-                <td>反馈数据</td>
-                <td>
-<xmp>
-
-result: true|false,
-data: {
-    status =>1,成功操作
-    'or'
-    status =>0,失败操作
-}
-</xmp>
-                </td>
-            </tr>
-        </table>
-<!-- //////////////////////////////////////////  接口结束  ///////////////////////////////////// -->
-<!-- //////////////////////////////////////////  接口开始  ///////////////////////////////////// -->
-        <h3>删除线下课与视频课程</h3>
-        <table>
-            <tr title="接口路径为相对路径(可根据不同的文件目录调整)，此为同级目录下路径">
-                <td>接口路径</td>
-                <td>var url = "./App/index.php?url=Admin/OffLine/delCourse"</td>
-            </tr>
-            <tr>
-                <td>提交数据</td>
-                <td>
-<xmp>
-{
-    $id =array(
-        1,2,3,....
-    );
-}
-</xmp>
-                </td>
-            </tr>
-            <tr>
-                <td>提交方式</td>
-                <td>
-<xmp>
-$.post(url, {} ,function (arr) {
-    // arr 为反馈数据(可自定义)
-    // console.log(arr) 在控制台输出(打印)结果
-    // F12 开发者模式 Network 可见
-    console.log(arr);
-});
-</xmp>
-                </td>
-            </tr>
-            <tr>
-                <td>反馈数据</td>
-                <td>
-<xmp>
-
-result: true|false,
-data: {
-    status =>1,成功操作
-    'or'
-    status =>0,失败操作
-}
-</xmp>
-                </td>
-            </tr>
-        </table>
-<!-- //////////////////////////////////////////  接口结束  ///////////////////////////////////// -->
-<!-- //////////////////////////////////////////  接口开始  ///////////////////////////////////// -->
-        <h3>删除音频课课程</h3>
-        <table>
-            <tr title="接口路径为相对路径(可根据不同的文件目录调整)，此为同级目录下路径">
-                <td>接口路径</td>
-                <td>var url = "./App/index.php?url=Admin/Audio/delAudio"</td>
+                <td>var url = "./App/index.php?url=Admin/Course/delCourse"</td>
             </tr>
             <tr>
                 <td>提交数据</td>
@@ -437,7 +351,7 @@ data: {
 {   
     $arr = array(
         'type' =>value(1:线下课、2:视频课、3:音频课),
-        'status'=>value(1:易、2:中、3:难)
+        'status'=>value(1:启用、2:停用)
     )
 }
 </xmp>
@@ -478,7 +392,7 @@ result: true|false,
                 [class_num] => 7(总课时)
                 [addtime] => 2016-07-06 18:00:41(线下课上课时间)
                 [picture] => <p>兔兔图图图</p><img src="2016-05-27/20160527153420-8996.jpg"/>(课程详情,图文简介)
-                [status] => value(课程难易程度)
+                [status] => value(课程状态)
             )
         ...
     )
@@ -492,7 +406,7 @@ result: true|false,
         <table>
             <tr title="接口路径为相对路径(可根据不同的文件目录调整)，此为同级目录下路径">
                 <td>接口路径</td>
-                <td>var url = "./App/index.php?url=Admin/Class/index"</td>
+                <td>var url = "./App/index.php?url=Admin/Class/addOffLine"</td>
             </tr>
             <tr>
                 <td>提交数据</td>
@@ -547,7 +461,7 @@ result: true|false,
                 [class_num] => 7(总课时)
                 [addtime] => 2016-07-06 18:00:41(线下课上课时间)
                 [picture] => <p>兔兔图图图</p><img src="2016-05-27/20160527153420-8996.jpg"/>(课程详情,图文简介)
-                [status] => value(课程难易程度)
+                [status] => value(课程状态)
             )
         ...
     )
@@ -570,7 +484,7 @@ result: true|false,
 {   
     $arr = array(
         'type' =>value(1:线下课、2:视频课、3:音频课),
-        'status'=>value(1:易、2:中、3:难)
+        'status'=>value(1:启用、0:停用)
     )
 }
 </xmp>
@@ -611,7 +525,7 @@ result: true|false,
                 [class_num] => 7(总课时)
                 [addtime] => 2016-07-06 18:00:41(线下课上课时间)
                 [picture] => <p>兔兔图图图</p><img src="2016-05-27/20160527153420-8996.jpg"/>(课程详情,图文简介)
-                [status] => value(课程难易程度)
+                [status] => value(课程状态)
             )
         ...
     )
@@ -634,7 +548,7 @@ result: true|false,
 {   
     $arr = array(
         'type' =>value(1:线下课、2:视频课、3:音频课),
-        'status'=>value(1:易、2:中、3:难)
+        'status'=>value(1:启用、0:停用)
     )
 }
 </xmp>
@@ -675,7 +589,7 @@ result: true|false,
                 [class_num] => 7(总课时)
                 [addtime] => 2016-07-06 18:00:41(线下课上课时间)
                 [picture] => <p>兔兔图图图</p><img src="2016-05-27/20160527153420-8996.jpg"/>(课程详情,图文简介)
-                [status] => value(课程难易程度)
+                [status] => value(课程状态)
             )
         ...
     )
@@ -684,8 +598,102 @@ result: true|false,
             </tr>
         </table>
 <!-- //////////////////////////////////////////  接口结束  ///////////////////////////////////// -->
+<!-- //////////////////////////////////////////  接口开始  ///////////////////////////////////// -->
+        <h3>删除课时</h3>
+        <table>
+            <tr title="接口路径为相对路径(可根据不同的文件目录调整)，此为同级目录下路径">
+                <td>接口路径</td>
+                <td>var url = "./App/index.php?url=Admin/Class/delClass"</td>
+            </tr>
+            <tr>
+                <td>提交数据</td>
+                <td>
+<xmp>
+{
+    $id =array(
+        1,2,3,....
+    );
+}
+</xmp>
+                </td>
+            </tr>
+            <tr>
+                <td>提交方式</td>
+                <td>
+<xmp>
+$.post(url, {} ,function (arr) {
+    // arr 为反馈数据(可自定义)
+    // console.log(arr) 在控制台输出(打印)结果
+    // F12 开发者模式 Network 可见
+    console.log(arr);
+});
+</xmp>
+                </td>
+            </tr>
+            <tr>
+                <td>反馈数据</td>
+                <td>
+<xmp>
 
+result: true|false,
+data: {
+    status =>1,成功操作
+    'or'
+    status =>0,失败操作
+}
+</xmp>
+                </td>
+            </tr>
+        </table>
+<!-- //////////////////////////////////////////  接口结束  ///////////////////////////////////// -->
+<!-- //////////////////////////////////////////  接口开始  ///////////////////////////////////// -->
+        <h3>停用启用</h3>
+        <table>
+            <tr title="接口路径为相对路径(可根据不同的文件目录调整)，此为同级目录下路径">
+                <td>接口路径</td>
+                <td>var url = "./App/index.php?url=Admin/Course/status"</td>
+            </tr>
+            <tr>
+                <td>提交数据</td>
+                <td>
+<xmp>
+{
+    $id =array(
+        1,2,3,....
+    );
+}
+</xmp>
+                </td>
+            </tr>
+            <tr>
+                <td>提交方式</td>
+                <td>
+<xmp>
+$.post(url, {} ,function (arr) {
+    // arr 为反馈数据(可自定义)
+    // console.log(arr) 在控制台输出(打印)结果
+    // F12 开发者模式 Network 可见
+    console.log(arr);
+});
+</xmp>
+                </td>
+            </tr>
+            <tr>
+                <td>反馈数据</td>
+                <td>
+<xmp>
 
+result: true|false,
+data: {
+    status =>1,成功操作
+    'or'
+    status =>0,失败操作
+}
+</xmp>
+                </td>
+            </tr>
+        </table>
+<!-- //////////////////////////////////////////  接口结束  ///////////////////////////////////// -->
 
 
 
