@@ -28,20 +28,20 @@
             <!-- 下拉列表组件 -->
             <span class="select_wrap ml30 mt15 dib">
         		<span>课程分类：</span>
-            <select class="ipt_default btn_large">
-                <option>全部</option>
-                <option>线下课</option>
-                <option>音频课</option>
-                <option>视频课</option>
+            <select class="ipt_default btn_large type" name="type">
+                <option value ="0">全部</option>
+                <option value="1">线下课</option>
+                <option value="2">音频课</option>
+                <option value="3">视频课</option>
             </select>
             <i class="fa fa-caret-down"></i>
             </span>
             <span class="select_wrap ml10 mt15 dib">
         		<span>课程状态：</span>
-            <select class="ipt_default btn_middle">
-                <option>全部</option>
-                <option>停用</option>
-                <option>启用</option>
+            <select class="ipt_default btn_middle aa" name="status">
+                <option value ="0">全部</option>
+                <option value ="1">停用</option>
+                <option value ="2">启用</option>
             </select>
             <i class="fa fa-caret-down"></i>
             </span>
@@ -233,6 +233,19 @@
     <script src="__AJS__/jquery.easing.js"></script>
     <script src="__AJS__/deleconfirm.js"></script>
     <script>
+        $(function(){
+            $('.type').change(function(){
+                var a = $('.type').val();
+                var b = $('.aa').val();
+                var c ={};
+                c['type'] = a;
+                c['status'] = b;
+                $.post("{:U('Admin/Course/course')}",c,function(){
+                    
+                });
+            });    
+        });
+        
         'use strict';
         let add_cour_btn = document.querySelector('.add_course'),
             modal_add_course = document.querySelector('.modal_add_course'),
@@ -287,7 +300,7 @@
 //            $('.opeartion>.edit';)
             edit.onclick = function (e) {
                 e.preventDefault();
-                location.href = "{:U('cousrse_edit')}"
+                location.href = "{:U('index/video_cousrse_edit')}"
             }
 //            document.querySelectorAll('.operation')[i].querySelector('.edit').onclick = function (e) {
 //                e.preventDefault();

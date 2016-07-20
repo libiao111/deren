@@ -22,14 +22,24 @@ class CourseController extends Controller
         /*分页*/
         $table = 'course';
         $condition = "";
-        $tiao = 1;
-        $where = "";
-        /*调用分页函数返回*/
+        $tiao = 5;
+        $where="";
+       /*调用分页函数返回*/
         $data = pageHandle($table,$condition,$tiao);
-        p($data);
+        $type = I('type');
+        $status = I('status');
+        
+        if ($type && $status) {
+           $where['type'] = $type;
+           $where['status']=$status;
+            
+        }
+        p($where);
         /*查询记录*/
         $result = M('course')->where($where)->limit($data['limit'])->select();
+       
         $this->assign('page',$data['pages']['pages']);
+
         $this->assign('course',$result);
         $this->display("index/course_management");
     }
@@ -39,6 +49,7 @@ class CourseController extends Controller
         if(!IS_AJAX){
             $this->error('页面不存在!');die;
         }
+        
         $type = I('type');
         $status = I('status');
         if (!$type) {
@@ -58,6 +69,7 @@ class CourseController extends Controller
                 $result = M('course')->where($arr)->select();
             }
         }
+
     }
     /*停启用状态*/
     public function status()
