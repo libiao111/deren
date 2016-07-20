@@ -22,13 +22,14 @@ class CourseController extends Controller
         /*分页*/
         $table = 'course';
         $condition = "";
-        $tiao = 5;
+        $tiao = 1;
         $where = "";
         /*调用分页函数返回*/
         $data = pageHandle($table,$condition,$tiao);
+        p($data);
         /*查询记录*/
         $result = M('course')->where($where)->limit($data['limit'])->select();
-        $this->assign('page',$data['pages']);
+        $this->assign('page',$data['pages']['pages']);
         $this->assign('course',$result);
         $this->display("index/course_management");
     }
@@ -57,8 +58,6 @@ class CourseController extends Controller
                 $result = M('course')->where($arr)->select();
             }
         }
-        $this->assign('course',$result);
-        
     }
     /*停启用状态*/
     public function status()

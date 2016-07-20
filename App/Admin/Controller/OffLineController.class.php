@@ -16,18 +16,19 @@ class OffLineController extends Controller
       	/*获取值*/
     	$id =I('id');
     	/*获取缩略图路径*/
-    	$course_photo =session('arr');
+    	$course_photo =session('course_photo');
+        $offline_url = session('offline_url');
     	//数组赋值
     	$arr =array(
 			'type'=>I('type'),
 	    	'course_name'=>I('course_name'),
-	    	'course_photo'=>I('course_photo'),
+	    	'course_photo'=>$course_photo,
 	    	'current_price'=>I('current_price'),
 	    	'course_price'=>I('course_price'),
 	    	'teach_name'=>I('teach_name'),
 	    	'picture'=>I('picture'),
 	    	'addtime'=>I('addtime'),
-			'offline_url'=>I('offline_url'),
+			'offline_url'=> $offline_url,
 	    	'class_num'=>I('class_num'),
 	    	'status'=>I('status')
 		);
@@ -42,33 +43,42 @@ class OffLineController extends Controller
         /*反馈数据*/
 		if($result){
 			$data = array('status'=>1);
+            session('offline_url',null);
+            session('course_photo',null);
 		}
 		else{
 			$data = array('status'=>0);
 		}
 		$this->ajaxReturn($data,'json');
   	}
-    public function aa(){
-    	$file = $_GET['b'];
-    	//p($file);
-		$width = 100;
-    	$photo = uploadHandle($file, $width, $height =null);
-    	//P($photo);
-    }
     public function upload(){
-	/*$file = $_GET['b'];
-	p($file);*/
-    $upload = new \Think\Upload();// 实例化上传类
-    $upload->maxSize   =     3145728 ;// 设置附件上传大小
-    $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
-    $upload->rootPath  =     './Public/resource/'; // 设置附件上传根目录
-    $upload->savePath  =     ''; // 设置附件上传（子）目录
-    // 上传文件 
-    $info   =   $upload->upload();
-    if(!$info) {// 上传错误提示错误信息
-        echo'上传失败';
-    }else{// 上传成功
-        $this->success('上传成功！');
+        $width = '300';
+        /*上传图片*/
+    	$offline_url = uploadHandle($width);
+        session('offline_url',$offline_url);
+        /*生成缩略图*/
+        $course_photo = photo_cut($offline_url, 50);
+        session('course_photo',$course_photo);
+
     }
-}
+    public function uploa(){
+        $aa = uploadvideo();
+        p($aa);
+    }
+    /*public function uplo(){
+    	//$file = $_POST['b'];
+    	$upload = new \Think\Upload();// 实例化上传类
+        $upload->maxSize   =     3145728 ;// 设置附件上传大小
+        $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
+        $upload->rootPath  =     './Public/resource/'; // 设置附件上传根目录
+        $upload->savePath  =     ''; // 设置附件上传（子）目录
+        $upload->saveName  =     array('date', 'YmdHis-'.rand(1000,9999));
+        // 上传文件 
+        $info   =   $upload->upload();
+        if(!$info) {// 上传错误提示错误信息
+            $this->error($upload->getError());
+        }else{// 上传成功
+            $this->success('上传成功！');
+        }
+    }*/
 }
