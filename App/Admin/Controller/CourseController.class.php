@@ -76,6 +76,9 @@ class CourseController extends Controller
     /*停启用状态*/
     public function status()
     {
+        if(!IS_AJAX){
+            $this->error('页面不存在!');die;
+        }
         $id = I('id');
         $status = I('status');
         $arr = array(

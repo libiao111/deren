@@ -47,7 +47,28 @@ class OffLineController extends Controller
 			$data = array('status'=>0);
 		}
 		$this->ajaxReturn($data,'json');
-  }
-    
-
+  	}
+    public function aa(){
+    	$file = $_GET['b'];
+    	//p($file);
+		$width = 100;
+    	$photo = uploadHandle($file, $width, $height =null);
+    	//P($photo);
+    }
+    public function upload(){
+	/*$file = $_GET['b'];
+	p($file);*/
+    $upload = new \Think\Upload();// 实例化上传类
+    $upload->maxSize   =     3145728 ;// 设置附件上传大小
+    $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
+    $upload->rootPath  =     './Public/resource/'; // 设置附件上传根目录
+    $upload->savePath  =     ''; // 设置附件上传（子）目录
+    // 上传文件 
+    $info   =   $upload->upload();
+    if(!$info) {// 上传错误提示错误信息
+        echo'上传失败';
+    }else{// 上传成功
+        $this->success('上传成功！');
+    }
+}
 }
