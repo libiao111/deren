@@ -98,14 +98,21 @@ class CourseController extends Controller
             $this->error('页面不存在!');die;
         }
         $id = I('id');
-        $status = I('status');
+        $status = 2;
         $where = array(
-            'id'=>array('in',$id),
+            'id'=>array('in',$id)
         );
         $arr = array(
             'status'=>$status
         );
-        $result = M('course')->save($arr);
+        $result = M('course')->where($where)->save($arr);
+         /*反馈数据*/
+        if ($result) {
+            $data = array('status'=>1); 
+        } else {
+            $data = array('status'=>0);
+        }
+        $this->ajaxReturn($data,'json');
     }
     /*删除课程*/
     public function delCourse()
@@ -143,7 +150,7 @@ class CourseController extends Controller
         } else {
             $data = array('status'=>0);
         }
-        $this->ajaxReturn('$data','json');
+        $this->ajaxReturn($data,'json');
     }
    
 }
