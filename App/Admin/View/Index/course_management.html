@@ -100,14 +100,15 @@
                 <input type="button" class="button btn_middle btn_primary trans pointer delete" value="删除">
             </div>
             <!-- 分页 -->
-            <div class="pagination mr30">
-                <span class="pagination_item pagination_item_on">1</span>
-                <span class="pagination_item">2</span>
+            <div class="pagination mr30" name= "page">
+                {$page}
+                <!-- <span class="pagination_item pagination_item_on" name="page">{$pages}</span>
+                <span class="pagination_item"></span>
                 <span class="pagination_item">3</span>
                 <span class="pagination_item">4</span>
                 <span class="pagination_item">5</span>
                 <span class="pagination_item">6</span>
-                <span class="pagination_item">7</span>
+                <span class="pagination_item">7</span>  -->
             </div>
         </div>
     </section>
@@ -235,6 +236,7 @@
     <script src="__AJS__/jquery.easing.js"></script>
     <script src="__AJS__/deleconfirm.js"></script>
     <script>
+<<<<<<< HEAD
         $(function () {
             $('.type').change(function () {
                $('.frm').submit();
@@ -244,6 +246,23 @@
         'use strict';
         let add_cour_btn = document.querySelector('.add_course'),
             modal_add_course = document.querySelector('.modal_add_course'),
+=======
+        $(function(){
+            $('.type').change(function(){
+        
+                var a = $('.type').val();
+                var b = $('.aa').val();
+                var c ={};
+                c['type'] = a;
+                $.post("{:U('Admin/Course/course')}",c,function(){
+                    
+                });
+            });    
+        });
+        
+        var add_cour_btn = document.querySelector('.add_course');
+        var modal_add_course = document.querySelector('.modal_add_course'),
+>>>>>>> 50b87051e852ab20e4492778578887c6f1254e18
             modal_add_course_cancel = document.querySelector('.modal_add_course').querySelector('.bottom').querySelector('.cancel'),
             modal_add_course_confirm = document.querySelector('.modal_add_course').querySelector('.bottom').querySelector('.confirm'),
             modal = document.querySelector('.modal'),
@@ -253,25 +272,35 @@
         //        console.log(iframe)
 
         add_cour_btn.onclick = function (event) {
+            'use strict';
             event.preventDefault();
             modal.style.display = 'block';
             modal_add_course.style.display = 'block'
         }
         modal_add_course_cancel.onclick = function () {
+            'use strict';
             modal.style.display = 'none';
             modal_add_course.style.display = 'none'
         }
 
         //modal back operation
         modal_back.onclick = function () {
+            'use strict';
             modal.style.display = 'none';
             modal_add_course.style.display = 'none'
         }
 
         modal_add_course_confirm.onclick = function () {
+<<<<<<< HEAD
             let select = document.querySelector('#select_course').value;
 
             if (select == "1") {
+=======
+            'use strict';
+            let select=document.querySelector('#select_course').value;
+        
+            if(select=="1"){
+>>>>>>> 50b87051e852ab20e4492778578887c6f1254e18
                 location.href = "{:U('index/offline_cousrse_edit')}"
             } else if (select == "2") {
                 location.href = "{:U('index/audio_cousrse_edit')}"
@@ -283,15 +312,22 @@
 
 
         //table中编辑按钮操作
+<<<<<<< HEAD
         let num = document.querySelectorAll('.operation');
         let edit = [];
         for (let i = 0; i < num.length; i++) {
+=======
+        var num = document.querySelectorAll('.operation');
+        var edit=[];
+        for (var i = 0; i < num.length; i++) {
+>>>>>>> 50b87051e852ab20e4492778578887c6f1254e18
             //            let edit[i] = document.querySelectorAll('.operation')[i].querySelector('.edit');
             //            console.log(ed);
             //            let edit=new Array();
             edit = document.querySelectorAll('.operation')[i].querySelector('.edit');
             //            $('.opeartion>.edit';)
             edit.onclick = function (e) {
+<<<<<<< HEAD
                     e.preventDefault();
                     location.href = "{:U('index/video_cousrse_edit')}"
                 }
@@ -299,40 +335,56 @@
                 //                e.preventDefault();
                 //                location.href = "{:U('cousrse_edit')}"
                 //            }
+=======
+               'use strict';
+                e.preventDefault();
+                location.href = "{:U('index/video_cousrse_edit')}"
+            }
+//            document.querySelectorAll('.operation')[i].querySelector('.edit').onclick = function (e) {
+//                e.preventDefault();
+//                location.href = "{:U('cousrse_edit')}"
+//            }
+>>>>>>> 50b87051e852ab20e4492778578887c6f1254e18
         }
 
         //table底部三个按钮操作
-        let enable_btn = document.querySelector('.operate_btn_box').querySelector('.enable'),
+        "use strict"
+        var enable_btn = document.querySelector('.operate_btn_box').querySelector('.enable'),
             disable_btn = document.querySelector('.operate_btn_box').querySelector('.disable'),
             delete_btn = document.querySelector('.operate_btn_box').querySelector('.delete'),
             three_box = document.querySelector('.modal_main_three');
         //enable operation
         enable_btn.onclick = function () {
+                'use strict';
                 modal.style.display = "block";
                 three_box.style.display = "block";
                 three_box.children[0].innerHTML = "您确定启用该课程吗？"
             }
             //disable operation
         disable_btn.onclick = function () {
+                'use strict';
                 modal.style.display = "block";
                 three_box.style.display = "block";
                 three_box.children[0].innerHTML = "您确定停用该课程吗？"
             }
             //delete operation
         delete_btn.onclick = function () {
+           'use strict';
             modal.style.display = "block";
             three_box.style.display = "block";
             three_box.children[0].innerHTML = "您确定删除该课程吗？"
         }
 
-        let modal_main_three_cancel = document.querySelector('.modal_main_three').querySelector('div').querySelector('.cancel'),
+        var modal_main_three_cancel = document.querySelector('.modal_main_three').querySelector('div').querySelector('.cancel'),
             modal_main_three_confirm = document.querySelector('.modal_main_three').querySelector('div').querySelector('.confirm');
 
         modal_main_three_cancel.onclick = function () {
+            'use strict';
             modal.style.display = 'none';
             modal_add_course.style.display = 'none'
         }
         modal_main_three_confirm.onclick = function () {
+            'use strict';
             //to do
         }
     </script>

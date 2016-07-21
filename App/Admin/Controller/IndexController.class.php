@@ -9,7 +9,7 @@ class IndexController extends Controller
     /*默认显示页*/
     public function index()
     {
-    	$this->display('frame');
+    	$this->display('login');
     }
     
 }

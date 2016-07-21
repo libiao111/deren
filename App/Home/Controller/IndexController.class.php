@@ -195,7 +195,7 @@ class IndexController extends Controller
         /*获取数据*/
         $users_id = session('user')['id'];
         /*以id= course_id查询课程表*/
-        $sql = M('course')->where(array('id'=>2))->field('id','course_name','current_price')->find();
+        $sql = M('course')->where(array('id'=>2))->field('id','type','course_photo','course_name','current_price')->find();
         /*生成订单号*/
         $time = time();
         $str = rand('1000','9999');
@@ -206,6 +206,10 @@ class IndexController extends Controller
             'ordera_mobi' => I('order_mobi'),
             'course_id' => I('course_id'),
             'users_id' => $users_id,
+            'type'=>$sql['type'],
+            'course_photo'=>$sql['course_photo'],
+            'current_price'=>$sql['current_price'],
+            'course_name'=>$sql['course_name'],
             'status' => 0,
             'ordera_num' => $ordera_num,
             'pay_type' => I('radio1')

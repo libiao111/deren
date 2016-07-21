@@ -88,7 +88,7 @@ function pageHandle($table, $condition = null, $tiao = null)
 
 /*缩略切图*/
 function photo_cut($result, $width, $height = null)
-{
+{   
     if (!$height) {
         $height = $width;
     }
@@ -99,13 +99,15 @@ function photo_cut($result, $width, $height = null)
     // 生成缩略图 宽,高,类型6种：3剧中
     $imgs->thumb($width,$height,3);
     // 保存路径+名称
-    $imgs->save($imgurl,'png');
-    return $result;
+    $imga = date('Y-m-d').'/'.date('YmdHis').'-'.rand(1000,9999).'.png';
+    $img = './Public/resource/'.$imga;
+    $imgs->save($img,'png');
+    return $imga;
 }
 
 
 /* 上传图片 */
-function uploadHandle($file, $width, $height = null)
+function uploadHandle($width, $height = null)
 {
     // $_FILES
     if (!$height) {
@@ -119,15 +121,42 @@ function uploadHandle($file, $width, $height = null)
     $upload->rootPath   = './Public/resource/';// 设置附件上传根目录
     $upload->saveExt    = 'png';// 设置附件上传（子）目录
     $upload->saveName   = array('date', 'YmdHis-'.rand(1000,9999));
-    $status = $upload->upload($file);
+    $status = $upload->upload();
     if ($status) {
         $result = $status['file']['savepath'].$status['file']['savename'];
         if ($width) {
-            $result = photo_cut($result, $width, $height);
+            $imgurl = './Public/resource/'.$result;
+            $imgs = new \Think\Image();
+            // 获取需要处理的图片
+            $imgs->open($imgurl);
+            // 生成缩略图 宽,高,类型6种：3剧中
+            $imgs->thumb($width,$height,3);
+            // 保存路径+名称
+            $img = md5(date('YmdHis').rand(1000,9999));
+            $imgs->save($imgurl,'png');
         }
     } else {
         $result = $upload->getError();
     }
-   return $result;
-
+    return $result;
+}
+/* 上传图片 */
+function uploadvideo()
+{
+    $upload = new \Think\Upload();
+    $upload->mimes      = array('image/rmvb','image/mp4','image/3gp');//允许上传的文件类型
+    $upload->exts       = array('avi','rmvb','rm','asf','divx','mpg','mpeg','mpe','wmv','mp4','mkv','vob','3gp');// 设置附件上传类型
+    $upload->maxSize    = '2097152';// 设置附件上传大小
+    $upload->hash       = false;//是否生成文件的hash编码 默认为true
+    $upload->rootPath   = './Public/video/';// 设置附件上传根目录
+    //$upload->saveExt    = 'rmvb';// 设置附件上传（子）目录
+    $upload->saveName   = array('date', 'YmdHis-'.rand(1000,9999));
+    $status = $upload->upload();
+    if ($status) {
+        $result = $status['file']['savepath'].$status['file']['savename'];
+        
+    } else {
+        $result = $upload->getError();
+    }
+    return $result;
 }

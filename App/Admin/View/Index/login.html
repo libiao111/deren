@@ -6,12 +6,26 @@
     <title>Document</title>
     <link rel="stylesheet" href="__ACSS__/phocus.dajun.css" />
     <link rel="stylesheet" href="__ACSS__/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="__CSS__/weui.min.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/main.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/phocus.css">
 </head>
 
 <body>
     <div id="login"></div>
-    <script src="__AJS__/jquery.js"></script>
-    <script>
+<script>
+    var goToIndex = "{:U('index')}";
+    var loginHandle = "{:U('Login/loginhandle')}";
+    // 记录页面名称
+    var url = window.location.href.toString().split("/");
+    var pageName = ((url.slice(url.length -1,url.length))[0].split("."))[0];
+    localStorage.pageName = pageName;
+    
+</script>
+
+<script src="__JS__/login.js"></script> 
+<script src="__AJS__/jquery.js"></script>
+<script>
         $(function () {
             function WebKit(datawrap) {
                 this.Login = () => {

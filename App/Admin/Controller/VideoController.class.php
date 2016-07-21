@@ -15,7 +15,7 @@ class VideoController extends Controller
       	/*获取值*/
     	$id =I('id');
     	/*获取缩略图路径*/
-    	$course_photo =session('arr');
+    	$course_photo =session('course_photo');
         /*获取视频地址*/
         $video_url = session('video_url');
     	//数组赋值
