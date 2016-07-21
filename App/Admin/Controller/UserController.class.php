@@ -3,9 +3,8 @@ namespace Admin\Controller;
 use Think\Controller;
 class UserController extends Controller
 {
-	public function index(){
-
-		$result = M('user')->select();
+	public function index()
+	{
 		$where="";
         /*分页*/
         $table = 'course';
@@ -19,6 +18,7 @@ class UserController extends Controller
         $this->assign('user',$result);
         $this->display('index/member_man_reg');
 	}
+	/*用户删除*/
 	public function deleteUser()
 	{
 		if (!IS_AJAX) {
@@ -36,18 +36,18 @@ class UserController extends Controller
 		}
 		$this->ajaxReturn($data,'json');
 	}
-	public function statusUser()
+	/*用户停用*/
+	public function statusStop()
 	{
 		if (!IS_AJAX) {
 			$this->error('页面不存在!');
 		}
 		$id = I('id');
-		$status = I('status');
 		$where = array(
 			'id'=>array('in',$id),
 		);
 		$arr = array(
-			'status'=>$status
+			'status'=>0
 		);
 		$result = M('users')->where($where)->save($arr);
 		if ($result) {
@@ -56,6 +56,48 @@ class UserController extends Controller
 			$data = array('status'=>0);
 		}
 		$this->ajaxReturn($data,'json');
+	}
+	/*用户启用*/
+	public function statusUsing()
+	{
+		if (!IS_AJAX) {
+			$this->error('页面不存在!');
+		}
+		$id = I('id');
+		$where = array(
+			'id'=>array('in',$id),
+		);
+		$arr = array(
+			'status'=>1
+		);
+		$result = M('users')->where($where)->save($arr);
+		if ($result) {
+			$data =array('status'=>1);
+		} else {
+			$data = array('status'=>0);
+		}
+		$this->ajaxReturn($data,'json');
+	}
+	/*回复初始密码*/
+	public function rpassword(){
+		if(!IS_AJAX){
+			$this->error('页面不存在!');
+		}
+		$id = I('id');
+		$where =array(
+			'id'=>array('in',$id)
+		);
+		$arr = array(
+			'password' =>md5('123456')
+		);
+		$result = M('users')->where($where)->save($arr);
+		if (!IS_AJAX) {
+			$data =array('status'=>1);
+		} else {
+			$data = array('status'=>0);
+		}
+		$this->ajaxReturn($data,'json');
+
 	}
 }
 

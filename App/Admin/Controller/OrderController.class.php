@@ -17,6 +17,7 @@ class OrderController extends Controller
     	);
 		/*查询记录*/
         $result = M('ordera')->where($where)->limit($data['limit'])->select();
+        $this->assign('ordera',$result);
         $this->assign('page',$data['pages']['pages']);
 		$this->display('bill_management');
 	}
@@ -38,16 +39,15 @@ class OrderController extends Controller
 	}
 	/*退款*/
 	public function rebate(){
-		/*if(!IS_AJAX){
+		if(!IS_AJAX){
 			$this->error('页面不存在!');die;
-		}*/
+		}
 		$id = I('id');
-		$status = I('status');
 		$where = array(
 			'id'=>array('in',$id)
 		);
 		$arr = array(
-			'status'=>$status
+			'status'=>3
 		);
 		$result = M('ordera')->where($where)->save($arr);
 		if($result){

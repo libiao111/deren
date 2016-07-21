@@ -150,7 +150,7 @@ function uploadvideo()
     $upload->hash       = false;//是否生成文件的hash编码 默认为true
     $upload->rootPath   = './Public/video/';// 设置附件上传根目录
     //$upload->saveExt    = 'rmvb';// 设置附件上传（子）目录
-    $upload->saveName   = array('date', 'YmdHis-'.rand(1000,9999));
+    $upload->saveName   = array('date', 'YmdHis-'.rand(100000,999999));
     $status = $upload->upload();
     if ($status) {
         $result = $status['file']['savepath'].$status['file']['savename'];
