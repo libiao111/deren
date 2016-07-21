@@ -148,8 +148,8 @@ function uploadvideo()
     $upload->exts       = array('avi','rmvb','rm','asf','divx','mpg','mpeg','mpe','wmv','mp4','mkv','vob','3gp');// 设置附件上传类型
     $upload->maxSize    = '2097152';// 设置附件上传大小
     $upload->hash       = false;//是否生成文件的hash编码 默认为true
-    $upload->rootPath   = './Public/resource/';// 设置附件上传根目录
-    $upload->saveExt    = 'rmvb';// 设置附件上传（子）目录
+    $upload->rootPath   = './Public/video/';// 设置附件上传根目录
+    //$upload->saveExt    = 'rmvb';// 设置附件上传（子）目录
     $upload->saveName   = array('date', 'YmdHis-'.rand(1000,9999));
     $status = $upload->upload();
     if ($status) {

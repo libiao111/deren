@@ -10,13 +10,13 @@ class LoginController extends Controller
     public function index()
     {
     	if(IS_AJAX){
-			$user = I('user_mobi');
+			$user = I('user');
             $pass = I('password');
 			$arr = array(
-				'user_mobi' =>$user,
+				'user' =>$user,
 				'password'	=>md5($pass),
 			);
-			$result = M('users')->where($arr)->field('password', true)->find();
+			$result = M('adminuser')->where($arr)->field('password', true)->find();
 			if($result){
 				$data = array('status' =>1);
 				session('user',$result);
@@ -27,4 +27,10 @@ class LoginController extends Controller
 		} else {
 			$this->error('页面不存在!');die;
 		}
+	public function exit(){
+		session_start();
+        session_unset();
+        session_destroy();
+        $this->redirect('Index/login',3000);
+    }
 }

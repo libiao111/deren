@@ -19,32 +19,36 @@ class CourseController extends Controller
     }
     /*默认显示所有*/
     public function course(){
+        
+        //搜索
+        $type = I('type');
+        $status = I('status');
+        //p($type);
+        //p($status);
+        $where="";
         /*分页*/
         $table = 'course';
         $condition = "";
-        $tiao = 5;
-        $where="";
-       /*调用分页函数返回*/
+        $tiao = 2;
+        /*调用分页函数返回*/
         $data = pageHandle($table,$condition,$tiao);
-        $type = I('type');
-        $status = I('status');
-        
-        if ($type && $status) {
+        /*按类型查询*/
+        if ($type) {
            $where['type'] = $type;
-           $where['status']=$status;
-            
         }
-        p($where);
+        /*按状态查询*/
+        if ($status) {
+            $where['status']=$status;
+        }
         /*查询记录*/
         $result = M('course')->where($where)->limit($data['limit'])->select();
-       
+        //p($result);
         $this->assign('page',$data['pages']['pages']);
-
         $this->assign('course',$result);
         $this->display("index/course_management");
     }
      /*搜索*/
-    public function search()
+    /*public function search()
     {
         if(!IS_AJAX){
             $this->error('页面不存在!');die;
@@ -70,7 +74,7 @@ class CourseController extends Controller
             }
         }
 
-    }
+    }*/
     /*停启用状态*/
     public function status()
     {
@@ -79,8 +83,10 @@ class CourseController extends Controller
         }
         $id = I('id');
         $status = I('status');
-        $arr = array(
+        $where = array(
             'id'=>array('in',$id),
+        );
+        $arr = array(
             'status'=>$status
         );
         $result = M('course')->save($arr);
