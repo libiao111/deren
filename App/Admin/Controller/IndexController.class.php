@@ -7,29 +7,36 @@ use Think\Controller;
 class IndexController extends Controller
 {
 	public function _initialize(){
-		if(IS_AJAX){
-			$user = I('user');
-            $pass = I('password');
-			$arr = array(
-				'user' =>$user,
-				'password'	=>md5($pass),
-			);
-			$result = M('adminuser')->where($arr)->field('password', true)->find();
-			if($result){
-				$data = array('status' =>1);
-				session('user',$result);
-			}else{
-				$data = array('status'=>0);
-			}
-			$this->ajaxReturn($data,'json');
-		} else {
-			$this->display("login"); die; 
-		}
-	 }
-    /*默认显示页*/
+		 if(!session('user')) {
+            if (IS_AJAX) {
+                $user = I('username');
+                $pass = I('password');
+                $arr = array(
+                    'user'=>$user,
+                    'password'=>$pass
+                );
+                $result = M('adminuser')->where($arr)->select();
+                if($result){
+                    $data = array('status'=>1);
+                    session('user', $result);
+                } else {
+                    $data = array('status'=>0);
+                }
+                $this->ajaxReturn($data,'json');
+            } else {
+                $this->display("index/login"); die;  
+            }
+        }
+	}
     public function index()
     {
-    	$this->display('frame');
+		$this->display('Index/frame');
+	}
+	public function tuichu()
+	{
+		session_start();
+        session_unset();
+        session_destroy();
+        $this->redirect('Index/login',3000);
     }
-    
 }
