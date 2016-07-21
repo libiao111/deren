@@ -15,7 +15,7 @@ class UserController extends Controller
         /*查询记录*/
         $result = M('users')->limit($data['limit'])->select();
         $this->assign('page',$data['pages']['pages']);
-        $this->assign('user',$result);
+        $this->assign('users',$result);
         $this->display('index/member_man_reg');
 	}
 	/*用户删除*/

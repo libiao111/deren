@@ -19,7 +19,7 @@ class OrderController extends Controller
         $result = M('ordera')->where($where)->limit($data['limit'])->select();
         $this->assign('ordera',$result);
         $this->assign('page',$data['pages']['pages']);
-		$this->display('bill_management');
+		$this->display('index/bill_management');
 	}
 	/*删除订单*/
 	public function deleteOrder(){

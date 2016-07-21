@@ -21,7 +21,7 @@
     </div>
 
     <section class="widget_wrp">
-        
+
 
         <!-- 表格主体 -->
         <table class="table_default">
@@ -37,18 +37,24 @@
                 <th width="12%">状态</th>
                 <th width="15%">操作</th>
             </tr>
-            <tr>
-                <td>
-                    <input type="checkbox">
-                </td>
-                <td><img src="__AIMG__/4.png" height="60px" class="mt8 mb8"></td>
-                <td>飞翔的荷兰人</td>
-                <td>男</td>
-                <td>12345678912</td>
-                <td>2016-06-23 15:30:23</td>
-                <td>启用</td>
-                <td>详情</td>
-            </tr>
+            <foreach name="users" item="v">
+                <tr>
+                    <td>
+                        <input type="checkbox" id="{$v.id}" value="{$v.id}">
+                    </td>
+                    <td><img src="__UPFILE__/{$v.user_photo}" height="60px" class="mt8 mb8"></td>
+                    <td>{$v.username}</td>
+                    <td>{$v.sex}</td>
+                    <td>{$v.user_mobi}</td>
+                    <td>{$v.logintime}</td>
+                    <td>
+                        <if condition="$v.status eq 0">启用
+                            <else />停用
+                        </if>
+                    </td>
+                    <td>详情</td>
+                </tr>
+            </foreach>
         </table>
 
         <!-- 尾部 -->
@@ -60,14 +66,8 @@
                 <input type="button" class="button btn_middle btn_primary trans pointer output_xls" value="导出excel表格">
                 <input type="button" class="button btn_middle btn_primary trans pointer reset_psd" value="回复初始密码">
             </div>
-            <div class="pagination mr30">
-                <span class="pagination_item pagination_item_on">1</span>
-                <span class="pagination_item">2</span>
-                <span class="pagination_item">3</span>
-                <span class="pagination_item">4</span>
-                <span class="pagination_item">5</span>
-                <span class="pagination_item">6</span>
-                <span class="pagination_item">7</span>
+            <div class="pagination mr30" name ="page">
+               {$page}
             </div>
         </div>
     </section>
@@ -228,10 +228,10 @@
             three_box.style.display = "block";
             three_box.children[0].innerHTML = "您确定删除该课程吗？"
         }
-        
+
         let modal_main_three_cancel = document.querySelector('.modal_main_three').querySelector('div').querySelector('.cancel'),
             modal_main_three_confirm = document.querySelector('.modal_main_three').querySelector('div').querySelector('.confirm');
-        
+
         modal_main_three_cancel.onclick = function () {
             modal.style.display = 'none';
             three_box.style.display = 'none'
