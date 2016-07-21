@@ -27,25 +27,25 @@
         <!-- 头部 -->
         <div class="table_header mt30">
             <!-- 下拉列表组件 -->
-            <form action="{:U('Course/course')}" method="POST" name="frm" class="frm">
+            <form action="{:U('Course/course')}" method="get" name="frm" class="frm" enctype="multipart/form-data">
                 <span class="select_wrap ml30 mt15 dib">
 
                 <span>课程分类：</span>
 
                 <select class="ipt_default btn_large type" name="type">
-                    <option value="0">全部</option>
-                    <option value="1">线下课</option>
-                    <option value="2">音频课</option>
-                    <option value="3">视频课</option>
+                    <option value="0" <if condition="$type eq 0">selected</if>>全部</option>
+                    <option value="1" <if condition="$type eq 1">selected</if>>线下课</option>
+                    <option value="2" <if condition="$type eq 2">selected</if>>音频课</option>
+                    <option value="3" <if condition="$type eq 3">selected</if>>视频课</option>
                 </select>
                 <i class="fa fa-caret-down"></i>
                 </span>
                 <span class="select_wrap ml10 mt15 dib">
                 <span>课程状态：</span>
                 <select class="ipt_default btn_middle aa" name="status">
-                    <option value="0">全部</option>
-                    <option value="1">停用</option>
-                    <option value="2">启用</option>
+                    <option value="0" <if condition="$status eq 0">selected</if>>全部</option>
+                    <option value="1" <if condition="$status eq 1">selected</if>>停用</option>
+                    <option value="2" <if condition="$status eq 2">selected</if>>启用</option>
                 </select>
                 <i class="fa fa-caret-down"></i>
                 </span>
