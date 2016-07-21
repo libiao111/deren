@@ -125,6 +125,10 @@
             </div>
         </div>
     </section>
+    <div class="hint">
+        <div class="hintback"></div>
+    </div>
+    
     <div class="modal">
         <div class="back"></div>
         <div class="modal_main_edit">
@@ -265,89 +269,89 @@
 
 
             //enable operation
-//                let a=[];
-//                $('.check').click(function(){
-//                    this_=$(this);
-//                    if(this_.prop('checked')){
-//                        a.push(this_.attr('id'));
-//                    }
-//                    else{
-//                        let index=this_.attr('id')
-//                        a.pop(this_.attr('id'))
-//                    }
-////                    a.push($('.check:checked').attr('id'));
-//                    return a;
-//                })
+            //                let a=[];
+            //                $('.check').click(function(){
+            //                    this_=$(this);
+            //                    if(this_.prop('checked')){
+            //                        a.push(this_.attr('id'));
+            //                    }
+            //                    else{
+            //                        let index=this_.attr('id')
+            //                        a.pop(this_.attr('id'))
+            //                    }
+            ////                    a.push($('.check:checked').attr('id'));
+            //                    return a;
+            //                })
             $('.enable').click(function () {
                     'use strict';
-                
-                let id=[],
-                    tid = $('td>input[type="checkbox"]:checked');
-                tid.each(function () {
-                    id.push(parseInt($(this).attr('id')));
-                });
-//                    let id = $('.check:checked').attr('id');
+
+                    let id = [],
+                        tid = $('td>input[type="checkbox"]:checked');
+                    tid.each(function () {
+                        id.push(parseInt($(this).attr('id')));
+                    });
+                    //                    let id = $('.check:checked').attr('id');
                     console.log(id);
-                
+
                     $.post('{:U("Admin/Course/enablestatus")}', {
                         id: id
                     }, function (data) {
-                        if(data.status){
-                           
-                        setTimeout(function () {
-                                    window.location.reload();
-                                }, 3000)
-                        
+                        if (data.status) {
+
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 3000)
+
                         }
                     });
                 })
                 //disable operation
-           $('.disable').click(function () {
-                    'use strict';
-                
-                let id=[],
+            $('.disable').click(function () {
+                'use strict';
+
+                let id = [],
                     tid = $('td>input[type="checkbox"]:checked');
                 tid.each(function () {
                     id.push(parseInt($(this).attr('id')));
                 });
-//                    let id = $('.check:checked').attr('id');
-                    console.log(id);
-                
-                    $.post('{:U("Admin/Course/disablestatus")}', {
-                        id: id
-                    }, function (data) {
-                        if(data.status){
-                           
+                //                    let id = $('.check:checked').attr('id');
+                console.log(id);
+
+                $.post('{:U("Admin/Course/disablestatus")}', {
+                    id: id
+                }, function (data) {
+                    if (data.status) {
+
                         setTimeout(function () {
-                                    window.location.reload();
-                                }, 3000)
-                        
-                        }
-                    });
-                })
-           $('.delete').click(function () {
-                    'use strict';
-                
-                let id=[],
+                            window.location.reload();
+                        }, 3000)
+
+                    }
+                });
+            })
+            $('.delete').click(function () {
+                'use strict';
+
+                let id = [],
                     tid = $('td>input[type="checkbox"]:checked');
                 tid.each(function () {
                     id.push(parseInt($(this).attr('id')));
                 });
-//                    let id = $('.check:checked').attr('id');
-                    console.log(id);
-                
-                    $.post('{:U("Admin/Course/delCourse")}', {
-                        id: id
-                    }, function (data) {
-                        if(data.status){
-                           
+                //                    let id = $('.check:checked').attr('id');
+                console.log(id);
+
+                $.post('{:U("Admin/Course/delCourse")}', {
+                    id: id
+                }, function (data) {
+                    if (data.status) {
+
                         setTimeout(function () {
-                                    window.location.reload();
-                                }, 3000)
-                        
-                        }
-                    });
-                })
+                            window.location.reload();
+                        }, 3000)
+
+                    }
+                });
+            })
 
 
 
