@@ -50,18 +50,32 @@
                 <th width="10%">金额</th>
                 <th width="11%">状态</th>
             </tr>
+            <foreach name="ordera" item="v">
             <tr>
                 <td>
-                    <input type="checkbox">
+                    <input type="checkbox" id="{$v.id}" value="{$v.id}">
                 </td>
-                <td><img src="__AIMG__/4.png" height="60px" class="mt8 mb8"><span class="in-span">思维口才50天速成课</span></td>
-                <td>线下课</td>
-                <td>2016-07-12 12:20:30</td>
-                <td>陈奕迅</td>
-                <td>112232132132132</td>
-                <td>500.00元</td>
-                <td>已支付</td>
+                <td><img src="__UPFILE__/{$v.course_photo}" height="60px" class="mt8 mb8"><span class="in-span">{$v.course_num}</span></td>
+                <td>
+                <if condition="$v.type eq 1">下线课
+                            <elseif condition="$v.type eq 2" />音频课
+                            <elseif condition="$v.type eq 3" /> 视频课
+                            <else />全部
+                        </if>
+                </td>
+                <td>{$v.order_time}</td>
+                <td>{$v.ordera_name}</td>
+                <td>{$v.ordera_mobi}</td>
+                <td>{$v.current_price}</td>
+                <td>
+                <if condition="$v.pay_type eq 1">下线课
+                            <elseif condition="$v.pay_type eq 2" />音频课
+                            <elseif condition="$v.pay_type eq 3" /> 视频课
+                            <else />全部
+                        </if>
+                </td>
             </tr>
+            </foreach>
         </table>
 
         <!-- 尾部 -->
@@ -73,14 +87,8 @@
 
             </div>
             <!-- 分页 -->
-            <div class="pagination mr30">
-                <span class="pagination_item pagination_item_on">1</span>
-                <span class="pagination_item">2</span>
-                <span class="pagination_item">3</span>
-                <span class="pagination_item">4</span>
-                <span class="pagination_item">5</span>
-                <span class="pagination_item">6</span>
-                <span class="pagination_item">7</span>
+            <div class="pagination mr30" name="page">
+                {$page}
             </div>
         </div>
     </section>

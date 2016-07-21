@@ -7,15 +7,15 @@ class UserController extends Controller
 	{
 		$where="";
         /*分页*/
-        $table = 'course';
+        $table = 'users';
         $condition = "";
         $tiao = 2;
         /*调用分页函数返回*/
         $data = pageHandle($table,$condition,$tiao);
         /*查询记录*/
-        $result = M('user')->limit($data['limit'])->select();
+        $result = M('users')->limit($data['limit'])->select();
         $this->assign('page',$data['pages']['pages']);
-        $this->assign('user',$result);
+        $this->assign('users',$result);
         $this->display('index/member_man_reg');
 	}
 	/*用户删除*/
@@ -28,7 +28,7 @@ class UserController extends Controller
 		$where = array(
 			'id'=>array('in',$id)
 		);
-		$result = M('user')->where($where)->delete();
+		$result = M('users')->where($where)->delete();
 		if ($result) {
 			$data =array('status'=>1);
 		} else {
