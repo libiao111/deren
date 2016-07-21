@@ -24,7 +24,7 @@ class IndexController extends Controller
                 }
                 $this->ajaxReturn($data,'json');
             } else {
-                $this->display("index/login"); die;  
+                $this->display("Index/login"); die;  
             }
         }
 	}
@@ -36,7 +36,18 @@ class IndexController extends Controller
 	/*修改密码*/
 	public function savepass()
 	{
-
+        $arr = session('user');
+        $where = array(
+            'password'=>I('password'),
+            'id'=>$arr[0]['id']
+        );
+        $result = M(adminuser)->save($where);
+        if($result){
+            $data = array('status'=>1); 
+        } else {
+            $data = array('status'=>0);
+        }
+        $this->ajaxReturn($data,'json');
 	}
 	/*退出登录*/
 	public function tuichu()
