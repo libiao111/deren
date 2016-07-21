@@ -33,7 +33,7 @@
                 <i class="fa fa-power-off vm mr4"></i> 修改密码
             </div>
 
-            <div class="sign_out trans bte">
+            <div class="sign_out trans bte logout">
                 <i class="fa fa-power-off vm mr4"></i> 退出
             </div>
         </div>
@@ -170,30 +170,38 @@
 
     </div>
 
+    <script src="__AJS__/jquery.js"></script>
     <script src="__AJS__/require.js" data-main="__AJS__/main"></script>
     <script>
         'use strict';
         let psdbox = document.querySelector('.modify_psd'),
-            modal=document.querySelector('.modal'),
-            modal_main=document.querySelector('.psd_modal_main_edit'),
-            cancel=document.querySelector('.psdcancel'),
-            save=document.querySelector('.psdsave'),
-            back=document.querySelector('.back');
+            modal = document.querySelector('.modal'),
+            modal_main = document.querySelector('.psd_modal_main_edit'),
+            cancel = document.querySelector('.psdcancel'),
+            save = document.querySelector('.psdsave'),
+            back = document.querySelector('.back');
 
         psdbox.onclick = function () {
-            modal.style.display="block";
-            modal_main.style.display="block";
+            modal.style.display = "block";
+            modal_main.style.display = "block";
         }
-        back.onclick=function(){
-            modal.style.display="none";
+        back.onclick = function () {
+            modal.style.display = "none";
         }
-        cancel.onclick=function(){
-            modal.style.display="none";
+        cancel.onclick = function () {
+            modal.style.display = "none";
         }
-        save.onclick=function(){
-            modal.style.display="none";
+        save.onclick = function () {
+            modal.style.display = "none";
             //to do
         }
+        $(function () {
+            $('.logout').click(function () {
+                $.post('{:U('index/tuichu')}',{},function () {
+                    window.location.reload();
+                });
+            });
+        })
     </script>
 </body>
 

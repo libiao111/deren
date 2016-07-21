@@ -29,7 +29,9 @@
             <!-- 下拉列表组件 -->
             <form action="{:U('Course/course')}" method="POST" name="frm" class="frm">
                 <span class="select_wrap ml30 mt15 dib">
+
                 <span>课程分类：</span>
+
                 <select class="ipt_default btn_large type" name="type">
                     <option value="0">全部</option>
                     <option value="1">线下课</option>
@@ -246,11 +248,15 @@
     <script src="__AJS__/jquery.easing.js"></script>
     <script src="__AJS__/deleconfirm.js"></script>
     <script>
+
+        
+
         $(function () {
             $('.type').change(function () {
                 $('.frm').submit();
             });
             $('.aa').change(function () {
+
                 $('.frm').submit();
             });
 
@@ -269,26 +275,28 @@
             iframe = document.querySelector('iframe');
         //        console.log(iframe)
 
-        add_cour_btn.onclick = function (event) {
+        add_cour_btn.onclick = function(event) {
             'use strict';
             event.preventDefault();
             modal.style.display = 'block';
             modal_add_course.style.display = 'block'
         }
-        modal_add_course_cancel.onclick = function () {
+        modal_add_course_cancel.onclick = function() {
             'use strict';
             modal.style.display = 'none';
             modal_add_course.style.display = 'none'
         }
 
         //modal back operation
-        modal_back.onclick = function () {
+        modal_back.onclick = function() {
             'use strict';
             modal.style.display = 'none';
             modal_add_course.style.display = 'none'
         }
 
+
         modal_add_course_confirm.onclick = function () {
+
             'use strict';
             let select = document.querySelector('#select_course').value;
 
@@ -312,7 +320,9 @@
             //            let edit=new Array();
             edit = document.querySelectorAll('.operation')[i].querySelector('.edit');
             //            $('.opeartion>.edit';)
+
             edit.onclick = function (e) {
+
                     'use strict';
                     e.preventDefault();
                     location.href = "{:U('index/video_cousrse_edit')}"
@@ -330,21 +340,23 @@
             delete_btn = document.querySelector('.operate_btn_box').querySelector('.delete'),
             three_box = document.querySelector('.modal_main_three');
         //enable operation
-        enable_btn.onclick = function () {
+        enable_btn.onclick = function() {
                 'use strict';
                 modal.style.display = "block";
                 three_box.style.display = "block";
                 three_box.children[0].innerHTML = "您确定启用该课程吗？"
             }
             //disable operation
-        disable_btn.onclick = function () {
+        disable_btn.onclick = function() {
                 'use strict';
                 modal.style.display = "block";
                 three_box.style.display = "block";
                 three_box.children[0].innerHTML = "您确定停用该课程吗？"
             }
             //delete operation
+
         delete_btn.onclick = function () {
+
             'use strict';
             modal.style.display = "block";
             three_box.style.display = "block";
@@ -354,12 +366,12 @@
         var modal_main_three_cancel = document.querySelector('.modal_main_three').querySelector('div').querySelector('.cancel'),
             modal_main_three_confirm = document.querySelector('.modal_main_three').querySelector('div').querySelector('.confirm');
 
-        modal_main_three_cancel.onclick = function () {
+        modal_main_three_cancel.onclick = function() {
             'use strict';
             modal.style.display = 'none';
             modal_add_course.style.display = 'none'
         }
-        modal_main_three_confirm.onclick = function () {
+        modal_main_three_confirm.onclick = function() {
             'use strict';
             //to do
         }

@@ -27,7 +27,7 @@ class CourseController extends Controller
         /*分页*/
         $table = 'course';
         $condition = "";
-        $tiao = 2;
+        $tiao = 15;
         /*调用分页函数返回*/
         $data = pageHandle($table,$condition,$tiao);
        /*按类型查询*/
