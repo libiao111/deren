@@ -37,6 +37,6 @@ class IndexController extends Controller
 		session_start();
         session_unset();
         session_destroy();
-        $this->redirect('Index/login',3000);
+        $this->redirect('Index/index',3000);
     }
 }

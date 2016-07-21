@@ -76,12 +76,12 @@
                             b = $('.psd').val();
                         arr['password'] = b;
                         arr['username'] = a;
-                        $.post("{:U('Login/index')}", arr, function (data) {
+                        $.post("{:U('index/index')}", arr, function (data) {
 
                             if (data.status) {
                                 submit.innerHTML = "登录成功，请稍后……";
                                 setTimeout(function () {
-                                    window.location="{:U('Index/index')}"
+                                    window.location.reload();
                                 }, 1000)
                             } else {
                                 submit.innerHTML = "账号或密码不正确";

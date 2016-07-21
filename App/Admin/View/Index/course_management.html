@@ -29,11 +29,9 @@
             <!-- 下拉列表组件 -->
             <form action="{:U('Course/course')}" method="POST" name="frm" class="frm">
                 <span class="select_wrap ml30 mt15 dib">
-<<<<<<< HEAD
-        	    <span>课程分类：</span>
-=======
+
                 <span>课程分类：</span>
->>>>>>> 1a6eca5c69658d30629e1fa572add913ec2499e4
+
                 <select class="ipt_default btn_large type" name="type">
                     <option value="0">全部</option>
                     <option value="1">线下课</option>
@@ -250,19 +248,15 @@
     <script src="__AJS__/jquery.easing.js"></script>
     <script src="__AJS__/deleconfirm.js"></script>
     <script>
-<<<<<<< HEAD
-        $(function() {
-            $('.type').change(function() {
-                $('.frm').submit();
-            });
-            $('.aa').change(function() {
-=======
+
+        
+
         $(function () {
             $('.type').change(function () {
                 $('.frm').submit();
             });
             $('.aa').change(function () {
->>>>>>> 1a6eca5c69658d30629e1fa572add913ec2499e4
+
                 $('.frm').submit();
             });
 
@@ -300,11 +294,9 @@
             modal_add_course.style.display = 'none'
         }
 
-<<<<<<< HEAD
-        modal_add_course_confirm.onclick = function() {
-=======
+
         modal_add_course_confirm.onclick = function () {
->>>>>>> 1a6eca5c69658d30629e1fa572add913ec2499e4
+
             'use strict';
             let select = document.querySelector('#select_course').value;
 
@@ -328,11 +320,9 @@
             //            let edit=new Array();
             edit = document.querySelectorAll('.operation')[i].querySelector('.edit');
             //            $('.opeartion>.edit';)
-<<<<<<< HEAD
-            edit.onclick = function(e) {
-=======
+
             edit.onclick = function (e) {
->>>>>>> 1a6eca5c69658d30629e1fa572add913ec2499e4
+
                     'use strict';
                     e.preventDefault();
                     location.href = "{:U('index/video_cousrse_edit')}"
@@ -364,11 +354,9 @@
                 three_box.children[0].innerHTML = "您确定停用该课程吗？"
             }
             //delete operation
-<<<<<<< HEAD
-        delete_btn.onclick = function() {
-=======
+
         delete_btn.onclick = function () {
->>>>>>> 1a6eca5c69658d30629e1fa572add913ec2499e4
+
             'use strict';
             modal.style.display = "block";
             three_box.style.display = "block";
