@@ -10,11 +10,11 @@ class LoginController extends Controller
     public function index()
     {
     	if(IS_AJAX){
-			$user = I('user');
+            $user = I('username');
             $pass = I('password');
-			$arr = array(
+            $arr = array(
 				'user' =>$user,
-				'password'	=>md5($pass),
+				'password'	=>$pass
 			);
 			$result = M('adminuser')->where($arr)->field('password', true)->find();
 			if($result){
@@ -27,7 +27,8 @@ class LoginController extends Controller
 		} else {
 			$this->error('页面不存在!');die;
 		}
-	public function exit(){
+    }
+    public function tuichu(){
 		session_start();
         session_unset();
         session_destroy();

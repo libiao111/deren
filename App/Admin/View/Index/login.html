@@ -29,6 +29,7 @@
         $(function () {
             function WebKit(datawrap) {
                 this.Login = () => {
+                    "use strict";
                     let target = datawrap.renderAt, //组件插入位置
                         styleType = datawrap.style, //组件样式
                         theme = datawrap.theme, //组件主题
@@ -75,11 +76,11 @@
                             b = $('.psd').val();
                         arr['password'] = b;
                         arr['username'] = a;
-                        $.post("{:U('Index')}", arr, function (data) {
+                        $.post("{:U('Login/index')}", arr, function (data) {
                             if (data.status) {
                                 submit.innerHTML = "登录成功，请稍后……";
                                 setTimeout(function () {
-                                    window.location.reload();
+                                    window.location="{:U('Index/index')}"
                                 }, 1000)
                             } else {
                                 submit.innerHTML = "账号或密码不正确";
