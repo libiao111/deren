@@ -23,8 +23,6 @@ class CourseController extends Controller
         //搜索
         $type = I('type');
         $status = I('status');
-        //p($type);
-        //p($status);
         $where="";
         /*分页*/
         $table = 'course';
@@ -32,14 +30,15 @@ class CourseController extends Controller
         $tiao = 2;
         /*调用分页函数返回*/
         $data = pageHandle($table,$condition,$tiao);
-        /*按类型查询*/
+       /*按类型查询*/
         if ($type) {
-           $where['type'] = $type;
+            $where['type'] = $type;
         }
         /*按状态查询*/
         if ($status) {
             $where['status']=$status;
         }
+
         /*查询记录*/
         $result = M('course')->where($where)->limit($data['limit'])->select();
         //p($result);

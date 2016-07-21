@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="__ACSS__/index.css" />
     <link rel="stylesheet" type="text/css" href="__ACSS__/font-awesome.min.css">
     <style>
+
     </style>
 </head>
 
@@ -26,29 +27,31 @@
         <!-- 头部 -->
         <div class="table_header mt30">
             <!-- 下拉列表组件 -->
-            <span class="select_wrap ml30 mt15 dib">
+            <form action="{:U('Course/course')}" method="POST" name="frm" class="frm">
+                <span class="select_wrap ml30 mt15 dib">
         		<span>课程分类：</span>
-            <select class="ipt_default btn_large type" name="type">
-                <option value ="0">全部</option>
-                <option value="1">线下课</option>
-                <option value="2">音频课</option>
-                <option value="3">视频课</option>
-            </select>
-            <i class="fa fa-caret-down"></i>
-            </span>
-            <span class="select_wrap ml10 mt15 dib">
+                <select class="ipt_default btn_large type" name="type">
+                    <option value="0">全部</option>
+                    <option value="1">线下课</option>
+                    <option value="2">音频课</option>
+                    <option value="3">视频课</option>
+                </select>
+                <i class="fa fa-caret-down"></i>
+                </span>
+                <span class="select_wrap ml10 mt15 dib">
         		<span>课程状态：</span>
-            <select class="ipt_default btn_middle aa" name="status">
-                <option value ="0">全部</option>
-                <option value ="1">停用</option>
-                <option value ="2">启用</option>
-            </select>
-            <i class="fa fa-caret-down"></i>
-            </span>
-            <!-- 按钮 -->
-            <a href="">
-                <input type="button" class="add_course button btn_middle btn_primary r mr30 mt15 pointer" value="添加课程">
-            </a>
+                <select class="ipt_default btn_middle aa" name="status">
+                    <option value="0">全部</option>
+                    <option value="1">停用</option>
+                    <option value="2">启用</option>
+                </select>
+                <i class="fa fa-caret-down"></i>
+                </span>
+                <!-- 按钮 -->
+                <a href="">
+                    <input type="button" class="add_course button btn_middle btn_primary r mr30 mt15 pointer" value="添加课程">
+                </a>
+            </form>
         </div>
 
         <!-- 表格主体 -->
@@ -233,6 +236,17 @@
     <script src="__AJS__/jquery.easing.js"></script>
     <script src="__AJS__/deleconfirm.js"></script>
     <script>
+<<<<<<< HEAD
+        $(function () {
+            $('.type').change(function () {
+               $('.frm').submit();
+            });
+        });
+
+        'use strict';
+        let add_cour_btn = document.querySelector('.add_course'),
+            modal_add_course = document.querySelector('.modal_add_course'),
+=======
         $(function(){
             $('.type').change(function(){
         
@@ -248,6 +262,7 @@
         
         var add_cour_btn = document.querySelector('.add_course');
         var modal_add_course = document.querySelector('.modal_add_course'),
+>>>>>>> 50b87051e852ab20e4492778578887c6f1254e18
             modal_add_course_cancel = document.querySelector('.modal_add_course').querySelector('.bottom').querySelector('.cancel'),
             modal_add_course_confirm = document.querySelector('.modal_add_course').querySelector('.bottom').querySelector('.confirm'),
             modal = document.querySelector('.modal'),
@@ -276,32 +291,51 @@
         }
 
         modal_add_course_confirm.onclick = function () {
+<<<<<<< HEAD
+            let select = document.querySelector('#select_course').value;
+
+            if (select == "1") {
+=======
             'use strict';
             let select=document.querySelector('#select_course').value;
         
             if(select=="1"){
+>>>>>>> 50b87051e852ab20e4492778578887c6f1254e18
                 location.href = "{:U('index/offline_cousrse_edit')}"
-            }
-            else if(select=="2"){
+            } else if (select == "2") {
                 location.href = "{:U('index/audio_cousrse_edit')}"
-            }
-            else if(select=='3'){
+            } else if (select == '3') {
                 location.href = "{:U('index/video_cousrse_edit')}"
             }
-//            location.href = "{:U('cousrse_edit')}"
+            //            location.href = "{:U('cousrse_edit')}"
         }
 
 
         //table中编辑按钮操作
+<<<<<<< HEAD
+        let num = document.querySelectorAll('.operation');
+        let edit = [];
+        for (let i = 0; i < num.length; i++) {
+=======
         var num = document.querySelectorAll('.operation');
         var edit=[];
         for (var i = 0; i < num.length; i++) {
+>>>>>>> 50b87051e852ab20e4492778578887c6f1254e18
             //            let edit[i] = document.querySelectorAll('.operation')[i].querySelector('.edit');
             //            console.log(ed);
-//            let edit=new Array();
-            edit=document.querySelectorAll('.operation')[i].querySelector('.edit');
-//            $('.opeartion>.edit';)
+            //            let edit=new Array();
+            edit = document.querySelectorAll('.operation')[i].querySelector('.edit');
+            //            $('.opeartion>.edit';)
             edit.onclick = function (e) {
+<<<<<<< HEAD
+                    e.preventDefault();
+                    location.href = "{:U('index/video_cousrse_edit')}"
+                }
+                //            document.querySelectorAll('.operation')[i].querySelector('.edit').onclick = function (e) {
+                //                e.preventDefault();
+                //                location.href = "{:U('cousrse_edit')}"
+                //            }
+=======
                'use strict';
                 e.preventDefault();
                 location.href = "{:U('index/video_cousrse_edit')}"
@@ -310,6 +344,7 @@
 //                e.preventDefault();
 //                location.href = "{:U('cousrse_edit')}"
 //            }
+>>>>>>> 50b87051e852ab20e4492778578887c6f1254e18
         }
 
         //table底部三个按钮操作
