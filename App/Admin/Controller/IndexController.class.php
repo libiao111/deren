@@ -28,15 +28,22 @@ class IndexController extends Controller
             }
         }
 	}
+	/*默认显示页面*/
     public function index()
     {
 		$this->display('Index/frame');
 	}
+	/*修改密码*/
+	public function savepass()
+	{
+
+	}
+	/*退出登录*/
 	public function tuichu()
 	{
 		session_start();
         session_unset();
         session_destroy();
-        $this->redirect('Index/login',3000);
+        $this->redirect('Index/index',3000);
     }
 }
