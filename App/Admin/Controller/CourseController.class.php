@@ -29,13 +29,14 @@ class CourseController extends Controller
         $data = pageHandle($table,$condition,$tiao);
         $type = I('type');
         $status = I('status');
-        
+        p($type);
+        p($status);
         if ($type && $status) {
            $where['type'] = $type;
            $where['status']=$status;
             
         }
-        p($where);
+        //p($where);
         /*查询记录*/
         $result = M('course')->where($where)->limit($data['limit'])->select();
        
