@@ -80,7 +80,7 @@
                     <td><img src="__UPFILE__/{$v.course_photo}" height="60px" class="mt8 mb8"></td>
                     <td>{$v.course_name}</td>
                     <td class="kc_type">
-                        <if condition="$v.type eq 1">下线课
+                        <if condition="$v.type eq 1">线下课
                             <elseif condition="$v.type eq 2" />音频课
                             <elseif condition="$v.type eq 3" /> 视频课
                             <else />
@@ -265,32 +265,89 @@
 
 
             //enable operation
+//                let a=[];
+//                $('.check').click(function(){
+//                    this_=$(this);
+//                    if(this_.prop('checked')){
+//                        a.push(this_.attr('id'));
+//                    }
+//                    else{
+//                        let index=this_.attr('id')
+//                        a.pop(this_.attr('id'))
+//                    }
+////                    a.push($('.check:checked').attr('id'));
+//                    return a;
+//                })
             $('.enable').click(function () {
                     'use strict';
-                    let id = [$('.check:checked').attr('id')];
+                
+                let id=[],
+                    tid = $('td>input[type="checkbox"]:checked');
+                tid.each(function () {
+                    id.push(parseInt($(this).attr('id')));
+                });
+//                    let id = $('.check:checked').attr('id');
                     console.log(id);
-                    $.post('{:U("Admin/Course/status")}', {
+                
+                    $.post('{:U("Admin/Course/enablestatus")}', {
                         id: id
                     }, function (data) {
-                        if (data.status == 1) {
-                            alert('1')
-                        } else {
-                            alert('2');
+                        if(data.status){
+                           
+                        setTimeout(function () {
+                                    window.location.reload();
+                                }, 3000)
+                        
                         }
                     });
                 })
                 //disable operation
-            disable_btn.onclick = function () {
+           $('.disable').click(function () {
                     'use strict';
-
-                }
-                //delete operation
-
-            delete_btn.onclick = function () {
-
-                'use strict';
-
-            }
+                
+                let id=[],
+                    tid = $('td>input[type="checkbox"]:checked');
+                tid.each(function () {
+                    id.push(parseInt($(this).attr('id')));
+                });
+//                    let id = $('.check:checked').attr('id');
+                    console.log(id);
+                
+                    $.post('{:U("Admin/Course/disablestatus")}', {
+                        id: id
+                    }, function (data) {
+                        if(data.status){
+                           
+                        setTimeout(function () {
+                                    window.location.reload();
+                                }, 3000)
+                        
+                        }
+                    });
+                })
+           $('.delete').click(function () {
+                    'use strict';
+                
+                let id=[],
+                    tid = $('td>input[type="checkbox"]:checked');
+                tid.each(function () {
+                    id.push(parseInt($(this).attr('id')));
+                });
+//                    let id = $('.check:checked').attr('id');
+                    console.log(id);
+                
+                    $.post('{:U("Admin/Course/delCourse")}', {
+                        id: id
+                    }, function (data) {
+                        if(data.status){
+                           
+                        setTimeout(function () {
+                                    window.location.reload();
+                                }, 3000)
+                        
+                        }
+                    });
+                })
 
 
 
