@@ -7,7 +7,7 @@ use Think\Controller;
 class IndexController extends Controller
 {
 
-    public function _initialize() {
+    /*public function _initialize() {
         $user = session('openid');
         if (count($user) == 0) {
             if (getOpenID()['status'] == 0) {
@@ -16,7 +16,7 @@ class IndexController extends Controller
         }
         $this->login = session('user') ? 1: 0;
         $this->user_content = session('user');
-    }
+    }*/
 
     /*查询所有课程*/
     public function index()
@@ -105,7 +105,6 @@ class IndexController extends Controller
             }
             $result[$k]=$kc;
         }
-
         $this->assign('course',$result);
         $this->display();
     }
@@ -119,7 +118,7 @@ class IndexController extends Controller
     		'id'=>$id
 		);
         $arr1 = array(
-            'bigpho','class'
+            'class'
         );
         $arr2 = array(
             'course_id'=>$id,
@@ -142,7 +141,7 @@ class IndexController extends Controller
             'id'=>$id
         );
         $arr1 = array(
-            'bigpho','class'
+            'class'
         );
         $arr2 = array(
             'course_id'=>$id,
@@ -167,12 +166,17 @@ class IndexController extends Controller
         $arr1 = array(
             'bigpho','class'
         );
+        $arr3 = array(
+            'bigpho'
+        );
         $arr2 = array(
             'course_id'=>$id,
             'users_id'=>$users_id
         );
-        /*关联查询*/
+        /*关联查询课时的id
         $result = D("course")->relation($arr1)->where($arr)->find();
+
+        $result = D("class")->relation($arr3)->where($arr)->find();
         $bills = M('ordera')->where($arr2)->find();
         $result['status'] = $bills['status'] ? 1: 0;
         $this->assign('course',$result);

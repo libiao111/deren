@@ -30,8 +30,9 @@ class IndexController extends Controller
 	}
 	/*默认显示页面*/
     public function index()
-    {
-		$this->display('Index/frame');
+    {   $arr = session('user');
+        $this->user=$arr[0]['user'];
+        $this->display('Index/frame');
 	}
 	/*修改密码*/
 	public function savepass()
