@@ -76,34 +76,39 @@ class CourseController extends Controller
 
     }*/
     /*启用状态*/
-    public function status()
+    public function enablestatus()
     {
         if(!IS_AJAX){
             $this->error('页面不存在!');die;
         }
         $id = I('id');
-        $status = I('status');
         $where = array(
             'id'=>array('in',$id),
         );
         $arr = array(
-            'status'=>$status
+            'status'=>2
         );
-        $result = M('course')->save($arr);
+        $result = M('course')->where($where)->save($arr);
+         /*反馈数据*/
+        if ($result) {
+            $data = array('status'=>1); 
+        } else {
+            $data = array('status'=>0);
+        }
+        $this->ajaxReturn($data,'json');
     }
     /*停用状态*/
-    public function status()
+    public function disablestatus()
     {
         if(!IS_AJAX){
             $this->error('页面不存在!');die;
         }
         $id = I('id');
-        $status = 2;
         $where = array(
             'id'=>array('in',$id)
         );
         $arr = array(
-            'status'=>$status
+            'status'=>1
         );
         $result = M('course')->where($where)->save($arr);
          /*反馈数据*/
