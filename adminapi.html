@@ -70,7 +70,7 @@
         <table>
             <tr title="接口路径为相对路径(可根据不同的文件目录调整)，此为同级目录下路径">
                 <td>接口路径</td>
-                <td>var url = "./App/index.php?url=Admin/Login/index"</td>
+                <td>var url = "./App/index.php?url=Admin/index/index"</td>
             </tr>
                       <tr>
                 <td>提交数据</td>
@@ -118,7 +118,7 @@ data: {
         <table>
             <tr title="接口路径为相对路径(可根据不同的文件目录调整)，此为同级目录下路径">
                 <td>接口路径</td>
-                <td>var url = "./App/index.php?url=Admin/Login/exit"</td>
+                <td>var url = "./App/index.php?url=Admin/Index/tuichu"</td>
             </tr>
         </table>
 <!-- //////////////////////////////////////////  接口结束  ///////////////////////////////////// -->
@@ -127,7 +127,7 @@ data: {
         <table>
             <tr title="接口路径为相对路径(可根据不同的文件目录调整)，此为同级目录下路径">
                 <td>接口路径</td>
-                <td>var url = "./App/index.php?url=Admin/"</td>
+                <td>var url = "./App/index.php?url=Admin/Course/course"</td>
             </tr>
             <tr>
                 <td>反馈数据</td>
@@ -395,11 +395,11 @@ data: {
         </table>
 <!-- //////////////////////////////////////////  接口结束  ///////////////////////////////////// -->
 <!-- //////////////////////////////////////////  接口开始  ///////////////////////////////////// -->
-        <h3>搜索</h3>
+        <h3>课程搜索</h3>
         <table>
             <tr title="接口路径为相对路径(可根据不同的文件目录调整)，此为同级目录下路径">
                 <td>接口路径</td>
-                <td>var url = "./App/index.php?url=Admin/Course/search"</td>
+                <td>var url = "./App/index.php?url=Admin/Course/course"</td>
             </tr>
             <tr>
                 <td>提交数据</td>
@@ -704,7 +704,7 @@ data: {
         </table>
 <!-- //////////////////////////////////////////  接口结束  ///////////////////////////////////// -->
 <!-- //////////////////////////////////////////  接口开始  ///////////////////////////////////// -->
-        <h3>停用启用</h3>
+        <h3>课程停用、启用</h3>
         <table>
             <tr title="接口路径为相对路径(可根据不同的文件目录调整)，此为同级目录下路径">
                 <td>接口路径</td>
@@ -751,11 +751,420 @@ data: {
             </tr>
         </table>
 <!-- //////////////////////////////////////////  接口结束  ///////////////////////////////////// -->
+<!-- //////////////////////////////////////////  接口开始  ///////////////////////////////////// -->
+        <h3>用户列表</h3>
+        <table>
+            <tr title="接口路径为相对路径(可根据不同的文件目录调整)，此为同级目录下路径">
+                <td>接口路径</td>
+                <td>var url = "./App/index.php?url=Admin/User/index"</td>
+            </tr>
+            <tr>
+                <td>反馈数据</td>
+                <td>
+<xmp>
+$result = array(
+    0=>array(
+        'id'=>value('用户id'),
+        'password'=>value(用户密码),
+        'username'=>(用户名称),
+        'user_mobi'=>(用户手机),
+        'logintime'=>(用户注册时间),
+        'sex'=>(用户性别),
+        'user_photo'=>(用户照片),
+        'status'=>value(用户状态),
+    ),
+    ...
+);
 
+分页:
+    name = "page" $data['pages'] 
+</xmp>
+                </td>
+            </tr>
+        </table>
+<!-- //////////////////////////////////////////  接口结束  ///////////////////////////////////// -->
+<!-- //////////////////////////////////////////  接口开始  ///////////////////////////////////// -->
+        <h3>用户删除</h3>
+        <table>
+            <tr title="接口路径为相对路径(可根据不同的文件目录调整)，此为同级目录下路径">
+                <td>接口路径</td>
+                <td>var url = "./App/index.php?url=Admin/User/deleteUser"</td>
+            </tr>
+            <tr>
+                <td>提交数据</td>
+                <td>
+                    <xmp>
+                    {
+                        $id =array(
+                            1,2,3,....
+                        );
+                    }
+                    </xmp>
+                </td>
+            </tr>
+            <tr>
+                <td>提交方式</td>
+                <td>
+<xmp>
+$.post(url, {} ,function (arr) {
+    // arr 为反馈数据(可自定义)
+    // console.log(arr) 在控制台输出(打印)结果
+    // F12 开发者模式 Network 可见
+    console.log(arr);
+});
+</xmp>
+                </td>
+            </tr>
+            <tr>
+                <td>反馈数据</td>
+                <td>
+<xmp>
 
+result: true|false,
+data: {
+    status =>1,成功操作
+    'or'
+    status =>0,失败操作
+}
+</xmp>
+           
+                </td>
+            </tr>
+        </table>
+<!-- //////////////////////////////////////////  接口结束  ///////////////////////////////////// -->
+<!-- //////////////////////////////////////////  接口开始  ///////////////////////////////////// -->
+        <h3>用户停用</h3>
+        <table>
+            <tr title="接口路径为相对路径(可根据不同的文件目录调整)，此为同级目录下路径">
+                <td>接口路径</td>
+                <td>var url = "./App/index.php?url=Admin/User/statusStop"</td>
+            </tr>
+            <tr>
+                <td>提交数据</td>
+                <td>
+                    <xmp>
+                    {
+                        $id =array(
+                            1,2,3,....
+                        );
+                    }
+                    </xmp>
+                </td>
+            </tr>
+            <tr>
+                <td>提交方式</td>
+                <td>
+<xmp>
+$.post(url, {} ,function (arr) {
+    // arr 为反馈数据(可自定义)
+    // console.log(arr) 在控制台输出(打印)结果
+    // F12 开发者模式 Network 可见
+    console.log(arr);
+});
+</xmp>
+                </td>
+            </tr>
+            <tr>
+                <td>反馈数据</td>
+                <td>
+<xmp>
 
+result: true|false,
+data: {
+    status =>1,成功操作
+    'or'
+    status =>0,失败操作
+}
+</xmp>
+           
+                </td>
+            </tr>
+        </table>
+<!-- //////////////////////////////////////////  接口结束  ///////////////////////////////////// -->
+<!-- //////////////////////////////////////////  接口开始  ///////////////////////////////////// -->
+        <h3>用户启用</h3>
+        <table>
+            <tr title="接口路径为相对路径(可根据不同的文件目录调整)，此为同级目录下路径">
+                <td>接口路径</td>
+                <td>var url = "./App/index.php?url=Admin/User/statusUsing"</td>
+            </tr>
+            <tr>
+                <td>提交数据</td>
+                <td>
+                    <xmp>
+                    {
+                        $id =array(
+                            1,2,3,....
+                        );
+                    }
+                    </xmp>
+                </td>
+            </tr>
+            <tr>
+                <td>提交方式</td>
+                <td>
+<xmp>
+$.post(url, {} ,function (arr) {
+    // arr 为反馈数据(可自定义)
+    // console.log(arr) 在控制台输出(打印)结果
+    // F12 开发者模式 Network 可见
+    console.log(arr);
+});
+</xmp>
+                </td>
+            </tr>
+            <tr>
+                <td>反馈数据</td>
+                <td>
+<xmp>
 
+result: true|false,
+data: {
+    status =>1,成功操作
+    'or'
+    status =>0,失败操作
+}
+</xmp>
+           
+                </td>
+            </tr>
+        </table>
+<!-- //////////////////////////////////////////  接口结束  ///////////////////////////////////// -->
+<!-- //////////////////////////////////////////  接口开始  ///////////////////////////////////// -->
+        <h3>回复初始密码</h3>
+        <table>
+            <tr title="接口路径为相对路径(可根据不同的文件目录调整)，此为同级目录下路径">
+                <td>接口路径</td>
+                <td>var url = "./App/index.php?url=Admin/User/rpassword"</td>
+            </tr>
+            <tr>
+                <td>提交数据</td>
+                <td>
+                    <xmp>
+                    {
+                        $id =array(
+                            1,2,3,....
+                        );
+                    }
+                    </xmp>
+                </td>
+            </tr>
+            <tr>
+                <td>提交方式</td>
+                <td>
+<xmp>
+$.post(url, {} ,function (arr) {
+    // arr 为反馈数据(可自定义)
+    // console.log(arr) 在控制台输出(打印)结果
+    // F12 开发者模式 Network 可见
+    console.log(arr);
+});
+</xmp>
+                </td>
+            </tr>
+            <tr>
+                <td>反馈数据</td>
+                <td>
+<xmp>
 
+result: true|false,
+data: {
+    status =>1,成功操作
+    'or'
+    status =>0,失败操作
+}
+</xmp>
+           
+                </td>
+            </tr>
+        </table>
+<!-- //////////////////////////////////////////  接口结束  ///////////////////////////////////// -->
+<!-- //////////////////////////////////////////  接口开始  ///////////////////////////////////// -->
+        <h3>订单列表</h3>
+        <table>
+            <tr title="接口路径为相对路径(可根据不同的文件目录调整)，此为同级目录下路径">
+                <td>接口路径</td>
+                <td>var url = "./App/index.php?url=Admin/Order/index"</td>
+            </tr>
+            <tr>
+                <td>反馈数据</td>
+                <td>
+<xmp>
+$result = Array
+(
+    [0] => Array
+        (
+            [id] => value(订单id)
+            [ordera_name] => (购买人)
+            [ordera_mobi] => value(购买人手机)
+            [users_id] => value(用户id)
+            [course_id] => value(课程id)
+            [order_time] => value(下单时间)
+            [status] => value(订单状态)
+            [ordera_num] => value(订单号)
+            [pay_type] => value(支付类型)
+            [course_photo] => value(课程图像)
+            [type] => value(课程类型)
+            [course_name] => value(课程名)
+            [current_price] => value(订单金额)
+        )
+    ...
+);
+
+分页:
+    name = "page" $data['pages'] 
+</xmp>
+                </td>
+            </tr>
+        </table>
+<!-- //////////////////////////////////////////  接口结束  ///////////////////////////////////// -->
+<!-- //////////////////////////////////////////  接口开始  ///////////////////////////////////// -->
+        <h3>删除订单</h3>
+        <table>
+            <tr title="接口路径为相对路径(可根据不同的文件目录调整)，此为同级目录下路径">
+                <td>接口路径</td>
+                <td>var url = "./App/index.php?url=Admin/User/deleteOrder"</td>
+            </tr>
+            <tr>
+                <td>提交数据</td>
+                <td>
+                    <xmp>
+                    {
+                        $id =array(
+                            1,2,3,....
+                        );
+                    }
+                    </xmp>
+                </td>
+            </tr>
+            <tr>
+                <td>提交方式</td>
+                <td>
+<xmp>
+$.post(url, {} ,function (arr) {
+    // arr 为反馈数据(可自定义)
+    // console.log(arr) 在控制台输出(打印)结果
+    // F12 开发者模式 Network 可见
+    console.log(arr);
+});
+</xmp>
+                </td>
+            </tr>
+            <tr>
+                <td>反馈数据</td>
+                <td>
+<xmp>
+
+result: true|false,
+data: {
+    status =>1,成功操作
+    'or'
+    status =>0,失败操作
+}
+</xmp>
+           
+                </td>
+            </tr>
+        </table>
+<!-- //////////////////////////////////////////  接口结束  ///////////////////////////////////// -->
+<!-- //////////////////////////////////////////  接口开始  ///////////////////////////////////// -->
+        <h3>删除订单</h3>
+        <table>
+            <tr title="接口路径为相对路径(可根据不同的文件目录调整)，此为同级目录下路径">
+                <td>接口路径</td>
+                <td>var url = "./App/index.php?url=Admin/User/rebate"</td>
+            </tr>
+            <tr>
+                <td>提交数据</td>
+                <td>
+                    <xmp>
+                    {
+                        $id =array(
+                            1,2,3,....
+                        );
+                    }
+                    </xmp>
+                </td>
+            </tr>
+            <tr>
+                <td>提交方式</td>
+                <td>
+<xmp>
+$.post(url, {} ,function (arr) {
+    // arr 为反馈数据(可自定义)
+    // console.log(arr) 在控制台输出(打印)结果
+    // F12 开发者模式 Network 可见
+    console.log(arr);
+});
+</xmp>
+                </td>
+            </tr>
+            <tr>
+                <td>反馈数据</td>
+                <td>
+<xmp>
+
+result: true|false,
+data: {
+    status =>1,成功操作
+    'or'
+    status =>0,失败操作
+}
+</xmp>
+           
+                </td>
+            </tr>
+        </table>
+<!-- //////////////////////////////////////////  接口结束  ///////////////////////////////////// -->
+<!-- //////////////////////////////////////////  接口开始  ///////////////////////////////////// -->
+        <h3>退款</h3>
+        <table>
+            <tr title="接口路径为相对路径(可根据不同的文件目录调整)，此为同级目录下路径">
+                <td>接口路径</td>
+                <td>var url = "./App/index.php?url=Admin/User/rebate"</td>
+            </tr>
+            <tr>
+                <td>提交数据</td>
+                <td>
+                    <xmp>
+                    {
+                        $id =array(
+                            1,2,3,....
+                        );
+                    }
+                    </xmp>
+                </td>
+            </tr>
+            <tr>
+                <td>提交方式</td>
+                <td>
+<xmp>
+$.post(url, {} ,function (arr) {
+    // arr 为反馈数据(可自定义)
+    // console.log(arr) 在控制台输出(打印)结果
+    // F12 开发者模式 Network 可见
+    console.log(arr);
+});
+</xmp>
+                </td>
+            </tr>
+            <tr>
+                <td>反馈数据</td>
+                <td>
+<xmp>
+
+result: true|false,
+data: {
+    status =>1,成功操作
+    'or'
+    status =>0,失败操作
+}
+</xmp>
+           
+                </td>
+            </tr>
+        </table>
+<!-- //////////////////////////////////////////  接口结束  ///////////////////////////////////// -->
 </div>
     <br><br><br><br>
     <script type="text/javascript">

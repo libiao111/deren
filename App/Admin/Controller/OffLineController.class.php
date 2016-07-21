@@ -63,7 +63,6 @@ class OffLineController extends Controller
     }
     public function uploa(){
         $aa = uploadvideo();
-        p($aa);
     }
     /*public function uplo(){
     	//$file = $_POST['b'];

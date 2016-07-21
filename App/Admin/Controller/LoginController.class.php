@@ -6,6 +6,7 @@ use Think\Controller;
 */
 class LoginController extends Controller
 {
+<<<<<<< HEAD
     
     public function index()
     {
@@ -34,4 +35,8 @@ class LoginController extends Controller
         session_destroy();
         $this->redirect('Index/login',3000);
     }
+=======
+	
+	
+>>>>>>> 1a6eca5c69658d30629e1fa572add913ec2499e4
 }
