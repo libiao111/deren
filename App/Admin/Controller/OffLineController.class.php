@@ -59,10 +59,12 @@ class OffLineController extends Controller
         /*生成缩略图*/
         $course_photo = photo_cut($offline_url, 50);
         session('course_photo',$course_photo);
+        $this->course_photo = $course_photo;
 
     }
     public function uploa(){
-        $aa = uploadvideo();
+        $video_url = uploadvideo();
+        $this->video_url=$video_url;
     }
     /*public function uplo(){
     	//$file = $_POST['b'];

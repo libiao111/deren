@@ -296,12 +296,11 @@
                     $.post('{:U("Admin/Course/enablestatus")}', {
                         id: id
                     }, function (data) {
-                        if (data.status) {
-
-                            setTimeout(function () {
-                                window.location.reload();
-                            }, 3000)
-
+                        if(data.status){
+                           
+                        setTimeout(function () {
+                                    window.location.reload();
+                                }, 1000)
                         }
                     });
                 })
@@ -323,16 +322,16 @@
                     if (data.status) {
 
                         setTimeout(function () {
-                            window.location.reload();
-                        }, 3000)
-
-                    }
-                });
-            })
-            $('.delete').click(function () {
-                'use strict';
-
-                let id = [],
+                                    window.location.reload();
+                                }, 1000)
+                        
+                        }
+                    });
+                })
+           $('.delete').click(function () {
+                    'use strict';
+                
+                let id=[],
                     tid = $('td>input[type="checkbox"]:checked');
                 tid.each(function () {
                     id.push(parseInt($(this).attr('id')));
@@ -346,16 +345,12 @@
                     if (data.status) {
 
                         setTimeout(function () {
-                            window.location.reload();
-                        }, 3000)
-
-                    }
-                });
-            })
-
-
-
-
+                                    window.location.reload();
+                                }, 1000)
+                        
+                        }
+                    });
+                })
         });
 
         var add_cour_btn = document.querySelector('.add_course');
