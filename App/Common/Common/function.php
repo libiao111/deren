@@ -144,9 +144,9 @@ function uploadHandle($width, $height = null)
 function uploadvideo()
 {
     $upload = new \Think\Upload();
-    $upload->mimes      = array('image/rmvb','image/mp4','image/3gp');//允许上传的文件类型
-    $upload->exts       = array('avi','rmvb','rm','asf','divx','mpg','mpeg','mpe','wmv','mp4','mkv','vob','3gp');// 设置附件上传类型
-    $upload->maxSize    = '2097152';// 设置附件上传大小
+    $upload->mimes      = array('video/rmvb','video/mp4','video/3gp','audio/mp3');//允许上传的文件类型
+    $upload->exts       = array('avi','rmvb','rm','asf','divx','mpg','mpeg','mpe','wmv','mp4','mkv','vob','3gp','mp3','wma','wav','ogg');// 设置附件上传类型
+    $upload->maxSize    = '2097152000';// 设置附件上传大小
     $upload->hash       = false;//是否生成文件的hash编码 默认为true
     $upload->rootPath   = './Public/video/';// 设置附件上传根目录
     //$upload->saveExt    = 'rmvb';// 设置附件上传（子）目录
