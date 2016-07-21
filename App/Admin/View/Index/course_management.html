@@ -75,7 +75,7 @@
             <foreach name="course" item="v">
                 <tr>
                     <td width="6%">
-                        <input type="checkbox" id="{$v.id}" value="{$v.id}">
+                        <input class="check" type="checkbox" id="{$v.id}" value="{$v.id}">
                     </td>
                     <td><img src="__UPFILE__/{$v.course_photo}" height="60px" class="mt8 mb8"></td>
                     <td>{$v.course_name}</td>
@@ -83,7 +83,7 @@
                         <if condition="$v.type eq 1">下线课
                             <elseif condition="$v.type eq 2" />音频课
                             <elseif condition="$v.type eq 3" /> 视频课
-                            <else />全部
+                            <else />
                         </if>
                     </td>
                     <td>{$v.class_num}</td>
@@ -91,8 +91,9 @@
                     <td>{$v.addtime}</td>
                     <td>{$v.classtime}</td>
                     <td>
-                        <if condition="$v.status eq 0">启用
-                            <else />停用
+                        <if condition="$v.status eq 2">启用
+                            <elseif condition="$v.status eq 1" />停用
+                            <else/>
                         </if>
                     </td>
                     <td class="operation">
@@ -248,9 +249,6 @@
     <script src="__AJS__/jquery.easing.js"></script>
     <script src="__AJS__/deleconfirm.js"></script>
     <script>
-
-        
-
         $(function () {
             $('.type').change(function () {
                 $('.frm').submit();
@@ -263,6 +261,40 @@
             if ($('kc_type') == "1") {
                 $('kc_type').text('线下课')
             }
+
+
+
+            //enable operation
+            $('.enable').click(function () {
+                    'use strict';
+                    let id = [$('.check:checked').attr('id')];
+                    console.log(id);
+                    $.post('{:U("Admin/Course/status")}', {
+                        id: id
+                    }, function (data) {
+                        if (data.status == 1) {
+                            alert('1')
+                        } else {
+                            alert('2');
+                        }
+                    });
+                })
+                //disable operation
+            disable_btn.onclick = function () {
+                    'use strict';
+
+                }
+                //delete operation
+
+            delete_btn.onclick = function () {
+
+                'use strict';
+
+            }
+
+
+
+
         });
 
         var add_cour_btn = document.querySelector('.add_course');
@@ -275,20 +307,20 @@
             iframe = document.querySelector('iframe');
         //        console.log(iframe)
 
-        add_cour_btn.onclick = function(event) {
+        add_cour_btn.onclick = function (event) {
             'use strict';
             event.preventDefault();
             modal.style.display = 'block';
             modal_add_course.style.display = 'block'
         }
-        modal_add_course_cancel.onclick = function() {
+        modal_add_course_cancel.onclick = function () {
             'use strict';
             modal.style.display = 'none';
             modal_add_course.style.display = 'none'
         }
 
         //modal back operation
-        modal_back.onclick = function() {
+        modal_back.onclick = function () {
             'use strict';
             modal.style.display = 'none';
             modal_add_course.style.display = 'none'
@@ -339,39 +371,46 @@
             disable_btn = document.querySelector('.operate_btn_box').querySelector('.disable'),
             delete_btn = document.querySelector('.operate_btn_box').querySelector('.delete'),
             three_box = document.querySelector('.modal_main_three');
-        //enable operation
-        enable_btn.onclick = function() {
-                'use strict';
-                modal.style.display = "block";
-                three_box.style.display = "block";
-                three_box.children[0].innerHTML = "您确定启用该课程吗？"
-            }
-            //disable operation
-        disable_btn.onclick = function() {
-                'use strict';
-                modal.style.display = "block";
-                three_box.style.display = "block";
-                three_box.children[0].innerHTML = "您确定停用该课程吗？"
-            }
-            //delete operation
 
-        delete_btn.onclick = function () {
 
-            'use strict';
-            modal.style.display = "block";
-            three_box.style.display = "block";
-            three_box.children[0].innerHTML = "您确定删除该课程吗？"
-        }
+
+
+        //        
+        //        //enable operation
+        //        enable_btn.onclick = function() {
+        //                'use strict';
+        //                modal.style.display = "block";
+        //                three_box.style.display = "block";
+        //                three_box.children[0].innerHTML = "您确定启用该课程吗？"
+        //            }
+        //            //disable operation
+        //        disable_btn.onclick = function() {
+        //                'use strict';
+        //                modal.style.display = "block";
+        //                three_box.style.display = "block";
+        //                three_box.children[0].innerHTML = "您确定停用该课程吗？"
+        //            }
+        //            //delete operation
+        //
+        //        delete_btn.onclick = function () {
+        //
+        //            'use strict';
+        //            modal.style.display = "block";
+        //            three_box.style.display = "block";
+        //            three_box.children[0].innerHTML = "您确定删除该课程吗？"
+        //        }
+
+
 
         var modal_main_three_cancel = document.querySelector('.modal_main_three').querySelector('div').querySelector('.cancel'),
             modal_main_three_confirm = document.querySelector('.modal_main_three').querySelector('div').querySelector('.confirm');
 
-        modal_main_three_cancel.onclick = function() {
+        modal_main_three_cancel.onclick = function () {
             'use strict';
             modal.style.display = 'none';
             modal_add_course.style.display = 'none'
         }
-        modal_main_three_confirm.onclick = function() {
+        modal_main_three_confirm.onclick = function () {
             'use strict';
             //to do
         }
