@@ -335,12 +335,6 @@
             })
             $('.delete').click(function () {
                 'use strict';
-                $('.hint').show();
-                $('.hintmain').show();
-                $('.hintmain>p').text('操作成功!');
-                setTimeout(function () {
-                    $('.hint').hide();
-                }, 1000);
                 let id = [],
                     tid = $('td>input[type="checkbox"]:checked');
                 tid.each(function () {
@@ -351,9 +345,13 @@
                     id:id
                 }, function (data) {
                     if (data.status) {
-
+                        $('.hint').show();
+                        $('.hintmain').show();
+                        $('.hintmain>p').text('操作成功!');
                         setTimeout(function () {
-                            $('.hint').hide();
+                            setTimeout(function () {
+                                $('.hint').hide();
+                            }, 1000);
                             window.location.reload();
                         }, 1000)
                     }
@@ -407,6 +405,7 @@
 
             //table中编辑按钮操作
             $('.edit').click(function (e) {
+                'use strict';
                 e.preventDefault();
                 this_ = $(this);
                 let kc = this_.parent().siblings('td.kc_type').text().trim();

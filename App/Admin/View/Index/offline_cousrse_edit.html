@@ -257,6 +257,7 @@
             courses_num = document.querySelector('.courses_num');
         $(function () {
             $('.courses_num').keyup(function () {
+                'use strict';
                 let num = $('.courses_num').val(),
                     strnum = num.split('');
                 if (strnum.length >= 3) {
@@ -267,6 +268,7 @@
             });
 
             $('.addvideo').click(function () {
+                'use strict';
                 $('.modal').show();
                 $('.video_modal_main_edit').show();
                 $('.m_m_offline').hide()
@@ -277,6 +279,7 @@
             });
 
             $('.videosave').click(function () {
+                'use strict';
                 $('.modal').hide();
                 var app = $('.table_default tr.clone').eq(0).clone(true);
                 app.find('td').eq(0).text($('.coursename').val());
@@ -292,6 +295,7 @@
             });
 
             $('.operation .edit').click(function (e) {
+                'use strict';
                 e.preventDefault();
                 $('.modal').show();
                 $('.video_modal_main_edit').show();

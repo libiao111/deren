@@ -46,34 +46,6 @@ class CourseController extends Controller
         $this->assign('course',$result);
         $this->display("index/course_management");
     }
-     /*搜索*/
-    /*public function search()
-    {
-        if(!IS_AJAX){
-            $this->error('页面不存在!');die;
-        }
-        
-        $type = I('type');
-        $status = I('status');
-        if (!$type) {
-            if (!$status) {
-                $result = M('course')->select();
-            } else {
-                $arr['status'] =$status;
-                $result = M('course')->where($arr)->select();
-            }
-        } else {
-            if (!$status) {
-                $arr['type'] = $type;
-                $result = M('course')->select();
-            } else if ($status) {
-                $arr['type']=$type;
-                $arr['status'] =$status;
-                $result = M('course')->where($arr)->select();
-            }
-        }
-
-    }*/
     /*启用状态*/
     public function enablestatus()
     {
@@ -144,13 +116,11 @@ class CourseController extends Controller
         $where1= array(
             'id'=>array('in',$arr1)
         );
-        $sql2 = D('class')->relation('bigpho')->where($where1)->delete();
         /*先删除子类*/
-        if($sql2){
-            $result = M('course')->where($where)->delete();
-        }else{
-             $result = M('course')->where($where)->delete();
+        if($va['id']){
+            $sql2 = D('class')->relation('bigpho')->where($where1)->delete();
         }
+        $result = M('course')->where($where)->delete();
         /*反馈数据*/
         if ($result) {
             $data = array('status'=>1); 
