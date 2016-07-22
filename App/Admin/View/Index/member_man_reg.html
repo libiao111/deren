@@ -27,15 +27,15 @@
         <table class="table_default">
             <tr>
                 <th width="10%">
-                    <input type="checkbox">
+                    <input type="checkbox" class="checkall">
                 </th>
-                <th width="15%">头像</th>
-                <th width="12%">昵称</th>
-                <th width="12%">性别</th>
-                <th width="12%">电话</th>
-                <th width="12%">登录时间</th>
-                <th width="12%">状态</th>
-                <th width="15%">操作</th>
+                <th width="17%">头像</th>
+                <th width="14%">昵称</th>
+                <th width="14%">性别</th>
+                <th width="14%">电话</th>
+                <th width="17%">登录时间</th>
+                <th width="14%">状态</th>
+                <!--                <th width="15%">操作</th>-->
             </tr>
             <foreach name="users" item="v">
                 <tr>
@@ -44,7 +44,14 @@
                     </td>
                     <td><img src="__UPFILE__/{$v.user_photo}" height="60px" class="mt8 mb8"></td>
                     <td>{$v.username}</td>
-                    <td>{$v.sex}</td>
+                    <td>
+                        <!--                    {$v.sex}-->
+                        <if condition="$v.sex eq 1">男
+                            <elseif condition="$v.sex eq 0" />女
+                            <else />
+                        </if>
+
+                    </td>
                     <td>{$v.user_mobi}</td>
                     <td>{$v.logintime}</td>
                     <td>
@@ -52,7 +59,7 @@
                             <else />停用
                         </if>
                     </td>
-                    <td>详情</td>
+                    <!--                    <td>详情</td>-->
                 </tr>
             </foreach>
         </table>
@@ -66,8 +73,8 @@
                 <input type="button" class="button btn_middle btn_primary trans pointer output_xls" value="导出excel表格">
                 <input type="button" class="button btn_middle btn_primary trans pointer reset_psd" value="回复初始密码">
             </div>
-            <div class="pagination mr30" name ="page">
-               {$page}
+            <div class="pagination mr30" name="page">
+                {$page}
             </div>
         </div>
     </section>
@@ -192,42 +199,133 @@
         </div>
     </div>
 
+    <div class="hint">
+        <!--        <div class="hintback"></div>-->
+        <div class="hintmain">
+            <p></p>
+        </div>
+    </div>
+
     <script src="__AJS__/jquery.js"></script>
     <script src="__AJS__/jquery.easing.js"></script>
     <script src="__AJS__/deleconfirm.js"></script>
     <script>
-        'use strict';
-        let enable_btn = document.querySelector('.operate_btn_box').querySelector('.enable'),
-            disable_btn = document.querySelector('.operate_btn_box').querySelector('.disable'),
-            delete_btn = document.querySelector('.operate_btn_box').querySelector('.delete'),
-            output_xls_btn = document.querySelector('.operate_btn_box').querySelector('.output_xls'),
-            reset_psd_btn = document.querySelector('.operate_btn_box').querySelector('.reset_psd'),
-            modal = document.querySelector('.modal'),
-            modal_back = document.querySelector('.back'),
-            three_box = document.querySelector('.modal_main_three');
+        $(function () {
+            $('.checkall').click(function () {
+                this_ = $(this);
+                if (this_.prop('checked')) {
+                    this_.parents('tr').siblings('tr').find('td:eq(0)>input[type="checkbox"]').prop("checked", true);
+                } else {
+                    this_.parents('tr').siblings('tr').find('td:eq(0)>input[type="checkbox"]').prop("checked", false);
+                }
+            })
 
-        modal_back.onclick = function () {
-            modal.style.display = 'none';
-            three_box.style.display = 'none'
-        }
+            //enable operation
+            $('.enable').click(function () {
+                'use strict';
+                $('.hint').show();
+                $('.hintmain').show();
+                $('.hintmain>p').text('操作成功!');
+                setTimeout(function () {
+                    $('.hint').hide();
+                }, 1000);
+                let id = [],
+                    tid = $('td>input[type="checkbox"]:checked');
+                tid.each(function () {
+                    id.push(parseInt($(this).attr('id')));
+                });
+                $.post('{:U("Admin/User/statusUsing")}', {
+                    id: id
+                }, function (data) {
+                    if (data.status) {
+                        setTimeout(function () {
+                            $('.hint').hide();
+                            window.location.reload();
+                        }, 1000)
+                    }
+                });
+            })
 
-        enable_btn.onclick = function () {
-                modal.style.display = "block";
-                three_box.style.display = "block";
-                three_box.children[0].innerHTML = "您确定启用该课程吗？"
-            }
             //disable operation
-        disable_btn.onclick = function () {
-                modal.style.display = "block";
-                three_box.style.display = "block";
-                three_box.children[0].innerHTML = "您确定停用该课程吗？"
-            }
+            $('.disable').click(function () {
+                'use strict';
+                $('.hint').show();
+                $('.hintmain').show();
+                $('.hintmain>p').text('操作成功!');
+                setTimeout(function () {
+                    $('.hint').hide();
+                }, 1000);
+                let id = [],
+                    tid = $('td>input[type="checkbox"]:checked');
+                tid.each(function () {
+                    id.push(parseInt($(this).attr('id')));
+                });
+                $.post('{:U("Admin/User/statusStop")}', {
+                    id: id
+                }, function (data) {
+                    if (data.status) {
+                        setTimeout(function () {
+                            $('.hint').hide();
+                            window.location.reload();
+                        }, 1000)
+                    }
+                });
+            })
+
             //delete operation
-        delete_btn.onclick = function () {
-            modal.style.display = "block";
-            three_box.style.display = "block";
-            three_box.children[0].innerHTML = "您确定删除该课程吗？"
-        }
+            $('.delete').click(function () {
+                'use strict';
+                $('.hint').show();
+                $('.hintmain').show();
+                $('.hintmain>p').text('操作成功!');
+                setTimeout(function () {
+                    $('.hint').hide();
+                }, 1000);
+                let id = [],
+                    tid = $('td>input[type="checkbox"]:checked');
+                tid.each(function () {
+                    id.push(parseInt($(this).attr('id')));
+                });
+                $.post('{:U("Admin/User/deleteUser")}', {
+                    id: id
+                }, function (data) {
+                    if (data.status) {
+                        setTimeout(function () {
+                            $('.hint').hide();
+                            window.location.reload();
+                        }, 1000)
+                    }
+                });
+            })
+
+            //reset_psd operation
+            $('.reset_psd').click(function () {
+                'use strict';
+                //                $('.hint').show();
+                //                $('.hintmain').show();
+                //                $('.hintmain>p').text('操作成功!');
+                setTimeout(function () {
+                    $('.hint').hide();
+                }, 1000);
+                let id = [],
+                    tid = $('td>input[type="checkbox"]:checked');
+                tid.each(function () {
+                    id.push(parseInt($(this).attr('id')));
+                });
+                $.post('{:U("Admin/User/rpassword")}', {
+                    id: id
+                }, function (data) {
+                    if (data.status) {
+                        setTimeout(function () {
+                            //                            $('.hint').hide();
+                            window.location.reload();
+                        }, 1000)
+                    }
+                });
+            })
+        })
+
+       
 
         let modal_main_three_cancel = document.querySelector('.modal_main_three').querySelector('div').querySelector('.cancel'),
             modal_main_three_confirm = document.querySelector('.modal_main_three').querySelector('div').querySelector('.confirm');
