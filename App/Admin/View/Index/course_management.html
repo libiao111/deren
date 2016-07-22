@@ -340,9 +340,9 @@
                 tid.each(function () {
                     id.push(parseInt($(this).attr('id')));
                 });
-
-                $.post('{:U("Admin/Course/delCourse")}', {
-                    id: id
+                
+                $.post("{:U('Admin/Course/delCourse')}", {
+                    id:id
                 }, function (data) {
                     if (data.status) {
 

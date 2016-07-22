@@ -125,6 +125,7 @@ class CourseController extends Controller
         if(!IS_AJAX){
             $this->error('页面不存在!');die;
         }
+        
         $id = I('id');
         $where=array(
             'id'  =>array('in',$id)
@@ -148,6 +149,8 @@ class CourseController extends Controller
         /*先删除子类*/
         if($sql2){
             $result = M('course')->where($where)->delete();
+        }else{
+             $result = M('course')->where($where)->delete();
         }
         /*反馈数据*/
         if ($result) {

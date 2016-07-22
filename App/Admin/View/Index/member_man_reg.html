@@ -316,8 +316,20 @@
                     id: id
                 }, function (data) {
                     if (data.status) {
+                        $('.hint').show();
+                        $('.hintmain').show();
+                        $('.hintmain>p').text('操作成功!');
                         setTimeout(function () {
-                            //                            $('.hint').hide();
+                            $('.hint').hide();
+                            window.location.reload();
+                        }, 1000)
+                    }
+                    else{
+                        $('.hint').show();
+                        $('.hintmain').show();
+                        $('.hintmain>p').text('操作失败!');
+                        setTimeout(function () {
+                            $('.hint').hide();
                             window.location.reload();
                         }, 1000)
                     }
@@ -325,7 +337,7 @@
             })
         })
 
-       
+
 
         let modal_main_three_cancel = document.querySelector('.modal_main_three').querySelector('div').querySelector('.cancel'),
             modal_main_three_confirm = document.querySelector('.modal_main_three').querySelector('div').querySelector('.confirm');

@@ -23,10 +23,10 @@
     <section class="widget_wrp">
         <div class="table_header mt30">
             <!-- 下拉列表组件 -->
-            <form action="{:U('Course/course')}" method="get" name="frm" class="frm" enctype="multipart/form-data">
+            <form action="{:U('Order/index')}" method="get" name="frm" class="frm" enctype="multipart/form-data">
                 <span class="select_wrap ml30 mt15 dib">
         		<span>课程类型：</span>
-                <select class="ipt_default btn_large" name="type">
+                <select class="ipt_default btn_large type" name="type">
                     <option value="0" <if condition="$type eq 0">selected</if>>全部</option>
                     <option value="1" <if condition="$type eq 1">selected</if>>线下课</option>
                     <option value="2" <if condition="$type eq 2">selected</if>>音频课</option>
@@ -70,10 +70,10 @@
                     <td>{$v.ordera_mobi}</td>
                     <td>{$v.current_price}</td>
                     <td>
-                        <if condition="$v.pay_type eq 1">下线课
-                            <elseif condition="$v.pay_type eq 2" />音频课
-                            <elseif condition="$v.pay_type eq 3" /> 视频课
-                            <else />全部
+                        <if condition="$v.status eq 0">未支付
+                            <elseif condition="$v.status eq 1" />已支付
+                            <elseif condition="$v.status eq 2" />已退款
+                            <else />
                         </if>
                     </td>
                 </tr>
@@ -214,7 +214,7 @@
             <div><span></span><span></span></div>
         </div>
     </div>
-    
+
     <div class="hint">
         <!--        <div class="hintback"></div>-->
         <div class="hintmain">
@@ -231,12 +231,11 @@
                 this_ = $(this);
                 if (this_.prop('checked')) {
                     this_.parents('tr').siblings('tr').find('td:eq(0)>input[type="checkbox"]').prop("checked", true);
-                }
-                else{
+                } else {
                     this_.parents('tr').siblings('tr').find('td:eq(0)>input[type="checkbox"]').prop("checked", false);
                 }
             })
-            
+
             $('.type').change(function () {
                 $('.frm').submit();
             });
@@ -244,23 +243,23 @@
             //delete operation
             $('.delete').click(function () {
                 'use strict';
-                $('.hint').show();
-                $('.hintmain').show();
-                $('.hintmain>p').text('操作成功!');
-                setTimeout(function () {
-                    $('.hint').hide();
-                }, 1000);
+
                 let id = [],
                     tid = $('td>input[type="checkbox"]:checked');
                 tid.each(function () {
                     id.push(parseInt($(this).attr('id')));
                 });
-                $.post('{:U("Admin/User/deleteOrder")}', {
+                $.post('{:U("Admin/Order/deleteOrder")}', {
                     id: id
                 }, function (data) {
                     if (data.status) {
+                        $('.hint').show();
+                        $('.hintmain').show();
+                        $('.hintmain>p').text('操作成功!');
                         setTimeout(function () {
-                            $('.hint').hide();
+                            setTimeout(function () {
+                                $('.hint').hide();
+                            }, 1000);
                             window.location.reload();
                         }, 1000)
                     }
@@ -281,7 +280,7 @@
                 tid.each(function () {
                     id.push(parseInt($(this).attr('id')));
                 });
-                $.post('{:U("Admin/User/rebate")}', {
+                $.post('{:U("Admin/Order/rebate")}', {
                     id: id
                 }, function (data) {
                     if (data.status) {
