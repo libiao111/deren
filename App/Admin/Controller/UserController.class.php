@@ -47,10 +47,10 @@ class UserController extends Controller
 			'id'=>array('in',$id),
 		);
 		$arr = array(
-			'status'=>0
+			'status'=>1
 		);
 		$result = M('users')->where($where)->save($arr);
-		if ($result) {
+        if ($result) {
 			$data =array('status'=>1);
 		} else {
 			$data = array('status'=>0);
@@ -68,7 +68,7 @@ class UserController extends Controller
 			'id'=>array('in',$id),
 		);
 		$arr = array(
-			'status'=>1
+			'status'=>0
 		);
 		$result = M('users')->where($where)->save($arr);
 		if ($result) {
@@ -78,6 +78,7 @@ class UserController extends Controller
 		}
 		$this->ajaxReturn($data,'json');
 	}
+   
 	/*回复初始密码*/
 	public function rpassword(){
 		if(!IS_AJAX){
@@ -88,10 +89,10 @@ class UserController extends Controller
 			'id'=>array('in',$id)
 		);
 		$arr = array(
-			'password' =>md5('123456')
+			'password' =>'1234'
 		);
 		$result = M('users')->where($where)->save($arr);
-		if (!IS_AJAX) {
+		if ($result) {
 			$data =array('status'=>1);
 		} else {
 			$data = array('status'=>0);

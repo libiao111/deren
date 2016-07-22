@@ -23,24 +23,26 @@
     <section class="widget_wrp">
         <div class="table_header mt30">
             <!-- 下拉列表组件 -->
-            <span class="select_wrap ml30 mt15 dib">
+            <form action="{:U('Order/index')}" method="get" name="frm" class="frm" enctype="multipart/form-data">
+                <span class="select_wrap ml30 mt15 dib">
         		<span>课程类型：</span>
-            <select class="ipt_default btn_large">
-                <option>产品经理</option>
-                <option>UI设计师</option>
-                <option>前端工程师</option>
-                <option>后端工程师</option>
-            </select>
-            <i class="fa fa-caret-down"></i>
-            </span>
+                <select class="ipt_default btn_large type" name="type">
+                    <option value="0" <if condition="$type eq 0">selected</if>>全部</option>
+                    <option value="1" <if condition="$type eq 1">selected</if>>线下课</option>
+                    <option value="2" <if condition="$type eq 2">selected</if>>音频课</option>
+                    <option value="3" <if condition="$type eq 3">selected</if>>视频课</option>
+                </select>
+                <i class="fa fa-caret-down"></i>
+                </span>
+            </form>
         </div>
-        
+
 
         <!-- 表格主体 -->
         <table class="table_default">
             <tr>
                 <th width="10%">
-                    <input type="checkbox">
+                    <input type="checkbox" class="checkall">
                 </th>
                 <th width="25%">订单内容</th>
                 <th width="10%">课程类型</th>
@@ -51,30 +53,30 @@
                 <th width="11%">状态</th>
             </tr>
             <foreach name="ordera" item="v">
-            <tr>
-                <td>
-                    <input type="checkbox" id="{$v.id}" value="{$v.id}">
-                </td>
-                <td><img src="__UPFILE__/{$v.course_photo}" height="60px" class="mt8 mb8"><span class="in-span">{$v.course_num}</span></td>
-                <td>
-                <if condition="$v.type eq 1">下线课
+                <tr>
+                    <td>
+                        <input type="checkbox" id="{$v.id}" value="{$v.id}">
+                    </td>
+                    <td><img src="__UPFILE__/{$v.course_photo}" height="60px" class="mt8 mb8"><span class="in-span">{$v.course_num}</span></td>
+                    <td>
+                        <if condition="$v.type eq 1">下线课
                             <elseif condition="$v.type eq 2" />音频课
                             <elseif condition="$v.type eq 3" /> 视频课
                             <else />全部
                         </if>
-                </td>
-                <td>{$v.order_time}</td>
-                <td>{$v.ordera_name}</td>
-                <td>{$v.ordera_mobi}</td>
-                <td>{$v.current_price}</td>
-                <td>
-                <if condition="$v.pay_type eq 1">下线课
-                            <elseif condition="$v.pay_type eq 2" />音频课
-                            <elseif condition="$v.pay_type eq 3" /> 视频课
-                            <else />全部
+                    </td>
+                    <td>{$v.order_time}</td>
+                    <td>{$v.ordera_name}</td>
+                    <td>{$v.ordera_mobi}</td>
+                    <td>{$v.current_price}</td>
+                    <td>
+                        <if condition="$v.status eq 0">未支付
+                            <elseif condition="$v.status eq 1" />已支付
+                            <elseif condition="$v.status eq 2" />已退款
+                            <else />
                         </if>
-                </td>
-            </tr>
+                    </td>
+                </tr>
             </foreach>
         </table>
 
@@ -92,7 +94,7 @@
             </div>
         </div>
     </section>
-    
+
     <div class="modal">
         <div class="back"></div>
         <div class="modal_main_edit">
@@ -213,42 +215,87 @@
         </div>
     </div>
 
+    <div class="hint">
+        <!--        <div class="hintback"></div>-->
+        <div class="hintmain">
+            <p></p>
+        </div>
+    </div>
+
     <script src="__AJS__/jquery.js"></script>
     <script src="__AJS__/jquery.easing.js"></script>
     <script src="__AJS__/deleconfirm.js"></script>
     <script>
-        'use strict';
-        let delete_btn = document.querySelector('.operate_btn_box').querySelector('.delete'),
-            output_xls_btn = document.querySelector('.operate_btn_box').querySelector('.output_xls'),
-            refund_btn = document.querySelector('.operate_btn_box').querySelector('.refund'),
-            modal = document.querySelector('.modal'),
-            modal_back = document.querySelector('.back'),
-            three_box = document.querySelector('.modal_main_three');
-        
-        modal_back.onclick = function () {
-            modal.style.display = 'none';
-            three_box.style.display = 'none'
-        }
+        $(function () {
+            $('.checkall').click(function () {
+                this_ = $(this);
+                if (this_.prop('checked')) {
+                    this_.parents('tr').siblings('tr').find('td:eq(0)>input[type="checkbox"]').prop("checked", true);
+                } else {
+                    this_.parents('tr').siblings('tr').find('td:eq(0)>input[type="checkbox"]').prop("checked", false);
+                }
+            })
 
-        refund_btn.onclick = function () {
-                modal.style.display = "block";
-                three_box.style.display = "block";
-                three_box.children[0].innerHTML = "确认更换成退款状态吗？更改后不可恢复"
-            }
-            //disable operation
-        output_xls_btn.onclick = function () {
-               // to do
-            }
+            $('.type').change(function () {
+                $('.frm').submit();
+            });
+
             //delete operation
-        delete_btn.onclick = function () {
-            modal.style.display = "block";
-            three_box.style.display = "block";
-            three_box.children[0].innerHTML = "确定删除订单吗？删除后不可恢复"
-        }
-        
+            $('.delete').click(function () {
+                'use strict';
+
+                let id = [],
+                    tid = $('td>input[type="checkbox"]:checked');
+                tid.each(function () {
+                    id.push(parseInt($(this).attr('id')));
+                });
+                $.post('{:U("Admin/Order/deleteOrder")}', {
+                    id: id
+                }, function (data) {
+                    if (data.status) {
+                        $('.hint').show();
+                        $('.hintmain').show();
+                        $('.hintmain>p').text('操作成功!');
+                        setTimeout(function () {
+                            setTimeout(function () {
+                                $('.hint').hide();
+                            }, 1000);
+                            window.location.reload();
+                        }, 1000)
+                    }
+                });
+            })
+
+            //refund operation
+            $('.refund').click(function () {
+                'use strict';
+                $('.hint').show();
+                $('.hintmain').show();
+                $('.hintmain>p').text('操作成功!');
+                setTimeout(function () {
+                    $('.hint').hide();
+                }, 1000);
+                let id = [],
+                    tid = $('td>input[type="checkbox"]:checked');
+                tid.each(function () {
+                    id.push(parseInt($(this).attr('id')));
+                });
+                $.post('{:U("Admin/Order/rebate")}', {
+                    id: id
+                }, function (data) {
+                    if (data.status) {
+                        setTimeout(function () {
+                            $('.hint').hide();
+                            window.location.reload();
+                        }, 1000)
+                    }
+                });
+            })
+        })
+
         let modal_main_three_cancel = document.querySelector('.modal_main_three').querySelector('div').querySelector('.cancel'),
             modal_main_three_confirm = document.querySelector('.modal_main_three').querySelector('div').querySelector('.confirm');
-        
+
         modal_main_three_cancel.onclick = function () {
             modal.style.display = 'none';
             three_box.style.display = 'none';

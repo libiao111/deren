@@ -66,7 +66,7 @@
         <table class="table_default">
             <tr>
                 <th width="6%">
-                    <input type="checkbox">
+                    <input type="checkbox" class="checkall">
                 </th>
                 <th width="12%">课程封面</th>
                 <th width="15%">课程名称</th>
@@ -132,9 +132,12 @@
         </div>
     </section>
     <div class="hint">
-        <div class="hintback"></div>
+        <!--        <div class="hintback"></div>-->
+        <div class="hintmain">
+            <p></p>
+        </div>
     </div>
-    
+
     <div class="modal">
         <div class="back"></div>
         <div class="modal_main_edit">
@@ -260,67 +263,63 @@
     <script src="__AJS__/deleconfirm.js"></script>
     <script>
         $(function () {
+            $('.checkall').click(function () {
+                this_ = $(this);
+                if (this_.prop('checked')) {
+                    this_.parents('tr').siblings('tr').find('td:eq(0)>input[type="checkbox"]').prop("checked", true);
+                }
+                else{
+                    this_.parents('tr').siblings('tr').find('td:eq(0)>input[type="checkbox"]').prop("checked", false);
+                }
+            })
+
             $('.type').change(function () {
                 $('.frm').submit();
             });
             $('.aa').change(function () {
-
                 $('.frm').submit();
             });
 
-            if ($('kc_type') == "1") {
-                $('kc_type').text('线下课')
-            }
-
-
-
-            //enable operation
-            //                let a=[];
-            //                $('.check').click(function(){
-            //                    this_=$(this);
-            //                    if(this_.prop('checked')){
-            //                        a.push(this_.attr('id'));
-            //                    }
-            //                    else{
-            //                        let index=this_.attr('id')
-            //                        a.pop(this_.attr('id'))
-            //                    }
-            ////                    a.push($('.check:checked').attr('id'));
-            //                    return a;
-            //                })
             $('.enable').click(function () {
                     'use strict';
+                    $('.hint').show();
+                    $('.hintmain').show();
+                    $('.hintmain>p').text('操作成功!');
+                    setTimeout(function () {
+                        $('.hint').hide();
+                    }, 1000);
 
                     let id = [],
                         tid = $('td>input[type="checkbox"]:checked');
                     tid.each(function () {
                         id.push(parseInt($(this).attr('id')));
                     });
-                    //                    let id = $('.check:checked').attr('id');
-                    console.log(id);
 
                     $.post('{:U("Admin/Course/enablestatus")}', {
                         id: id
                     }, function (data) {
-                        if(data.status){
-                           
-                        setTimeout(function () {
-                                    window.location.reload();
-                                }, 1000)
+                        if (data.status) {
+                            setTimeout(function () {
+                                $('.hint').hide();
+                                window.location.reload();
+                            }, 1000)
                         }
                     });
                 })
                 //disable operation
             $('.disable').click(function () {
                 'use strict';
-
+                $('.hint').show();
+                $('.hintmain').show();
+                $('.hintmain>p').text('操作成功!');
+                setTimeout(function () {
+                    $('.hint').hide();
+                }, 1000);
                 let id = [],
                     tid = $('td>input[type="checkbox"]:checked');
                 tid.each(function () {
                     id.push(parseInt($(this).attr('id')));
                 });
-                //                    let id = $('.check:checked').attr('id');
-                console.log(id);
 
                 $.post('{:U("Admin/Course/disablestatus")}', {
                     id: id
@@ -328,154 +327,118 @@
                     if (data.status) {
 
                         setTimeout(function () {
-                                    window.location.reload();
-                                }, 1000)
-                        
-                        }
-                    });
-                })
-           $('.delete').click(function () {
-                    'use strict';
-                
-                let id=[],
+                            $('.hint').hide();
+                            window.location.reload();
+                        }, 1000)
+                    }
+                });
+            })
+            $('.delete').click(function () {
+                'use strict';
+                $('.hint').show();
+                $('.hintmain').show();
+                $('.hintmain>p').text('操作成功!');
+                setTimeout(function () {
+                    $('.hint').hide();
+                }, 1000);
+                let id = [],
                     tid = $('td>input[type="checkbox"]:checked');
                 tid.each(function () {
                     id.push(parseInt($(this).attr('id')));
                 });
-                //                    let id = $('.check:checked').attr('id');
-                console.log(id);
-
-                $.post('{:U("Admin/Course/delCourse")}', {
-                    id: id
+                
+                $.post("{:U('Admin/Course/delCourse')}", {
+                    id:id
                 }, function (data) {
                     if (data.status) {
 
                         setTimeout(function () {
-                                    window.location.reload();
-                                }, 1000)
-                        
-                        }
-                    });
-                })
-        });
-
-        var add_cour_btn = document.querySelector('.add_course');
-        var modal_add_course = document.querySelector('.modal_add_course'),
-            modal_add_course_cancel = document.querySelector('.modal_add_course').querySelector('.bottom').querySelector('.cancel'),
-            modal_add_course_confirm = document.querySelector('.modal_add_course').querySelector('.bottom').querySelector('.confirm'),
-            modal = document.querySelector('.modal'),
-            modal_back = document.querySelector('.back'),
-            modal_main_three = document.querySelector('.modal_main_three'),
-            iframe = document.querySelector('iframe');
-        //        console.log(iframe)
-
-        add_cour_btn.onclick = function (event) {
-            'use strict';
-            event.preventDefault();
-            modal.style.display = 'block';
-            modal_add_course.style.display = 'block'
-        }
-        modal_add_course_cancel.onclick = function () {
-            'use strict';
-            modal.style.display = 'none';
-            modal_add_course.style.display = 'none'
-        }
-
-        //modal back operation
-        modal_back.onclick = function () {
-            'use strict';
-            modal.style.display = 'none';
-            modal_add_course.style.display = 'none'
-        }
+                            $('.hint').hide();
+                            window.location.reload();
+                        }, 1000)
+                    }
+                });
+            })
 
 
-        modal_add_course_confirm.onclick = function () {
+            var add_cour_btn = document.querySelector('.add_course');
+            var modal_add_course = document.querySelector('.modal_add_course'),
+                modal_add_course_cancel = document.querySelector('.modal_add_course').querySelector('.bottom').querySelector('.cancel'),
+                modal_add_course_confirm = document.querySelector('.modal_add_course').querySelector('.bottom').querySelector('.confirm'),
+                modal = document.querySelector('.modal'),
+                modal_back = document.querySelector('.back'),
+                modal_main_three = document.querySelector('.modal_main_three'),
+                iframe = document.querySelector('iframe');
 
-            'use strict';
-            let select = document.querySelector('#select_course').value;
 
-            if (select == "1") {
-                location.href = "{:U('index/offline_cousrse_edit')}"
-            } else if (select == "2") {
-                location.href = "{:U('index/audio_cousrse_edit')}"
-            } else if (select == '3') {
-                location.href = "{:U('index/video_cousrse_edit')}"
+            add_cour_btn.onclick = function (event) {
+                'use strict';
+                event.preventDefault();
+                modal.style.display = 'block';
+                modal_add_course.style.display = 'block'
             }
-            //            location.href = "{:U('cousrse_edit')}"
-        }
+            modal_add_course_cancel.onclick = function () {
+                'use strict';
+                modal.style.display = 'none';
+                modal_add_course.style.display = 'none'
+            }
+
+            //modal back operation
+            modal_back.onclick = function () {
+                'use strict';
+                modal.style.display = 'none';
+                modal_add_course.style.display = 'none'
+            }
 
 
-        //table中编辑按钮操作
-        var num = document.querySelectorAll('.operation');
-        var edit = [];
-        for (var i = 0; i < num.length; i++) {
-            //            let edit[i] = document.querySelectorAll('.operation')[i].querySelector('.edit');
-            //            console.log(ed);
-            //            let edit=new Array();
-            edit = document.querySelectorAll('.operation')[i].querySelector('.edit');
-            //            $('.opeartion>.edit';)
+            modal_add_course_confirm.onclick = function () {
+                'use strict';
+                let select = document.querySelector('#select_course').value;
 
-            edit.onclick = function (e) {
-
-                    'use strict';
-                    e.preventDefault();
+                if (select == "1") {
+                    location.href = "{:U('index/offline_cousrse_edit')}"
+                } else if (select == "2") {
+                    location.href = "{:U('index/audio_cousrse_edit')}"
+                } else if (select == '3') {
                     location.href = "{:U('index/video_cousrse_edit')}"
                 }
-                //            document.querySelectorAll('.operation')[i].querySelector('.edit').onclick = function (e) {
-                //                e.preventDefault();
-                //                location.href = "{:U('cousrse_edit')}"
-                //            }
-        }
-
-        //table底部三个按钮操作
-        "use strict"
-        var enable_btn = document.querySelector('.operate_btn_box').querySelector('.enable'),
-            disable_btn = document.querySelector('.operate_btn_box').querySelector('.disable'),
-            delete_btn = document.querySelector('.operate_btn_box').querySelector('.delete'),
-            three_box = document.querySelector('.modal_main_three');
+            }
 
 
+            //table中编辑按钮操作
+            $('.edit').click(function (e) {
+                e.preventDefault();
+                this_ = $(this);
+                let kc = this_.parent().siblings('td.kc_type').text().trim();
+                if (kc == "线下课") {
+                    location.href = "{:U('index/offline_cousrse_edit')}"
+                } else if (kc == "视频课") {
+                    location.href = "{:U('index/video_cousrse_edit')}"
+                } else if (kc == "音频课") {
+                    location.href = "{:U('index/audio_cousrse_edit')}"
+                }
+            })
 
+            //table底部三个按钮操作
+            "use strict"
+            var enable_btn = document.querySelector('.operate_btn_box').querySelector('.enable'),
+                disable_btn = document.querySelector('.operate_btn_box').querySelector('.disable'),
+                delete_btn = document.querySelector('.operate_btn_box').querySelector('.delete'),
+                three_box = document.querySelector('.modal_main_three');
 
-        //        
-        //        //enable operation
-        //        enable_btn.onclick = function() {
-        //                'use strict';
-        //                modal.style.display = "block";
-        //                three_box.style.display = "block";
-        //                three_box.children[0].innerHTML = "您确定启用该课程吗？"
-        //            }
-        //            //disable operation
-        //        disable_btn.onclick = function() {
-        //                'use strict';
-        //                modal.style.display = "block";
-        //                three_box.style.display = "block";
-        //                three_box.children[0].innerHTML = "您确定停用该课程吗？"
-        //            }
-        //            //delete operation
-        //
-        //        delete_btn.onclick = function () {
-        //
-        //            'use strict';
-        //            modal.style.display = "block";
-        //            three_box.style.display = "block";
-        //            three_box.children[0].innerHTML = "您确定删除该课程吗？"
-        //        }
+            var modal_main_three_cancel = document.querySelector('.modal_main_three').querySelector('div').querySelector('.cancel'),
+                modal_main_three_confirm = document.querySelector('.modal_main_three').querySelector('div').querySelector('.confirm');
 
-
-
-        var modal_main_three_cancel = document.querySelector('.modal_main_three').querySelector('div').querySelector('.cancel'),
-            modal_main_three_confirm = document.querySelector('.modal_main_three').querySelector('div').querySelector('.confirm');
-
-        modal_main_three_cancel.onclick = function () {
-            'use strict';
-            modal.style.display = 'none';
-            modal_add_course.style.display = 'none'
-        }
-        modal_main_three_confirm.onclick = function () {
-            'use strict';
-            //to do
-        }
+            modal_main_three_cancel.onclick = function () {
+                'use strict';
+                modal.style.display = 'none';
+                modal_add_course.style.display = 'none'
+            }
+            modal_main_three_confirm.onclick = function () {
+                'use strict';
+                //to do
+            }
+        });
     </script>
 </body>
 
