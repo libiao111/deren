@@ -7,7 +7,7 @@ use Think\Controller;
 class IndexController extends Controller
 {
 
-    /*public function _initialize() {
+    public function _initialize() {
         $user = session('openid');
         if (count($user) == 0) {
             if (getOpenID()['status'] == 0) {
@@ -16,7 +16,7 @@ class IndexController extends Controller
         }
         $this->login = session('user') ? 1: 0;
         $this->user_content = session('user');
-    }*/
+    }
 
     /*查询所有课程*/
     public function index()
@@ -159,25 +159,31 @@ class IndexController extends Controller
     {
         //获取用户id
         $users_id = session('user')['id'];
-        $id = I('id');
+        /*获取课程id*/
+        //$id = I('id');
+        $id= 3;
         $arr = array(
             'id'=>$id
-        );
-        $arr1 = array(
-            'bigpho','class'
-        );
-        $arr3 = array(
-            'bigpho'
         );
         $arr2 = array(
             'course_id'=>$id,
             'users_id'=>$users_id
         );
-        /*关联查询课时的id
-        $result = D("course")->relation($arr1)->where($arr)->find();
-
-        $result = D("class")->relation($arr3)->where($arr)->find();
+        /*以course_id查询课时id*/
+        $sql = M('class')->where(array('course_id'=>3))->order('paixu')->field('paixu','id')->find();
+        $arr3 = array(
+            'id'=>$sql['id']
+        );
+        //关联查询轮播图
+        $sql2 = D("class")->relation('bigpho')->where($arr3)->find();
+        $arr4 = $sql2['bigpho'];
+        /*关联查询课程表*/
+        $result = D("course")->relation('class')->where($arr)->find();
+        /*赋值*/
+        $result['bigpho']=$arr4;
+        /*查询订单表*/
         $bills = M('ordera')->where($arr2)->find();
+        /*判断是否购买*/
         $result['status'] = $bills['status'] ? 1: 0;
         $this->assign('course',$result);
         $this->display();

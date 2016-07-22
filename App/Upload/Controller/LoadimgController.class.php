@@ -45,8 +45,8 @@ class LoadimgController extends Controller
 			$this->error('页面不存在');die;
 		}
 			$upload = new \Think\Upload();
-			$upload->mimes 		= array('image/jpeg','image/png');
-			$upload->exts 		= array('jpg','png');
+			$upload->mimes 		= array('image/jpeg','image/png','image/gif');
+			$upload->exts 		= array('jpg','png','gif');
 			$upload->maxSize 	= '2097152';
 			$upload->hash 		= false;
 			$upload->rootPath 	= './Public/upfile/';

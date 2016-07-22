@@ -92,6 +92,7 @@ class LoginController extends Controller
 		if (!IS_AJAX) {
 			$this->error('页面不存在!');die;
 		}
+		$user = session('user');
 		/*session 获取验证码*/
 		$str = session('str');
 		/*赋值变量*/
@@ -108,9 +109,9 @@ class LoginController extends Controller
 		$arr = array(
 			'password' 		=> md5($password),
 			'user_mobi'		=> I('user_mobi'),
-			'username'		=> $username,
-			'sex' 			=> 1,
-			'user_photo'	=> 'http://www.gkdao.cn/resource/2016-07-05/20160705183330-9879.png'
+			'username'		=> $user['name'],
+			'sex' 			=> $user['sex'],
+			'user_photo'	=> $user['image']
 		);
 		$result = M('users')->add($arr);
 		/*返回状态*/

@@ -30,7 +30,7 @@ class CourseController extends Controller
         $tiao = 5;
         /*调用分页函数返回*/
         $data = pageHandle($table,$condition,$tiao);
-       /*按类型查询*/
+        /*按类型查询*/
         if ($type) {
             $where['type'] = $type;
         }
@@ -42,7 +42,6 @@ class CourseController extends Controller
         $this->status=$status;
         /*查询记录*/
         $result = M('course')->where($where)->limit($data['limit'])->select();
-        //p($result);
         $this->assign('page',$data['pages']['pages']);
         $this->assign('course',$result);
         $this->display("index/course_management");
