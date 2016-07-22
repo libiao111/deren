@@ -259,17 +259,12 @@
         $(function () {
             $('.checkall').click(function () {
                 this_ = $(this);
-                console.log(this_);
-                console.log(this_.parents('tr').siblings('tr').find('td:eq(0)>input[type="checkbox"]').attr('id'));
                 if (this_.prop('checked')) {
                     this_.parents('tr').siblings('tr').find('td:eq(0)>input[type="checkbox"]').prop("checked", true);
                 }
                 else{
                     this_.parents('tr').siblings('tr').find('td:eq(0)>input[type="checkbox"]').prop("checked", false);
                 }
-
-
-
             })
 
             $('.type').change(function () {
