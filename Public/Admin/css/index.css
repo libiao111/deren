@@ -637,6 +637,9 @@ section.about {
 .h150 {
     height: 150px
 }
+.h170{
+    height: 170px;
+}
 
 .h460 {
     height: 460px
@@ -720,4 +723,24 @@ section.about {
 
 .border-r {
     border-right: solid 1px;
+}
+.fra1{
+    border: 0;
+    width: 120px;
+    height: 60px;
+    top: -8px;
+    left: 105px;
+}
+.fra2{
+    border: 0;
+    width: 100px;
+    height: 40px;
+    top: -8px;
+    left: 76px;
+}
+.relative{
+    position: relative;
+}
+.absolute{
+    position: absolute
 }
