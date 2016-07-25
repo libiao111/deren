@@ -16,10 +16,10 @@ function loadFormWrapper()
 /* 调用上传 */
 function uploadStart(obj)
 {	
+	
 	uploadReturnObj = obj;
 	var form = $('form[name="jqueryupload"]');
 	if (!form.length) {
-	//alert(form.length);
 		loadFormWrapper();
 		form = $('form[name="jqueryupload"]');
 		form.find('input[name="file"]').change(function () {

@@ -1,10 +1,10 @@
 <!DOCTYPE>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en_US" xml:lang="en_US">
 <head>
-<link rel="stylesheet" type="text/css" href="./Public/Admin/css/upload.css">
-  <title>图片异步上传</title>
-	<style type="text/css">
-		/* .alt-imgarea span {
+<link rel="stylesheet" href="__ACSS__/upload.css">
+	<title>图片异步上传</title>
+<style type="text/css">
+		 .alt-imgarea span {
 		    display: block;
 		    width: 100%;
 		    height: 100%;
@@ -36,22 +36,19 @@
 		}
 		.hide {
 			display: none;
-		} */
-	</style>
+		} 
+	</style> 
 </head>
 <body>
- 
- 
-	<div class="alt-imgarea">
+ 	<div class="alt-imgarea">
 	    <span data-num="0" onclick="uploadStart(this)"><!-- upload btn --></span>
 	</div>
 
-
-
 <script type="text/javascript" >
- 	var uploadActionUrl="index.php/Uploads/Loadimg/upload";
+ 	var uploadActionUrl ="{:U('Uploads/Loadimg/upload')}";
 </script>
-<script type="text/javascript" src ="./Public/Admin/js/jquery.js"></script>
-<script type="text/javascript" src ="./Public/Admin/js/jquery.upload.js"></script>
+ <script src="__AJS__/jquery.upload.js"></script>
+<script type="text/javascript" src ="__PUBLIC__/Admin/js/jquery.js"></script>
+<script type="text/javascript" src ="__PUBLIC__/Admin/js/jquery.upload.js"></script>
 </body>
 </html>
