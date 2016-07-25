@@ -163,7 +163,7 @@ function uploadvideo()
 /* 上传图片 2016-07-20 新增 */
 function uploadImgHandler($width, $height = null)
 {
-    // $_FILES
+    p($_FILES);
     if (!$height) {
         $height = $width;
     }

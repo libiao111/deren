@@ -1,4 +1,4 @@
-aaaa<?php
+<?php
 namespace Admin\Controller;
 use Think\Controller;
 /**
@@ -51,6 +51,7 @@ class OffLineController extends Controller
 		}
 		$this->ajaxReturn($data,'json');
   	}
+    /*上传缩略图*/
     public function upload(){
         $width = '300';
         /*上传图片*/
@@ -62,27 +63,14 @@ class OffLineController extends Controller
         $this->course_photo = $course_photo;
 
     }
+    /*上传音频视频*/
     public function uploa(){
         $video_url = uploadvideo();
         $this->video_url=$video_url;
     }
-    /*public function uplo(){
-    	//$file = $_POST['b'];
-    	$upload = new \Think\Upload();// 实例化上传类
-        $upload->maxSize   =     3145728 ;// 设置附件上传大小
-        $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
-        $upload->rootPath  =     './Public/resource/'; // 设置附件上传根目录
-        $upload->savePath  =     ''; // 设置附件上传（子）目录
-        $upload->saveName  =     array('date', 'YmdHis-'.rand(1000,9999));
-        // 上传文件 
-        $info   =   $upload->upload();
-        if(!$info) {// 上传错误提示错误信息
-            $this->error($upload->getError());
-        }else{// 上传成功
-            $this->success('上传成功！');
-        }
-    }*/
+    /*上传轮播图*/
     public function uploadimg() {
+
         if (!IS_POST) {
             $this->error('页面不存在');
         }
@@ -104,7 +92,7 @@ class OffLineController extends Controller
             $data = $data;
         }
         /* 输出调用反馈function */
-        echo '<script type="text/javascript">parent.uploadReturn("'.$result['status'].'","'.$data.'")</script>';
+         echo '<script type="text/javascript">parent.uploadReturn("'.$result['status'].'","'.$data.'")</script>';
     }
 
 }

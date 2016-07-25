@@ -257,14 +257,15 @@
             <div><span></span><span></span></div>
         </div>
     </div>
-
+    <script src="__AJS__/jquery.upload.js"></script>
     <script src="__AJS__/jquery.js"></script>
     <script src="__AJS__/jquery.easing.js"></script>
     <script src="__AJS__/deleconfirm.js"></script>
     <script>
         $(function () {
             $('.checkall').click(function () {
-                this_ = $(this);
+                'use strict';
+                var this_ = $(this);
                 if (this_.prop('checked')) {
                     this_.parents('tr').siblings('tr').find('td:eq(0)>input[type="checkbox"]').prop("checked", true);
                 }
@@ -407,7 +408,7 @@
             $('.edit').click(function (e) {
                 'use strict';
                 e.preventDefault();
-                this_ = $(this);
+               var this_ = $(this);
                 let kc = this_.parent().siblings('td.kc_type').text().trim();
                 if (kc == "线下课") {
                     location.href = "{:U('index/offline_cousrse_edit')}"

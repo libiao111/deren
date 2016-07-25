@@ -6,6 +6,7 @@
     <title>audio</title>
     <link rel="stylesheet" href="__ACSS__/main.css">
     <link rel="stylesheet" href="__ACSS__/temp.css">
+    <link rel="stylesheet" href="__ACSS__/upload.css">
     <link rel="stylesheet" href="__ACSS__/index.css" />
     <link href="__ADATEPICK__/js/datetimepicker/datepicker.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="__ACSS__/font-awesome.min.css">
@@ -143,9 +144,9 @@
                     <span>上传视频：</span>
                     <input type="file">
                 </p>
-                <p>
+                <p class="alt-imgarea">
                     <span>上传图片：</span>
-                    <input type="file">
+                    <span data-num="0" onclick="uploadStart(this)"><!-- upload btn --></span>
                 </p>
             </div>
 
@@ -242,9 +243,13 @@
 
     <script src="__AJS__/jquery.js"></script>
     <script src="__AJS__/jquery.easing.js"></script>
+    <script src="__AJS__/jquery.upload.js"></script>
     <script src="__AJS__/deleconfirm.js"></script>
     <script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.min.js"></script>
     <script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.zh-CN.js"></script>
+    <script type="text/javascript" >
+        var uploadActionUrl="index.php/Admin/OffLine/uploadimg";
+    </script>
     <script type="text/javascript">
         'use strict';
         var option = {
