@@ -30,36 +30,36 @@
         </span>
     </div>
 
-    <section class="widget_wrp h150">
+    <section class="widget_wrp h170">
         <div class="f_l w500">
             <div class="mb15">
                 <span class="i_block w100 texy_a_r ">课程名称:</span>
-                <input type="text" class="w250 courses_name">
+                <input type="text" class="w250 courses_name" name='courses_name'>
             </div>
             <div class="mb15">
                 <span class="i_block w100 texy_a_r ">讲师姓名:</span>
-                <input type="text" class="w250 teacher_name">
+                <input type="text" class="w250 teacher_name" name="teacher_name">
             </div>
             <div>
                 <span class="i_block w100 texy_a_r">现价:</span>
-                <input type="text" class="w80">
+                <input type="text" class="w80 course_price" name="course_price">
                 <span class="ml50">原价:</span>
-                <input type="text" class="w80">
+                <input type="text" class="w80" name="current_price">
             </div>
         </div>
 
         <div class="f_l w500">
             <div class="mb15">
                 <span class="i_block w100 texy_a_r ">课节数量:</span>
-                <input type="text" class="w250 courses_num" maxlength="5">
+                <input type="text" class="w250 courses_num" maxlength="5" name="courses_num">
             </div>
             <div class="mb15">
                 <span class="i_block w100 texy_a_r">开始上课时间:</span>
-                <input type="text" id="startTime" class="am-form-field w250" data-am-datepicker />
+                <input type="text" id="startTime" class="am-form-field w250" data-am-datepicker name="startTime" />
             </div>
             <div>
                 <span class="i_block w100 texy_a_r">上传封面:</span>
-                <input type="file" class="w250">
+                <input type="file" class="w250 fengmian" name="fengmian">
             </div>
         </div>
     </section>
@@ -117,7 +117,7 @@
         <!-- 尾部 -->
         <div class="table_footer mb30">
             <div class="operate_btn_box f_r mr30">
-                <input type="button" class="button btn_middle btn_primary trans pointer" value="保存">
+                <input type="button" class="button btn_middle btn_primary trans pointer saveall" value="保存">
             </div>
         </div>
     </section>
@@ -129,12 +129,12 @@
 
             <div class="m_m_video">
                 <p><span>课节名称：</span>
-                    <input type="text" class="w200 coursename">
+                    <input type="text" class="w200 coursename" name="coursename">
                 </p>
-                
+
                 <p>
                     <span>上课时间：</span>
-                    <input type="text" id="startTime1" class="am-form-field w200" data-am-datepicker />
+                    <input type="text" id="startTime1" class="am-form-field w200 class_time" data-am-datepicker name="class_time"/>
                 </p>
                 <p>
                     <span class="inline-block w70"></span>
@@ -255,8 +255,8 @@
         let courses_name = document.querySelector('.courses_name'),
             teacher_name = document.querySelector('.teacher_name'),
             courses_num = document.querySelector('.courses_num');
-        $(function () {
-            $('.courses_num').keyup(function () {
+        $(function() {
+            $('.courses_num').keyup(function() {
                 'use strict';
                 let num = $('.courses_num').val(),
                     strnum = num.split('');
@@ -267,49 +267,80 @@
                 }
             });
 
-            $('.addvideo').click(function () {
+            $('.addvideo').click(function() {
                 'use strict';
                 $('.modal').show();
                 $('.video_modal_main_edit').show();
                 $('.m_m_offline').hide()
                 $('.m_m_audio').hide()
-                $('.videocancel').click(function () {
+                $('.videocancel').click(function() {
                     $('.modal').hide()
                 })
             });
 
-            $('.videosave').click(function () {
+            $('.videosave').click(function() {
                 'use strict';
                 $('.modal').hide();
                 var app = $('.table_default tr.clone').eq(0).clone(true);
                 app.find('td').eq(0).text($('.coursename').val());
                 app.find('td').eq(1).text($('.hour').val() + '小时' + $('.minute').val() + '分');
-                console.log(app);
+//                console.log(app);
                 app.appendTo('.table_default');
-                return app = null;
+                
+//                return app = null;.
+                $.post("{:U('Admin/Class/addOffLine')}", {
+                    'id': handle1_id,
+                    'class_name': $('.coursename').val(),
+                    'class_time': $('.class_time').val(),
+                }, function(data) {
+                    if (data.status) {
+
+                    }
+                });
             });
 
+            $('.saveall').click(function() {
+                $.post("{:U('Admin/OffLine/index')}", {
+                    'id': handle1_id,
+                    'type': $('#table_id').val(),
+                    'course_name': $('.courses_name').val(),
+                    'course_photo': $('.fengmian').val(),
+                    'course_price': $('.course_price').val(),
+                    'current_price': $('.current_price').val(),
+                    'teach_name': $('.teacher_name').val(),
+                    'picture': $('#fnull').val(),
+                    'offline_url': $('#fprimarykey').val(),
+                    'class_num': $('#fincre').val(),
+                    'addtime': $('#fincre').val(),
+                    'status': $('#fincre').val(),
+                }, function(data) {
+                    if (data.status) {
 
-            $('.back').click(function () {
+                    }
+                });
+            })
+
+
+            $('.back').click(function() {
                 $('.modal').hide()
             });
 
-            $('.operation .edit').click(function (e) {
+            $('.operation .edit').click(function(e) {
                 'use strict';
                 e.preventDefault();
                 $('.modal').show();
                 $('.video_modal_main_edit').show();
                 $('.m_m_offline').hide()
                 $('.m_m_audio').hide()
-                $('.videocancel').click(function () {
+                $('.videocancel').click(function() {
                     $('.modal').hide()
                 })
-                $('.videosave').click(function () {
+                $('.videosave').click(function() {
                     $('.modal').hide()
                 })
             });
 
-            $('.table_footer input').click(function () {
+            $('.table_footer input').click(function() {
                 location.href = "{:U('index/course')}"
             });
         })
