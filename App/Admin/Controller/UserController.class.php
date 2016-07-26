@@ -100,6 +100,34 @@ class UserController extends Controller
 		$this->ajaxReturn($data,'json');
 
 	}
+	/* 导出用户表数据*/
+    public function daochu(){
+        /*if(!I('id')){
+            $this->error('数据错误');die;
+        }*/
+        /*$action = date('Y-m-d', strtotime(I('action')));
+        $action = explode('-', $action);
+        $over = date('Y-m-d', strtotime(I('over')));
+        $over = explode('-', $over);*/
+        $id = array(1,2,3,4,5,6);
+        $condition = array(
+            'id'=>array('in',$id)
+        ); 
+        $data = M('users')->where($condition)->select();
+        $title = array(
+            array(
+                'id' => '序号',
+                'user_mobi'=>'电话',
+                'username'=>'昵称',
+                'sex'=>'性别',
+                'logintime'=>'登录时间',
+                'status'=>'状态'
+            )
+        );
+        $data = array_merge($title,$data);
+        $name = 'ersg';  
+        $res = dataPush($data,$name);
+    }
 }
 
 ?>

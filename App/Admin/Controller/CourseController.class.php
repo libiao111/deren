@@ -44,7 +44,7 @@ class CourseController extends Controller
         $result = M('course')->where($where)->limit($data['limit'])->select();
         $this->assign('page',$data['pages']['pages']);
         $this->assign('course',$result);
-        $this->display("index/course_management");
+        $this->display("Index/course_management");
     }
     /*启用状态*/
     public function enablestatus()

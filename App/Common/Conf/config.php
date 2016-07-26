@@ -19,6 +19,7 @@ return array(
         '__ACSS__'  => __ROOT__.'/Public/admin/css',
         '__AIMG__'  => __ROOT__.'/Public/admin/img',
         '__AJS__'   => __ROOT__.'/Public/admin/js',
+        '__UP__'    =>__ROOT__.'/Public',
         '__AEDITOR__'   => __ROOT__.'/Public/admin/editor',
         '__ADATEPICK__'   => __ROOT__.'/Public/admin/datepick'
     ),

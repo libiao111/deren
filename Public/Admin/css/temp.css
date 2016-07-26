@@ -73,3 +73,10 @@ div.input_set input {
     top: 0px;
     z-index: 5;
 }
+
+.fra1 {
+    height: 100px;
+    width: 100px;
+    border: 0;
+    margin-left: 1px
+}

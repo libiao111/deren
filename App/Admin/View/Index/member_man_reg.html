@@ -24,46 +24,47 @@
 
 
         <!-- 表格主体 -->
-        <table class="table_default">
-            <tr>
-                <th width="10%">
-                    <input type="checkbox" class="checkall">
-                </th>
-                <th width="17%">头像</th>
-                <th width="14%">昵称</th>
-                <th width="14%">性别</th>
-                <th width="14%">电话</th>
-                <th width="17%">登录时间</th>
-                <th width="14%">状态</th>
-                <!--                <th width="15%">操作</th>-->
-            </tr>
-            <foreach name="users" item="v">
+        <form class= "frm" method="post" action="{:U('User/daochu')}"enctype="multipart/form-data">
+            <table class="table_default">
                 <tr>
-                    <td>
-                        <input type="checkbox" id="{$v.id}" value="{$v.id}">
-                    </td>
-                    <td><img src="__UPFILE__/{$v.user_photo}" height="60px" class="mt8 mb8"></td>
-                    <td>{$v.username}</td>
-                    <td>
-                        <!--                    {$v.sex}-->
-                        <if condition="$v.sex eq 1">男
-                            <elseif condition="$v.sex eq 0" />女
-                            <else />
-                        </if>
-
-                    </td>
-                    <td>{$v.user_mobi}</td>
-                    <td>{$v.logintime}</td>
-                    <td>
-                        <if condition="$v.status eq 0">启用
-                            <else />停用
-                        </if>
-                    </td>
-                    <!--                    <td>详情</td>-->
+                    <th width="10%">
+                        <input type="checkbox" class="checkall">
+                    </th>
+                    <th width="17%">头像</th>
+                    <th width="14%">昵称</th>
+                    <th width="14%">性别</th>
+                    <th width="14%">电话</th>
+                    <th width="17%">登录时间</th>
+                    <th width="14%">状态</th>
+                    <!--                <th width="15%">操作</th>-->
                 </tr>
-            </foreach>
-        </table>
+                <foreach name="users" item="v">
+                    <tr>
+                        <td>
+                            <input type="checkbox" id="{$v.id}" value="{$v.id}" name="id">
+                        </td>
+                        <td><img src="__UPFILE__/{$v.user_photo}" height="60px" class="mt8 mb8"></td>
+                        <td>{$v.username}</td>
+                        <td>
+                            <!--                    {$v.sex}-->
+                            <if condition="$v.sex eq 1">男
+                                <elseif condition="$v.sex eq 0" />女
+                                <else />
+                            </if>
 
+                        </td>
+                        <td>{$v.user_mobi}</td>
+                        <td>{$v.logintime}</td>
+                        <td>
+                            <if condition="$v.status eq 0">启用
+                                <else />停用
+                            </if>
+                        </td>
+                        <!--                    <td>详情</td>-->
+                    </tr>
+                </foreach>
+            </table>
+        </form>
         <!-- 尾部 -->
         <div class="table_footer mb30">
             <div class="operate_btn_box">
@@ -245,7 +246,10 @@
                     }
                 });
             })
-
+            //导出exl
+            $('.output_xls').click(function(){
+                $('.frm').submit();
+            })
             //disable operation
             $('.disable').click(function () {
                 'use strict';

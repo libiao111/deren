@@ -58,4 +58,45 @@ class IndexController extends Controller
         session_destroy();
         $this->redirect('Index/index',3000);
     }
+
+
+
+
+
+
+
+
+       /* 导入销售机会 */
+    public function daoru() {
+        if (!IS_POST) {
+            $this->error('页面不存在');
+            die;
+        }
+        if (!empty($_FILES['fileexcel']['name'])) {
+            $content = $_FILES['fileexcel']['tmp_name'];
+            $type = explode (".", $_FILES['fileexcel']['name']);
+            $type = strtolower($type[1]);
+            /* 限制文件格式 */
+            if ($type != "xlsx" && $type != "xls") {
+                $this->error ('仅支持：slsx/sls');
+            }
+            /* 导入文件 */
+            $arr = read($content, $type);
+            $join = dataHandle($arr);
+            $this->display('index');
+            $result = M('users')->addAll($join);
+            if ($result) {
+                $this->redirect('index');
+            } else {
+                $this->error ('导入数据失败');
+            }
+        } else {
+            $this->error ('数据错误');
+        }
+    }
+
+
+    
+   
+
 }
