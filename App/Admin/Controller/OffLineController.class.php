@@ -10,27 +10,30 @@ class OffLineController extends Controller
     //添加或修改线下课
     public function index()
     {
-    	if(!IS_AJAX){
-      		  $this->error('页面不存在!');die; 
+        if(!IS_AJAX){
+            $this->error('页面不存在!');die; 
       	}
-      	/*获取值*/
-    	$id =I('id');
+		 // $type = I('type');
+		/*获取值*/
+    	//$id =I('id');
     	/*获取缩略图路径*/
     	$course_photo =session('course_photo');
         $offline_url = session('offline_url');
+        
     	//数组赋值
     	$arr =array(
-			'type'=>I('type'),
+			//'type'=>I('type'),
 	    	'course_name'=>I('course_name'),
-	    	'course_photo'=>$course_photo,
+	    	//'course_photo'=>$course_photo,
 	    	'current_price'=>I('current_price'),
 	    	'course_price'=>I('course_price'),
 	    	'teach_name'=>I('teach_name'),
-	    	'picture'=>I('picture'),
+	    	//'picture'=>I('picture'),
 	    	'addtime'=>I('addtime'),
 			'offline_url'=> $offline_url,
 	    	'class_num'=>I('class_num'),
-	    	'status'=>I('status')
+	    	//'status'=>I('status')
+            
 		);
 		if ($id) {
 			/*修改线下课*/
@@ -51,6 +54,7 @@ class OffLineController extends Controller
 		}
 		$this->ajaxReturn($data,'json');
   	}
+    
     /*显示课时*/
     public function Offlineclass()
     {
@@ -60,8 +64,9 @@ class OffLineController extends Controller
         );
         $result = M('class')->where($arr)->order('paixu')->select();
         $this->assign('class',$result);
-        $this->thisplay('index/offline_course_edit')
+        $this->display('Index/offline_cousrse_edit');
     } 
+    
     /*上传缩略图*/
     public function upload(){
         $width = '300';
@@ -74,6 +79,7 @@ class OffLineController extends Controller
         $this->course_photo = $course_photo;
 
     }
+    
     /*上传音频视频*/
     public function uploa(){
         $video_url = uploadvideo();

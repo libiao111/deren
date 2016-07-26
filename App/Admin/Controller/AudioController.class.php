@@ -59,7 +59,8 @@ class AudioController extends Controller
         );
         $result = M('class')->where($arr)->order('paixu')->select();
         $this->assign('class',$result);
-        $this->display('index/Audio_course_edit');
+        $this->display('index/Audio_cousrse_edit');
+
     } 
   	/*上传轮播图*/
     public function upload() 

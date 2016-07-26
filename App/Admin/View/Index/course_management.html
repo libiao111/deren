@@ -8,12 +8,10 @@
     <link rel="stylesheet" href="__ACSS__/index.css" />
     <link rel="stylesheet" type="text/css" href="__ACSS__/font-awesome.min.css">
     <style>
-        
-        .current{
-            display:inline-block;
-            width:10px;
-            height:15px;
-            
+        .current {
+            display: inline-block;
+            width: 10px;
+            height: 15px;
         }
     </style>
 </head>
@@ -103,9 +101,17 @@
                         </if>
                     </td>
                     <td class="operation">
-                        <a href="" class="mr2 edit">
-                            <i class="fa fa-edit vm"></i> 编辑
-                        </a>
+                        <switch name="v.type">
+                            <case value="1">
+                                <a href="{:U('OffLine/Offlineclass', array('id' => $v['id'],'type'=>$v['type']))}" class="mr2 edit"><i class="fa fa-edit vm"></i> 编辑</a>
+                            </case>
+                            <case value="3">
+                                <a href="{:U('Video/Videoclass', array('id' => $v['id']))}" class="mr2 edit"><i class="fa fa-edit vm"></i> 编辑</a>
+                            </case>
+                            <case value="2">
+                                <a href="{:U('Audio/Audioclass', array('id' => $v['id']))}" class="mr2 edit"><i class="fa fa-edit vm"></i> 编辑</a>
+                            </case>
+                        </switch>
                     </td>
                 </tr>
             </foreach>
@@ -195,7 +201,7 @@
         <div class="modal_add_course">
             <div class="top">
                 <span class="f_s20">选择课程分类：</span>
-                <select name="" id="select_course" class="f_s20">
+                <select id="select_course" class="f_s20">
                     <option value="1">线下课</option>
                     <option value="2">音频课</option>
                     <option value="3">视频课</option>
@@ -203,7 +209,7 @@
             </div>
             <div class="bottom">
                 <span class="cancel pointer">取消</span>
-                <span class="confirm pointer">确认</span>
+                <span class="confirm pointer"><a href="{:U('index',array('id'=>1))}">确认</a></span>
             </div>
         </div>
         <div class="modal_mian_add">
@@ -262,45 +268,44 @@
     <script src="__AJS__/jquery.easing.js"></script>
     <script src="__AJS__/deleconfirm.js"></script>
     <script>
-        $(function () {
-            $('.checkall').click(function () {
+        $(function() {
+            $('.checkall').click(function() {
                 'use strict';
                 var this_ = $(this);
                 if (this_.prop('checked')) {
                     this_.parents('tr').siblings('tr').find('td:eq(0)>input[type="checkbox"]').prop("checked", true);
-                }
-                else{
+                } else {
                     this_.parents('tr').siblings('tr').find('td:eq(0)>input[type="checkbox"]').prop("checked", false);
                 }
             })
 
-            $('.type').change(function () {
+            $('.type').change(function() {
                 $('.frm').submit();
             });
-            $('.aa').change(function () {
+            $('.aa').change(function() {
                 $('.frm').submit();
             });
 
-            $('.enable').click(function () {
+            $('.enable').click(function() {
                     'use strict';
                     $('.hint').show();
                     $('.hintmain').show();
                     $('.hintmain>p').text('操作成功!');
-                    setTimeout(function () {
+                    setTimeout(function() {
                         $('.hint').hide();
                     }, 1000);
 
                     let id = [],
                         tid = $('td>input[type="checkbox"]:checked');
-                    tid.each(function () {
+                    tid.each(function() {
                         id.push(parseInt($(this).attr('id')));
                     });
 
                     $.post('{:U("Admin/Course/enablestatus")}', {
                         id: id
-                    }, function (data) {
+                    }, function(data) {
                         if (data.status) {
-                            setTimeout(function () {
+                            setTimeout(function() {
                                 $('.hint').hide();
                                 window.location.reload();
                             }, 1000)
@@ -308,49 +313,50 @@
                     });
                 })
                 //disable operation
-            $('.disable').click(function () {
+            $('.disable').click(function() {
                 'use strict';
                 $('.hint').show();
                 $('.hintmain').show();
                 $('.hintmain>p').text('操作成功!');
-                setTimeout(function () {
+                setTimeout(function() {
                     $('.hint').hide();
                 }, 1000);
                 let id = [],
                     tid = $('td>input[type="checkbox"]:checked');
-                tid.each(function () {
+                tid.each(function() {
                     id.push(parseInt($(this).attr('id')));
                 });
 
                 $.post('{:U("Admin/Course/disablestatus")}', {
                     id: id
-                }, function (data) {
+                }, function(data) {
                     if (data.status) {
 
-                        setTimeout(function () {
+                        setTimeout(function() {
                             $('.hint').hide();
                             window.location.reload();
                         }, 1000)
                     }
                 });
             })
-            $('.delete').click(function () {
+            
+            $('.delete').click(function() {
                 'use strict';
                 let id = [],
                     tid = $('td>input[type="checkbox"]:checked');
-                tid.each(function () {
+                tid.each(function() {
                     id.push(parseInt($(this).attr('id')));
                 });
-                
+
                 $.post("{:U('Admin/Course/delCourse')}", {
-                    id:id
-                }, function (data) {
+                    id: id
+                }, function(data) {
                     if (data.status) {
                         $('.hint').show();
                         $('.hintmain').show();
                         $('.hintmain>p').text('操作成功!');
-                        setTimeout(function () {
-                            setTimeout(function () {
+                        setTimeout(function() {
+                            setTimeout(function() {
                                 $('.hint').hide();
                             }, 1000);
                             window.location.reload();
@@ -370,27 +376,27 @@
                 iframe = document.querySelector('iframe');
 
 
-            add_cour_btn.onclick = function (event) {
+            add_cour_btn.onclick = function(event) {
                 'use strict';
                 event.preventDefault();
                 modal.style.display = 'block';
                 modal_add_course.style.display = 'block'
             }
-            modal_add_course_cancel.onclick = function () {
+            modal_add_course_cancel.onclick = function() {
                 'use strict';
                 modal.style.display = 'none';
                 modal_add_course.style.display = 'none'
             }
 
             //modal back operation
-            modal_back.onclick = function () {
+            modal_back.onclick = function() {
                 'use strict';
                 modal.style.display = 'none';
                 modal_add_course.style.display = 'none'
             }
 
 
-            modal_add_course_confirm.onclick = function () {
+            modal_add_course_confirm.onclick = function() {
                 'use strict';
                 let select = document.querySelector('#select_course').value;
 
@@ -404,20 +410,7 @@
             }
 
 
-            //table中编辑按钮操作
-            $('.edit').click(function (e) {
-                'use strict';
-                e.preventDefault();
-               var this_ = $(this);
-                let kc = this_.parent().siblings('td.kc_type').text().trim();
-                if (kc == "线下课") {
-                    location.href = "{:U('index/offline_cousrse_edit')}"
-                } else if (kc == "视频课") {
-                    location.href = "{:U('index/video_cousrse_edit')}"
-                } else if (kc == "音频课") {
-                    location.href = "{:U('index/audio_cousrse_edit')}"
-                }
-            })
+           
 
             //table底部三个按钮操作
             "use strict"
@@ -429,12 +422,12 @@
             var modal_main_three_cancel = document.querySelector('.modal_main_three').querySelector('div').querySelector('.cancel'),
                 modal_main_three_confirm = document.querySelector('.modal_main_three').querySelector('div').querySelector('.confirm');
 
-            modal_main_three_cancel.onclick = function () {
+            modal_main_three_cancel.onclick = function() {
                 'use strict';
                 modal.style.display = 'none';
                 modal_add_course.style.display = 'none'
             }
-            modal_main_three_confirm.onclick = function () {
+            modal_main_three_confirm.onclick = function() {
                 'use strict';
                 //to do
             }

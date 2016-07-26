@@ -51,12 +51,13 @@ class VideoController extends Controller
     /*显示视频课时*/
     public function Videoclass()
     {
+		
         $id= I('id');
         $arr = array(
             'course_id'=>$id
         );
-        $result = M('class')->where($arr)->order('paixu')->select()
+        $result = M('class')->where($arr)->order('paixu')->select();
         $this->assign('class',$result);
-        $this->display('index/video_course_edit');
+        $this->display('index/video_cousrse_edit');
     } 
 }
