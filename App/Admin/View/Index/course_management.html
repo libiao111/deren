@@ -203,7 +203,7 @@
             </div>
             <div class="bottom">
                 <span class="cancel pointer">取消</span>
-                <span class="confirm pointer">确认</span>
+                <span class="confirm pointer"><a href="{:U('index',array('id'=>1))}">确认</a></span>
             </div>
         </div>
         <div class="modal_mian_add">
@@ -408,15 +408,20 @@
             $('.edit').click(function (e) {
                 'use strict';
                 e.preventDefault();
-               var this_ = $(this);
+                var this_ = $(this);
+                
                 let kc = this_.parent().siblings('td.kc_type').text().trim();
+                let lu  = "";
                 if (kc == "线下课") {
-                    location.href = "{:U('index/offline_cousrse_edit')}"
+                   lu = "{:U('OffLine/index')}";
                 } else if (kc == "视频课") {
-                    location.href = "{:U('index/video_cousrse_edit')}"
+                    lu = "{:U('Video/index')}";
                 } else if (kc == "音频课") {
-                    location.href = "{:U('index/audio_cousrse_edit')}"
+                    lu = "{:U('Audio/index')}";
                 }
+                $.post(lu,{},function(){
+                    
+                })
             })
 
             //table底部三个按钮操作

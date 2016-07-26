@@ -744,3 +744,13 @@ section.about {
 .absolute{
     position: absolute
 }
+.upaudio{
+    border: solid 1px;
+    border-radius: 4px;
+    padding: 5px;
+    cursor: pointer;
+    
+}
+.upaudio:hover{
+    background-color: aqua
+}

@@ -95,6 +95,7 @@
                 <th width="10%">上课时间</th>
                 <th width="11%">操作</th>
             </tr>
+            
             <tr class="h50 clone">
                 <td>思维口才50天速成课</td>
                 <td>2016-05-20 15:30</td>
@@ -144,12 +145,12 @@
                 <p>
                     <span>上传视频：</span>
                     <input type="file" name="upvideo" class="upvideo">
-                    <span>上传视频</span>
+                    <span class="upaudio">上传视频</span>
                 </p>
                 <p class="">
                     <span class="absolute">上传图片：</span>
-<!--                    <span data-num="0" onclick="uploadStart(this)" name="upphoto" class="upphoto"> upload btn </span>-->
                     <iframe src="{:U('Upload/Loadimg/sele',array('name'=>'arr','text'=>'图片'))}" class="fra2 relative"></iframe>
+<!--                    <span class="uppic">上传图片</span>-->
                 </p>
             </div>
 
@@ -262,11 +263,16 @@
         };
         $("#startTime").datepicker(option);
         $("#endTime").datepicker(option);
+        
 
         let courses_name = document.querySelector('.courses_name'),
             teacher_name = document.querySelector('.teacher_name'),
             courses_num = document.querySelector('.courses_num');
         $(function() {
+            $('.upaudio').click(function(){
+                $(this).siblings('input').click()
+            })
+            
             $('.courses_num').keyup(function() {
                 'use strict';
                 let num = $('.courses_num').val(),
@@ -298,11 +304,11 @@
 //                return app = null;
                 
                 $.post("{:U('Admin/Class/addAudioClass')}", {
-                    'id': handle1_id,
+//                    'id': handle1_id,
                     'class_name': $('.coursename').val(),
-                    'class_time': $('.class_time').val(),
-                    'type':asdasd,
-                    'status':asd,
+                    'class_time': $('.hour').val() 
+//                    'type':asdasd,
+//                    'status':asd,
                 }, function(data) {
                     if (data.status) {
 
