@@ -57,9 +57,10 @@
                 <span class="i_block w100 texy_a_r">开始上课时间:</span>
                 <input type="text" id="startTime" class="am-form-field w250" data-am-datepicker name="startTime" />
             </div>
-            <div>
-                <span class="i_block w100 texy_a_r">上传封面:</span>
-                <input type="file" class="w250 fengmian" name="fengmian">
+            <div class="mb15 relative ">
+                <span class="i_block w100 texy_a_r absolute">上传封面:</span>
+                <iframe src="{:U('Upload/Loadimg/sele',array('name'=>'arr','text'=>'图片'))}" class="fra1 relative"></iframe>
+
             </div>
         </div>
     </section>
@@ -255,8 +256,8 @@
         let courses_name = document.querySelector('.courses_name'),
             teacher_name = document.querySelector('.teacher_name'),
             courses_num = document.querySelector('.courses_num');
-        $(function() {
-            $('.courses_num').keyup(function() {
+        $(function () {
+            $('.courses_num').keyup(function () {
                 'use strict';
                 let num = $('.courses_num').val(),
                     strnum = num.split('');
@@ -267,40 +268,36 @@
                 }
             });
 
-            $('.addvideo').click(function() {
+            $('.addvideo').click(function () {
                 'use strict';
                 $('.modal').show();
                 $('.video_modal_main_edit').show();
                 $('.m_m_offline').hide()
                 $('.m_m_audio').hide()
-                $('.videocancel').click(function() {
+                $('.videocancel').click(function () {
                     $('.modal').hide()
                 })
             });
 
-            $('.videosave').click(function() {
+            $('.videosave').click(function () {
                 'use strict';
                 $('.modal').hide();
                 var app = $('.table_default tr.clone').eq(0).clone(true);
+                var data=$('#startTime1').val();
                 app.find('td').eq(0).text($('.coursename').val());
-                app.find('td').eq(1).text($('#startTime1') + $('.hour').val() + ':' + $('.minute').val());
-                //                console.log(app);
+                app.find('td').eq(1).text(data +" "+ $('.hour').val() + ':' + $('.minute').val());
                 app.appendTo('.table_default');
-
-                //                return app = null;.
                 $.post("{:U('Admin/Class/addOffLine')}", {
-                    //                    'id': handle1_id,
                     'class_name': $('.coursename').val(),
                     'class_time': $('.class_time').val()
-                        //                    'paixu':
-                }, function(data) {
+                }, function (data) {
                     if (data.status) {
 
                     }
                 });
             });
 
-            $('.saveall').click(function() {
+            $('.saveall').click(function () {
 
                 $.post("{:U('Admin/OffLine/index')}", {
                     //                    'id': handle1_id,
@@ -313,7 +310,7 @@
                     'class_num': $('.courses_num').val(),
                     'addtime': $('#fincre').val(),
                     // 'status': $('#fincre').val(),
-                }, function(data) {
+                }, function (data) {
                     if (data.status) {
 
                     }
@@ -321,28 +318,24 @@
             })
 
 
-            $('.back').click(function() {
+            $('.back').click(function () {
                 $('.modal').hide()
             });
 
-            $('.operation .edit').click(function(e) {
+            $('.operation .edit').click(function (e) {
                 'use strict';
                 e.preventDefault();
                 $('.modal').show();
                 $('.video_modal_main_edit').show();
                 $('.m_m_offline').hide()
                 $('.m_m_audio').hide()
-                $('.videocancel').click(function() {
+                $('.videocancel').click(function () {
                     $('.modal').hide()
                 })
-                $('.videosave').click(function() {
+                $('.videosave').click(function () {
                     $('.modal').hide()
                 })
             });
-
-            // $('.table_footer input').click(function() {
-            //     location.href = "{:U('index/course')}"
-            // });
         })
     </script>
 </body>

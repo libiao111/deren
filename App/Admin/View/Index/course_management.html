@@ -201,10 +201,10 @@
         <div class="modal_add_course">
             <div class="top">
                 <span class="f_s20">选择课程分类：</span>
-                <select name="" id="select_course" class="f_s20">
-                    <option value="{:U('OffLine/')}">线下课</option>
-                    <option value="{:U('index',array('id'=>2))}">音频课</option>
-                    <option value="{:U('index',array('id'=>1))}">视频课</option>
+                <select id="select_course" class="f_s20">
+                    <option value="1">线下课</option>
+                    <option value="2">音频课</option>
+                    <option value="3">视频课</option>
                 </select>
             </div>
             <div class="bottom">
@@ -410,25 +410,7 @@
             }
 
 
-            //table中编辑按钮操作
-            // $('.edit').click(function(e) {
-            //     'use strict';
-            //     e.preventDefault();
-            //     var this_ = $(this);
-
-            //     let kc = this_.parent().siblings('td.kc_type').text().trim();
-            //     let lu = "";
-            //     if (kc == "线下课") {
-            //         lu = "{:U('OffLine/index',array('type'=>kc ))}";
-            //     } else if (kc == "视频课") {
-            //         lu = "{:U('Video/index')}";
-            //     } else if (kc == "音频课") {
-            //         lu = "{:U('Audio/index')}";
-            //     }
-            //     $.post(lu, {}, function() {
-
-            //     })
-            // })
+           
 
             //table底部三个按钮操作
             "use strict"
