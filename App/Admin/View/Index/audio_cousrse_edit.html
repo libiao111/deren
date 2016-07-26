@@ -74,7 +74,7 @@
         </span>
     </div>
     <section class="widget_wrp h460">
-        <script id="editor" type="text/plain" style="width:800px;height:300px;"></script>
+        <textarea id="editor" type="text/plain" style="width:800px;height:300px;"></textarea>
         <script type="text/javascript">
             var ue = UE.getEditor('editor');
         </script>
@@ -95,7 +95,7 @@
                 <th width="10%">上课时间</th>
                 <th width="11%">操作</th>
             </tr>
-            
+
             <tr class="h50 clone">
                 <td>思维口才50天速成课</td>
                 <td>2016-05-20 15:30</td>
@@ -150,17 +150,17 @@
                 <p class="">
                     <span class="absolute">上传图片：</span>
 
-<!--                    <span class="uppic">上传图片</span>-->
+                    <!--                    <span class="uppic">上传图片</span>-->
 
-                    <div>
+                    <!--<div>
                         <div class="alt-imgarea">
-                        <span data-num="0" onclick="uploadStart(this)"></span>
+                            <span data-num="0" onclick="uploadStart(this)"></span>
                         </div>
-                    </div>
+                    </div>-->
 
                 </p>
             </div>
-            
+
             <div class="m_m_offline">
                 <p><span></span>
                     <input type="text">
@@ -255,14 +255,13 @@
     <script src="__AJS__/jquery.js"></script>
     <script src="__AJS__/jquery.easing.js"></script>
     <script src="__AJS__/deleconfirm.js"></script>
-    <script type="text/javascript" src ="__AJS__/jquery.upload.js"></script>
+    <script type="text/javascript" src="__AJS__/jquery.upload.js"></script>
     <script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.min.js"></script>
     <script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.zh-CN.js"></script>
     <script type="text/javascript">
         var uploadActionUrl = "{:U('Audio/upload')}";
     </script>
     <script type="text/javascript">
-        
         'use strict';
         var option = {
             dateFormat: "yyyy-m-d",
@@ -271,16 +270,16 @@
         };
         $("#startTime").datepicker(option);
         $("#endTime").datepicker(option);
-        
+
 
         let courses_name = document.querySelector('.courses_name'),
             teacher_name = document.querySelector('.teacher_name'),
             courses_num = document.querySelector('.courses_num');
         $(function() {
-            $('.upaudio').click(function(){
+            $('.upaudio').click(function() {
                 $(this).siblings('input').click()
             })
-            
+
             $('.courses_num').keyup(function() {
                 'use strict';
                 let num = $('.courses_num').val(),
@@ -306,16 +305,13 @@
                 var app = $('.table_default tr.clone').eq(0).clone(true);
                 app.find('td').eq(0).text($('.coursename').val());
                 app.find('td').eq(1).text($('.hour').val() + '小时' + $('.minute').val() + '分');
-//                console.log(app);
+                //                console.log(app);
                 app.appendTo('.table_default');
-//                return app = null;
-                
+                //                return app = null;
+
                 $.post("{:U('Admin/Class/addAudioClass')}", {
-//                    'id': handle1_id,
                     'class_name': $('.coursename').val(),
-                    'class_time': $('.hour').val() 
-//                    'type':asdasd,
-//                    'status':asd,
+                    'class_time': $('.hour').val()
                 }, function(data) {
                     if (data.status) {
 
