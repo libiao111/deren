@@ -60,5 +60,31 @@ class OrderController extends Controller
 		}
         $this->ajaxReturn($data,'json');
 	}
+	 /* 导出订单表数据*/
+    public function daochu2(){
+        /*if(!I('id')){
+            $this->error('数据错误');die;
+        }*/
+        $id = array(1,2,3,4);
+        $condition = array(
+            'id'=>array('in',$id)
+        ); 
+        
+        $data = M('ordera')->where($condition)->select();
+        $title = array(
+            array(
+                'id' => 'id',
+                'ordera_mobi'=>'手机号码',
+                'ordera_name'=>'购买人姓名',
+                'order_time'=>'购买时间',
+                'status'=>'状态',
+                'type'=>'课程类型',
+                'current_price'=>'金额'
+            )
+        );
+        $data = array_merge($title,$data);
+        $name = date('Y-m-d H:i:s');
+        $res = dataPush2($data,$name);
+    }
 }
 ?>

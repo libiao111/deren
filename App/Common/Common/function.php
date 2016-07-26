@@ -188,3 +188,173 @@ function uploadImgHandler($width, $height = null)
     }
     return $data;
 }
+
+
+
+
+
+
+/* 导入EXCEL */
+/*function read($filename, $type, $encode = 'utf-8'){
+    include_once('Public/Plugin/excel/PHPExcel.php');
+    if ($type === 'xlsx') {
+        $objReader = PHPExcel_IOFactory::createReader('Excel2007'); 
+    } else if ($type === 'xls'){
+        $objReader = PHPExcel_IOFactory::createReader('Excel5'); 
+    } else { die;}
+    $objReader->setReadDataOnly(true); 
+    $objPHPExcel = $objReader->load($filename); 
+    $objWorksheet = $objPHPExcel->getActiveSheet(); 
+    $highestRow = $objWorksheet->getHighestRow(); 
+    $highestColumn = $objWorksheet->getHighestColumn(); 
+    $highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn); 
+    $excelData = array(); 
+    for ($row = 1; $row <= $highestRow; $row++) { 
+        for ($col = 0; $col < $highestColumnIndex; $col++) { 
+            $excelData[$row][] =(string)$objWorksheet->getCellByColumnAndRow($col, $row)->getValue();
+        } 
+    } 
+    return $excelData; 
+}*/
+
+
+/* 导出用户表EXCEL */
+function dataPush($data,$name='Excel') {
+    include_once('./Public/PHPExcel.php');
+    error_reporting(E_ALL);
+    date_default_timezone_set('Europe/London');
+    $objPHPExcel = new PHPExcel();
+ 
+    /* 以下是一些设置 ，什么作者 标题啊之类的 */
+    $objPHPExcel->getProperties()->setCreator("客户数据")
+        ->setLastModifiedBy("客户数据")
+        ->setTitle("数据EXCEL导出")
+        ->setSubject("数据EXCEL导出")
+        ->setDescription("备份数据")
+        ->setKeywords("excel")
+        ->setCategory("result file");
+
+    /* 以下就是对处理Excel里的数据， 横着取数据，主要是这一步，其他基本都不要改 */
+    foreach($data as $k => $v) {
+        $num = $k + 1;
+        //Excel的第A列，uid是你查出数组的键值，下面以此类推
+        $objPHPExcel->setActiveSheetIndex(0)
+        ->setCellValue('A'.$num, $v['id'])
+        ->setCellValue('B'.$num, $v['user_photo'])
+        ->setCellValue('C'.$num, $v['username'])
+        ->setCellValue('D'.$num, $v['sex'])
+        ->setCellValue('E'.$num, $v['user_mobi'])
+        ->setCellValue('F'.$num, $v['logintime'])
+        ->setCellValue('G'.$num, $v['status']);
+    }
+    $objPHPExcel->getActiveSheet()->setTitle('User');
+    $objPHPExcel->setActiveSheetIndex(0);
+    header('Content-Type: application/vnd.ms-excel');
+    header('Content-Disposition: attachment;filename="'.$name.'.xls"');
+    header('Cache-Control: max-age=0');
+    $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+    $objWriter->save('php://output');
+    exit;
+}
+/* 导出订单表EXCEL */
+function dataPush2($data,$name='Excel') {
+    include_once('./Public/PHPExcel.php');
+    error_reporting(E_ALL);
+    date_default_timezone_set('Europe/London');
+    $objPHPExcel = new PHPExcel();
+ 
+    /* 以下是一些设置 ，什么作者 标题啊之类的 */
+    $objPHPExcel->getProperties()->setCreator("客户数据")
+        ->setLastModifiedBy("客户数据")
+        ->setTitle("数据EXCEL导出")
+        ->setSubject("数据EXCEL导出")
+        ->setDescription("备份数据")
+        ->setKeywords("excel")
+        ->setCategory("result file");
+
+    /* 以下就是对处理Excel里的数据， 横着取数据，主要是这一步，其他基本都不要改 */
+    foreach($data as $k => $v) {
+        $num = $k + 1;
+        if($v['type']==1){
+            $v['type']='线下课';
+        }else if($v['type']==2){
+            $v['type']='视频课';
+        }else if($v['type']==3){
+            $v['type']='音频课';
+        }
+        if($v['status']==0){
+            $v['status']='未支付';
+        }else if($v['status']==1){
+            $v['status']='已支付';
+        }else if($v['status']==2){
+            $v['status']='已退款';
+        }
+        //Excel的第A列，uid是你查出数组的键值，下面以此类推
+        $objPHPExcel->setActiveSheetIndex(0)
+        ->setCellValue('A'.$num, $v['id'])
+        ->setCellValue('B'.$num, $v['type'])
+        ->setCellValue('C'.$num, $v['order_time'])
+        ->setCellValue('D'.$num, $v['ordera_name'])
+        ->setCellValue('E'.$num, $v['ordera_mobi'])
+        ->setCellValue('F'.$num, $v['current_price'])
+        ->setCellValue('G'.$num, $v['status']);
+    }
+    $objPHPExcel->getActiveSheet()->setTitle('User');
+    $objPHPExcel->setActiveSheetIndex(0);
+    header('Content-Type: application/vnd.ms-excel');
+    header('Content-Disposition: attachment;filename="'.$name.'.xls"');
+    header('Cache-Control: max-age=0');
+    $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+    $objWriter->save('php://output');
+    exit;
+}
+
+
+/* 导入数据重组 */
+/*function dataHandle($arr) {
+    $data = array();
+    foreach ($arr as $k => $va) {
+        if ($k > 1) {
+            $time = intval(($va[0] - 25569) * 3600 * 24);
+            $time = explode('-', date('Y-m-d', $time));
+            if ($va[18]) {
+                $ysyf = $va[18];
+            } else {
+                $ysyf = 0;
+            }
+            $data[] = array(
+                'year' => $time[0],
+                'date' => $time[1].'-'.$time[2],
+
+                'shrxm' => $va[1],
+                'shrdh' => $va[2],
+                'ch' => $va[3],
+                'fhrxm' => $va[4],
+                'bh' => $va[5],
+                'fhrdh' => $va[6],
+                'hm' => $va[7],
+                'js' => $va[8],
+                'tj' => $va[9],
+                'tyf' => $va[10],
+                'dfka' => $va[11],
+                'dska' => $va[12],
+                'zyf' => $va[13],
+                'fkfs' => $va[14],
+                'bza' => $va[15],
+                'qhr' => $va[16],
+                'skrq' => $va[17],
+                'ysyf' => $ysyf,
+                'dfkb' => $va[19],
+                'dskb' => $va[20],
+                'bzb' => $va[21],
+                'zkrq' => $va[22],
+                'zkje' => $va[23],
+                'fkrq' => $va[24],
+                'fkje' => $va[25],
+                'add_date' => time()
+            );
+        }
+    }
+    return $data;
+}
+*/

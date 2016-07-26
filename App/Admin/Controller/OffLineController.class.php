@@ -51,6 +51,17 @@ class OffLineController extends Controller
 		}
 		$this->ajaxReturn($data,'json');
   	}
+    /*显示课时*/
+    public function Offlineclass()
+    {
+        $id= I('id');
+        $arr = array(
+            'course_id'=>$id
+        );
+        $result = M('class')->where($arr)->order('paixu')->select()
+        $this->assign('class',$result);
+        $this->thisplay('index/offline_course_edit')
+    } 
     /*上传缩略图*/
     public function upload(){
         $width = '300';

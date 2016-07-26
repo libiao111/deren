@@ -39,6 +39,7 @@
 
 
         <!-- 表格主体 -->
+        <form action="{:U('Order/daochu2')}" method="post" name="frm" class="frm1" enctype="multipart/form-data">
         <table class="table_default">
             <tr>
                 <th width="10%">
@@ -79,7 +80,7 @@
                 </tr>
             </foreach>
         </table>
-
+    </form>
         <!-- 尾部 -->
         <div class="table_footer mb30">
             <div class="operate_btn_box">
@@ -239,7 +240,9 @@
             $('.type').change(function () {
                 $('.frm').submit();
             });
-
+            $('.output_xls').click(function () {
+                $('.frm1').submit();
+            });
             //delete operation
             $('.delete').click(function () {
                 'use strict';

@@ -50,6 +50,17 @@ class AudioController extends Controller
 		}
 		$this->ajaxReturn($data,'json');
     }
+    /*显示音频课课时*/
+     public function Videoclass()
+    {
+        $id= I('id');
+        $arr = array(
+            'course_id'=>$id
+        );
+        $result = M('class')->where($arr)->order('paixu')->select()
+        $this->assign('class',$result);
+        $this->display('index/video_course_edit');
+    } 
   	/*上传轮播图*/
     public function upload() {
 
@@ -74,7 +85,6 @@ class AudioController extends Controller
         } else {
             $data = $data;
         }
-        p($data);
         /* 输出调用反馈function */
          echo '<script type="text/javascript">parent.uploadReturn("'.$result['status'].'","'.$data.'")</script>';
     }
