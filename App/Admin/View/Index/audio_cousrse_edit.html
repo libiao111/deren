@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="__ACSS__/main.css">
     <link rel="stylesheet" href="__ACSS__/temp.css">
     <link rel="stylesheet" href="__ACSS__/index.css" />
+    <link rel="stylesheet" href="__ACSS__/upload.css" />
     <link href="__ADATEPICK__/js/datetimepicker/datepicker.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="__ACSS__/font-awesome.min.css">
     <script type="text/javascript" charset="utf-8" src="__AEDITOR__/ueditor.config.js"></script>
@@ -129,7 +130,7 @@
         <div class="audio_modal_main_edit">
             <h2>编辑课节</h2>
 
-            <div class="m_m_video">
+            <div class="m_m_video alt-imgarea">
                 <p><span>课节名称：</span>
                     <input type="text" class="w200 coursename" name="coursename">
                 </p>
@@ -147,12 +148,14 @@
                 </p>
                 <p class="">
                     <span class="absolute">上传图片：</span>
-<!--                    <span data-num="0" onclick="uploadStart(this)" name="upphoto" class="upphoto"> upload btn </span>-->
-                    <iframe src="{:U('Upload/Loadimg/sele',array('name'=>'arr','text'=>'图片'))}" class="fra2 relative"></iframe>
-
+                    <div>
+                        <div class="alt-imgarea">
+                        <span data-num="0" onclick="uploadStart(this)"></span>
+                        </div>
+                    </div>
                 </p>
             </div>
-
+            
             <div class="m_m_offline">
                 <p><span></span>
                     <input type="text">
@@ -246,16 +249,15 @@
 
     <script src="__AJS__/jquery.js"></script>
     <script src="__AJS__/jquery.easing.js"></script>
-   
     <script src="__AJS__/deleconfirm.js"></script>
+    <script type="text/javascript" src ="__AJS__/jquery.upload.js"></script>
     <script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.min.js"></script>
     <script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.zh-CN.js"></script>
-
     <script type="text/javascript">
-        var uploadActionUrl = "index.php/Admin/OffLine/uploadimg";
+        var uploadActionUrl = "{:U('Audio/upload')}";
     </script>
-
     <script type="text/javascript">
+        
         'use strict';
         var option = {
             dateFormat: "yyyy-m-d",
@@ -279,7 +281,6 @@
                     $('.courses_num').val(newstr)
                 }
             });
-
             $('.addvideo').click(function() {
                 $('.modal').show();
                 $('.audio_modal_main_edit').show();

@@ -34,6 +34,7 @@ function uploadStart(obj)
 }
 
 /* 反馈结果 */
+var uploa= ''
 function uploadReturn(status, data)
 {	
 	$('form[name="jqueryupload"]').remove();
