@@ -51,18 +51,19 @@ class AudioController extends Controller
 		$this->ajaxReturn($data,'json');
     }
     /*显示音频课课时*/
-     public function Videoclass()
+     public function Audioclass()
     {
         $id= I('id');
         $arr = array(
             'course_id'=>$id
         );
-        $result = M('class')->where($arr)->order('paixu')->select()
+        $result = M('class')->where($arr)->order('paixu')->select();
         $this->assign('class',$result);
-        $this->display('index/video_course_edit');
+        $this->display('index/Audio_course_edit');
     } 
   	/*上传轮播图*/
-    public function upload() {
+    public function upload() 
+    {
 
         if (!IS_POST) {
             $this->error('页面不存在');

@@ -58,7 +58,7 @@ class OffLineController extends Controller
         $arr = array(
             'course_id'=>$id
         );
-        $result = M('class')->where($arr)->order('paixu')->select()
+        $result = M('class')->where($arr)->order('paixu')->select();
         $this->assign('class',$result);
         $this->thisplay('index/offline_course_edit')
     } 
