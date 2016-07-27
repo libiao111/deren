@@ -10,9 +10,10 @@ class OffLineController extends Controller
     //添加或修改线下课
     public function index()
     {
-        if(!IS_AJAX){
-            $this->error('页面不存在!');die; 
-      	}
+		
+//        if(!IS_AJAX){
+//            $this->error('页面不存在!');die; 
+//      	}
 		 // $type = I('type');
 		/*获取值*/
     	//$id =I('id');
@@ -29,12 +30,13 @@ class OffLineController extends Controller
 	    	'course_price'=>I('course_price'),
 	    	'teach_name'=>I('teach_name'),
 	    	//'picture'=>I('picture'),
-	    	'addtime'=>I('addtime'),
-			'offline_url'=> $offline_url,
+	    	'addtime'=>I('startTime'),
+			//'offline_url'=> $offline_url,
 	    	'class_num'=>I('class_num'),
 	    	//'status'=>I('status')
             
 		);
+		p($arr);
 		if ($id) {
 			/*修改线下课*/
 			$arr['id']=$id;
@@ -43,6 +45,7 @@ class OffLineController extends Controller
 			/*添加线下课*/
 			$result = M('course')->add($arr);
 		}
+		p($result);
         /*反馈数据*/
 		if($result){
 			$data = array('status'=>1);
@@ -58,12 +61,12 @@ class OffLineController extends Controller
     /*显示课时*/
     public function Offlineclass()
     {
-        $id= I('id');
+        //$id= I('id');
         $arr = array(
-            'course_id'=>$id
+            'course_id'=>1
         );
         $result = M('class')->where($arr)->order('paixu')->select();
-        $this->assign('class',$result);
+        $this->assign('classa',$result);
         $this->display('Index/offline_cousrse_edit');
     } 
     

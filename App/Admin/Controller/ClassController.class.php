@@ -120,12 +120,13 @@ class ClassController extends Controller
     //删除课时
     public function delClass()
     {
+        
         if(!IS_AJAX){
             $this->error('页面不存在!');die;
         }
         $id = I('id');
         $where=array(
-            'id'  =>array('in',$id)
+            'id'  =>$id
         );
         $result = D('class')->relation('bigpho')->where($where)->delete();
         /*反馈数据*/
