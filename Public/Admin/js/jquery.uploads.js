@@ -9,14 +9,15 @@ function loadFormWrapper()
 		return false;
 	};
 	var obj = ''+
-	'<form name="jqueryupload" class="hide" action="" target="uploadhander" method="post" enctype="multipart/form-data">'+
-        '<input type="hidden" name="w">'+
-        '<input type="hidden" name="h">'+
+	'<form name="jqueryupload" class="hide" action="'+uploadActionUrl+'" target="uploadhander" method="post" enctype="multipart/form-data">'+
+        '<input type="hidden" name="num">'+
+        '<input type="hidden" name="name">'+
         '<input type="file" name="file">'+
     '</form>'+
     '<iframe name="uploadhander" class="hide" frameborder="0"></iframe>';
     $('body').append(obj);
 }
+
 /* 调用上传 */
 function uploadStart(obj)
 {
@@ -29,21 +30,13 @@ function uploadStart(obj)
 	    	form.submit();
 	    });
 	};
-
-	var type = $(obj).attr('data-type')/1;
-	if(type) {
-		form.attr('action', uploadActionSilder);
-	} else {
-		form.attr('action', uploadActionUrl);
-	}
-
-	var w = $(obj).attr('data-w');
-	if (w) {
-		form.find('input[name="w"]').val(w);
+	var num = $(obj).attr('data-num');
+	if (num) {
+		form.find('input[name="num"]').val(num);
 	};
-	var h = $(obj).attr('data-h');
-	if (h) {
-		form.find('input[name="h"]').val(h);
+	var name = $(obj).attr('data-name');
+	if (name) {
+		form.find('input[name="name"]').val(name);
 	};
     form.find('input[name="file"]').click();
 }
@@ -54,12 +47,8 @@ function uploadReturn(status, area, data)
 	$('form[name="jqueryupload"]').remove();
 	$('iframe[name="uploadhander"]').remove();
 	if (status) {
-		var obj = $(uploadReturnObj).parent();
-		var clone = obj.clone();
 		$(uploadReturnObj).parent().css('background-image', 'url('+area+data+')');
 		$(uploadReturnObj).siblings('input').val(data);
-		obj.after(clone);
-		obj.css('background-image', 'url('+data+')');
 	} else {
 		alert(data);
 	};
