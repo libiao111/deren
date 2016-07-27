@@ -58,7 +58,7 @@ class AudioController extends Controller
             'course_id'=>$id
         );
         $result = M('class')->where($arr)->order('paixu')->select();
-        $this->assign('class',$result);
+        $this->assign('classa',$result);
         $this->display('index/Audio_cousrse_edit');
 
     } 
