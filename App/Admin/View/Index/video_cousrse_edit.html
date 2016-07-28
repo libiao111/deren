@@ -159,12 +159,12 @@
 					<span>上课时间：</span>
 					<input type="text" id="startTime1" class="am-form-field w200 class_time" data-am-datepicker name="class_time" />
 				</p>
-				<p>
-					<span class="inline-block w70"></span>
-					<input type="text" class="w50 hour">
-					<span class="">小时</span>
-					<input type="text" class="w50 minute">
-					<span class="">分</span>
+				<p style='position:relative'>
+					<span>上传视频：</span>
+					<form name="fr" class="audio" action="{:U('Audio/uploa')}" method="post" enctype="multipart/form-data" style="position:absolute;top:180px;left:95px;">
+						<input type="file" name="file" class="file" style="display:none">
+						<input type="button" value="上传视频" class="video">
+					</form>
 				</p>
 			</div>
 
@@ -206,6 +206,14 @@
 					$('.courses_num').val(newstr)
 				}
 			});
+			
+			$('.video').click(function () {
+					$('.file').click();
+					$('.file').change(function (e) {
+						$('.audio').submit();
+						e.preventDefault();
+					})
+				})
 
 			$('.addvideo').click(function () {
 				'use strict';
