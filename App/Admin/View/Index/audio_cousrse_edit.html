@@ -6,11 +6,11 @@
 	<title>offline</title>
 	<link rel="stylesheet" href="__ACSS__/main.css">
 	<link rel="stylesheet" href="__ACSS__/index.css" />
+	<link rel="stylesheet" href="__ACSS__/upload.css" />
 	<link href="__ADATEPICK__/js/datetimepicker/datepicker.min.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="__ACSS__/font-awesome.min.css">
 	<script type="text/javascript" charset="utf-8" src="__AEDITOR__/ueditor.config.js"></script>
-	<script type="text/javascript" charset="utf-8" src="__AEDITOR__/ueditor.all.min.js">
-	</script>
+	<script type="text/javascript" charset="utf-8" src="__AEDITOR__/ueditor.all.min.js"></script>
 	<script type="text/javascript" charset="utf-8" src="__AEDITOR__/lang/zh-cn/zh-cn.js"></script>
 
 </head>
@@ -52,24 +52,20 @@
 				</div>
 			</div>
 
-
-			<div class="mb15 relative ">
-
-				<div class="f_l w500">
-					<div class="mb15">
-						<span class="i_block w100 texy_a_r ">课节数量:</span>
-						<input type="text" class="w250 courses_num" maxlength="5" name="class_num">
-					</div>
-					<div class="mb15">
-						<span class="i_block w100 texy_a_r">开始上课时间:</span>
-						<input type="text" id="startTime" class="am-form-field w250" data-am-datepicker name="startTime" />
-					</div>
-					<div class="mb15 relative ">
-						<span class="i_block w100 texy_a_r absolute">上传封面:</span>
-						<div class="upload-img">
-							<span class="upload-btn" data-w="735" data-h="460" onclick="uploadStart(this)"><!-- btn --></span>
-							<input type="hidden" name="bigimg[]" value="{$sp.bigimg.0.big_pho}">
-						</div>
+			<div class="f_l w500">
+				<div class="mb15">
+					<span class="i_block w100 texy_a_r">开始上课时间:</span>
+					<input type="text" id="startTime" class="am-form-field w250" data-am-datepicker name="startTime" />
+				</div>
+				<div class="mb15">
+					<span class="i_block w100 texy_a_r ">课节数量:</span>
+					<input type="text" class="w250 courses_num" maxlength="5" name="class_num">
+				</div>
+				<div class="mb15 relative ">
+					<span class="i_block w100 texy_a_r absolute">上传封面:</span>
+					<div class="upload-img">
+						<span class="upload-btn" data-w="735" data-h="460" onclick="uploadStart(this)"><!-- btn --></span>
+						<input type="hidden" name="bigimg[]" value="{$sp.bigimg.0.big_pho}">
 					</div>
 				</div>
 			</div>
@@ -145,7 +141,7 @@
 
 	<div class="modal">
 		<div class="back"></div>
-		<div class="video_modal_main_edit">
+		<div class="audio_modal_main_edit">
 			<h2>编辑课节</h2>
 
 			<div class="m_m_video">
@@ -160,66 +156,31 @@
 					<input type="text" class="w50 minute" name="minute">
 					<span class="">分</span>
 				</p>
-				<p>
+				<p style='position:relative'>
 					<span>上传音频：</span>
-					<form name="fr" class="audio" action="{:U('Audio/uploa')}" method="post" enctype="multipart/form-data">>
-						<input type="file" name="file" class="file">
-						<input type="button" value="上传视频" class="video">
+					<form name="fr" class="audio" action="{:U('Audio/uploa')}" method="post" enctype="multipart/form-data" style="position:absolute;top:180px;left:95px;">
+						<input type="file" name="file" class="file" style="display:none">
+						<input type="button" value="上传音频" class="video">
 					</form>
 				</p>
 				<p>
 					<span>上传图片：</span>
-					<div class="upload-img">
+					<div class="upload-img" style="top:217px">
 						<span class="upload-btn" data-type="1" data-w="735" data-h="460" onclick="uploadStart(this)"><!-- btn --></span>
 						<input type="hidden" name="bigimg[]" value="{$sp.bigimg.0.big_pho}">
 					</div>
 				</p>
 			</div>
-
-			<div class="m_m_offline">
-				<p><span></span>
-					<input type="text">
-				</p>
-				<p><span></span>
-					<input type="text" id="startTime" class="am-form-field w250" data-am-datepicker>
-				</p>
-			</div>
-
-			<div class="m_m_audio">
-				<p><span></span>
-					<input type="text">
-				</p>
-				<p>
-					<span></span>
-					<input type="text" class="w80">
-					<span class=""></span>
-					<input type="text" class="w80">
-				</p>
-				<p><span></span><span></span><span class=""></span></p>
-				<p><span></span></p>
-			</div>
-
-
-			<p>
-				<span>上课时间：</span>
-				<input type="text" id="startTime1" class="am-form-field w200 class_time" data-am-datepicker name="class_time" />
-			</p>
-			<p>
-				<span class="inline-block w70"></span>
-				<input type="text" class="w50 hour">
-				<span class="">小时</span>
-				<input type="text" class="w50 minute">
-				<span class="">分</span>
-			</p>
+			<span class="videosave pointer">保存</span><span class="videocancel pointer">取消</span>
 		</div>
 
-		<span class="videosave pointer">保存</span><span class="videocancel pointer">取消</span>
 	</div>
 	</div>
 
 	<script src="__AJS__/jquery.js"></script>
 	<script src="__AJS__/jquery.easing.js"></script>
 	<script src="__AJS__/deleconfirm.js"></script>
+	<script type="text/javascript" src="__AJS__/jquery.upload.js"></script>
 	<script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.min.js"></script>
 	<script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.zh-CN.js"></script>
 	<script type="text/javascript">
@@ -268,7 +229,7 @@
 			$('.addvideo').click(function () {
 				'use strict';
 				$('.modal').show();
-				$('.video_modal_main_edit').show();
+				$('.audio_modal_main_edit').show();
 				$('.m_m_offline').hide()
 				$('.m_m_audio').hide()
 				$('.videocancel').click(function () {
