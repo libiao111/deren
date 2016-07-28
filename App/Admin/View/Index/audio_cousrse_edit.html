@@ -2,376 +2,352 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>offline</title>
-    <link rel="stylesheet" href="__ACSS__/main.css">
-    <link rel="stylesheet" href="__ACSS__/index.css" />
-    <link href="__ADATEPICK__/js/datetimepicker/datepicker.min.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="__ACSS__/font-awesome.min.css">
-    <script type="text/javascript" charset="utf-8" src="__AEDITOR__/ueditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="__AEDITOR__/ueditor.all.min.js">
-    </script>
-    <script type="text/javascript" charset="utf-8" src="__AEDITOR__/lang/zh-cn/zh-cn.js"></script>
+	<meta charset="UTF-8">
+	<title>offline</title>
+	<link rel="stylesheet" href="__ACSS__/main.css">
+	<link rel="stylesheet" href="__ACSS__/index.css" />
+	<link href="__ADATEPICK__/js/datetimepicker/datepicker.min.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="__ACSS__/font-awesome.min.css">
+	<script type="text/javascript" charset="utf-8" src="__AEDITOR__/ueditor.config.js"></script>
+	<script type="text/javascript" charset="utf-8" src="__AEDITOR__/ueditor.all.min.js">
+	</script>
+	<script type="text/javascript" charset="utf-8" src="__AEDITOR__/lang/zh-cn/zh-cn.js"></script>
 
 </head>
 
 <body class="bf2">
 
-    <!-- sub nav -->
-    <div class="sub_nav pl20 pt10">
-        <span class="route">
+	<!-- sub nav -->
+	<div class="sub_nav pl20 pt10">
+		<span class="route">
         <span class="router router1">业务管理/课程管理</span>
-        </span>
-    </div>
+		</span>
+	</div>
 
-    <div class="sub_nav pl20 pt10 mt20">
-        <span class="route">
+	<div class="sub_nav pl20 pt10 mt20">
+		<span class="route">
         <span class="router router1">课程信息</span>
-        </span>
-    </div>
+		</span>
+	</div>
 
 
-    <form action="{:U('Admin/OffLine/index')}" class="editor" name="frm2">
+	<form action="{:U('Admin/OffLine/index')}" class="editor" name="frm2">
 
 
-        <section class="widget_wrp h170">
-            <div class="f_l w500">
-                <div class="mb15">
-                    <span class="i_block w100 texy_a_r ">课程名称:</span>
-                    <input type="text" class="w250 courses_name" name='course_name'>
-                </div>
-                <div class="mb15">
-                    <span class="i_block w100 texy_a_r ">讲师姓名:</span>
-                    <input type="text" class="w250 teacher_name" name="teach_name">
-                </div>
-                <div>
-                    <span class="i_block w100 texy_a_r">现价:</span>
-                    <input type="text" class="w80 current_price" name="current_price">
-                    <span class="ml50">原价:</span>
-                    <input type="text" class="w80 course_price" name="course_price">
-                </div>
-            </div>
+		<section class="widget_wrp h170">
+			<div class="f_l w500">
+				<div class="mb15">
+					<span class="i_block w100 texy_a_r ">课程名称:</span>
+					<input type="text" class="w250 courses_name" name='course_name'>
+				</div>
+				<div class="mb15">
+					<span class="i_block w100 texy_a_r ">讲师姓名:</span>
+					<input type="text" class="w250 teacher_name" name="teach_name">
+				</div>
+				<div>
+					<span class="i_block w100 texy_a_r">现价:</span>
+					<input type="text" class="w80 current_price" name="current_price">
+					<span class="ml50">原价:</span>
+					<input type="text" class="w80 course_price" name="course_price">
+				</div>
+			</div>
 
 
-            <div class="mb15 relative ">
-                
-            <div class="f_l w500">
-                <div class="mb15">
-                    <span class="i_block w100 texy_a_r ">课节数量:</span>
-                    <input type="text" class="w250 courses_num" maxlength="5" name="class_num">
-                </div>
-                <div class="mb15">
-                    <span class="i_block w100 texy_a_r">开始上课时间:</span>
-                    <input type="text" id="startTime" class="am-form-field w250" data-am-datepicker name="startTime" />
-                </div>
-                <div class="mb15 relative ">
-                    <span class="i_block w100 texy_a_r absolute">上传封面:</span>
-                    <div class="upload-img">
-                         <span class="upload-btn" data-w="735" data-h="460" onclick="uploadStart(this)"><!-- btn --></span>
-                         <input type="hidden" name="bigimg[]" value="{$sp.bigimg.0.big_pho}">
-                    </div>
-                </div>
-            </div>
-            </div>
-        </section>
-    </form>
+			<div class="mb15 relative ">
 
-    <div class="sub_nav pl20 pt10">
-        <span class="route">
+				<div class="f_l w500">
+					<div class="mb15">
+						<span class="i_block w100 texy_a_r ">课节数量:</span>
+						<input type="text" class="w250 courses_num" maxlength="5" name="class_num">
+					</div>
+					<div class="mb15">
+						<span class="i_block w100 texy_a_r">开始上课时间:</span>
+						<input type="text" id="startTime" class="am-form-field w250" data-am-datepicker name="startTime" />
+					</div>
+					<div class="mb15 relative ">
+						<span class="i_block w100 texy_a_r absolute">上传封面:</span>
+						<div class="upload-img">
+							<span class="upload-btn" data-w="735" data-h="460" onclick="uploadStart(this)"><!-- btn --></span>
+							<input type="hidden" name="bigimg[]" value="{$sp.bigimg.0.big_pho}">
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</form>
+
+	<div class="sub_nav pl20 pt10">
+		<span class="route">
         <span class="router router1">课程简介</span>
 
-        </span>
-    </div>
-    <section class="widget_wrp h460">
-        <textarea id="editor" type="text/plain" style="width:800px;height:300px;"></textarea>
-        <script type="text/javascript">
-            var ue = UE.getEditor('editor');
-        </script>
-    </section>
+		</span>
+	</div>
+	<section class="widget_wrp h460">
+		<textarea id="editor" type="text/plain" style="width:800px;height:300px;"></textarea>
+		<script type="text/javascript">
+			var ue = UE.getEditor('editor');
+		</script>
+	</section>
 
 
 
 
-    <div class="sub_nav pl20 pt10">
-        <span class="route">
+	<div class="sub_nav pl20 pt10">
+		<span class="route">
         <span class="router router1">课程表</span>
-        <span class="router router1 float_r mr20 red addvideo pointer">添加课节</span>
-        </span>
-    </div>
+		<span class="router router1 float_r mr20 red addvideo pointer">添加课节</span>
+		</span>
+	</div>
 
-    <section class="widget_wrp">
-        <!-- 表格主体 -->
-        <table class="table_default">
-            <tr>
-                <th width="12%">课程名称</th>
-                <th width="10%">上课时间</th>
-                <th width="11%">操作</th>
-            </tr>
-            <foreach name='classa' item='v'>
-                <tr class="h50 clone">
-                    <td>
-                        {$v.class_name}
-                    </td>
-                    <td>{$v.class_time}</td>
-                    <td class="operation">
-                        <a href="" class="mr2 edit">
-                            <i class="fa fa-edit vm"></i> 编辑
-                        </a>
-                        <span class="ccc">|</span>
-                        <span class="pointer ml2 remove">
+	<section class="widget_wrp">
+		<!-- 表格主体 -->
+		<table class="table_default">
+			<tr>
+				<th width="12%">课程名称</th>
+				<th width="10%">上课时间</th>
+				<th width="11%">操作</th>
+			</tr>
+			<foreach name='classa' item='v'>
+				<tr class="h50 clone">
+					<td>
+						{$v.class_name}
+					</td>
+					<td>{$v.class_time}</td>
+					<td class="operation">
+						<a href="" class="mr2 edit">
+							<i class="fa fa-edit vm"></i> 编辑
+						</a>
+						<span class="ccc">|</span>
+						<span class="pointer ml2 remove">
     					<i class="fa fa-trash vm"></i>
     					删除
     				</span>
-                        <!-- 删除提示 -->
-                        <div class="deleConfirm">
-                            <span class="mbutton trans confirm mt10">
+						<!-- 删除提示 -->
+						<div class="deleConfirm">
+							<span class="mbutton trans confirm mt10">
                             <input name="" class="zxc" type="hidden" value="{$v.id}"><i class="fa fa-check mr4"></i>确认
                             </span>
-                            <span class="mbutton trans cancel"><i class="fa fa-times mr4"></i>取消</span>
-                        </div>
-                    </td>
-                </tr>
-            </foreach>
+							<span class="mbutton trans cancel"><i class="fa fa-times mr4"></i>取消</span>
+						</div>
+					</td>
+				</tr>
+			</foreach>
 
-        </table>
+		</table>
 
-        <!-- 尾部 -->
-        <div class="table_footer mb30">
-            <div class="operate_btn_box f_r mr30">
-                <input type="button" class="button btn_middle btn_primary trans pointer saveall" value="保存">
-            </div>
-        </div>
-    </section>
+		<!-- 尾部 -->
+		<div class="table_footer mb30">
+			<div class="operate_btn_box f_r mr30">
+				<input type="button" class="button btn_middle btn_primary trans pointer saveall" value="保存">
+			</div>
+		</div>
+	</section>
 
-    <div class="modal">
-        <div class="back"></div>
-        <div class="video_modal_main_edit">
-            <h2>编辑课节</h2>
+	<div class="modal">
+		<div class="back"></div>
+		<div class="video_modal_main_edit">
+			<h2>编辑课节</h2>
 
-            <div class="m_m_video">
-                <p><span>课节名称：</span>
-                    <input type="text" class="w200 coursename" name="coursename">
-                </p>
+			<div class="m_m_video">
+				<p><span>课节名称：</span>
+					<input type="text" class="w200 coursename" name="coursename">
+				</p>
 
-                <p>
-                    <span>课节时长：</span>
-                    <input type="text" class="w50 hour" name="hour">
-                    <span class="">小时</span>
-                    <input type="text" class="w50 minute" name="minute">
-                    <span class="">分</span>
-                </p>
-                <p>
-                    <span>上传音频：</span>
-                    <form name="fr" class="audio" action="{:U('Audio/uploa')}" method="post" enctype="multipart/form-data">>
-                    <input type="file" name="file" class="file">
-                    <input type="button" value="上传视频" class="video">
-                    </form>
-                </p>
-                <p>
-                    <span>上传图片：</span>
-                    <div class="upload-img">
-                         <span class="upload-btn" data-type="1" data-w="735" data-h="460" onclick="uploadStart(this)"><!-- btn --></span>
-                         <input type="hidden" name="bigimg[]" value="{$sp.bigimg.0.big_pho}">
-                    </div>
-                </p>
-            </div>
+				<p>
+					<span>课节时长：</span>
+					<input type="text" class="w50 hour" name="hour">
+					<span class="">小时</span>
+					<input type="text" class="w50 minute" name="minute">
+					<span class="">分</span>
+				</p>
+				<p>
+					<span>上传音频：</span>
+					<form name="fr" class="audio" action="{:U('Audio/uploa')}" method="post" enctype="multipart/form-data">>
+						<input type="file" name="file" class="file">
+						<input type="button" value="上传视频" class="video">
+					</form>
+				</p>
+				<p>
+					<span>上传图片：</span>
+					<div class="upload-img">
+						<span class="upload-btn" data-type="1" data-w="735" data-h="460" onclick="uploadStart(this)"><!-- btn --></span>
+						<input type="hidden" name="bigimg[]" value="{$sp.bigimg.0.big_pho}">
+					</div>
+				</p>
+			</div>
 
-            <div class="m_m_offline">
-                <p><span></span>
-                    <input type="text">
-                </p>
-                <p><span></span>
-                    <input type="text" id="startTime" class="am-form-field w250" data-am-datepicker>
-                </p>
-            </div>
+			<div class="m_m_offline">
+				<p><span></span>
+					<input type="text">
+				</p>
+				<p><span></span>
+					<input type="text" id="startTime" class="am-form-field w250" data-am-datepicker>
+				</p>
+			</div>
 
-            <div class="m_m_audio">
-                <p><span></span>
-                    <input type="text">
-                </p>
-                <p>
-                    <span></span>
-                    <input type="text" class="w80">
-                    <span class=""></span>
-                    <input type="text" class="w80">
-                </p>
-                <p><span></span><span></span><span class=""></span></p>
-                <p><span></span></p>
-            </div>
-
-
-                <p>
-                    <span>上课时间：</span>
-                    <input type="text" id="startTime1" class="am-form-field w200 class_time" data-am-datepicker name="class_time" />
-                </p>
-                <p>
-                    <span class="inline-block w70"></span>
-                    <input type="text" class="w50 hour">
-                    <span class="">小时</span>
-                    <input type="text" class="w50 minute">
-                    <span class="">分</span>
-                </p>
-            </div>
-
-            <span class="videosave pointer">保存</span><span class="videocancel pointer">取消</span>
-        </div>
-    </div>
-
-    <script src="__AJS__/jquery.js"></script>
-    <script src="__AJS__/jquery.easing.js"></script>
-    <script src="__AJS__/deleconfirm.js"></script>
-    <script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.min.js"></script>
-    <script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.zh-CN.js"></script>
-    <script type="text/javascript">
+			<div class="m_m_audio">
+				<p><span></span>
+					<input type="text">
+				</p>
+				<p>
+					<span></span>
+					<input type="text" class="w80">
+					<span class=""></span>
+					<input type="text" class="w80">
+				</p>
+				<p><span></span><span></span><span class=""></span></p>
+				<p><span></span></p>
+			</div>
 
 
-        var uploadActionUrl = "{:U('Audio/uploadimg')}";
-        var uploadActionSilder = "{:U('Audio/uploada')}";
-    
+			<p>
+				<span>上课时间：</span>
+				<input type="text" id="startTime1" class="am-form-field w200 class_time" data-am-datepicker name="class_time" />
+			</p>
+			<p>
+				<span class="inline-block w70"></span>
+				<input type="text" class="w50 hour">
+				<span class="">小时</span>
+				<input type="text" class="w50 minute">
+				<span class="">分</span>
+			</p>
+		</div>
 
-        'use strict';
-        var option = {
-            dateFormat: "yyyy-m-d",
-            autoClose: true,
-            weekStart: 7
-        };
-        $("#startTime").datepicker(option);
-        $("#startTime1").datepicker(option);
-        $("#endTime").datepicker(option);
+		<span class="videosave pointer">保存</span><span class="videocancel pointer">取消</span>
+	</div>
+	</div>
 
-        let courses_name = document.querySelector('.courses_name'),
-            teacher_name = document.querySelector('.teacher_name'),
-            courses_num = document.querySelector('.courses_num');
-        $(function() {
-
-            $('.upaudio').click(function() {
-                $(this).siblings('input').click(function(){
-                    
-                });
-            })
-            /*上传音频*/
-            $('.video').click(function(){
-                $('.file').click();
-                $('.file').change(function(e){
-                    
-                    $('.audio').submit();
-                    e.preventDefault();
-
-               })
-                
-            })
-            /*上传视频*/
-
-            $('.courses_num').keyup(function() {
-                'use strict';
-                let num = $('.courses_num').val(),
-                    strnum = num.split('');
-                if (strnum.length >= 3) {
-                    let newstr = num.split('', 3).join('');
-                    console.log(newstr)
-                    $('.courses_num').val(newstr)
-                }
-            });
-
-            $('.addvideo').click(function() {
-                'use strict';
-                $('.modal').show();
-                $('.video_modal_main_edit').show();
-                $('.m_m_offline').hide()
-                $('.m_m_audio').hide()
-                $('.videocancel').click(function() {
-                    $('.modal').hide()
-                })
-            });
-            $('.videosave').click(function() {
-                'use strict';
-                $('.modal').hide();
-                var app = $('.table_default tr.clone').eq(0).clone(true);
-               
-                app.find('td').eq(0).text($('.coursename').val());
-                app.find('td').eq(1).text($('.hour').val() + ':' + $('.minute').val());
-                app.appendTo('.table_default');
-                $.post("{:U('Admin/Class/addAudioClass')}", {
-                    'class_name': $('.coursename').val(),
-                    'class_time': $('.class_time').val()
-                }, function(data) {
-                    if (data.status) {
-
-                    }
-                });
-            });
-
-            
-            $('.saveall').click(function() {
-                $.post("{:U('Admin/Audio/index')}", {
-                    'id': handle1_id,
-                    'type': $('#table_id').val(),
-                    'course_name': $('.courses_name').val(),
-                    'course_photo': $('.fengmian').val(),
-                    'course_price': $('.course_price').val(),
-                    'current_price': $('.current_price').val(),
-                    'teach_name': $('.teacher_name').val(),
-                    'picture': $('#fnull').val(),
-                    'offline_url': $('#fprimarykey').val(),
-                    'class_num': $('#fincre').val(),
-                    'addtime': $('#fincre').val(),
-                    'status': $('#fincre').val(),
-                }, function(data) {
-                    if (data.status) {
+	<script src="__AJS__/jquery.js"></script>
+	<script src="__AJS__/jquery.easing.js"></script>
+	<script src="__AJS__/deleconfirm.js"></script>
+	<script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.min.js"></script>
+	<script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.zh-CN.js"></script>
+	<script type="text/javascript">
+		var uploadActionUrl = "{:U('Audio/uploadimg')}";
+		var uploadActionSilder = "{:U('Audio/uploada')}";
 
 
-            $('.saveall').click(function(e) {
-                e.preventDefault();
-                let editor = $('.view').html();
-                console.log(editor);
-                $('form.editor').submit();
+		'use strict';
+		var option = {
+			dateFormat: "yyyy-m-d",
+			autoClose: true,
+			weekStart: 7
+		};
+		$("#startTime").datepicker(option);
+		$("#startTime1").datepicker(option);
+		$("#endTime").datepicker(option);
 
-//                $.post("{:U('Admin/OffLine/index')}", {
-//                    'course_name': $('.courses_name').val(),
-//                    'course_price': $('.course_price').val(),
-//                    'current_price': $('.current_price').val(),
-//                    'teach_name': $('.teacher_name').val(),
-//                    'class_num': $('.courses_num').val(),
-//                    'addtime': $('#startTime').val()
-//                }, function(data) {
-//                    if (data.status) {
-//
-//                    }
-//                });
-            })
-            $("span.confirm").click(function() {
+		let courses_name = document.querySelector('.courses_name'),
+			teacher_name = document.querySelector('.teacher_name'),
+			courses_num = document.querySelector('.courses_num');
+		$(function () {
+			$('.upaudio').click(function () {
+					$(this).siblings('input').click(function () {});
+				})
+				/*上传音频*/
+			$('.video').click(function () {
+					$('.file').click();
+					$('.file').change(function (e) {
+						$('.audio').submit();
+						e.preventDefault();
+					})
+				})
+				/*上传视频*/
+
+			$('.courses_num').keyup(function () {
+				'use strict';
+				let num = $('.courses_num').val(),
+					strnum = num.split('');
+				if (strnum.length >= 3) {
+					let newstr = num.split('', 3).join('');
+					console.log(newstr)
+					$('.courses_num').val(newstr)
+				}
+			});
+
+			$('.addvideo').click(function () {
+				'use strict';
+				$('.modal').show();
+				$('.video_modal_main_edit').show();
+				$('.m_m_offline').hide()
+				$('.m_m_audio').hide()
+				$('.videocancel').click(function () {
+					$('.modal').hide()
+				})
+			});
+			$('.videosave').click(function () {
+				'use strict';
+				$('.modal').hide();
+				var app = $('.table_default tr.clone').eq(0).clone(true);
+				app.find('td').eq(0).text($('.coursename').val());
+				app.find('td').eq(1).text($('.hour').val() + ':' + $('.minute').val());
+				app.appendTo('.table_default');
+				$.post("{:U('Admin/Class/addAudioClass')}", {
+					'class_name': $('.coursename').val(),
+					'class_time': $('.class_time').val()
+				}, function (data) {
+					if (data.status) {
+
+					}
+				});
+			});
 
 
-                let id = $(this).find('.zxc').attr('value')
-                console.log(id);
-                $.post('{:U("Admin/Class/delClass")}', {
-                    id: id
-                }, function() {
+			$('.saveall').click(function () {
+				$.post("{:U('Admin/Audio/index')}", {
+					'id': handle1_id,
+					'type': $('#table_id').val(),
+					'course_name': $('.courses_name').val(),
+					'course_photo': $('.fengmian').val(),
+					'course_price': $('.course_price').val(),
+					'current_price': $('.current_price').val(),
+					'teach_name': $('.teacher_name').val(),
+					'picture': $('#fnull').val(),
+					'offline_url': $('#fprimarykey').val(),
+					'class_num': $('#fincre').val(),
+					'addtime': $('#fincre').val(),
+					'status': $('#fincre').val(),
+				}, function (data) {
+					if (data.status) {}
+				})
+			})
 
-                })
-            })
+
+			$('.saveall').click(function (e) {
+				e.preventDefault();
+				let editor = $('.view').html();
+				console.log(editor);
+				$('form.editor').submit();
+			})
+			$("span.confirm").click(function () {
+				let id = $(this).find('.zxc').attr('value')
+				console.log(id);
+				$.post('{:U("Admin/Class/delClass")}', {
+					id: id
+				}, function () {})
+			})
 
 
-            $('.back').click(function() {
-                $('.modal').hide()
-            });
+			$('.back').click(function () {
+				$('.modal').hide()
+			});
 
-            $('.operation .edit').click(function(e) {
-                'use strict';
-                e.preventDefault();
-                $('.modal').show();
-                $('.video_modal_main_edit').show();
-                $('.m_m_offline').hide()
-                $('.m_m_audio').hide()
-                $('.videocancel').click(function() {
-                    $('.modal').hide()
-                })
-                $('.videosave').click(function() {
-                    $('.modal').hide()
-                })
-            });
-        })
-    </script>
+			$('.operation .edit').click(function (e) {
+				'use strict';
+				e.preventDefault();
+				$('.modal').show();
+				$('.video_modal_main_edit').show();
+				$('.m_m_offline').hide()
+				$('.m_m_audio').hide()
+				$('.videocancel').click(function () {
+					$('.modal').hide()
+				})
+				$('.videosave').click(function () {
+					$('.modal').hide()
+				})
+			});
+		})
+	</script>
 </body>
 
 </html>
