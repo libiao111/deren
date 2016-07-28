@@ -53,24 +53,21 @@
                     <input type="text" class="w80 course_price" name="course_price">
                 </div>
             </div>
-
-            <div class="mb15 relative ">
-                <span class="i_block w100 texy_a_r absolute">上传封面:</span>
-                <div class="upload-img">
-                     <span class="upload-btn" data-w="735" data-h="460" onclick="uploadStart(this)"><!-- btn --></span>
-                     <input type="hidden" name="bigimg[]" value="{$sp.bigimg.0.big_pho}">
+            <div class="f_l w500">
+                <div class="mb15">
+                    <span class="i_block w100 texy_a_r ">课节数量:</span>
+                    <input type="text" class="w250 courses_num" maxlength="5" name="class_num">
                 </div>
-
-                <div class="f_l w500">
-                    <div class="mb15">
-                        <span class="i_block w100 texy_a_r ">课节数量:</span>
-                        <input type="text" class="w250 courses_num" maxlength="5" name="class_num">
+                <div class="mb15">
+                    <span class="i_block w100 texy_a_r">开始上课时间:</span>
+                    <input type="text" id="startTime" class="am-form-field w250" data-am-datepicker name="startTime" />
+                </div>
+                <div class="mb15 relative ">
+                    <span class="i_block w100 texy_a_r absolute">上传封面:</span>
+                    <div class="upload-img">
+                         <span class="upload-btn" data-w="735" data-h="460" onclick="uploadStart(this)"><!-- btn --></span>
+                         <input type="hidden" name="bigimg[]" value="{$sp.bigimg.0.big_pho}">
                     </div>
-                    <div class="mb15">
-                        <span class="i_block w100 texy_a_r">开始上课时间:</span>
-                        <input type="text" id="startTime" class="am-form-field w250" data-am-datepicker name="startTime" />
-                    </div>
-                    
                 </div>
             </div>
         </section>
