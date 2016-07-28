@@ -3,14 +3,16 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>offline</title>
-    <link rel="stylesheet" href="__ACSS__/main.css">
-    <link rel="stylesheet" href="__ACSS__/index.css" />
+
+    <title>video</title>
+    <link rel="stylesheet" href="__ACSS__/main.css"/>
+    <link rel="stylesheet" href="__ACSS__/index.css"/>
+    <link rel="stylesheet" href="__ACSS__/temp.css"/>
+    <link rel="stylesheet" href="__ACSS__/upload.css" />
     <link href="__ADATEPICK__/js/datetimepicker/datepicker.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="__ACSS__/font-awesome.min.css">
     <script type="text/javascript" charset="utf-8" src="__AEDITOR__/ueditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="__AEDITOR__/ueditor.all.min.js">
-    </script>
+    <script type="text/javascript" charset="utf-8" src="__AEDITOR__/ueditor.all.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="__AEDITOR__/lang/zh-cn/zh-cn.js"></script>
 
 </head>
@@ -52,6 +54,13 @@
                 </div>
             </div>
 
+            <div class="mb15 relative ">
+                <span class="i_block w100 texy_a_r absolute">上传封面:</span>
+                <div class="upload-img">
+                     <span class="upload-btn" data-w="735" data-h="460" onclick="uploadStart(this)"><!-- btn --></span>
+                     <input type="hidden" name="bigimg[]" value="{$sp.bigimg.0.big_pho}">
+
+
             <div class="f_l w500">
                 <div class="mb15">
                     <span class="i_block w100 texy_a_r ">课节数量:</span>
@@ -62,8 +71,7 @@
                     <input type="text" id="startTime" class="am-form-field w250" data-am-datepicker name="startTime" />
                 </div>
                 <div class="mb15 relative ">
-                    <span class="i_block w100 texy_a_r absolute">上传封面:</span>
-                    <iframe src="{:U('Upload/Loadimg/sele',array('name'=>'arr','text'=>'图片'))}" class="fra1 relative"></iframe>
+                  
 
                 </div>
             </div>
@@ -167,8 +175,12 @@
     <script src="__AJS__/jquery.js"></script>
     <script src="__AJS__/jquery.easing.js"></script>
     <script src="__AJS__/deleconfirm.js"></script>
+    <script type="text/javascript" src="__AJS__/jquery.upload.js"></script>
     <script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.min.js"></script>
     <script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.zh-CN.js"></script>
+    <script type="text/javascript">
+        var uploadActionUrl = "{:U('Audio/uploadimg')}";
+    </script>
     <script type="text/javascript">
         'use strict';
         var option = {
@@ -205,7 +217,11 @@
                     $('.modal').hide()
                 })
             });
+            $('.file').change(function(){
+                $.post('{:U('OffLine/uploa')}'{},function(){
 
+                })
+            })
             $('.videosave').click(function() {
                 'use strict';
                 $('.modal').hide();

@@ -102,14 +102,10 @@ class UserController extends Controller
 	}
 	/* 导出用户表数据*/
     public function daochu(){
-        /*if(!I('id')){
+        if(!I('id')){
             $this->error('数据错误');die;
-        }*/
-        /*$action = date('Y-m-d', strtotime(I('action')));
-        $action = explode('-', $action);
-        $over = date('Y-m-d', strtotime(I('over')));
-        $over = explode('-', $over);*/
-        $id = array(1,2,3,4,5,6);
+        }
+        $id = I('id');
         $condition = array(
             'id'=>array('in',$id)
         ); 
@@ -125,7 +121,7 @@ class UserController extends Controller
             )
         );
         $data = array_merge($title,$data);
-        $name = 'ersg';  
+        $name = date('Y-m-d H:i:s'); 
         $res = dataPush($data,$name);
     }
 }

@@ -60,33 +60,48 @@ class AudioController extends Controller
         $result = M('class')->where($arr)->order('paixu')->select();
         $this->assign('classa',$result);
         $this->display('index/Audio_cousrse_edit');
-    } 
-  	/*上传轮播图*/
-    public function upload() {
 
+    } 
+  	
+    /*上传音频视频*/
+    public function uploa(){
+        
+        $video_url = uploadvideo();
+        $this->video_url=$video_url;
+        
+    }
+
+    /*上传图片*/
+    public function uploadimg()
+    {
         if (!IS_POST) {
             $this->error('页面不存在');
         }
         /* 开始上传 */
-        $result = uploadImgHandler();
-        /* 写入SESSION */
-        $data = $result['data'];
-        
-        if ($result['status']) {
-            $num = I('num');
-            if ($num >= 0) {
-                $img = session('uploadimg');
-                $img[$num] = $data;
-                session('uploadimg', $img);
-            } else {
-                session('uploadimg', $data);
-            }
-            $data = __ROOT__.'/Public/resource/'.$data;
-        } else {
-            $data = $data;
-        }
-        /* 输出调用反馈function */
-         echo '<script type="text/javascript">parent.uploadReturn("'.$result['status'].'","'.$data.'")</script>';
+        $w = '300';
+        /*上传图片*/
+        $result = uploadImgHandler($w);
+        /*存入session*/
+        session('offline_url',$result['data']);
+        /*生成缩略图*/
+        $course_photo = photo_cut($result['data'],50);
+        /*存入session*/
+        session('course_photo',$course_photo);
+        $result['data'] = __ROOT__.'/Public/resource/'.$course_photo; 
+        echo '<script>parent.uploadReturn("'.$result['status'].'","","'.$result['data'].'")</script>';
     }
-   
+    /*上传轮播图*/
+    public function uploada()
+    {
+        if (!IS_POST) {
+            $this->error('页面不存在');
+        }
+        /* 开始上传 */
+        $w = '300';
+        /*上传图片*/
+        $result = uploadImgHandler($w);
+        /*生成缩略图*/
+        $result['data'] = __ROOT__.'/Public/resource/'.$result['data']; 
+        echo '<script>parent.uploadReturn("'.$result['status'].'","","'.$result['data'].'")</script>';
+    }
 }

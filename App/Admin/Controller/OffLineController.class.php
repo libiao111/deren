@@ -83,10 +83,6 @@ class OffLineController extends Controller
 
     }
     
-    /*上传音频视频*/
-    public function uploa(){
-        $video_url = uploadvideo();
-        $this->video_url=$video_url;
-    }
+    
 
 }
