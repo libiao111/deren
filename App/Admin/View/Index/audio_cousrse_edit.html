@@ -52,13 +52,9 @@
                 </div>
             </div>
 
-<<<<<<< HEAD
+
             <div class="mb15 relative ">
-                <span class="i_block w100 texy_a_r absolute">上传封面:</span>
-                <div class="upload-img">
-                     <span class="upload-btn" data-w="735" data-h="460" onclick="uploadStart(this)"><!-- btn --></span>
-                     <input type="hidden" name="bigimg[]" value="{$sp.bigimg.0.big_pho}">
-=======
+                
             <div class="f_l w500">
                 <div class="mb15">
                     <span class="i_block w100 texy_a_r ">课节数量:</span>
@@ -70,10 +66,12 @@
                 </div>
                 <div class="mb15 relative ">
                     <span class="i_block w100 texy_a_r absolute">上传封面:</span>
-                    <iframe src="{:U('Upload/Loadimg/sele',array('name'=>'arr','text'=>'图片'))}" class="fra1 relative"></iframe>
-
->>>>>>> bf9560fa9b14e4f2f3d2311d126f91cefcd9ef9b
+                    <div class="upload-img">
+                         <span class="upload-btn" data-w="735" data-h="460" onclick="uploadStart(this)"><!-- btn --></span>
+                         <input type="hidden" name="bigimg[]" value="{$sp.bigimg.0.big_pho}">
+                    </div>
                 </div>
+            </div>
             </div>
         </section>
     </form>
@@ -154,7 +152,7 @@
                 <p><span>课节名称：</span>
                     <input type="text" class="w200 coursename" name="coursename">
                 </p>
-<<<<<<< HEAD
+
                 <p>
                     <span>课节时长：</span>
                     <input type="text" class="w50 hour" name="hour">
@@ -200,8 +198,7 @@
                 <p><span></span><span></span><span class=""></span></p>
                 <p><span></span></p>
             </div>
-=======
->>>>>>> bf9560fa9b14e4f2f3d2311d126f91cefcd9ef9b
+
 
                 <p>
                     <span>上课时间：</span>
@@ -226,13 +223,12 @@
     <script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.min.js"></script>
     <script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.zh-CN.js"></script>
     <script type="text/javascript">
-<<<<<<< HEAD
+
 
         var uploadActionUrl = "{:U('Audio/uploadimg')}";
         var uploadActionSilder = "{:U('Audio/uploada')}";
     
-=======
->>>>>>> bf9560fa9b14e4f2f3d2311d126f91cefcd9ef9b
+
         'use strict';
         var option = {
             dateFormat: "yyyy-m-d",
@@ -247,7 +243,7 @@
             teacher_name = document.querySelector('.teacher_name'),
             courses_num = document.querySelector('.courses_num');
         $(function() {
-<<<<<<< HEAD
+
             $('.upaudio').click(function() {
                 $(this).siblings('input').click(function(){
                     
@@ -265,8 +261,7 @@
                 
             })
             /*上传视频*/
-=======
->>>>>>> bf9560fa9b14e4f2f3d2311d126f91cefcd9ef9b
+
             $('.courses_num').keyup(function() {
                 'use strict';
                 let num = $('.courses_num').val(),
@@ -305,7 +300,7 @@
                     }
                 });
             });
-<<<<<<< HEAD
+
             
             $('.saveall').click(function() {
                 $.post("{:U('Admin/Audio/index')}", {
@@ -323,7 +318,7 @@
                     'status': $('#fincre').val(),
                 }, function(data) {
                     if (data.status) {
-=======
+
 
             $('.saveall').click(function(e) {
                 e.preventDefault();
@@ -345,7 +340,7 @@
 //                });
             })
             $("span.confirm").click(function() {
->>>>>>> bf9560fa9b14e4f2f3d2311d126f91cefcd9ef9b
+
 
                 let id = $(this).find('.zxc').attr('value')
                 console.log(id);
