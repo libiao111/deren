@@ -29,7 +29,7 @@ class OrderController extends Controller
 			$this->error('页面不存在!');die;
 		}
 		$id = I('id');
-		$where = array(
+        $where = array(
 			'id'=>array('in',$id)
 		);
         $result = M('ordera')->where($where)->delete();
@@ -62,11 +62,11 @@ class OrderController extends Controller
 	}
 	 /* 导出订单表数据*/
     public function daochu2(){
-        /*if(!I('id')){
-            $this->error('数据错误');die;
-        }*/
+        // if(!I('id')){
+        //     $this->error('数据错误');die;
+        // }
+        p('id');die;
         $id = I('id');
-
         $condition = array(
             'id'=>array('in',$id)
         ); 

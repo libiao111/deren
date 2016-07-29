@@ -22,7 +22,7 @@ class AudioController extends Controller
         $pho_url =I('pho_url');
     	//数组赋值
     	$arr =array(
-			'type'=>I('type'),
+			'type'=>3,
 	    	'course_name'=>I('course_name'),
 	    	'course_photo'=>$course_photo,
 	    	'current_price'=>I('current_price'),

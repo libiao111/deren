@@ -23,7 +23,7 @@ class OffLineController extends Controller
         
     	//数组赋值
     	$arr =array(
-			//'type'=>I('type'),
+			'type'=>1,
 	    	'course_name'=>I('course_name'),
 	    	//'course_photo'=>$course_photo,
 	    	'current_price'=>I('current_price'),
@@ -36,7 +36,6 @@ class OffLineController extends Controller
 	    	//'status'=>I('status')
             
 		);
-		p($arr);
 		if ($id) {
 			/*修改线下课*/
 			$arr['id']=$id;
@@ -45,8 +44,7 @@ class OffLineController extends Controller
 			/*添加线下课*/
 			$result = M('course')->add($arr);
 		}
-		p($result);
-        /*反馈数据*/
+		/*反馈数据*/
 		if($result){
 			$data = array('status'=>1);
             session('offline_url',null);
@@ -61,9 +59,9 @@ class OffLineController extends Controller
     /*显示课时*/
     public function Offlineclass()
     {
-        //$id= I('id');
+        $id= I('id');
         $arr = array(
-            'course_id'=>1
+            'course_id'=>$id
         );
         $result = M('class')->where($arr)->order('paixu')->select();
         $this->assign('classa',$result);

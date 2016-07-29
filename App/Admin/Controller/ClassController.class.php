@@ -21,8 +21,8 @@ class ClassController extends Controller
         $arr = array(
             'class_name'=>I('class_name'),
             'class_time'=>I('class_time'),
-            'paixu'=>I('paixu'),
-            'course_id'=>I('course_id')
+            //'paixu'=>I('paixu'),
+            'course_id'=>1
         );
         if ($id) {
             /*修改操作*/
@@ -53,8 +53,8 @@ class ClassController extends Controller
         $arr = array(
             'class_name'=>I('class_name'),
             'class_mins'=>I('class_mins'),
-            'paixu'=>I('paixu'),
-            'course_id'=>I('course_id')
+            //'paixu'=>I('paixu'),
+            'course_id'=>2
         );
 
         if ($id) {
@@ -90,8 +90,8 @@ class ClassController extends Controller
         $arr = array(
             'class_name' => I('class_name'),
             'class_mins' => I('class_mins'),
-            'paixu'=>I('paixu'),
-            'course_id'=>I('course_id')
+            //'paixu'=>I('paixu'),
+            'course_id'=>3
         );
         /*图片路径赋值给数组$arr*/
         foreach ($pho_url as $va) {
