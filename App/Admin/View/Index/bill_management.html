@@ -29,8 +29,8 @@
 				<select class="ipt_default btn_large type" name="type">
 					<option value="0" <if condition="$type eq 0">selected</if>>全部</option>
 					<option value="1" <if condition="$type eq 1">selected</if>>线下课</option>
-					<option value="2" <if condition="$type eq 2">selected</if>>音频课</option>
-					<option value="3" <if condition="$type eq 3">selected</if>>视频课</option>
+					<option value="2" <if condition="$type eq 2">selected</if>>视频课</option>
+					<option value="3" <if condition="$type eq 3">selected</if>>音频课</option>
 				</select>
 				<i class="fa fa-caret-down"></i>
 				</span>
@@ -39,7 +39,7 @@
 
 
 		<!-- 表格主体 -->
-		<form action="" method="post" name="frm" class="frm1" enctype="multipart/form-data">
+		<form action="{:U('Order/daochu2')}" method="post" name="frm" class="frm1" enctype="multipart/form-data">
 			<table class="table_default">
 				<tr>
 					<th width="10%">
@@ -56,7 +56,7 @@
 				<foreach name="ordera" item="v">
 					<tr>
 						<td>
-							<input type="checkbox" id="{$v.id}" value="{$v.id}" name ="id">
+							<input type="checkbox" id="{$v.id}" value="{$v.id}" name ="id[]">
 						</td>
 						<td><img src="__UPFILE__/{$v.course_photo}" height="60px" class="mt8 mb8"><span class="in-span">{$v.course_num}</span></td>
 						<td>
@@ -241,14 +241,15 @@
 				$('.frm').submit();
 			});
 			$('.output_xls').click(function () {
-				var id = [],
-					tid = $('td>input[type="checkbox"]:checked');
-				tid.each(function () {
-					id.push(parseInt($(this).attr('id')));
-				});
-				console.log(id);
-				$('.frm1').attr('action',"{:U("Order/daochu2",array('id'=>id))}");
 				$('.frm1').submit();
+				// var id = [],
+				// 	tid = $('td>input[type="checkbox"]:checked');
+				// tid.each(function () {
+				// 	id.push(parseInt($(this).attr('id')));
+				// });
+				// console.log(id);
+				// $('.frm1').attr('action',"{:U("Order/daochu2",array('id'=>id))}");
+				// $('.frm1').submit();
 			});
 			//delete operation
 			$('.delete').click(function () {

@@ -10,13 +10,12 @@ class OffLineController extends Controller
     //添加或修改线下课
     public function index()
     {
+		// if(!IS_AJAX){
+  //           $this->error('页面不存在!');die; 
+  //     	}
 		
-//        if(!IS_AJAX){
-//            $this->error('页面不存在!');die; 
-//      	}
-		 // $type = I('type');
 		/*获取值*/
-    	//$id =I('id');
+    	$id =session('ida');
     	/*获取缩略图路径*/
     	$course_photo =session('course_photo');
         $offline_url = session('offline_url');
@@ -47,6 +46,7 @@ class OffLineController extends Controller
 		/*反馈数据*/
 		if($result){
 			$data = array('status'=>1);
+            session('ida',null);
             session('offline_url',null);
             session('course_photo',null);
 		}
@@ -60,6 +60,7 @@ class OffLineController extends Controller
     public function Offlineclass()
     {
         $id= I('id');
+        session('ida',$id);
         $arr = array(
             'course_id'=>$id
         );

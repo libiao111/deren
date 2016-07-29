@@ -39,8 +39,8 @@
                 <select class="ipt_default btn_large type" name="type">
                     <option value="0" <if condition="$type eq 0">selected</if>>全部</option>
                     <option value="1" <if condition="$type eq 1">selected</if>>线下课</option>
-                    <option value="2" <if condition="$type eq 2">selected</if>>音频课</option>
-                    <option value="3" <if condition="$type eq 3">selected</if>>视频课</option>
+                    <option value="2" <if condition="$type eq 2">selected</if>>视频课</option>
+                    <option value="3" <if condition="$type eq 3">selected</if>>音频课</option>
                 </select>
                 <i class="fa fa-caret-down"></i>
                 </span>
@@ -85,8 +85,8 @@
                     <td>{$v.course_name}</td>
                     <td class="kc_type">
                         <if condition="$v.type eq 1">线下课
-                            <elseif condition="$v.type eq 2" />音频课
-                            <elseif condition="$v.type eq 3" /> 视频课
+                            <elseif condition="$v.type eq 3" />音频课
+                            <elseif condition="$v.type eq 2" /> 视频课
                             <else />
                         </if>
                     </td>
@@ -105,10 +105,10 @@
                             <case value="1">
                                 <a href="{:U('OffLine/Offlineclass', array('id' => $v['id']))}" class="mr2 edit"><i class="fa fa-edit vm"></i> 编辑</a>
                             </case>
-                            <case value="3">
+                            <case value="2">
                                 <a href="{:U('Video/Videoclass', array('id' => $v['id']))}" class="mr2 edit"><i class="fa fa-edit vm"></i> 编辑</a>
                             </case>
-                            <case value="2">
+                            <case value="3">
                                 <a href="{:U('Audio/Audioclass', array('id' => $v['id']))}" class="mr2 edit"><i class="fa fa-edit vm"></i> 编辑</a>
                             </case>
                         </switch>
@@ -203,8 +203,8 @@
                 <span class="f_s20">选择课程分类：</span>
                 <select id="select_course" class="f_s20">
                     <option value="1">线下课</option>
-                    <option value="2">音频课</option>
-                    <option value="3">视频课</option>
+                    <option value="2">视频课</option>
+                    <option value="3">音频课</option>
                 </select>
             </div>
             <div class="bottom">
@@ -400,12 +400,12 @@
                 'use strict';
                 let select = document.querySelector('#select_course').value;
 
-                if (select == "1") {
+                if (select == 1) {
                     location.href = "{:U('index/offline_cousrse_edit')}"
-                } else if (select == "2") {
-                    location.href = "{:U('index/audio_cousrse_edit')}"
-                } else if (select == '3') {
+                } else if (select == 2) {
                     location.href = "{:U('index/video_cousrse_edit')}"
+                } else if (select == 3) {
+                    location.href = "{:U('index/audio_cousrse_edit')}"
                 }
             }
 

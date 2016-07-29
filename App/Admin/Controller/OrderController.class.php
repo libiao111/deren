@@ -62,15 +62,11 @@ class OrderController extends Controller
 	}
 	 /* 导出订单表数据*/
     public function daochu2(){
-        // if(!I('id')){
-        //     $this->error('数据错误');die;
-        // }
-        p('id');die;
-        $id = I('id');
+        
+        $id = ($_POST['id']);
         $condition = array(
             'id'=>array('in',$id)
         ); 
-        
         $data = M('ordera')->where($condition)->select();
         $title = array(
             array(

@@ -111,7 +111,7 @@
 					<td>{$v.class_time}</td>
 					<td class="operation">
 						<a href="" class="mr2 edit">
-							<i class="fa fa-edit vm"></i> 编辑
+							<i class="fa fa-edit vm bian"></i> 编辑
 						</a>
 						<span class="ccc">|</span>
 						<span class="pointer ml2 remove">
@@ -212,23 +212,7 @@
 				})
 			});
 
-			$('.videosave').click(function () {
-				'use strict';
-				$('.modal').hide();
-				var app = $('.table_default tr.clone').eq(0).clone(true);
-				var data = $('#startTime1').val();
-				app.find('td').eq(0).text($('.coursename').val());
-				app.find('td').eq(1).text(data + " " + $('.hour').val() + ':' + $('.minute').val());
-				app.appendTo('.table_default');
-				$.post("{:U('Admin/Class/addOffLine')}", {
-					'class_name': $('.coursename').val(),
-					'class_time': $('.class_time').val()
-				}, function (data) {
-					if (data.status) {
-
-					}
-				});
-			});
+			
 
 			$('.saveall').click(function (e) {
 				e.preventDefault();
@@ -236,6 +220,9 @@
 				console.log(editor);
 				$('form.editor').submit();
 			})
+
+			
+
 			$("span.confirm").click(function () {
 
 				let id = $(this).find('.zxc').attr('value')
@@ -255,6 +242,31 @@
 			$('.operation .edit').click(function (e) {
 				'use strict';
 				e.preventDefault();
+				var this_ = $(this);
+				var id =[];
+				id.push(this_.siblings('.deleConfirm').find('.zxc').attr('value'));
+				$('.videosave').click(function () {
+				'use strict';
+
+				$('.modal').hide();
+				var app = $('.table_default tr.clone').eq(0).clone(true);
+				var data = $('#startTime1').val();
+				app.find('td').eq(0).text($('.coursename').val());
+				app.find('td').eq(1).text(data + " " + $('.hour').val() + ':' + $('.minute').val());
+				app.appendTo('.table_default');
+				$.post("{:U('Admin/Class/addOffLine')}", {
+					'class_name': $('.coursename').val(),
+					'class_time': $('.class_time').val()
+				}, function (data) {
+					if (data.status) {
+
+					}
+				});
+			});
+				$.post('{:U("Admin/Class/addOffLine")}',id,function(){
+
+				})
+
 				$('.modal').show();
 				$('.video_modal_main_edit').show();
 				$('.m_m_offline').hide()

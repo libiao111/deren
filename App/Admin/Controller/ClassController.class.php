@@ -14,15 +14,20 @@ class ClassController extends Controller
     public function addOffLine()
     {
         if(!IS_AJAX){
-            $this->error('页面不存在!');die;
+             $this->error('页面不存在!');die;
         }
-        $id = I('id');
+        /*获取课程id*/
+        $ida = session('ida');
+        /*获取课时id*/
+        //$id = I('id');
+        //p($id);die;
         /*赋值*/
+        p($_POST);die;
         $arr = array(
             'class_name'=>I('class_name'),
             'class_time'=>I('class_time'),
             //'paixu'=>I('paixu'),
-            'course_id'=>1
+            'course_id'=>$ida
         );
         if ($id) {
             /*修改操作*/

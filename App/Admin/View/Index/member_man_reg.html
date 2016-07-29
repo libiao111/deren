@@ -41,7 +41,7 @@
                 <foreach name="users" item="v">
                     <tr>
                         <td>
-                            <input type="checkbox" id="{$v.id}" value="{$v.id}" name="id">
+                            <input type="checkbox" id="{$v.id}" value="{$v.id}" name="id[]">
                         </td>
                         <td><img src="__UPFILE__/{$v.user_photo}" height="60px" class="mt8 mb8"></td>
                         <td>{$v.username}</td>

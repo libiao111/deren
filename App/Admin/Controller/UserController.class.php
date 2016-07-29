@@ -102,10 +102,8 @@ class UserController extends Controller
 	}
 	/* 导出用户表数据*/
     public function daochu(){
-        if(!I('id')){
-            $this->error('数据错误');die;
-        }
-        $id = I('id');
+        
+        $id = $_POST['id'];
         $condition = array(
             'id'=>array('in',$id)
         ); 
