@@ -161,10 +161,10 @@
 				</p>
 				<p style='position:relative'>
 					<span>上传视频：</span>
-					<form name="fr" class="audio" action="{:U('Audio/uploa')}" method="post" enctype="multipart/form-data" style="position:absolute;top:180px;left:95px;">
-						<input type="file" name="file" class="file" style="display:none">
-						<input type="button" value="上传视频" class="video">
-					</form>
+					<div class="upload-img upload-video" style="top:217px">
+						<span class="upload-btn" data-type = "2" onclick="uploadStart(this)" style= "top:155px">
+						</span>
+					</div>
 				</p>
 			</div>
 
@@ -180,6 +180,7 @@
 	<script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.zh-CN.js"></script>
 	<script type="text/javascript">
 		var uploadActionUrl = "{:U('Audio/uploadimg')}";
+		var uploadActionVideo = "{:U('Audio/uploa')}";
 	</script>
 	<script type="text/javascript">
 		'use strict';

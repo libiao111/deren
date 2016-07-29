@@ -64,8 +64,7 @@
 				<div class="mb15 relative ">
 					<span class="i_block w100 texy_a_r absolute">上传封面:</span>
 					<div class="upload-img">
-						<span class="upload-btn" data-w="735" data-h="460" onclick="uploadStart(this)"><!-- btn --></span>
-						<input type="hidden" name="bigimg[]" value="{$sp.bigimg.0.big_pho}">
+						<span class="upload-btn" onclick="uploadStart(this)"><!-- btn --></span>
 					</div>
 				</div>
 			</div>
@@ -158,16 +157,15 @@
 				</p>
 				<p style='position:relative'>
 					<span>上传音频：</span>
-					<form name="fr" class="audio" action="{:U('Audio/uploa')}" method="post" enctype="multipart/form-data" style="position:absolute;top:180px;left:95px;">
-						<input type="file" name="file" class="file" style="display:none">
-						<input type="button" value="上传音频" class="video">
-					</form>
+					 <div class="upload-img upload-video" style="top:217px">
+						<span class="upload-btn" data-type = "2" onclick="uploadStart(this)" style= "top:155px">
+						</span>
+					</div>
 				</p>
 				<p>
 					<span>上传图片：</span>
 					<div class="upload-img" style="top:217px">
-						<span class="upload-btn" data-type="1" data-w="735" data-h="460" onclick="uploadStart(this)"><!-- btn --></span>
-						<input type="hidden" name="bigimg[]" value="{$sp.bigimg.0.big_pho}">
+						<span class="upload-btn" data-multiple="multiple" data-type="1" onclick="uploadStart(this)"></span>
 					</div>
 				</p>
 			</div>
@@ -186,7 +184,7 @@
 	<script type="text/javascript">
 		var uploadActionUrl = "{:U('Audio/uploadimg')}";
 		var uploadActionSilder = "{:U('Audio/uploada')}";
-
+		var uploadActionVideo = "{:U('Audio/uploa')}";
 
 		'use strict';
 		var option = {
@@ -198,23 +196,16 @@
 		$("#startTime1").datepicker(option);
 		$("#endTime").datepicker(option);
 
-		let courses_name = document.querySelector('.courses_name'),
+		var courses_name = document.querySelector('.courses_name'),
 			teacher_name = document.querySelector('.teacher_name'),
 			courses_num = document.querySelector('.courses_num');
 		$(function () {
 			$('.upaudio').click(function () {
 					$(this).siblings('input').click(function () {});
 				})
-				/*上传音频*/
-			$('.video').click(function () {
-					$('.file').click();
-					$('.file').change(function (e) {
-						$('.audio').submit();
-						e.preventDefault();
-					})
-				})
+				
+			
 				/*上传视频*/
-
 			$('.courses_num').keyup(function () {
 				'use strict';
 				let num = $('.courses_num').val(),
@@ -276,12 +267,12 @@
 
 			$('.saveall').click(function (e) {
 				e.preventDefault();
-				let editor = $('.view').html();
+				var editor = $('.view').html();
 				console.log(editor);
 				$('form.editor').submit();
 			})
 			$("span.confirm").click(function () {
-				let id = $(this).find('.zxc').attr('value')
+				var id = $(this).find('.zxc').attr('value')
 				console.log(id);
 				$.post('{:U("Admin/Class/delClass")}', {
 					id: id
