@@ -83,24 +83,8 @@ function pageHandle($table, $condition = null, $tiao = null)
     );
     return $data;
 }
-/*缩略切图*/
-function photo_cut($result, $width, $height = null)
-{   
-    if (!$height) {
-        $height = $width;
-    }
-    $imgurl = './Public/resource/'.$result;
-    $imgs = new \Think\Image();
-    // 获取需要处理的图片
-    $imgs->open($imgurl);
-    // 生成缩略图 宽,高,类型6种：3剧中
-    $imgs->thumb($width,$height,3);
-    // 保存路径+名称
-    $imga = date('Y-m-d').'/'.date('YmdHis').'-'.rand(1000,9999).'.png';
-    $img = './Public/resource/'.$imga;
-    $imgs->save($img,'png');
-    return $imga;
-}
+
+
 /*缩略切图*/
 function image_cut($img, $width, $height = null)
 {
@@ -118,34 +102,7 @@ function image_cut($img, $width, $height = null)
     $imgs->save($imgurl, $suffix);
 }
 
-/*轮播图*/
-function uploadImgHandler($width, $height = null)
-{
-    if (!$height) {
-        $height = $width;
-    }
-    $upload = new \Think\Upload();
-    $upload->mimes      = array('image/jpeg','image/png');
-    $upload->exts       = array('jpg','png');
-    $upload->maxSize    = '2097152';
-    $upload->hash       = false;
-    $upload->rootPath   = './Public/resource/'; // 上传路径
-    $upload->saveExt    = 'png';
-    $upload->saveName   = array('date', 'YmdHis-'.rand(1000,9999));
-    $status = $upload->upload();
-    if ($status) {
-        $result = $status['file']['savepath'].$status['file']['savename'];
-        if ($width) {
-            image_cut($result, $width, $height);
-    }
-        $data['status'] = true;
-        $data['data'] = $result;
-    } else {
-        $data['status'] = false;
-        $data['data'] = $upload->getError();
-    }
-    return $data;
-}
+
 
 /* 上传视频 */
 function uploadvideo()
@@ -160,11 +117,11 @@ function uploadvideo()
     $upload->saveName   = array('date', 'YmdHis-'.rand(100000,999999));
     $status = $upload->upload();
     if ($status) {
-        $result = $status['file']['savepath'].$status['file']['savename'];
-        
+        $result = $status[0]['savepath'].$status[0]['savename'];
     } else {
         $result = $upload->getError();
     }
+    p($result);
     return $result;
 }
 
@@ -206,6 +163,7 @@ function dataPush($data,$name='Excel') {
     $objWriter->save('php://output');
     exit;
 }
+
 /* 导出订单表EXCEL */
 function dataPush2($data,$name='Excel') {
     include_once('./Public/PHPExcel.php');

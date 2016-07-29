@@ -66,6 +66,7 @@ class OrderController extends Controller
             $this->error('数据错误');die;
         }*/
         $id = I('id');
+
         $condition = array(
             'id'=>array('in',$id)
         ); 

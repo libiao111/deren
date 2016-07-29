@@ -64,12 +64,21 @@ class AudioController extends Controller
     } 
   	
     /*上传音频视频*/
-    public function uploa(){
-        
-        $video_url = uploadvideo();
-        $this->video_url=$video_url;
-        
+    public function uploa()
+    {
+        if (!IS_POST) {
+            $this->error('页面不存在');
+        }
+        $result =uploadvideo();
+        if ($result){ 
+            $data = __ROOT__.'/Public/video/'.$result; 
+            session('course_slider', $result);
+        } else {
+            $data = $load->getErrorMsg();
+        }
+        echo '<script>parent.uploadReturnVideo("'.$result.'","'.$data.'")</script>';
     }
+    
 
     /*上传图片*/
     public function uploadimg()
@@ -77,31 +86,43 @@ class AudioController extends Controller
         if (!IS_POST) {
             $this->error('页面不存在');
         }
-        /* 开始上传 */
-        $w = '300';
-        /*上传图片*/
-        $result = uploadImgHandler($w);
-        /*存入session*/
-        session('offline_url',$result['data']);
-        /*生成缩略图*/
-        $course_photo = photo_cut($result['data'],50);
-        /*存入session*/
-        session('course_photo',$course_photo);
-        $result['data'] = __ROOT__.'/Public/resource/'.$course_photo; 
-        echo '<script>parent.uploadReturn("'.$result['status'].'","","'.$result['data'].'")</script>';
+        $load = new \Org\Util\FileUpload();
+        $load->set('path', './Public/resource/');
+        $result = $load->upload('file');
+        if ($result) {
+            $data = $load->getFileName();
+            image_cut($data[0], 50);
+            session('course_photo',$data[0]);
+            $data = __ROOT__.'/Public/resource/'.$data[0]; 
+        } else {
+            $data = $load->getErrorMsg();
+        }
+        echo '<script>parent.uploadReturnFming("'.$result.'","'.$data.'")</script>';
     }
+
     /*上传轮播图*/
     public function uploada()
     {
         if (!IS_POST) {
             $this->error('页面不存在');
         }
-        /* 开始上传 */
-        $w = '300';
-        /*上传图片*/
-        $result = uploadImgHandler($w);
-        /*生成缩略图*/
-        $result['data'] = __ROOT__.'/Public/resource/'.$result['data']; 
-        echo '<script>parent.uploadReturn("'.$result['status'].'","","'.$result['data'].'")</script>';
+
+        $load = new \Org\Util\FileUpload();
+        $load->set('path', './Public/resource/');
+        $result = $load->upload('file');
+        if ($result) {
+            $data = $load->getFileName();
+            foreach ($data as $k => $img) {
+                image_cut($img, 600, 300);
+                $imgs[] = $img;
+                $reImg[] = __ROOT__.'/Public/resource/'.$img; 
+            }
+            session('course_slider', $imgs);
+            //$data = json_encode($reImg);
+            $data = join($reImg,',');
+        } else {
+            $data = $load->getErrorMsg();
+        }
+        echo '<script>parent.uploadReturnSlider("'.$result.'","'.$data.'")</script>';
     }
 }
