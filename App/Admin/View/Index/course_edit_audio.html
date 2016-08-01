@@ -57,7 +57,7 @@
 				</div>
 				<div class="mb15 relative ">
 					<span class="i_block w100 texy_a_r ">上传封面:</span>
-                    <div class="dib" style="background-image: url(__UPFILE__/{$va.course_photo})">
+                    <div class="dib bg" style="background-image: url(__UPFILE__/{$va.course_photo})">
                         <input type="file" name="course_photo">
                         <span class="upload">上传</span>
                     </div>
@@ -154,14 +154,15 @@
                     <p style='position:relative'>
                         <span>上传音频：</span>
                         <input type="file" name="assets">
-                        <button type="button">选择音频</button>
+                        <button type="button" class="uploadbtn">选择音频</button>
                     </p>
                     <p>
                         <span class="dib">上传图片：</span>
-                        <div class="dib" style="background-image: url(__UPFILE__/{$va.course_photo})">
-                            <input type="file" name="course_photo">
-                            <span class="upload">上传</span>
-                        </div>
+                        <div class="dib bg duotu" style="background-image: url(__UPFILE__/{$va.course_photo})">
+<!--                       上传-->
+                        <input type="file" name="course_photo">
+                        <span class="upload">上传</span>
+                    </div>
                     </p>
                 </div>
                 <span class="videosave pointer">保存</span><span class="videocancel pointer">取消</span>
@@ -320,6 +321,9 @@
 			
 			//上传按钮
 			$('.dib>span.upload').click(function(){
+				$(this).siblings('input').click()
+			})
+			$('.uploadbtn').click(function () {
 				$(this).siblings('input').click()
 			})
         })

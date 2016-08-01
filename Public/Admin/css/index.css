@@ -778,9 +778,17 @@ section.about {
 }
 
 .dib>span.upload {
-    width: 30px;
-    height: 20px;
+    width: 100px;
+    height: 60px;
     display: inline-block;
     text-align: center;
     cursor: pointer;
+    line-height: 60px;
+    color: black
+}
+
+.duotu {
+    position: relative;
+    left: 94px;
+    top: -66px
 }
