@@ -130,7 +130,7 @@
 
     <!-- 弹窗 -->
     <div class="modal">
-        <form action="{:U('newCourseDot')}" method="post" target="post-handler" accept-charset="utf-8">
+        <form action="{:U('newOfflineDot')}" method="post" target="post-handler" accept-charset="utf-8">
             <input type="hidden" name="course_id" value="{$va.id}">
             <input type="hidden" name="open_id" value="">
             <div class="back"></div>
@@ -138,11 +138,11 @@
                 <h2>编辑课节</h2>
                 <div class="m_m_video">
                     <p><span>课节名称：</span>
-                        <input type="text" name="class_name" class="w200 coursename" name="coursename">
+                        <input type="text" name="class_name" class="w200">
                     </p>
                     <p>
                         <span>上课时间：</span>
-                        <input type="text" name="class_day" id="startTime1" class="am-form-field w200 class_time">
+                        <input type="text" name="class_day" id="startTime1" class="am-form-field w200">
                     </p>
                     <p>
                         <span class="inline-block w70"></span>
@@ -170,7 +170,6 @@
     <script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.zh-CN.js"></script>
 <!--    <script type="text/javascript" src="__AJS__/require.js" data-main="__AJS__/main.js"></script>-->
     <script type="text/javascript">
-        var uploadActionUrl = "{:U('Audio/uploadimg')}";
         var ue = UE.getEditor('editor');
 
         /* 加载日期选择 */
@@ -278,7 +277,7 @@
             /* 显示编辑课节 */
             $('.operation .edit').click(function (e) {
                 var id = $(this).attr('open_id');
-                $.post('{:U("pullCourseDot")}', {id: id}, function(data){
+                $.post('{:U("pullOfflineDot")}', {id: id}, function(data){
                     if (data.status) {
                         var obj = $('.modal');
                         var va = data.data;

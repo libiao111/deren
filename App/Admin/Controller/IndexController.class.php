@@ -54,6 +54,8 @@ class IndexController extends Controller
         }
         $this->ajaxReturn($data,'json');
     }
+
+
     /*退出登录*/
     public function tuichu()
     {

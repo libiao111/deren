@@ -42,7 +42,6 @@ class OffLineController extends Controller
     public function newOfflineHandler()
     {
         $this->checkPost();
-
         /* 数组赋值 */
         $data =array(
             'type'          => 1,
@@ -78,7 +77,7 @@ class OffLineController extends Controller
         $return = array(
             'status' => $result ? 1 : 0,
             'info' => $id ? '编辑线下课' : '新建线下课',
-            'course_id' => $id ? $id:$result
+            'course_id' => $id ? $id : $result
         );
         $return = json_encode($return);
         echo "<script>parent.returnHandler($return)</script>";
@@ -86,7 +85,7 @@ class OffLineController extends Controller
 
 
     /* 添加课节 */
-    public function newCourseDot()
+    public function newOfflineDot()
     {
         $this->checkPost();
         $data = array(
@@ -119,7 +118,7 @@ class OffLineController extends Controller
 
 
     /* 获取课节信息 */
-    public function pullCourseDot()
+    public function pullOfflineDot()
     {
         $this->checkAjax();
         $id = I('id');
