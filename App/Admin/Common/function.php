@@ -49,7 +49,7 @@ function loadImageHandler()
         'rootPath'      =>  C('UPLOAD_PATH'),                   //保存根路径
         // 'savePath'      =>  'upfile/',                       //保存路径
         // 'saveName'      =>  array('date', 'YmdHis-'.rand(1000,9999)),
-        'maxSize'       =>  0,                            //上传的文件大小限制 (0-不做限制)
+        'maxSize'       =>  0,                                  //上传的文件大小限制 (0-不做限制)
         'mimes'         =>  array('image/jpeg','image/png'),    //允许上传的文件MiMe类型
         'exts'          =>  array('jpg','png'),                 //允许上传的文件后缀
         'autoSub'       =>  false,                              //自动子目录保存文件
@@ -72,7 +72,7 @@ function loadOneImageHandler($file)
         'rootPath'      =>  C('UPLOAD_PATH'),                   //保存根路径
         // 'savePath'      =>  'upfile/',                       //保存路径
         // 'saveName'      =>  array('date', 'YmdHis-'.rand(1000,9999)),
-        'maxSize'       =>  0,                            //上传的文件大小限制 (0-不做限制)
+        'maxSize'       =>  0,                                  //上传的文件大小限制 (0-不做限制)
         'mimes'         =>  array('image/jpeg','image/png'),    //允许上传的文件MiMe类型
         'exts'          =>  array('jpg','png'),                 //允许上传的文件后缀
         'autoSub'       =>  false,                              //自动子目录保存文件
@@ -86,12 +86,12 @@ function loadOneImageHandler($file)
 /**
 * 上传zip
 */
-function loadPackageHandler($file)
+function loadVideoHandler($file)
 {
     $config = array(
         'rootPath'      =>  C('UPLOAD_PATH'),           //保存根路径
-        'savePath'      =>  'zip/',                     //保存路径
-        'maxSize'       =>  0,                    //上传的文件大小限制 (0-不做限制)
+        'savePath'      =>  'video/',                   //保存路径
+        'maxSize'       =>  0,                          //上传的文件大小限制 (0-不做限制)
         'mimes'         =>  array('application/zip'),   //允许上传的文件MiMe类型
         'exts'          =>  array('zip'),               //允许上传的文件后缀
         'autoSub'       =>  false,                      //自动子目录保存文件

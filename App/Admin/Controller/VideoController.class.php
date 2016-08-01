@@ -94,6 +94,13 @@ class VideoController extends Controller
             'class_min' => I('class_min')
         );
 
+        /* 上传视频 */
+        $video = $_FILES['assets'];
+        if (!$img['error']) {
+            $video = loadVideoHandler($video);
+            $data['course_photo'] = $video;
+        }
+
         /* 执行保存 */
         $id = I('open_id');
         if ($id !== '') {
