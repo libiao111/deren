@@ -61,9 +61,8 @@
                 </div>
                 <div class="mb15 relative ">
                     <span class="i_block w100 texy_a_r absolute">上传封面:</span>
-                    <div class="upload-img">
-                        <span class="upload-btn" data-w="735" data-h="460" onclick="uploadStart(this)"><!-- btn --></span>
-                        <input type="hidden" name="bigimg[]" value="{$sp.bigimg.0.big_pho}">
+                    <div class="dib" style="background-image: url(__UPFILE__/{$va.course_photo})">
+                        <input type="file" name="course_photo">
                     </div>
                 </div>
             </div>
