@@ -62,7 +62,9 @@
                 <div class="mb15 relative ">
                     <span class="i_block w100 texy_a_r">上传封面:</span>
                     <div class="dib" style="background-image: url(__UPFILE__/{$va.course_photo})">
+<!--                       上传-->
                         <input type="file" name="course_photo">
+                        <span class="upload">上传</span>
                     </div>
                 </div>
             </div>
@@ -162,11 +164,13 @@
 
     <script type="text/javascript" src="__AJS__/jquery.js"></script>
     <script type="text/javascript" src="__AJS__/jquery.easing.js"></script>
+    <script type="text/javascript" src="__AJS__/deleconfirm.js"></script>
     <script type="text/javascript" src="__AEDITOR__/ueditor.config.js"></script>
     <script type="text/javascript" src="__AEDITOR__/ueditor.all.min.js"></script>
     <script type="text/javascript" src="__AEDITOR__/lang/zh-cn/zh-cn.js"></script>
     <script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.min.js"></script>
     <script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.zh-CN.js"></script>
+<!--    <script type="text/javascript" src="__AJS__/require.js" data-main="__AJS__/main.js"></script>-->
     <script type="text/javascript">
         var uploadActionUrl = "{:U('Audio/uploadimg')}";
         var ue = UE.getEditor('editor');
@@ -291,6 +295,10 @@
                     };
                 })
             });
+			
+			$('.dib>span.upload').click(function(){
+				$(this).siblings('input').click()
+			})
 
 
 

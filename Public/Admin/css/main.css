@@ -212,7 +212,7 @@ div.table_footer .pagination {
   height: 32px;
   float: right;
   margin-top: 14px;
-  border: 1px solid #e2e2e2;
+  /*border: 1px solid #e2e2e2;*/
   font-size: 0;
   overflow: hidden;
 }
