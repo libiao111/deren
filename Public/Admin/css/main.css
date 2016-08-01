@@ -289,7 +289,7 @@ div.table_footer .pagination {
     height: 32px;
     line-height: 32px;
     text-align: center;
-    /*border-right: 1px solid #efefef;*/
+    border-right: 1px solid #efefef;
     cursor: pointer;
     color: #999;
     margin: 0;

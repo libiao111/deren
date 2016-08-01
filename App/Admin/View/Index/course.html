@@ -153,6 +153,10 @@
 	<script>
 		$(function () {
 			'use strict';
+			//移除分页a标签之间的4px间距
+			$('.pagination>div').contents().filter(function(){
+				return this.nodeType===3;
+			}).remove();
 
 			/* 成功提示 */
 			function succeeAlt(txt) {
