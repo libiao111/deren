@@ -265,7 +265,9 @@ body {
     display: inline-block;
 }
 
-..modal_add_course>.top>select {}
+input[type='file'] {
+    display: none;
+}
 
 .modal_add_course>.bottom {
     width: 100%;
@@ -772,4 +774,12 @@ section.about {
     border: 5px;
     position: fixed;
     z-index: 1111;
+}
+
+.dib>span.upload {
+    width: 30px;
+    height: 20px;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
 }
