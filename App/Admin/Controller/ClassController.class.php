@@ -14,15 +14,20 @@ class ClassController extends Controller
     public function addOffLine()
     {
         if(!IS_AJAX){
-            $this->error('页面不存在!');die;
+             $this->error('页面不存在!');die;
         }
-        $id = I('id');
+        /*获取课程id*/
+        $ida = session('ida');
+        /*获取课时id*/
+        //$id = I('id');
+        //p($id);die;
         /*赋值*/
+        p($_POST);die;
         $arr = array(
             'class_name'=>I('class_name'),
             'class_time'=>I('class_time'),
-            'paixu'=>I('paixu'),
-            'course_id'=>I('course_id')
+            //'paixu'=>I('paixu'),
+            'course_id'=>$ida
         );
         if ($id) {
             /*修改操作*/
@@ -53,8 +58,8 @@ class ClassController extends Controller
         $arr = array(
             'class_name'=>I('class_name'),
             'class_mins'=>I('class_mins'),
-            'paixu'=>I('paixu'),
-            'course_id'=>I('course_id')
+            //'paixu'=>I('paixu'),
+            'course_id'=>2
         );
 
         if ($id) {
@@ -90,8 +95,8 @@ class ClassController extends Controller
         $arr = array(
             'class_name' => I('class_name'),
             'class_mins' => I('class_mins'),
-            'paixu'=>I('paixu'),
-            'course_id'=>I('course_id')
+            //'paixu'=>I('paixu'),
+            'course_id'=>3
         );
         /*图片路径赋值给数组$arr*/
         foreach ($pho_url as $va) {

@@ -7,16 +7,16 @@ use Think\Controller;
 class IndexController extends Controller
 {
 
-    public function _initialize() {
-        $user = session('openid');
-        if (count($user) == 0) {
-            if (getOpenID()['status'] == 0) {
-                $this->redirect('open/entry');
-            }
-        }
-        $this->login = session('user') ? 1: 0;
-        $this->user_content = session('user');
-    }
+    // public function _initialize() {
+    //     $user = session('openid');
+    //     if (count($user) == 0) {
+    //         if (getOpenID()['status'] == 0) {
+    //             $this->redirect('Open/index');
+    //         }
+    //     }
+    //     $this->login = session('user') ? 1: 0;
+    //     $this->user_content = session('user');
+    // }
 
     /*查询所有课程*/
     public function index()
@@ -26,7 +26,7 @@ class IndexController extends Controller
         // 查询课程表
         $course = M("course")->where()->order('id')->select();
         // 查询已支付订单
-        $bills = M('ordera')->where(array('users_id' => $users_id, 'status' => 1))->field('course_id')->select();
+        $bills = M('bills')->where(array('users_id' => $users_id, 'status' => 1))->field('course_id')->select();
         foreach ($course as $k => $kc) {
             $kc['status'] = 0;
             foreach ($bills as $dd) {
@@ -48,7 +48,7 @@ class IndexController extends Controller
         $where['type'] = 1;
         $result = M("course")->where($where)->order('id desc')->select();
         //查询已支付订单
-        $bills = M('ordera')->where(array('users_id' => $users_id, 'status' => 1))->field('course_id')->select();
+        $bills = M('bills')->where(array('users_id' => $users_id, 'status' => 1))->field('course_id')->select();
         foreach ($result as $k => $kc) {
             $kc['status'] = 0;
             foreach ($bills as $dd) {
@@ -60,19 +60,19 @@ class IndexController extends Controller
         }
 
         $this->assign('course',$result);
-    	$this->display();
+        $this->display();
     }
 
     /*视频课*/
     public function videolist()
     {
-    	//获取用户id
+        //获取用户id
         $users_id = session('user')['id'];
         /*查询所有线下课*/
         $where['type'] = 2;
         $result = M("course")->where($where)->order('id desc')->select();
         //查询已支付订单
-        $bills = M('ordera')->where(array('users_id' => $users_id, 'status' => 1))->field('course_id')->select();
+        $bills = M('bills')->where(array('users_id' => $users_id, 'status' => 1))->field('course_id')->select();
         foreach ($result as $k => $kc) {
             $kc['status'] = 0;
             foreach ($bills as $dd) {
@@ -89,13 +89,13 @@ class IndexController extends Controller
     /*音频课*/
     public function audiolist()
     {
-    	//获取用户id
+        //获取用户id
         $users_id = session('user')['id'];
         /*查询所有线下课*/
         $where['type'] = 3;
         $result = M("course")->where($where)->order('id desc')->select();
         //查询已支付订单
-        $bills = M('ordera')->where(array('users_id' => $users_id, 'status' => 1))->field('course_id')->select();
+        $bills = M('bills')->where(array('users_id' => $users_id, 'status' => 1))->field('course_id')->select();
         foreach ($result as $k => $kc) {
             $kc['status'] = 0;
             foreach ($bills as $dd) {
@@ -111,12 +111,12 @@ class IndexController extends Controller
     /*线下课详情*/
     public function offline()
     {
-    	//获取用户id
+        //获取用户id
         $users_id = session('user')['id'];
         $id = I('id');
-    	$arr = array(
-    		'id'=>$id
-		);
+        $arr = array(
+            'id'=>$id
+        );
         $arr1 = array(
             'class'
         );
@@ -126,7 +126,7 @@ class IndexController extends Controller
         );
         /*关联查询*/
         $result = D("course")->relation($arr1)->where($arr)->find();
-        $bills = M('ordera')->where($arr2)->find();
+        $bills = M('bills')->where($arr2)->find();
         $result['status'] = $bills['status'] ? 1: 0;
         $this->assign('course',$result);
         $this->display();
@@ -149,7 +149,7 @@ class IndexController extends Controller
         );
         /*关联查询*/
         $result = D("course")->relation($arr1)->where($arr)->find();
-        $bills = M('ordera')->where($arr2)->find();
+        $bills = M('bills')->where($arr2)->find();
         $result['status'] = $bills['status'] ? 1: 0;
         $this->assign('course',$result);
         $this->display();
@@ -182,7 +182,7 @@ class IndexController extends Controller
         /*赋值*/
         $result['bigpho']=$arr4;
         /*查询订单表*/
-        $bills = M('ordera')->where($arr2)->find();
+        $bills = M('bills')->where($arr2)->find();
         /*判断是否购买*/
         $result['status'] = $bills['status'] ? 1: 0;
         $this->assign('course',$result);

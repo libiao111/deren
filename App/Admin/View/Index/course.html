@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>组件</title>
+    <link rel="stylesheet" href="__ACSS__/main.css">
+    <link rel="stylesheet" href="__ACSS__/index.css" />
+    <link rel="stylesheet" type="text/css" href="__ACSS__/font-awesome.min.css">
+</head>
+
+<body class="bf2">
+    <!-- sub nav -->
+    <div class="sub_nav pl20 pt10">
+        <span class="route">
+            <a href="dash.html" target="frame"><i class="fa fa-home fa-lg"></i></a>
+            <span class="slashes slashes1 ml8 mr8 rel"></span>
+        <span class="router router1">内容管理/全部课程</span>
+        </span>
+    </div>
+
+    <section class="widget_wrp">
+        <!-- 头部 -->
+        <div class="table_header">
+            <!-- 下拉列表组件 -->
+            <form action="?" method="get" id="seek">
+                <span class="select_wrap ml30 mt15 dib">
+
+                <span>课程分类：</span>
+
+                <select name="type" class="ipt_default btn_large">
+                    <option value="0">全部</option>
+                    <option value="1" {$type == 1 ? 'selected':''}>线下课</option>
+                    <option value="2" {$type == 2 ? 'selected':''}>视频课</option>
+                    <option value="3" {$type == 3 ? 'selected':''}>音频课</option>
+                </select>
+                <i class="fa fa-caret-down"></i>
+                </span>
+                <span class="select_wrap ml10 mt15 dib">
+                <span>课程状态：</span>
+                <select name="status" class="ipt_default btn_middle">
+                    <option value="0">全部</option>
+                    <option value="1" {$status == 1 ? 'selected':''}>停用</option>
+                    <option value="2" {$status == 2 ? 'selected':''}>启用</option>
+                </select>
+                <i class="fa fa-caret-down"></i>
+                </span>
+                <!-- 按钮 -->
+                <a href="{:U('OffLine/index', array('type' => 1))}" class="button btn_middle btn_primary r mr15 mt15 pointer">+ 线下课</a>
+                <a href="{:U('Video/index', array('type' => 2))}" class="button btn_middle btn_primary r mr10 mt15 pointer">+ 视频课</a>
+                <a href="{:U('Audio/index', array('type' => 3))}" class="button btn_middle btn_primary r mr10 mt15 pointer">+ 音频课</a>
+            </form>
+        </div>
+
+        <!-- 表格主体 -->
+        <table class="table_default">
+            <tr>
+                <th width="6%">
+                    <input type="checkbox" class="checkall">
+                </th>
+                <th width="12%">课程封面</th>
+                <th width="15%">课程名称</th>
+                <th width="10%">课程分类</th>
+                <th width="10%">课程数量</th>
+                <th width="8%">讲师姓名</th>
+                <th width="10%">开始上课时间</th>
+                <th width="10%">课程总时长</th>
+                <th width="8%">状态</th>
+                <th width="11%">操作</th>
+            </tr>
+            <foreach name="course" item="v">
+                <tr>
+                    <td width="6%">
+                        <input class="check" type="checkbox" id="{$v.id}" value="{$v.id}">
+                    </td>
+                    <td><img src="__UPFILE__/{$v.course_photo}" height="60px" class="mt8 mb8"></td>
+                    <td>{$v.course_name}</td>
+                    <td class="kc_type">
+                        <switch name="v.type">
+                            <case value="1">线下课</case>
+                            <case value="2">音频课</case>
+                            <case value="3">视频课</case>
+                            <default/>-
+                        </switch>
+                    </td>
+                    <td>{$v.class_num}</td>
+                    <td>{$v.teach_name}</td>
+                    <td>{$v.addtime}</td>
+                    <td>{$v.classtime}</td>
+                    <td>{$v['status'] == 2 ? '启用':'停用'}</td>
+                    <td class="operation">
+                        <switch name="v.type">
+                            <case value="1">
+                                <a href="{:U('OffLine/index', array('id' => $v['id'], 'type' => 1))}" class="mr2 edit"><i class="fa fa-edit vm"></i> 编辑</a>
+                            </case>
+                            <case value="2">
+                                <a href="{:U('Video/index', array('id' => $v['id'], 'type' => 2))}" class="mr2 edit"><i class="fa fa-edit vm"></i> 编辑</a>
+                            </case>
+                            <case value="3">
+                                <a href="{:U('Audio/index', array('id' => $v['id'], 'type' => 3))}" class="mr2 edit"><i class="fa fa-edit vm"></i> 编辑</a>
+                            </case>
+                        </switch>
+                    </td>
+                </tr>
+            </foreach>
+        </table>
+
+        <!-- 尾部 -->
+        <div class="table_footer mb30">
+            <div class="operate_btn_box">
+                <input type="button" class="button btn_middle btn_primary trans pointer enable" value="启用">
+                <input type="button" class="button btn_middle btn_primary trans pointer disable" value="停用">
+                <input type="button" class="button btn_middle btn_primary trans pointer delete" value="删除">
+            </div>
+            <!-- 分页 -->
+            <div class="pagination mr30" name="page">
+                {$page.pages}
+                <span class="pagination_item pagination_item_on" name="page">1</span>
+                <span class="pagination_item">2</span>
+                <span class="pagination_item">3</span>
+                <span class="pagination_item">4</span>
+                <span class="pagination_item">5</span>
+                <span class="pagination_item">6</span>
+                <span class="pagination_item">7</span> 
+            </div>
+        </div>
+    </section>
+    <div class="hint">
+        <div class="hintmain">
+            <p></p>
+        </div>
+    </div>
+
+    <script>
+    var startUrl = '{:U("startHandler")}';
+    var stopUrl = '{:U("stopHandler")}';
+    var deleUlr = "{:U('deleCourseHandler')}";
+    </script>
+    <script src="__AJS__/jquery.js"></script>
+    <script src="__AJS__/jquery.easing.js"></script>
+    <script src="__AJS__/seekfor.js"></script>
+    <script>
+        $(function() {
+            'use strict';
+            
+            /* 成功提示 */
+            function succeeAlt(txt)
+            {
+                $('.hint').show();
+                $('.hintmain').show();
+                $('.hintmain>p').text(txt);
+                setTimeout(function() {
+                    $('.hint').hide();
+                }, 1000);
+            }
+
+            /* 启用 */
+            $('.enable').click(function() {
+                let id = [],
+                    tid = $('td>input[type="checkbox"]:checked');
+                tid.each(function() {
+                    id.push(parseInt($(this).attr('id')));
+                });
+
+                $.post(startUrl, {
+                    id: id
+                }, function(data) {
+                    if (data.status) {
+                        succeeAlt('启用成功');
+                        setTimeout(function() {
+                            window.location.reload();
+                        }, 1000)
+                    }
+                });
+            })
+
+            /* 停用 */
+            $('.disable').click(function() {
+                let id = [],
+                    tid = $('td>input[type="checkbox"]:checked');
+                tid.each(function() {
+                    id.push(parseInt($(this).attr('id')));
+                });
+
+                $.post(stopUrl, {
+                    id: id
+                }, function(data) {
+                    if (data.status) {
+                        succeeAlt('停用成功');
+                        setTimeout(function() {
+                            window.location.reload();
+                        }, 1000)
+                    }
+                });
+            })
+            
+            /* 删除 */
+            $('.delete').click(function() {
+                let id = [],
+                    tid = $('td>input[type="checkbox"]:checked');
+                tid.each(function() {
+                    id.push(parseInt($(this).attr('id')));
+                });
+
+                $.post(deleUrl, {
+                    id: id
+                }, function(data) {
+                    if (data.status) {
+                        succeeAlt('删除成功');
+                        setTimeout(function() {
+                            window.location.reload();
+                        }, 1000)
+                    }
+                });
+            })
+
+        });
+    </script>
+</body>
+
+</html>

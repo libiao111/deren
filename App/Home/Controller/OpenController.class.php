@@ -6,13 +6,16 @@ use Think\Controller;
 */
 class OpenController extends Controller
 {
-	public function index()
-	{
-		$this->entry();
-	}
-	/* 显示关注公众号二维码 */
-	public function entry()
-	{
-		$this->display('Index/entry');
-	}
+    // private
+    /* 显示关注公众号二维码 */
+    private function entry()
+    {
+        $this->display('Index/entry');
+    }
+
+    /* 显示扫码 */
+    public function index()
+    {
+        $this->entry();
+    }
 }
