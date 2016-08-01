@@ -95,7 +95,7 @@
                 <th width="11%">操作</th>
             </tr>
             <foreach name='va.class' item='v'>
-                <tr class="h50 clone">
+                <tr class="h50 clone" data-row="{$v.id}">
                     <td>
                         {$v.class_name}
                     </td>
@@ -168,9 +168,9 @@
     <script type="text/javascript" src="__AEDITOR__/lang/zh-cn/zh-cn.js"></script>
     <script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.min.js"></script>
     <script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.zh-CN.js"></script>
-<!--    <script type="text/javascript" src="__AJS__/require.js" data-main="__AJS__/main.js"></script>-->
     <script type="text/javascript">
         var ue = UE.getEditor('editor');
+        var deleUrl = "{:U('deleDotList')}";
 
         /* 加载日期选择 */
         var option = {
@@ -235,13 +235,12 @@
                 });
             }
 
-
-            /* 关闭 */
+            /* 关闭弹窗 */
             $('.back').click(function () {
                 $('.modal').hide()
             });
 
-            /* 显示添加课时 */
+            /* 显示添加课节 */
             $('.addvideo').click(function () {
                 var obj = $('.modal');
                 var course_id = obj.find('input[name="course_id"]').val();
@@ -262,17 +261,6 @@
             $('.videosave').click(function () {
                 $(this).parents('form').submit();
             });
-
-            /* 删除课节 */
-            // $("span.confirm").click(function () {
-            //     var id = $(this).find('.zxc').attr('value')
-            //     console.log(id);
-            //     $.post('{:U("Admin/Class/delClass")}', {
-            //         id: id
-            //     }, function () {
-
-            //     })
-            // })
 
             /* 显示编辑课节 */
             $('.operation .edit').click(function (e) {

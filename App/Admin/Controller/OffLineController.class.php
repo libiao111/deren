@@ -67,9 +67,10 @@ class OffLineController extends Controller
         $id = I('id');
         if ($id !== '') {
             $data['id'] = $id;
+            $data['udate'] = time();
             $result = M('course')->save($data);
         } else {
-            $data['addtime'] = date('Y-m-d H:i:s');
+            $data['adate'] = time();
             $result = M('course')->add($data);
         }
 
@@ -141,5 +142,17 @@ class OffLineController extends Controller
     }
 
 
+    /* 删除课节 */
+    public function deleDotList()
+    {
+        $this->checkAjax();
+        $id = I('id');
+        $result = M('class')->where(array('id' => $id))->delete();
+        $return = array(
+            'status' => $result ? 1 : 0,
+            'info' => '删除课节'
+        );
+        $this->ajaxReturn($return, 'json');
+    }
 
 }
