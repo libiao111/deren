@@ -79,7 +79,7 @@ class VideoController extends Controller
             'course_id' => $id ? $id : $result
         );
         $return = json_encode($return);
-        echo "<script>parent.returnHandler($return)</script>";
+        exit("<script>parent.returnHandler($return)</script>");
     }
 
 
@@ -96,9 +96,10 @@ class VideoController extends Controller
 
         /* 上传视频 */
         $video = $_FILES['assets'];
+        p($_FILES);die;
         if (!$img['error']) {
             $video = loadVideoHandler($video);
-            $data['course_photo'] = $video;
+            $data['assets_url'] = $video;
         }
 
         /* 执行保存 */
@@ -118,7 +119,7 @@ class VideoController extends Controller
             'info' => $id ? '编辑课节' : '新建课节'
         );
         $return = json_encode($return);
-        echo "<script>parent.returnDotHandler($return)</script>";
+        exit("<script>parent.returnDotHandler($return)</script>");
     }
 
 
@@ -133,7 +134,6 @@ class VideoController extends Controller
                 'open_id'    => $result['id'],
                 'course_id'  => $result['course_id'],
                 'class_name' => $result['class_name'],
-                'class_day'  => $result['class_day'],
                 'class_hour' => $result['class_hour'],
                 'class_min'  => $result['class_min']
             );
@@ -141,6 +141,20 @@ class VideoController extends Controller
         $return = array(
             'data' => $data,
             'status' => $result ? 1:0
+        );
+        $this->ajaxReturn($return, 'json');
+    }
+
+
+    /* 删除课节 */
+    public function deleDotList()
+    {
+        $this->checkAjax();
+        $id = I('id');
+        $result = M('class')->where(array('id' => $id))->delete();
+        $return = array(
+            'status' => $result ? 1 : 0,
+            'info' => '删除课节'
         );
         $this->ajaxReturn($return, 'json');
     }

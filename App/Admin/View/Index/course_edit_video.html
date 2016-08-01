@@ -99,13 +99,13 @@
                 <th width="11%">操作</th>
             </tr>
             <foreach name='va.class' item='v'>
-                <tr class="h50 clone">
+                <tr class="h50 clone" data-row="{$v.id}">
                     <td>
                         {$v.class_name}
                     </td>
                     <td>{$v.class_hour}时{$v.class_min}分</td>
                     <td class="operation">
-                        <a href="javascript:;" class="mr2 edit">
+                        <a href="javascript:;" class="mr2 edit" open_id="{$v.id}">
                             <i class="fa fa-edit vm"></i> 编辑
                         </a>
                         <span class="ccc">|</span>
@@ -115,14 +115,13 @@
                         <!-- 删除提示 -->
                         <div class="deleConfirm">
                             <span class="mbutton trans confirm mt10">
-                            <input name="" class="zxc" type="hidden" value="{$v.id}"><i class="fa fa-check mr4"></i>确认
+                                <input name="" class="zxc" type="hidden" value="{$v.id}"><i class="fa fa-check mr4"></i>确认
                             </span>
                             <span class="mbutton trans cancel"><i class="fa fa-times mr4"></i>取消</span>
                         </div>
                     </td>
                 </tr>
             </foreach>
-
         </table>
 
         <!-- 尾部 -->
@@ -147,12 +146,11 @@
                     <p><span>课节名称：</span>
                         <input type="text" name="class_name" class="w200">
                     </p>
-
                     <p>
                         <span>课节时长：</span>
-                        <input type="text" class="w50 hour" name="class_hour">
+                        <input type="number" class="w50 hour" name="class_hour">
                         <span class="">小时</span>
-                        <input type="text" class="w50 minute" name="class_min">
+                        <input type="number" class="w50 minute" name="class_min">
                         <span class="">分</span>
                     </p>
                     <p>
@@ -161,8 +159,8 @@
                         <button type="button" class="uploadbtn">选择视频</button>
                     </p>
                 </div>
-
-                <span class="videosave pointer">保存</span><span class="videocancel pointer">取消</span>
+                <span class="videosave pointer">保存</span>
+                <span class="videocancel pointer">取消</span>
             </div>
         </form>
     </div>
@@ -176,8 +174,7 @@
     <script type="text/javascript" src="__AEDITOR__/ueditor.all.min.js"></script>
     <script type="text/javascript" src="__AEDITOR__/lang/zh-cn/zh-cn.js"></script>
     <script type="text/javascript">
-        var uploadActionUrl = "{:U('Audio/uploadimg')}";
-        var uploadActionVideo = "{:U('Audio/uploa')}";
+        var deleUrl = "{:U('deleDotList')}";
         var ue = UE.getEditor('editor');
 
 
@@ -193,6 +190,7 @@
         function returnDotHandler(data)
         {
             if (data.status) {
+                $('.modal').hide()
                 alert(data.info);
             };
         }
@@ -223,73 +221,48 @@
             }
 
 
-            /* 显示添加 */
+            /* 提交编辑课程 */
+            $('.saveall').click(function (e) {
+                $('form.editor').submit();
+            })
+
+
+            /* 关闭弹窗 */
+            $('.back').click(function () {
+                $('.modal').hide()
+            });
+            /* 显示添加课节 */
             $('.addvideo').click(function () {
                 $('.modal').show();
                 $('.video_modal_main_edit').show();
             });
+            /* 取消 */
             $('.videocancel').click(function () {
                 $('.modal').hide()
             })
-
-
-            $('.file').change(function () {
-                $.post('{:U('
-                    OffLine / uploa ')}', {},
-                    function () {})
-            })
+            /* 保存 */
             $('.videosave').click(function () {
-                'use strict';
-                $('.modal').hide();
-                var app = $('.table_default tr.clone').eq(0).clone(true);
-                var data = $('#startTime1').val();
-                app.find('td').eq(0).text($('.coursename').val());
-                app.find('td').eq(1).text(data + " " + $('.hour').val() + ':' + $('.minute').val());
-                app.appendTo('.table_default');
-                $.post("{:U('Admin/Class/addVideoClass')}", {
-                    'class_name': $('.coursename').val(),
-                    'class_time': $('.class_time').val()
-                }, function (data) {
-                    if (data.status) {
-
-                    }
-                });
+                $(this).parents('form').submit();
             });
 
-            $('.saveall').click(function (e) {
-                e.preventDefault();
-                let editor = $('#editor').text();
-                console.log(editor);
-                $('form.editor').submit();
-            })
-            $("span.confirm").click(function () {
-                let id = $(this).find('.zxc').attr('value')
-                console.log(id);
-                $.post('{:U("Admin/Class/delClass")}', {
-                    id: id
-                }, function () {
-
-                })
-            })
-
-            $('.back').click(function () {
-                $('.modal').hide()
-            });
-
+            /* 显示编辑课节 */
             $('.operation .edit').click(function (e) {
-                'use strict';
-                e.preventDefault();
-                $('.modal').show();
-                $('.video_modal_main_edit').show();
-                $('.m_m_offline').hide()
-                $('.m_m_audio').hide()
-                $('.videocancel').click(function () {
-                    $('.modal').hide()
-                })
-                $('.videosave').click(function () {
-                    $('.modal').hide()
+                var id = $(this).attr('open_id');
+                $.post('{:U("pullVideoDot")}', {id: id}, function(data){
+                    if (data.status) {
+                        var obj = $('.modal');
+                        var va = data.data;
+                        obj.find('input[name="course_id"]').val(va.course_id);
+                        obj.find('input[name="open_id"]').val(va.open_id);
+                        obj.find('input[name="class_name"]').val(va.class_name);
+                        obj.find('input[name="class_hour"]').val(va.class_hour);
+                        obj.find('input[name="class_min"]').val(va.class_min);
+                        obj.show();
+                        $('.video_modal_main_edit').show();
+                    };
                 })
             });
+
 
             //上传按钮
             $('.dib>span.upload').click(function () {
@@ -298,6 +271,8 @@
             $('.uploadbtn').click(function () {
                 $(this).siblings('input').click()
             })
+
+
         })
     </script>
 </body>
