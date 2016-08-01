@@ -7,6 +7,17 @@
     <link rel="stylesheet" href="__ACSS__/main.css">
     <link rel="stylesheet" href="__ACSS__/index.css" />
     <link rel="stylesheet" type="text/css" href="__ACSS__/font-awesome.min.css">
+    <style>
+        .delwarp {
+            width: 120px;
+            height: 36px;
+            border: solid 1px;
+            display: inline-block;
+            position: absolute;
+            top: 0px;
+            left: 315px
+        }
+    </style>
 </head>
 
 <body class="bf2">
@@ -29,20 +40,20 @@
                 <span>课程分类：</span>
 
                 <select name="type" class="ipt_default btn_large">
-                    <option value="0">全部</option>
-                    <option value="1" {$type == 1 ? 'selected':''}>线下课</option>
-                    <option value="2" {$type == 2 ? 'selected':''}>视频课</option>
-                    <option value="3" {$type == 3 ? 'selected':''}>音频课</option>
-                </select>
+					<option value="0">全部</option>
+					<option value="1" {$type==1 ? 'selected': ''}>线下课</option>
+					<option value="2" {$type==2 ? 'selected': ''}>视频课</option>
+					<option value="3" {$type==3 ? 'selected': ''}>音频课</option>
+				</select>
                 <i class="fa fa-caret-down"></i>
                 </span>
                 <span class="select_wrap ml10 mt15 dib">
                 <span>课程状态：</span>
                 <select name="status" class="ipt_default btn_middle">
-                    <option value="0">全部</option>
-                    <option value="1" {$status == 1 ? 'selected':''}>停用</option>
-                    <option value="2" {$status == 2 ? 'selected':''}>启用</option>
-                </select>
+					<option value="0">全部</option>
+					<option value="1" {$status==1 ? 'selected': ''}>停用</option>
+					<option value="2" {$status==2 ? 'selected': ''}>启用</option>
+				</select>
                 <i class="fa fa-caret-down"></i>
                 </span>
                 <!-- 按钮 -->
@@ -111,11 +122,18 @@
                 <input type="button" class="button btn_middle btn_primary trans pointer enable" value="启用">
                 <input type="button" class="button btn_middle btn_primary trans pointer disable" value="停用">
                 <input type="button" class="button btn_middle btn_primary trans pointer delete" value="删除">
+                <div class="delwarp" style="display:none;position:absoulte">
+                    <span class="mbutton trans confirm" style="width:50%;height:100%;box-sizing:border-box;float:left;line-height:30px;">
+              			<input name="" class="zxc" type="hidden" value="{$v.id}">
+              			<i class="fa fa-check mr4"></i>确认
+        			</span>
+                    <span class="mbutton trans cancel" style="width:50%;height:100%;box-sizing:border-box;float:left;line-height:30px;"><i class="fa fa-times mr4"></i>取消</span>
+                </div>
             </div>
             <!-- 分页 -->
             <div class="pagination mr30" name="page">
                 {$page.pages}
-<!--
+                <!--
                 <span class="pagination_item pagination_item_on" name="page">1</span>
                 <span class="pagination_item">2</span>
                 <span class="pagination_item">3</span>
@@ -127,6 +145,12 @@
             </div>
         </div>
     </section>
+    <div class="delbox" style="display:none;position:absoulte">
+        <span class="mbutton trans confirm mt10">
+              <input name="" class="zxc" type="hidden" value="{$v.id}"><i class="fa fa-check mr4"></i>确认
+        </span>
+        <span class="mbutton trans cancel"><i class="fa fa-times mr4"></i>取消</span>
+    </div>
     <div class="hint">
         <div class="hintmain">
             <p></p>
@@ -134,9 +158,9 @@
     </div>
 
     <script>
-    var startUrl = '{:U("startHandler")}';
-    var stopUrl = '{:U("stopHandler")}';
-    var deleUlr = "{:U('deleCourseHandler')}";
+        var startUrl = '{:U("startHandler")}';
+        var stopUrl = '{:U("stopHandler")}';
+        var deleUlr = "{:U('deleCourseHandler')}";
     </script>
     <script src="__AJS__/jquery.js"></script>
     <script src="__AJS__/jquery.easing.js"></script>
@@ -144,10 +168,9 @@
     <script>
         $(function() {
             'use strict';
-            
+
             /* 成功提示 */
-            function succeeAlt(txt)
-            {
+            function succeeAlt(txt) {
                 $('.hint').show();
                 $('.hintmain').show();
                 $('.hintmain>p').text(txt);
@@ -195,11 +218,18 @@
                     }
                 });
             })
-            
+
             /* 删除 */
             $('.delete').click(function() {
                 let id = [],
-                    tid = $('td>input[type="checkbox"]:checked');
+                    tid = $('td>input[type="checkbox"]:checked'),
+                    clone = $('.delbox').clone(true);
+                $('.delwarp').show();
+				
+				$('.delwarp>.cancel').click(function(){
+					$('.delwarp').hide();
+				})
+				
                 tid.each(function() {
                     id.push(parseInt($(this).attr('id')));
                 });

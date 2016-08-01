@@ -623,6 +623,7 @@ section.about {
     display: inline-block;
     margin-left: 30px;
     margin-top: 12px;
+    position: relative;
 }
 
 .in-span {
