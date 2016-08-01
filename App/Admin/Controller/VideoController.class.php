@@ -21,6 +21,13 @@ class VideoController extends Controller
             $this->error('页面不存在');
         }
     }
+    // form post return
+    private function selfReturn($return)
+    {
+        $callback = I('callback');
+        $return = json_encode($return);
+        exit("<script>parent.$callback($return)</script>");
+    }
 
 
     /* 页面(新建编辑) */
@@ -57,9 +64,20 @@ class VideoController extends Controller
         /* 上传封面 */
         $img = $_FILES['course_photo'];
         if (!$img['error']) {
-            $img = loadOneImageHandler($img);
-            image_cut($img, 320, 180);
-            $data['course_photo'] = $img;
+            $load = loadOneImageHandler($img);
+            if ($load['status']) {
+                /* 成功 */
+                $img = $load['assets'];
+                image_cut($img, 320, 180);
+                $data['course_photo'] = $img;
+            } else {
+                /* 失败 */
+                $return = array(
+                    'status' => 0,
+                    'info' => $load['error']
+                );
+                $this->selfReturn($return);
+            }
         }
 
         /* 执行保存 */
@@ -78,8 +96,7 @@ class VideoController extends Controller
             'info' => $id ? '编辑视频课' : '新建视频课',
             'course_id' => $id ? $id : $result
         );
-        $return = json_encode($return);
-        exit("<script>parent.returnHandler($return)</script>");
+        $this->selfReturn($return);
     }
 
 
@@ -88,18 +105,27 @@ class VideoController extends Controller
     {
         $this->checkPost();
         $data = array(
-            'course_id' => I('course_id'),
+            'course_id'  => I('course_id'),
             'class_name' => I('class_name'),
             'class_hour' => I('class_hour'),
-            'class_min' => I('class_min')
+            'class_min'  => I('class_min')
         );
-
+        
         /* 上传视频 */
-        $video = $_FILES['assets'];
-        p($_FILES);die;
-        if (!$img['error']) {
-            $video = loadVideoHandler($video);
-            $data['assets_url'] = $video;
+        $vid = $_FILES['assets'];
+        if (!$vid['error']) {
+            $load = loadVideoHandler($vid);
+            if ($load['status']) {
+                $vid = $load['assets'];
+                $data['assets_url'] = $vid;
+            } else {
+                /* 失败 */
+                $return = array(
+                    'status' => 0,
+                    'info' => $load['error']
+                );
+                $this->selfReturn($return);
+            }
         }
 
         /* 执行保存 */
@@ -118,8 +144,7 @@ class VideoController extends Controller
             'status' => $result ? 1 : 0,
             'info' => $id ? '编辑课节' : '新建课节'
         );
-        $return = json_encode($return);
-        exit("<script>parent.returnDotHandler($return)</script>");
+        $this->selfReturn($return);
     }
 
 

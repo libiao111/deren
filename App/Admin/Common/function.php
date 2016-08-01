@@ -41,14 +41,14 @@ function pageHandle($table, $condition = null, $tiao = null)
 //     [savepath] => 
 // )
 /**
-* 多图片上传
+* 多图上传
 */
-function loadImageHandler()
+function loadImageHandler($file)
 {
     $config = array(
         'rootPath'      =>  C('UPLOAD_PATH'),                   //保存根路径
-        // 'savePath'      =>  'upfile/',                       //保存路径
-        // 'saveName'      =>  array('date', 'YmdHis-'.rand(1000,9999)),
+        'savePath'      =>  'image/',                           //保存路径
+        // 'saveName'      =>  array('date', 'YmdHis-'.rand(1000,9999)), // 命名规则
         'maxSize'       =>  0,                                  //上传的文件大小限制 (0-不做限制)
         'mimes'         =>  array('image/jpeg','image/png'),    //允许上传的文件MiMe类型
         'exts'          =>  array('jpg','png'),                 //允许上传的文件后缀
@@ -56,50 +56,88 @@ function loadImageHandler()
         'hash'          =>  false                               //是否生成hash编码
     );
     $load = new \Think\Upload($config);
-    $result = $load->upload();
+    $result = $load->upload(array($file));
     foreach ($result as $k => $img) {
-        $result[$k] = $img['savename'];
+        $result[$k] = 'image/'.$img['savename'];
     }
-    return $result;
+    $data = array(
+        'assets' => $result,
+        'status' => $result ? 1:0,
+        'error'  => $load->getError()
+    );
+    return $data;
 }
 
 /**
-* 单图片上传
+* 单图上传
 */
 function loadOneImageHandler($file)
 {
     $config = array(
-        'rootPath'      =>  C('UPLOAD_PATH'),                   //保存根路径
-        // 'savePath'      =>  'upfile/',                       //保存路径
-        // 'saveName'      =>  array('date', 'YmdHis-'.rand(1000,9999)),
-        'maxSize'       =>  0,                                  //上传的文件大小限制 (0-不做限制)
-        'mimes'         =>  array('image/jpeg','image/png'),    //允许上传的文件MiMe类型
-        'exts'          =>  array('jpg','png'),                 //允许上传的文件后缀
-        'autoSub'       =>  false,                              //自动子目录保存文件
-        'hash'          =>  false                               //是否生成hash编码
+        'rootPath'      =>  C('UPLOAD_PATH'),
+        'savePath'      =>  'image/',
+        'maxSize'       =>  0,
+        'mimes'         =>  array('image/jpeg','image/png'),
+        'exts'          =>  array('jpg','png'),
+        'autoSub'       =>  false,
+        'hash'          =>  false
     );
     $load = new \Think\Upload($config);
     $img = $load->uploadOne($file);
-    return $img['savename'];
+    $data = array(
+        'assets' => 'image/'.$img['savename'],
+        'status' => $vid ? 1:0,
+        'error'  => $load->getError()
+    );
+    return $data;
 }
 
 /**
-* 上传zip
+* 上传video
 */
 function loadVideoHandler($file)
 {
     $config = array(
-        'rootPath'      =>  C('UPLOAD_PATH'),           //保存根路径
-        'savePath'      =>  'video/',                   //保存路径
-        'maxSize'       =>  0,                          //上传的文件大小限制 (0-不做限制)
-        'mimes'         =>  array('application/zip'),   //允许上传的文件MiMe类型
-        'exts'          =>  array('zip'),               //允许上传的文件后缀
-        'autoSub'       =>  false,                      //自动子目录保存文件
-        'hash'          =>  false                       //是否生成hash编码
+        'rootPath'      =>  C('UPLOAD_PATH'),
+        'savePath'      =>  'video/',
+        'maxSize'       =>  0,
+        'mimes'         =>  array('video/webm','video/ogv','video/mp4'),
+        'exts'          =>  array('webm','mp4','ogv'),
+        'autoSub'       =>  false,
+        'hash'          =>  false
     );
     $load = new \Think\Upload($config);
-    $zip = $load->uploadOne($file);
-    return 'zip/'.$zip['savename'];
+    $vid = $load->uploadOne($file);
+    $data = array(
+        'assets' => 'video/'.$vid['savename'],
+        'status' => $vid ? 1:0,
+        'error'  => $load->getError()
+    );
+    return $data;
+}
+
+/**
+* 上传audio
+*/
+function loadAudioHandler($file)
+{
+    $config = array(
+        'rootPath'      =>  C('UPLOAD_PATH'),
+        'savePath'      =>  'audio/',
+        'maxSize'       =>  0,
+        'mimes'         =>  array('audio/mpeg'),
+        'exts'          =>  array('mp3'),
+        'autoSub'       =>  false,
+        'hash'          =>  false
+    );
+    $load = new \Think\Upload($config);
+    $aud = $load->uploadOne($file);
+    $data = array(
+        'assets' => 'audio/'.$aud['savename'],
+        'status' => $aud ? 1:0,
+        'error'  => $load->getError()
+    );
+    return $data;
 }
 
 

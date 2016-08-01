@@ -21,6 +21,13 @@ class OffLineController extends Controller
             $this->error('页面不存在');
         }
     }
+    // form post return
+    private function selfReturn($return)
+    {
+        $callback = I('callback');
+        $return = json_encode($return);
+        exit("<script>parent.$callback($return)</script>");
+    }
 
 
 
@@ -58,9 +65,20 @@ class OffLineController extends Controller
         /* 上传封面 */
         $img = $_FILES['course_photo'];
         if (!$img['error']) {
-            $img = loadOneImageHandler($img);
-            image_cut($img, 320, 180);
-            $data['course_photo'] = $img;
+            $load = loadOneImageHandler($img);
+            if ($load['status']) {
+                /* 成功 */
+                $img = $load['assets'];
+                image_cut($img, 320, 180);
+                $data['course_photo'] = $img;
+            } else {
+                /* 失败 */
+                $return = array(
+                    'status' => 0,
+                    'info' => $load['error']
+                );
+                $this->selfReturn($return);
+            }
         }
 
         /* 执行保存 */
@@ -80,8 +98,7 @@ class OffLineController extends Controller
             'info' => $id ? '编辑线下课' : '新建线下课',
             'course_id' => $id ? $id : $result
         );
-        $return = json_encode($return);
-        echo "<script>parent.returnHandler($return)</script>";
+        $this->selfReturn($return);
     }
 
 
@@ -113,8 +130,7 @@ class OffLineController extends Controller
             'status' => $result ? 1 : 0,
             'info' => $id ? '编辑课节' : '新建课节'
         );
-        $return = json_encode($return);
-        echo "<script>parent.returnDotHandler($return)</script>";
+        $this->selfReturn($return);
     }
 
 
