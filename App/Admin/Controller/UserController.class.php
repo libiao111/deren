@@ -1,6 +1,9 @@
 <?php
 namespace Admin\Controller;
 use Think\Controller;
+/**
+* 学员管理
+*/
 class UserController extends Controller
 {
     public function index()

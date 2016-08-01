@@ -39,7 +39,7 @@ class OffLineController extends Controller
     
 
     /* 页面(新建编辑) */
-    public function newHandler()
+    public function newOfflineHandler()
     {
         $this->checkPost();
 

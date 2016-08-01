@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>offline</title>
+    <title>编辑线下课</title>
     <link rel="stylesheet" href="__ACSS__/main.css">
     <link rel="stylesheet" href="__ACSS__/index.css">
     <link rel="stylesheet" href="__ACSS__/font-awesome.min.css" type="text/css">
@@ -12,7 +12,6 @@
 
     <!-- sub nav -->
     <div class="sub_nav pl20 pt10">
-        <span class="route">
         <span class="router router1">
             业务管理/{$va['id'] ? '编辑':'添加'}
             <switch name="type = I('type')">
@@ -20,7 +19,6 @@
                 <case value="2">视频课</case>
                 <case value="3">音频课</case>
             </switch>
-        </span>
         </span>
     </div>
 
@@ -31,7 +29,7 @@
     </div>
 
 
-    <form class="editor" action="{:U('newHandler')}" method="post" target="post-handler" enctype="multipart/form-data">
+    <form class="editor" action="{:U('newOfflineHandler')}" method="post" target="post-handler" enctype="multipart/form-data">
         <input type="hidden" name="id" value="{$va.id}">
         <section class="widget_wrp h170">
             <div class="f_l w500">
@@ -75,7 +73,7 @@
             </span>
         </div>
         <section class="widget_wrp h460">
-            <textarea id="editor" name="picture" type="text/plain" style="width:800px;height:300px;">{$va.picture}</textarea>
+            <textarea id="editor" name="picture" type="text/plain" style="width:800px; height:300px;">{$va.picture}</textarea>
         </section>
     </form>
 
@@ -194,6 +192,7 @@
         function returnDotHandler(data)
         {
             if (data.status) {
+                alert(data.info);
                 /* init */
                 var obj = $('.modal');
                 obj.find('input[name="open_id"]').val('');
@@ -202,7 +201,6 @@
                 obj.find('input[name="class_hour"]').val('');
                 obj.find('input[name="class_min"]').val('');
                 obj.hide();
-                alert(data.info);
             };
         }
 
