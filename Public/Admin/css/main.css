@@ -280,6 +280,8 @@ div.table_footer .pagination {
 .pagination>div>.prev-no,
 .pagination>div>.current,
 .pagination>div>.num,
+.pagination>div>.prev,
+.pagination>div>.next-no,
 .pagination>div>.next,
 .pagination>div>.end-no {
     display: inline-block;
@@ -287,9 +289,17 @@ div.table_footer .pagination {
     height: 32px;
     line-height: 32px;
     text-align: center;
-    border-right: 1px solid #efefef;
+    /*border-right: 1px solid #efefef;*/
     cursor: pointer;
     color: #999;
+    margin: 0;
+    padding: 0;
+}
+
+.pagination>div>.prev-no,
+.pagination>div>.next-no,
+.pagination>div>.end-no {
+    width: 30px;
 }
 
 .pagination>div>.current {
