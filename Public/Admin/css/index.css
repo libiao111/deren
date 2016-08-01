@@ -790,5 +790,17 @@ section.about {
 .duotu {
     position: relative;
     left: 94px;
-    top: -66px
+    top: -56px;
+    width: 50px;
+    height: 40px
+}
+
+.editupload {
+    display: inline-block;
+    color: black;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    line-height: 40px;
+    text-align: center;
 }
