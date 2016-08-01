@@ -7,7 +7,7 @@ use Think\Controller;
 class IndexController extends Controller
 {
     public function _initialize(){
-        //  if(!session('user')) {
+        // if(!session('user')) {
         //     if (IS_AJAX) {
         //         $user = I('username');
         //         $pass = I('password');

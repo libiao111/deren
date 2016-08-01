@@ -1,9 +1,13 @@
 <?php
 namespace Admin\Controller;
-use Think\Controller;
+use Think\Controller;、
+/**
+* 订单
+*/
 class OrderController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $users_id = I('users_id');
          /*分页*/
         $table = 'course';
@@ -23,6 +27,7 @@ class OrderController extends Controller
         $this->assign('page',$data['pages']['pages']);
         $this->display('index/bill_management');
     }
+
     /*删除订单*/
     public function deleteOrder(){
         if(!IS_AJAX){

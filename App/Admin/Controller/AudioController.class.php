@@ -2,12 +2,17 @@
 namespace Admin\Controller;
 use Think\Controller;
 /**
-* 管理端
+* 音频
 */
 class AudioController extends Controller
 {
-    //添加或修改音频课
     public function index()
+    {
+        $this->display('Index/course_edit_audio');
+    }
+
+    //添加或修改音频课
+    public function newAudioHandler()
     {
         if(!IS_AJAX){
               $this->error('页面不存在!');die; 

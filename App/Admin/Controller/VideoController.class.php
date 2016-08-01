@@ -2,12 +2,43 @@
 namespace Admin\Controller;
 use Think\Controller;
 /**
-* 管理端
+* 视频
 */
 class VideoController extends Controller
 {
-    //添加或修改视频课
+    // private
+    // check post
+    private function checkPost()
+    {
+        if (!IS_POST) {
+            $this->error('页面不存在');
+        }
+    }
+    // check ajax
+    private function checkAjax()
+    {
+        if (!IS_AJAX) {
+            $this->error('页面不存在');
+        }
+    }
+
+
+    /* 页面(新建编辑) */
     public function index()
+    {
+        $id = I('id');
+        $info = array();
+        if ($id !== '') {
+            $info = D('course')->relation('class')->where(array('id' => $id))->find();
+        }
+
+        $this->assign('va', $info);
+        $this->display('Index/course_edit_video');
+    }
+
+
+    /* 提交(新建编辑) */
+    public function newVideoHandler()
     {
         if (!IS_AJAX) {
               $this->error('页面不存在!');die; 
