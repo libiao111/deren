@@ -2,131 +2,103 @@
 namespace Admin\Controller;
 use Think\Controller;
 /**
-* 管理端
+* 课程列表
 */
 class CourseController extends Controller
 {
+    // check
+    // check post
+    private function checkPost()
+    {
+        if (!IS_POST) {
+            $this->error('页面不存在');
+        }
+    }
+    // check ajax
+    private function checkAjax()
+    {
+        if (!IS_AJAX) {
+            $this->error('页面不存在');
+        }
+    }
+
+
+    /* 列表 */
     public function index()
     {
-        /*$type = I('type');
-        if($type==1){
-
-        }else if($type==2){
-
-        }else if($type==3){
-
-        }*/
-    }
-    /*默认显示所有*/
-    public function course(){
-        
-        //搜索
+        /* 筛选 */
+        $condition = array();
         $type = I('type');
         $status = I('status');
-        $where="";
-        /*分页*/
-        $table = 'course';
-        $condition = "";
-        $tiao = 5;
-        /*调用分页函数返回*/
-        $data = pageHandle($table,$condition,$tiao);
-        /*按类型查询*/
-        if ($type) {
-            $where['type'] = $type;
-        }
-        /*按状态查询*/
-        if ($status) {
-            $where['status']=$status;
-        }
-        $this->type=$type;
-        $this->status=$status;
+        $this->type = $type ? $condition['type'] = $type: '';
+        $this->status = $status ? $condition['status'] = $status: '';
+
+        /* 页码 */
+        $page = pageHandle('course',$condition, 5);
+        $limit = $page['limit'];
+        
         /*查询记录*/
-        $result = M('course')->where($where)->limit($data['limit'])->select();
-        $this->assign('page',$data['pages']['pages']);
+        $result = M('course')->where($condition)->limit($limit)->select();
+
         $this->assign('course',$result);
-        $this->display("Index/course_management");
+        $this->assign('page',$page['pages']);
+        $this->display("Index/course");
     }
-    /*启用状态*/
-    public function enablestatus()
+
+    /* 启用状态 */
+    public function startHandler()
     {
-        if(!IS_AJAX){
-            $this->error('页面不存在!');die;
-        }
+        $this->checkAjax();
         $id = I('id');
-        $where = array(
-            'id'=>array('in',$id),
-        );
-        $arr = array(
-            'status'=>2
-        );
-        $result = M('course')->where($where)->save($arr);
-         /*反馈数据*/
-        if ($result) {
-            $data = array('status'=>1); 
-        } else {
-            $data = array('status'=>0);
-        }
+        $in = array('id' => array('in', $id));
+        $result = M('course')->where($in)->save(array('status' => 2));
+        
+        /*反馈数据*/
+        $data = array('status'=> $result ? 1:0);
         $this->ajaxReturn($data,'json');
     }
-    /*停用状态*/
-    public function disablestatus()
+
+    /* 停用状态 */
+    public function stopHandler()
     {
-        if(!IS_AJAX){
-            $this->error('页面不存在!');die;
-        }
+        $this->checkAjax();
         $id = I('id');
-        $where = array(
-            'id'=>array('in',$id)
-        );
-        $arr = array(
-            'status'=>1
-        );
-        $result = M('course')->where($where)->save($arr);
-         /*反馈数据*/
-        if ($result) {
-            $data = array('status'=>1); 
-        } else {
-            $data = array('status'=>0);
-        }
+        $in = array('id' => array('in', $id));
+        $result = M('course')->where($in)->save(array('status' => 1));
+
+        /*反馈数据*/
+        $data = array('status'=> $result ? 1:0);
         $this->ajaxReturn($data,'json');
     }
-    /*删除课程*/
-    public function delCourse()
+
+    /* 删除课程 */
+    public function deleCourseHandler()
     {
-        if(!IS_AJAX){
-            $this->error('页面不存在!');die;
-        }
+        $this->checkAjax();
         
         $id = I('id');
-        $where=array(
-            'id'  =>array('in',$id)
-        );
-        /*关联表*/
-        $arr = array(
-          'class'
-        );
+        $in = array('id' => array('in', $id));
+    
         /*关联查询课时表id*/    
-        $sql = D('course')->relation($arr)->where($where)->select();
+        $sql = D('course')->relation('class')->where($in)->select();
         foreach ($sql as $k => $v) {
             foreach ($v['class'] as $key => $va) {
                 /*课时id赋值数组*/
                $arr1[] = $va['id'];
             }
         }
-        $where1= array(
-            'id'=>array('in',$arr1)
-        );
-        /*先删除子类*/
-        if($va['id']){
+
+        /* 删除子类 */
+        if($arr1){
+            $where1= array('id' => array('in', $arr1));
             $sql2 = D('class')->relation('bigpho')->where($where1)->delete();
         }
+
+        /* 删除课程 */
         $result = M('course')->where($where)->delete();
-        /*反馈数据*/
-        if ($result) {
-            $data = array('status'=>1); 
-        } else {
-            $data = array('status'=>0);
-        }
+
+        /* 反馈数据 */
+        $data = array('status'=> $result ? 1:0);
         $this->ajaxReturn($data,'json');
     }
    

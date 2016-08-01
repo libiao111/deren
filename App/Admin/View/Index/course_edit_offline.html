@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>offline</title>
+    <link rel="stylesheet" href="__ACSS__/main.css">
+    <link rel="stylesheet" href="__ACSS__/index.css">
+    <link rel="stylesheet" href="__ACSS__/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="__ADATEPICK__/js/datetimepicker/datepicker.min.css" type="text/css">
+</head>
+<body class="bf2">
+
+    <!-- sub nav -->
+    <div class="sub_nav pl20 pt10">
+        <span class="route">
+        <span class="router router1">
+            业务管理/{$va['id'] ? '编辑':'添加'}
+            <switch name="type = I('type')">
+                <case value="1">线下课</case>
+                <case value="2">视频课</case>
+                <case value="3">音频课</case>
+            </switch>
+        </span>
+        </span>
+    </div>
+
+    <div class="sub_nav pl20 pt10 mt20">
+        <span class="route">
+        <span class="router router1">课程信息</span>
+        </span>
+    </div>
+
+
+    <form class="editor" action="{:U('newHandler')}" method="post" target="post-handler" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="{$va.id}">
+        <section class="widget_wrp h170">
+            <div class="f_l w500">
+                <div class="mb15">
+                    <span class="i_block w100 texy_a_r ">课程名称:</span>
+                    <input type="text" name="course_name" value="{$va.course_name}" class="w250 courses_name">
+                </div>
+                <div class="mb15">
+                    <span class="i_block w100 texy_a_r ">讲师姓名:</span>
+                    <input type="text" name="teach_name" value="{$va.teach_name}" class="w250 teacher_name">
+                </div>
+                <div>
+                    <span class="i_block w100 texy_a_r">现价:</span>
+                    <input type="number" name="current_price" value="{$va.current_price}" class="w80 current_price">
+                    <span class="ml50">原价:</span>
+                    <input type="number" name="course_price" value="{$va.course_price}" class="w80 course_price">
+                </div>
+            </div>
+            <div class="f_l w500">
+                <div class="mb15">
+                    <span class="i_block w100 texy_a_r">开始日期:</span>
+                    <input type="text" name="class_time" value="{$va.class_time}" id="startTime" class="am-form-field w250">
+                </div>
+                <div class="mb15">
+                    <span class="i_block w100 texy_a_r ">课节数量:</span>
+                    <input type="number" name="class_num" value="{$va.class_num}" class="w250" maxlength="5">
+                </div>
+                <div class="mb15 relative ">
+                    <span class="i_block w100 texy_a_r">上传封面:</span>
+                    <div class="dib" style="background-image: url(__UPFILE__/{$va.course_photo})">
+                        <input type="file" name="course_photo">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="sub_nav pl20 pt10">
+            <span class="route">
+            <span class="router router1">课程简介</span>
+
+            </span>
+        </div>
+        <section class="widget_wrp h460">
+            <textarea id="editor" name="picture" type="text/plain" style="width:800px;height:300px;">{$va.picture}</textarea>
+        </section>
+    </form>
+
+    <div class="sub_nav pl20 pt10">
+        <span class="route">
+        <span class="router router1">课程表</span>
+        <span class="router router1 float_r mr20 red addvideo pointer">添加课节</span>
+        </span>
+    </div>
+
+    <section class="widget_wrp">
+        <!-- 表格主体 -->
+        <table class="table_default">
+            <tr>
+                <th width="12%">课程名称</th>
+                <th width="10%">上课时间</th>
+                <th width="11%">操作</th>
+            </tr>
+            <foreach name='va.class' item='v'>
+                <tr class="h50 clone">
+                    <td>
+                        {$v.class_name}
+                    </td>
+                    <td>{$v.class_day} {$v.class_hour}:{$v.class_min}</td>
+                    <td class="operation">
+                        <a href="javascript:;" class="mr2 edit" open_id="{$v.id}">
+                            <i class="fa fa-edit vm bian"></i> 编辑
+                        </a>
+                        <span class="ccc">|</span>
+                        <span class="pointer ml2 remove">
+                            <i class="fa fa-trash vm"></i> 删除
+                        </span>
+                        <!-- 删除提示 -->
+                        <div class="deleConfirm">
+                            <span class="mbutton trans confirm mt10">
+                            <input name="" class="zxc" type="hidden" value="{$v.id}"><i class="fa fa-check mr4"></i>确认
+                            </span>
+                            <span class="mbutton trans cancel"><i class="fa fa-times mr4"></i>取消</span>
+                        </div>
+                    </td>
+                </tr>
+            </foreach>
+        </table>
+
+        <!-- 尾部 -->
+        <div class="table_footer mb30">
+            <div class="operate_btn_box f_r mr30">
+                <input type="button" class="button btn_middle btn_primary trans pointer saveall" value="保存">
+            </div>
+        </div>
+    </section>
+
+    <!-- 弹窗 -->
+    <div class="modal">
+        <form action="{:U('newCourseDot')}" method="post" target="post-handler" accept-charset="utf-8">
+            <input type="hidden" name="course_id" value="{$va.id}">
+            <input type="hidden" name="open_id" value="">
+            <div class="back"></div>
+            <div class="video_modal_main_edit">
+                <h2>编辑课节</h2>
+                <div class="m_m_video">
+                    <p><span>课节名称：</span>
+                        <input type="text" name="class_name" class="w200 coursename" name="coursename">
+                    </p>
+                    <p>
+                        <span>上课时间：</span>
+                        <input type="text" name="class_day" id="startTime1" class="am-form-field w200 class_time">
+                    </p>
+                    <p>
+                        <span class="inline-block w70"></span>
+                        <input type="number" name="class_hour" class="w50 hour">
+                        <span class="">小时</span>
+                        <input type="number" name="class_min" class="w50 minute">
+                        <span class="">分</span>
+                    </p>
+                </div>
+
+                <span class="videosave pointer">保存</span>
+                <span class="videocancel pointer">取消</span>
+            </div>
+        </form>
+    </div>
+    <iframe name="post-handler" class="dn"></iframe>
+
+    <script type="text/javascript" src="__AJS__/jquery.js"></script>
+    <script type="text/javascript" src="__AJS__/jquery.easing.js"></script>
+    <script type="text/javascript" src="__AEDITOR__/ueditor.config.js"></script>
+    <script type="text/javascript" src="__AEDITOR__/ueditor.all.min.js"></script>
+    <script type="text/javascript" src="__AEDITOR__/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.min.js"></script>
+    <script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.zh-CN.js"></script>
+    <script type="text/javascript">
+        var uploadActionUrl = "{:U('Audio/uploadimg')}";
+        var ue = UE.getEditor('editor');
+
+        /* 加载日期选择 */
+        var option = {
+            dateFormat: "yyyy-m-d",
+            autoClose: true,
+            weekStart: 7
+        };
+        $("#startTime").datepicker(option);
+        $("#startTime1").datepicker(option);
+
+        /* 提交-课程回调 */
+        function returnHandler(data)
+        {
+            if (data.status) {
+                alert(data.info);
+                var obj = $('.modal');
+                obj.find('input[name="course_id"]').val(data.course_id);
+            };
+        }
+
+        /* 提交-课节回调 */
+        function returnDotHandler(data)
+        {
+            if (data.status) {
+                /* init */
+                var obj = $('.modal');
+                obj.find('input[name="open_id"]').val('');
+                obj.find('input[name="class_name"]').val('');
+                obj.find('input[name="class_day"]').val('');
+                obj.find('input[name="class_hour"]').val('');
+                obj.find('input[name="class_min"]').val('');
+                obj.hide();
+                alert(data.info);
+            };
+        }
+
+        $(function () {
+            /* 提交表单 */
+            $('.saveall').click(function () {
+                $('form.editor').submit();
+            })
+
+            //判断浏览器是否支持FileReader接口  
+            if(typeof FileReader == 'undefined'){  
+                alert('你的浏览器不支持FileReader接口，图片上传预览功能将无法使用!');  
+                //使选择控件不可操作
+                // file.setAttribute("disabled","disabled");
+            } else {
+                $('input[name="course_photo"]').change(function(e){
+                    var _this = $(this);
+                    var file = e.target.files[0] || e.dataTransfer.files[0];
+                    // var file = document.getElementById("file").files[0];  
+                    // console.log(file);
+                    if(file){
+                        var reader = new FileReader();
+                        reader.onload = function(){
+                            var url = this.result;
+                            _this.parent().css("background-image","url("+url+")");
+                        }
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+
+
+            /* 关闭 */
+            $('.back').click(function () {
+                $('.modal').hide()
+            });
+
+            /* 显示添加课时 */
+            $('.addvideo').click(function () {
+                var obj = $('.modal');
+                var course_id = obj.find('input[name="course_id"]').val();
+                if (course_id === '') {
+                    alert('请先保存课程');
+                    return false;
+                };
+
+                obj.find('input[name="open_id"]').val('');
+                obj.show();
+                $('.video_modal_main_edit').show();
+            });
+            /* 取消 */
+            $('.videocancel').click(function () {
+                $('.modal').hide()
+            });
+            /* 保存 */
+            $('.videosave').click(function () {
+                $(this).parents('form').submit();
+            });
+
+            /* 删除课节 */
+            // $("span.confirm").click(function () {
+            //     var id = $(this).find('.zxc').attr('value')
+            //     console.log(id);
+            //     $.post('{:U("Admin/Class/delClass")}', {
+            //         id: id
+            //     }, function () {
+
+            //     })
+            // })
+
+            /* 显示编辑课节 */
+            $('.operation .edit').click(function (e) {
+                var id = $(this).attr('open_id');
+                $.post('{:U("pullCourseDot")}', {id: id}, function(data){
+                    if (data.status) {
+                        var obj = $('.modal');
+                        var va = data.data;
+                        obj.find('input[name="course_id"]').val(va.course_id);
+                        obj.find('input[name="open_id"]').val(va.open_id);
+                        obj.find('input[name="class_name"]').val(va.class_name);
+                        obj.find('input[name="class_day"]').val(va.class_day);
+                        obj.find('input[name="class_hour"]').val(va.class_hour);
+                        obj.find('input[name="class_min"]').val(va.class_min);
+                        obj.show();
+                        $('.video_modal_main_edit').show();
+                    };
+                })
+            });
+
+
+
+        })
+    </script>
+</body>
+
+</html>

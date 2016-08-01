@@ -6,37 +6,41 @@ use Think\Controller;
 */
 class IndexController extends Controller
 {
-	public function _initialize(){
-		 if(!session('user')) {
-            if (IS_AJAX) {
-                $user = I('username');
-                $pass = I('password');
-                $arr = array(
-                    'user'=>$user,
-                    'password'=>$pass
-                );
-                $result = M('adminuser')->where($arr)->select();
-                if($result){
-                    $data = array('status'=>1);
-                    session('user', $result);
-                } else {
-                    $data = array('status'=>0);
-                }
-                $this->ajaxReturn($data,'json');
-            } else {
-                $this->display("Index/login"); die;  
-            }
-        }
-	}
-	/*默认显示页面*/
+    public function _initialize(){
+        //  if(!session('user')) {
+        //     if (IS_AJAX) {
+        //         $user = I('username');
+        //         $pass = I('password');
+        //         $arr = array(
+        //             'user'=>$user,
+        //             'password'=>$pass
+        //         );
+        //         $result = M('adminuser')->where($arr)->select();
+        //         if($result){
+        //             $data = array('status'=>1);
+        //             session('user', $result);
+        //         } else {
+        //             $data = array('status'=>0);
+        //         }
+        //         $this->ajaxReturn($data,'json');
+        //     } else {
+        //         $this->display("Index/login"); die;  
+        //     }
+        // }
+    }
+    
+    /*默认显示页面*/
     public function index()
-    {   $arr = session('user');
+    {
+        $arr = session('user');
         $this->user=$arr[0]['user'];
         $this->display('Index/frame');
-	}
-	/*修改密码*/
-	public function savepass()
-	{
+    }
+
+
+    /*修改密码*/
+    public function savepass()
+    {
         $arr = session('user');
         $where = array(
             'password'=>I('password'),
@@ -49,11 +53,11 @@ class IndexController extends Controller
             $data = array('status'=>0);
         }
         $this->ajaxReturn($data,'json');
-	}
-	/*退出登录*/
-	public function tuichu()
-	{
-		session_start();
+    }
+    /*退出登录*/
+    public function tuichu()
+    {
+        session_start();
         session_unset();
         session_destroy();
         $this->redirect('Index/index',3000);
