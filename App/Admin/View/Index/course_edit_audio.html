@@ -201,7 +201,29 @@
                 $(this).siblings('input').click(function() {});
             })
 
+            //判断浏览器是否支持FileReader接口  
+            if(typeof FileReader == 'undefined'){  
+                alert('你的浏览器不支持FileReader接口，图片上传预览功能将无法使用!');  
+                //使选择控件不可操作
+                // file.setAttribute("disabled","disabled");
+            } else {
+                $('input[name="course_photo"]').change(function(e){
+                    var _this = $(this);
+                    var file = e.target.files[0] || e.dataTransfer.files[0];
+                    // var file = document.getElementById("file").files[0];  
+                    // console.log(file);
+                    if(file){
+                        var reader = new FileReader();
+                        reader.onload = function(){
+                            var url = this.result;
+                            _this.parent().css("background-image","url("+url+")");
+                        }
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
 
+            
             /*上传视频*/
             $('.courses_num').keyup(function() {
                 'use strict';
