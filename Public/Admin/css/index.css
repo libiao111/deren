@@ -788,9 +788,9 @@ section.about {
 }
 
 .duotu {
-    position: relative;
-    left: 94px;
-    top: -56px;
+    /*position: relative;*/
+    /*left: 94px;*/
+    /*top: -56px;*/
     width: 50px;
     height: 40px
 }
@@ -803,4 +803,20 @@ section.about {
     height: 100%;
     line-height: 40px;
     text-align: center;
+}
+
+.duotubao {
+    width: 286px;
+    height: 40px;
+    display: inline-block;
+    overflow: auto;
+}
+
+.duotuzi {
+    position: relative;
+    top: -26px;
+}
+
+.duotudabao {
+    margin: 30px 20px;
 }
