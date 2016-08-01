@@ -55,22 +55,22 @@ class VideoController extends Controller
         );
 
         /* 上传封面 */
-        $img = $_FILES['course_photo'];
-        if (!$img['error']) {
-            $img = loadOneImageHandler($img);
-            image_cut($img, 320, 180);
-            $data['course_photo'] = $img;
-        }
+        // $img = $_FILES['course_photo'];
+        // if (!$img['error']) {
+        //     $img = loadOneImageHandler($img);
+        //     image_cut($img, 320, 180);
+        //     $data['course_photo'] = $img;
+        // }
 
         /* 执行保存 */
-        $id = I('id');
-        if ($id !== '') {
-            $data['id'] = $id;
-            $result = M('course')->save($data);
-        } else {
-            $data['addtime'] = date('Y-m-d H:i:s');
-            $result = M('course')->add($data);
-        }
+        // $id = I('id');
+        // if ($id !== '') {
+        //     $data['id'] = $id;
+        //     $result = M('course')->save($data);
+        // } else {
+        //     $data['addtime'] = date('Y-m-d H:i:s');
+        //     $result = M('course')->add($data);
+        // }
 
         /*反馈数据*/
         $return = array(
@@ -96,15 +96,15 @@ class VideoController extends Controller
         );
 
         /* 执行保存 */
-        $id = I('open_id');
-        if ($id !== '') {
-            $data['id'] = $id;
-            $data['udate'] = time();
-            $result = M('class')->save($data);
-        } else {
-            $data['adate'] = time();
-            $result = M('class')->add($data);
-        }
+        // $id = I('open_id');
+        // if ($id !== '') {
+        //     $data['id'] = $id;
+        //     $data['udate'] = time();
+        //     $result = M('class')->save($data);
+        // } else {
+        //     $data['adate'] = time();
+        //     $result = M('class')->add($data);
+        // }
 
         /*反馈数据*/
         $return = array(
@@ -121,7 +121,7 @@ class VideoController extends Controller
     {
         $this->checkAjax();
         $id = I('id');
-        $result = M('class')->where(array('id' => $id))->find();
+        // $result = M('class')->where(array('id' => $id))->find();
         if ($result) {
             $data = array(
                 'open_id'    => $result['id'],

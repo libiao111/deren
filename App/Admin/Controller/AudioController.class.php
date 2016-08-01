@@ -6,103 +6,136 @@ use Think\Controller;
 */
 class AudioController extends Controller
 {
+    // private
+    // check post
+    private function checkPost()
+    {
+        if (!IS_POST) {
+            $this->error('页面不存在');
+        }
+    }
+    // check ajax
+    private function checkAjax()
+    {
+        if (!IS_AJAX) {
+            $this->error('页面不存在');
+        }
+    }
+
+
+    /* 页面(新建编辑) */
     public function index()
     {
+        $id = I('id');
+        $info = array();
+        if ($id !== '') {
+            $info = D('course')->relation('class')->where(array('id' => $id))->find();
+        }
+
+        $this->assign('va', $info);
         $this->display('Index/course_edit_audio');
     }
 
     //添加或修改音频课
     public function newAudioHandler()
     {
-        if(!IS_AJAX){
-              $this->error('页面不存在!');die; 
-        }
-        /*获取课程id*/
-        $id =I('id');
-        /*获取缩略图路径*/
-        $course_photo =session('course_photo ');
-        /*获取视频地址*/
-        $video_url = session('video_url');
-        /*获取轮播图路径*/
-        $pho_url =I('pho_url');
-        //数组赋值
-        $arr =array(
-            'type'=>3,
-            'course_name'=>I('course_name'),
-            'course_photo'=>$course_photo,
-            'current_price'=>I('current_price'),
-            'course_price'=>I('course_price'),
-            'teach_name'=>I('teach_name'),
-            'picture'=>I('picture'),
-            'video_url'=>$video_url,
-            'classtime'=>I('classtime'),
-            'class_num'=>I('class_num'),
-            'status'=>I('status')
+        $this->checkPost();
+        /* 数组赋值 */
+        $data =array(
+            'type'          => 2,
+            'status'        => 1,
+            'course_name'   => I('course_name'),
+            'current_price' => I('current_price'),
+            'course_price'  => I('course_price'),
+            'teach_name'    => I('teach_name'),
+            'class_num'     => I('class_num'),
+            'class_time'    => I('class_time'),
+            'picture'       => $_POST['picture']
         );
-        if($id){
-            $arr['id']=$id;
-            /*执行修改操作*/
-            $result =M('course')->save($arr);
-        }else{
-            $result = M('course')->add($arr);
-        }
+
+        /* 上传封面 */
+        // $img = $_FILES['course_photo'];
+        // if (!$img['error']) {
+        //     $img = loadOneImageHandler($img);
+        //     image_cut($img, 320, 180);
+        //     $data['course_photo'] = $img;
+        // }
+
+        /* 执行保存 */
+        // $id = I('id');
+        // if ($id !== '') {
+        //     $data['id'] = $id;
+        //     $result = M('course')->save($data);
+        // } else {
+        //     $data['addtime'] = date('Y-m-d H:i:s');
+        //     $result = M('course')->add($data);
+        // }
+
         /*反馈数据*/
-        if($result){
-            $data = array('status'=>1);
-        }
-        else{
-            $data = array('status'=>0);
-        }
-        $this->ajaxReturn($data,'json');
-    }
-    /*显示音频课课时*/
-     public function Audioclass()
-    {
-        $id= I('id');
-        $arr = array(
-            'course_id'=>$id
+        $return = array(
+            'status' => $result ? 1 : 0,
+            'info' => $id ? '编辑音频课' : '新建音频课',
+            'course_id' => $id ? $id : $result
         );
-        $result = M('class')->where($arr)->order('paixu')->select();
-        $this->assign('classa',$result);
-        $this->display('index/Audio_cousrse_edit');
-
-    } 
-    
-    /*上传音频视频*/
-    public function uploa()
-    {
-        if (!IS_POST) {
-            $this->error('页面不存在');
-        }
-        $result =uploadvideo();
-        if ($result){ 
-            $data = __ROOT__.'/Public/video/'.$result; 
-            session('course_slider', $result);
-        } else {
-            $data = $load->getErrorMsg();
-        }
-        echo '<script>parent.uploadReturnVideo("'.$result.'","'.$data.'")</script>';
+        $return = json_encode($return);
+        echo "<script>parent.returnHandler($return)</script>";
     }
-    
 
-    /*上传图片*/
-    public function uploadimg()
+
+    /* 添加课节 */
+    public function newAudioDot()
     {
-        if (!IS_POST) {
-            $this->error('页面不存在');
-        }
-        $load = new \Org\Util\FileUpload();
-        $load->set('path', './Public/resource/');
-        $result = $load->upload('file');
+        $this->checkPost();
+        $data = array(
+            'course_id' => I('course_id'),
+            'class_name' => I('class_name'),
+            'class_day' => I('class_day'),
+            'class_hour' => I('class_hour'),
+            'class_min' => I('class_min')
+        );
+
+        /* 执行保存 */
+        // $id = I('open_id');
+        // if ($id !== '') {
+        //     $data['id'] = $id;
+        //     $data['udate'] = time();
+        //     $result = M('class')->save($data);
+        // } else {
+        //     $data['adate'] = time();
+        //     $result = M('class')->add($data);
+        // }
+
+        /*反馈数据*/
+        $return = array(
+            'status' => $result ? 1 : 0,
+            'info' => $id ? '编辑课节' : '新建课节'
+        );
+        $return = json_encode($return);
+        echo "<script>parent.returnDotHandler($return)</script>";
+    }
+
+
+    /* 获取课节信息 */
+    public function pullAudioDot()
+    {
+        $this->checkAjax();
+        $id = I('id');
+        $result = M('class')->where(array('id' => $id))->find();
         if ($result) {
-            $data = $load->getFileName();
-            image_cut($data[0], 50);
-            session('course_photo',$data[0]);
-            $data = __ROOT__.'/Public/resource/'.$data[0]; 
-        } else {
-            $data = $load->getErrorMsg();
+            $data = array(
+                'open_id'    => $result['id'],
+                'course_id'  => $result['course_id'],
+                'class_name' => $result['class_name'],
+                'class_day'  => $result['class_day'],
+                'class_hour' => $result['class_hour'],
+                'class_min'  => $result['class_min']
+            );
         }
-        echo '<script>parent.uploadReturnFming("'.$result.'","'.$data.'")</script>';
+        $return = array(
+            'data' => $data,
+            'status' => $result ? 1:0
+        );
+        $this->ajaxReturn($return, 'json');
     }
 
     /*上传轮播图*/
