@@ -20,7 +20,7 @@ function pullCode($data){
 	return $result;
 }
 
-
+/* 微信授权获取信息 */
 function getOpenID() {
 	if (isset($_GET['code'])) {
 		//获取微信服务器回调code;
@@ -40,17 +40,17 @@ function getOpenID() {
 		$userinfo_url = 'https://api.weixin.qq.com/sns/userinfo?access_token='.$access_token.'&openid='.$openid.'&lang=zh_CN';
 		$info = json_decode(file_get_contents($userinfo_url));
 
-		$data['openid'] = $info->openid;
-		$data['name'] = $info->nickname;
-		$data['image'] = $info->headimgurl;
-		$data['province'] = $info->province;
-		$data['city'] = $info->city;
-		$data['country'] = $info->country;	
-		$data['sex'] = $info->sex;	
+		$data['openid'] 	= $info->openid;
+		$data['name'] 		= $info->nickname;
+		$data['image'] 		= $info->headimgurl;
+		$data['province'] 	= $info->province;
+		$data['city'] 		= $info->city;
+		$data['country'] 	= $info->country;	
+		$data['sex'] 		= $info->sex;	
 		$data['subscribe_time'] = $info->subscribe_time;
-		$subscribe_time = date("Y-m-d H:i", $data['subscribe_time']);
-		$data['language'] = $info->language;
-		$data['status'] = 1;
+		$subscribe_time 	= date("Y-m-d H:i", $data['subscribe_time']);
+		$data['language'] 	= $info->language;
+		$data['status'] 	= 1;
 		session('openid', $data);
 	} else {
 	    $data = array('status' => 0);

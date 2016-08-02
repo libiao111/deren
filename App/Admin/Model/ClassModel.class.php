@@ -11,7 +11,9 @@ class ClassModel extends RelationModel
         'class_img'=> array(
             'mapping_type' => self::HAS_MANY,
             'mapping_name' => 'img',
-            'foreign_key'  => 'class_id'
+            'foreign_key'  => 'class_id',
+            'mapping_fields' => 'pho_url',
+            'mapping_order' => 'id'
         )
     );
 }

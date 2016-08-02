@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>登录管理系统</title>
     <link rel="stylesheet" href="__ACSS__/phocus.dajun.css" />
     <link rel="stylesheet" href="__ACSS__/font-awesome.min.css" />
     <link rel="stylesheet" type="text/css" href="__CSS__/weui.min.css">
@@ -13,14 +13,13 @@
 
 <body>
     <div id="login"></div>
+
 <script>
-    var goToIndex = "{:U('index')}";
-    var loginHandle = "{:U('Login/loginhandle')}";
+    var goToIndex = "{:U('Index/index')}";
     // 记录页面名称
     var url = window.location.href.toString().split("/");
     var pageName = ((url.slice(url.length -1,url.length))[0].split("."))[0];
     localStorage.pageName = pageName;
-    
 </script>
 
 <script src="__JS__/login.js"></script> 
@@ -76,18 +75,18 @@
                             b = $('.psd').val();
                         arr['password'] = b;
                         arr['username'] = a;
-                        $.post("{:U('index/index')}", arr, function (data) {
+                        $.post("{:U('Login/login')}", arr, function (data) {
 
                             if (data.status) {
                                 submit.innerHTML = "登录成功，请稍后……";
                                 setTimeout(function () {
-                                    window.location.reload();
+                                    window.location.href = goToIndex;
                                 }, 1000)
                             } else {
                                 submit.innerHTML = "账号或密码不正确";
                                 setTimeout(function () {
                                     submit.innerHTML = "登录";
-                                }, 1000)
+                                }, 2000)
                             }
                         });
                     }

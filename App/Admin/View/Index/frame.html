@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>PHOCUSAdmin</title>
+    <title>德仁商学院</title>
     <link rel="stylesheet" type="text/css" href="__ACSS__/main.css">
     <link rel="stylesheet" href="__ACSS__/index.css" />
     <link rel="stylesheet" type="text/css" href="__ACSS__/font-awesome.min.css">
@@ -160,19 +160,20 @@
             <div class="m_m_video">
                 <p>
                     <span class="w120 inline-block f_s20 texy_a_r mr20">旧密码</span>
-                    <input type="text" class="w200">
+                    <input type="password" class="w200">
                 </p>
                 <p>
                     <span class="w120 inline-block f_s20 texy_a_r mr20">新密码</span>
-                    <input type="text" class="w200">
+                    <input type="password" class="w200">
                 </p>
                 <p>
                     <span class="w120 inline-block f_s20 texy_a_r mr20">确认新密码</span>
-                    <input type="text" class="w200">
+                    <input type="password" class="w200">
                 </p>
             </div>
 
-            <span class="pointer border-r f_s20 psdsave">保存</span><span class="pointer f_s20 psdcancel">取消</span>
+            <span class="pointer border-r f_s20 psdsave">保存</span>
+            <span class="pointer f_s20 psdcancel">取消</span>
         </div>
 
     </div>
@@ -181,12 +182,12 @@
     <script src="__AJS__/require.js" data-main="__AJS__/main"></script>
     <script>
         'use strict';
-        let psdbox = document.querySelector('.modify_psd'),
-            modal = document.querySelector('.modal'),
-            modal_main = document.querySelector('.psd_modal_main_edit'),
-            cancel = document.querySelector('.psdcancel'),
-            save = document.querySelector('.psdsave'),
-            back = document.querySelector('.back');
+        let psdbox      = document.querySelector('.modify_psd'),
+            modal       = document.querySelector('.modal'),
+            modal_main  = document.querySelector('.psd_modal_main_edit'),
+            cancel      = document.querySelector('.psdcancel'),
+            save        = document.querySelector('.psdsave'),
+            back        = document.querySelector('.back');
 
         psdbox.onclick = function () {
             modal.style.display = "block";
@@ -204,7 +205,7 @@
         }
         $(function () {
             $('.logout').click(function () {
-                $.post('{:U('index/tuichu')}',{},function () {
+                $.post('{:U("index/tuichu")}',{},function () {
                     window.location.reload();
                 });
             });

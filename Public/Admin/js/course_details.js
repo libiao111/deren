@@ -2,12 +2,12 @@
 function returnHandler(data)
 {
     if (data.status) {
-        alert(data.info);
+        succeeAlt((data.info + '成功 ^_^'));
         /* 赋值课程ID */
         var obj = $('.modal');
         obj.find('input[name="course_id"]').val(data.course_id);
     } else {
-        alert(data.info);
+        succeeAlt((data.info + '失败 ！'));
     };
 }
 
@@ -15,7 +15,7 @@ function returnHandler(data)
 function returnDotHandler(data)
 {
     if (data.status) {
-        alert(data.info);
+        succeeAlt((data.info + '成功 ^_^'));
         /* init */
         var obj = $('.modal');
         obj.find('input[name="open_id"]').val('');
@@ -25,9 +25,21 @@ function returnDotHandler(data)
         obj.find('input[name="class_min"]').val('');
         obj.hide();
     } else {
-        alert(data.info);
+        succeeAlt((data.info + '失败 ！'));
     };
 }
+
+
+/* 成功提示 */
+function succeeAlt(txt) {
+    $('.hint').show();
+    $('.hintmain').show();
+    $('.hintmain>p').text(txt);
+    setTimeout(function () {
+        $('.hint').hide();
+    }, 1000);
+}
+
 
 $(function () {
     //判断浏览器是否支持FileReader接口  
@@ -52,6 +64,11 @@ $(function () {
         });
     }
 
+    /* 音频轮播图 */
+    $('input[name="class_img[]').change(function () {
+        $(this).siblings('input[name="class_image[]"]').val('');
+    });
+
     /* 提交保存课程 */
     $('.saveall').click(function (e) {
         $('form.editor').submit();
@@ -72,6 +89,8 @@ $(function () {
             alert('请先保存课程');
             return false;
         };
+        obj.find('input[name="class_image[]"]').parent('div').attr('style','');
+        obj.find('input[name="class_image[]"]').val('');
         obj.find('input[name="class_img[]"]').val('');
         obj.find('input[name="open_id"]').val('');
         obj.show();
@@ -92,9 +111,17 @@ $(function () {
         var id = $(this).attr('open_id');
         $.post(pullUrl, {id: id}, function(data){
             if (data.status) {
-                var obj = $('.modal');
                 var va = data.data;
+                var image = va.image;
+                var obj = $('.modal');
                 obj.find('input[name="class_img[]"]').val('');
+                obj.find('input[name="class_image[]"]').parent('div').attr('style','');
+                if (image) {
+                    for (var i = 0; i < image.length; i++) {
+                        obj.find('input[name="class_image[]"]').eq(i).val(image[i].pho_url);
+                        obj.find('input[name="class_image[]"]').eq(i).parent('div').css("background-image", "url(" + imageUrl + image[i].pho_url + ")");
+                    };
+                };
                 obj.find('input[name="course_id"]').val(va.course_id);
                 obj.find('input[name="open_id"]').val(va.open_id);
                 obj.find('input[name="class_name"]').val(va.class_name);

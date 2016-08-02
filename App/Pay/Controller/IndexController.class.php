@@ -6,11 +6,10 @@ use Think\Controller;
 */
 class IndexController extends Controller
 {
-    
+    // pay
     /* 生成支付信息 */
     public function index()
     {
-        
         /*生成订单数据*/
         $arr = session('arr');
         $arr['sign'] ? $arr['sign'] : $this->error('缺少商品签名');
@@ -20,8 +19,6 @@ class IndexController extends Controller
         $arr['realm'] ? $arr['realm'] : $this->error('缺少通告回调域名(/index.php 之前的路径)');
         $arr['successurl'] ? $arr['successurl'] : $this->error('缺少支付成功跳转路径');
         $arr['data'] ? $arr['data'] : 'data';
-
-        // p($_GET);
 
         /* 下单 */
         $result = logHand($arr);

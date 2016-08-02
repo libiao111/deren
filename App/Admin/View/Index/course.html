@@ -45,9 +45,9 @@
                 <i class="fa fa-caret-down"></i>
                 </span>
                 <!-- 按钮 -->
-                <a href="{:U('OffLine/index', array('type' => 1))}" class="button btn_middle btn_primary r mr15 mt15 pointer">+ 线下课</a>
-                <a href="{:U('Video/index', array('type' => 2))}" class="button btn_middle btn_primary r mr10 mt15 pointer">+ 视频课</a>
                 <a href="{:U('Audio/index', array('type' => 3))}" class="button btn_middle btn_primary r mr10 mt15 pointer">+ 音频课</a>
+                <a href="{:U('Video/index', array('type' => 2))}" class="button btn_middle btn_primary r mr10 mt15 pointer">+ 视频课</a>
+                <a href="{:U('OffLine/index', array('type' => 1))}" class="button btn_middle btn_primary r mr15 mt15 pointer">+ 线下课</a>
             </form>
         </div>
 
@@ -62,15 +62,14 @@
                 <th width="10%">课程分类</th>
                 <th width="6%">课程数量</th>
                 <th width="8%">讲师姓名</th>
-                <th width="10%">开始上课时间</th>
-                <th width="10%">课程总时长</th>
+                <th width="20%">开始时间/总时长</th>
                 <th width="8%">状态</th>
                 <th width="15%">操作</th>
             </tr>
             <foreach name="course" item="v">
                 <tr data-row="{$v.id}">
                     <td width="6%">
-                        <input class="check" type="checkbox" id="{$v.id}" value="{$v.id}">
+                        <input class="check" name="id" type="checkbox" id="{$v.id}" value="{$v.id}">
                     </td>
                     <td><img src="__UPFILE__/{$v.course_photo}" height="60px" class="mt8 mb8"></td>
                     <td>{$v.course_name}</td>
@@ -84,9 +83,8 @@
                     </td>
                     <td>{$v.class_num}</td>
                     <td>{$v.teach_name}</td>
-                    <td>{$v.addtime}</td>
-                    <td>{$v.classtime}</td>
-                    <td>{$v['status'] == 2 ? '启用':'停用'}</td>
+                    <td>{$v.class_time}</td>
+                    <td class="status">{$v['status'] == 2 ? '启用':'停用'}</td>
                     <td class="operation">
                         <switch name="v.type">
                             <case value="1">
@@ -129,7 +127,7 @@
         </div>
     </section>
 
-    <!-- lock bg -->
+    <!-- 成功提示 -->
     <div class="hint">
         <div class="hintmain">
             <p></p>
@@ -172,7 +170,6 @@
                 }
             });
 
-            
             'use strict';
             //移除分页a标签之间的4px间距
             $('.pagination>div').contents().filter(function(){
@@ -196,14 +193,11 @@
                 tid.each(function () {
                     id.push(parseInt($(this).attr('id')));
                 });
-
-                $.post(startUrl, {
-                    id: id
-                }, function (data) {
+                $.post(startUrl, {id: id}, function (data) {
                     if (data.status) {
                         succeeAlt('启用成功');
                         setTimeout(function () {
-                            window.location.reload();
+                            $('input[name="id"]:checked').parents('tr').find('.status').text('启用');
                         }, 1000)
                     }
                 });
@@ -216,14 +210,11 @@
                 tid.each(function () {
                     id.push(parseInt($(this).attr('id')));
                 });
-
-                $.post(stopUrl, {
-                    id: id
-                }, function (data) {
+                $.post(stopUrl, {id: id}, function (data) {
                     if (data.status) {
                         succeeAlt('停用成功');
                         setTimeout(function () {
-                            window.location.reload();
+                            $('input[name="id"]:checked').parents('tr').find('.status').text('停用');
                         }, 1000)
                     }
                 });

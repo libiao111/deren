@@ -86,7 +86,7 @@ function loadOneImageHandler($file)
     $img = $load->uploadOne($file);
     $data = array(
         'assets' => 'image/'.$img['savename'],
-        'status' => $vid ? 1:0,
+        'status' => $img ? 1:0,
         'error'  => $load->getError()
     );
     return $data;
