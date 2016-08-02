@@ -71,18 +71,13 @@ $(function () {
 
     /* 提交保存课程 */
     $('.saveall').click(function (e) {
-//		alert()
-		var val=$('.datas'),
-			vals=[];
-		vals=Array.prototype.slice.call(val);
-		console.log(vals)
-		console.log(vals.length)
-		for(let i=0;i<vals.length;i++){
-			if(vals[i].value==''){
-				vals[i].focus();
-				return false;
-			}
-		}
+		var vals = $('.datas');
+        for (var i = 0; i < vals.length; i++) {
+            if (vals.eq(i).val() === '') {
+                vals.eq(i).focus();
+                return false;
+            };
+        };
         $('form.editor').submit();
     })
 
