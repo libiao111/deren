@@ -10,13 +10,13 @@ class IndexController extends Controller
     public function _initialize()
     {
         /* 关注公众号 */
-        $openid = session('openid');
-        if (count($openid) == 0) {
-            $openid = getOpenID();
-            if ($openid['status'] == 0) {
-                $this->redirect('Open/index');
-            }
-        }
+        // $openid = session('openid');
+        // if (count($openid) == 0) {
+        //     $openid = getOpenID();
+        //     if ($openid['status'] == 0) {
+        //         $this->redirect('Open/index');
+        //     }
+        // }
 
         /* 登录验证 */
         $user = session('user');
@@ -50,6 +50,9 @@ class IndexController extends Controller
         $bills = M('bills')->where(array('users_id' => $users_id, 'status' => 1))->field('course_id')->select();
         foreach ($course as $k => $kc) {
             $kc['status'] = 0;
+            if ($kc['type'] == 1) {
+                $kc['class_time'] = date('m-d', strtotime($kc['class_time']));
+            }
             foreach ($bills as $dd) {
                 if ($kc['id'] == $dd['course_id']) {
                     $kc['status'] = 1;
@@ -72,6 +75,7 @@ class IndexController extends Controller
         $bills = M('bills')->where(array('users_id' => $users_id, 'status' => 1))->field('course_id')->select();
         foreach ($result as $k => $kc) {
             $kc['status'] = 0;
+            $kc['class_time'] = date('m-d', strtotime($kc['class_time']));
             foreach ($bills as $dd) {
                 if ($kc['id'] == $dd['course_id']) {
                     $kc['status'] = 1;

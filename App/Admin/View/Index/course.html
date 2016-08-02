@@ -39,8 +39,8 @@
                 <span>课程状态：</span>
                 <select name="status" class="ipt_default btn_middle">
                     <option value="0">全部</option>
-                    <option value="1" {$status==1 ? 'selected': ''}>停用</option>
-                    <option value="2" {$status==2 ? 'selected': ''}>启用</option>
+                    <option value="1" {$status==1 ? 'selected': ''}>启用</option>
+                    <option value="2" {$status==2 ? 'selected': ''}>停用</option>
                 </select>
                 <i class="fa fa-caret-down"></i>
                 </span>
@@ -84,7 +84,7 @@
                     <td>{$v.class_num}</td>
                     <td>{$v.teach_name}</td>
                     <td>{$v.class_time}</td>
-                    <td class="status">{$v['status'] == 2 ? '启用':'停用'}</td>
+                    <td class="status">{$v['status'] == 1 ? '启用':'停用'}</td>
                     <td class="operation">
                         <switch name="v.type">
                             <case value="1">
