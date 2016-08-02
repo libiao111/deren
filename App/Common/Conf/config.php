@@ -23,8 +23,8 @@ return array(
     'DB_USER'   => 'root',
     'DB_PWD'    => '',
     'DB_NAME'   => 'deren',
-    'DB_HOST' => 'qdm100230239.my3w.com',
-    'DB_USER' => 'qdm100230239',
-    'DB_PWD'  => 'stevewins1023',
-    'DB_NAME' => 'qdm100230239_db'
+    // 'DB_HOST' => 'qdm100230239.my3w.com',
+    // 'DB_USER' => 'qdm100230239',
+    // 'DB_PWD'  => 'stevewins1023',
+    // 'DB_NAME' => 'qdm100230239_db'
 );

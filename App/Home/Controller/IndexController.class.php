@@ -10,13 +10,14 @@ class IndexController extends Controller
     public function _initialize()
     {
         /* 关注公众号 */
-        $openid = session('openid');
-        if (count($openid) == 0) {
-            $openid = getOpenID();
-            if ($openid['status'] == 0) {
-                $this->redirect('Open/index');
-            }
-        }
+        // $openid = session('openid');
+        // if (count($openid) == 0) {
+        //     $openid = getOpenID();
+        //     if ($openid['status'] == 0) {
+        //         $this->redirect('Open/index');
+        //     }
+        // }
+        
 
         /* 登录验证 */
         $user = session('user');
@@ -50,6 +51,9 @@ class IndexController extends Controller
         $bills = M('bills')->where(array('users_id' => $users_id, 'status' => 1))->field('course_id')->select();
         foreach ($course as $k => $kc) {
             $kc['status'] = 0;
+            if ($kc['type'] == 1) {
+                $kc['class_time'] = date('m-d', strtotime($kc['class_time']));
+            }
             foreach ($bills as $dd) {
                 if ($kc['id'] == $dd['course_id']) {
                     $kc['status'] = 1;
@@ -72,6 +76,7 @@ class IndexController extends Controller
         $bills = M('bills')->where(array('users_id' => $users_id, 'status' => 1))->field('course_id')->select();
         foreach ($result as $k => $kc) {
             $kc['status'] = 0;
+            $kc['class_time'] = date('m-d', strtotime($kc['class_time']));
             foreach ($bills as $dd) {
                 if ($kc['id'] == $dd['course_id']) {
                     $kc['status'] = 1;
@@ -229,7 +234,7 @@ class IndexController extends Controller
         $id = I('course_id');
         
         /* 课程信息 */
-        $filed = 'course_name,current_price';
+        $filed = 'course_name,current_price,type';
         $course = M('course')->where(array('id' => $id))->field($filed)->find();
         
         /*生成订单号*/
@@ -248,19 +253,24 @@ class IndexController extends Controller
         );
         $result = M('bills')->add($arr);
 
-        /*传递到支付数组*/
+        /* 支付信息 */
         $data = array(
+            'id'    =>$course['id'],
             'sign'  => '[德仁商学院]',              // 签名
             'bills' => $ordera_num,                 // 订单号
             'title' => $course['course_name'],      // 商品名
             'price' => $course['current_price'],    // 支付价格
+            'type'  => $course['type'],      // 课程类型
             'realm'      => 'http://www.gkdao.com/temps/heroslider/deren', // 支付回调域名URL
             'successurl' => U('gotocourse') // 成功跳转URL
         );
-        session('arr',$data);
-        $this->redirect("Pay/Index/index");
+        session('orderData',$data);
+
+        /* 跳转支付 */
+        if(I('pay_type') == 1){
+            $this->redirect("Pay/Index/index");
+        } else {
+            $this->redirect("Alipay/Index/index");
+        }
     }
-
-
 }
-

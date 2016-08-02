@@ -6,17 +6,30 @@ use Think\Controller;
 */
 class UserController extends Controller
 {
+    // check
+    // check post
+    private function checkPost()
+    {
+        if (!IS_POST) {
+            $this->error('页面不存在');
+        }
+    }
+    // check ajax
+    private function checkAjax()
+    {
+        if (!IS_AJAX) {
+            $this->error('页面不存在');
+        }
+    }
     public function index()
     {
-        $where="";
         /*分页*/
-        $table = 'users';
         $condition = "";
-        $tiao = 2;
         /*调用分页函数返回*/
-        $data = pageHandle($table,$condition,$tiao);
+        $data = pageHandle('users',$condition,15);
         /*查询记录*/
         $result = M('users')->limit($data['limit'])->select();
+
         $this->assign('page',$data['pages']['pages']);
         $this->assign('users',$result);
         $this->display('Index/member_man_reg');
@@ -24,92 +37,60 @@ class UserController extends Controller
     /*用户删除*/
     public function deleteUser()
     {
-        if (!IS_AJAX) {
-            $this->error('页面不存在!');
-        }
-        $id = I('id');
-        $where = array(
-            'id'=>array('in',$id)
-        );
+        $this->checkAjax();
+        /*赋值*/
+        $where = array('id'=>I('id'));
+        /*执行删除操作*/
         $result = M('users')->where($where)->delete();
-        if ($result) {
-            $data =array('status'=>1);
-        } else {
-            $data = array('status'=>0);
-        }
+        /*反馈*/
+        $data = array('status'=>$result ? 1:0);
         $this->ajaxReturn($data,'json');
     }
     /*用户停用*/
     public function statusStop()
     {
-        if (!IS_AJAX) {
-            $this->error('页面不存在!');
-        }
-        $id = I('id');
-        $where = array(
-            'id'=>array('in',$id),
-        );
-        $arr = array(
-            'status'=>1
-        );
+        $this->checkAjax();
+        $where = array('id'=>I('id'));
+        $arr = array('status'=>1);
+        /*执行操作*/
         $result = M('users')->where($where)->save($arr);
-        if ($result) {
-            $data =array('status'=>1);
-        } else {
-            $data = array('status'=>0);
-        }
+        /*反馈*/
+        $data = array('status'=>$result ?1:0);
         $this->ajaxReturn($data,'json');
     }
     /*用户启用*/
     public function statusUsing()
     {
-        if (!IS_AJAX) {
-            $this->error('页面不存在!');
-        }
-        $id = I('id');
-        $where = array(
-            'id'=>array('in',$id),
-        );
-        $arr = array(
-            'status'=>0
-        );
+        $this->checkAjax();
+        $where = array('id'=>array('in',I('id')));
+        $arr = array('status'=>0);
+        /*执行操作*/
         $result = M('users')->where($where)->save($arr);
-        if ($result) {
-            $data =array('status'=>1);
-        } else {
-            $data = array('status'=>0);
-        }
+        /*反馈*/
+        $data = array('status'=>$result ?1:0);
         $this->ajaxReturn($data,'json');
     }
    
     /*回复初始密码*/
-    public function rpassword(){
-        if(!IS_AJAX){
-            $this->error('页面不存在!');
-        }
-        $id = I('id');
-        $where =array(
-            'id'=>array('in',$id)
-        );
-        $arr = array(
-            'password' =>'1234'
-        );
+    public function rpassword()
+    {
+        $this->checkAjax();
+        $where =array('id'=>array('in',I('id')));
+        /*设置默认密码*/
+        $arr = array('password' =>md5('123456'));
+        /*执行操作*/
         $result = M('users')->where($where)->save($arr);
-        if ($result) {
-            $data =array('status'=>1);
-        } else {
-            $data = array('status'=>0);
-        }
+        /*反馈*/
+        $data = array('status'=>$result ? 1:0);
         $this->ajaxReturn($data,'json');
 
     }
     /* 导出用户表数据*/
     public function daochu(){
-        
+        $this->checkPost();
         $id = $_POST['id'];
-        $condition = array(
-            'id'=>array('in',$id)
-        ); 
+        $condition = array('id'=>array('in',$id)); 
+        /*执行查询操作*/
         $data = M('users')->where($condition)->select();
         $title = array(
             array(

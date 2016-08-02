@@ -11,7 +11,7 @@ class IndexController extends Controller
     public function index()
     {
         /*生成订单数据*/
-        $arr = session('arr');
+        $arr = session('orderData');
         $arr['sign'] ? $arr['sign'] : $this->error('缺少商品签名');
         $arr['title'] ? $arr['title'] : $this->error('缺少商品名称');
         $arr['bills'] ? $arr['bills'] : $this->error('缺少商品订单号');

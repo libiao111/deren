@@ -160,15 +160,15 @@
             <div class="m_m_video">
                 <p>
                     <span class="w120 inline-block f_s20 texy_a_r mr20">旧密码</span>
-                    <input type="password" class="w200">
+                    <input type="password" class="w200 oldpass">
                 </p>
                 <p>
                     <span class="w120 inline-block f_s20 texy_a_r mr20">新密码</span>
-                    <input type="password" class="w200">
+                    <input type="password" class="w200 pass">
                 </p>
                 <p>
                     <span class="w120 inline-block f_s20 texy_a_r mr20">确认新密码</span>
-                    <input type="password" class="w200">
+                    <input type="password" class="w200 repass">
                 </p>
             </div>
 
@@ -182,7 +182,7 @@
     <script src="__AJS__/require.js" data-main="__AJS__/main"></script>
     <script>
         'use strict';
-        let psdbox      = document.querySelector('.modify_psd'),
+        var psdbox      = document.querySelector('.modify_psd'),
             modal       = document.querySelector('.modal'),
             modal_main  = document.querySelector('.psd_modal_main_edit'),
             cancel      = document.querySelector('.psdcancel'),
@@ -203,6 +203,31 @@
             modal.style.display = "none";
             //to do
         }
+        /*修改密码*/
+        $('.psdsave').click(function(){
+            var oldpass =  $('.oldpass').val();
+            var pass = $('.pass').val();
+            var repass = $('.repass').val();
+            if(pass == repass && pass){
+                $.post('{:U('Index/savepass')}',{pass:pass},function(data){
+                    if (data.status) {
+                        $('.hint').show();
+                        $('.hint p').text('修改成功');
+                        setTimeout(function () {
+                        $('.hint').hide();
+                        }, 2000);
+                    } else {
+                        $('.hint').show();
+                        $('.hint p').text('两次密码不一致或不能为空');
+                        setTimeout(function () {
+                        $('.hint').hide();
+                        }, 2000);
+                        
+                    }
+                })
+            }
+        });
+        /*退出*/
         $(function () {
             $('.logout').click(function () {
                 $.post('{:U("index/tuichu")}',{},function () {

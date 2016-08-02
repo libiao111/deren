@@ -6,23 +6,34 @@ use Think\Controller;
 */
 class OrderController extends Controller
 {
+    // check
+    // check post
+    private function checkPost()
+    {
+        if (!IS_POST) {
+            $this->error('页面不存在');
+        }
+    }
+    // check ajax
+    private function checkAjax()
+    {
+        if (!IS_AJAX) {
+            $this->error('页面不存在');
+        }
+    }
     public function index()
     {
         $users_id = I('users_id');
          /*分页*/
-        $table = 'bills';
         $condition = "";
-        $tiao = 5;
-        $type = I('type');
-       /*调用分页函数返回*/
-        $data = pageHandle($table,$condition,$tiao);
+        /*调用分页函数返回*/
+        $data = pageHandle('bills',$condition,15);
         /*按分类查询*/
-        if ($type) {
-            $where['type'] = $type;
-        }
+        $this->type = $type ? $condition['type'] = $type: '';
         $this->type=$type;
         /*查询记录*/
-        $result = M('bills')->where($where)->limit($data['limit'])->select();
+        $result = M('bills')->where($condition)->limit($data['limit'])->select();
+
         $this->assign('ordera',$result);
         $this->assign('page',$data['pages']['pages']);
         $this->display('Index/bill_management');
@@ -30,48 +41,36 @@ class OrderController extends Controller
 
     /*删除订单*/
     public function deleteOrder(){
-        if(!IS_AJAX){
-            $this->error('页面不存在!');die;
-        }
-        $id = I('id');
-        $where = array(
-            'id'=>array('in',$id)
-        );
+        $this->checkAjax();
+        /*赋值数组*/
+        $where = array('id'=>I('id'));
+        /*执行删除操作*/
         $result = M('bills')->where($where)->delete();
-        if($result){
-            $data = array('status'=>1);
-        }else{
-            $data = array('status'=>0);
-        }
+        /*反馈*/
+        $data = array('status'=> $result ? 1:0);
         $this->ajaxReturn($data,'json');
     }
     /*退款*/
     public function rebate(){
-        if(!IS_AJAX){
-            $this->error('页面不存在!');die;
-        }
-        $id = I('id');
-        $where = array(
-            'id'=>array('in',$id)
-        );
-        $arr = array(
-            'status'=>2
-        );
+        $this->checkAjax();
+        /*条件*/
+        $where = array('id'=>array('in',I('id')));
+        /*修改*/
+        $arr = array('status'=>2);
+        /*执行修改操作*/
         $result = M('bills')->where($where)->save($arr);
-        if($result){
-            $data = array('status'=>1);
-        }else{
-            $data = array('status'=>0);
-        }
+        /*反馈*/
+        $data = array('status'=> $result ? 1:0);
         $this->ajaxReturn($data,'json');
     }
      /* 导出订单表数据*/
     public function daochu2(){
-        
+        $this->checkPost();
+        /*获取id*/
         $id = ($_POST['id']);
-        $condition = array(
-            'id'=>array('in',$id)
-        ); 
+        /*条件*/
+        $condition = array('id'=>array('in',$id)); 
+        /*执行操作*/
         $data = M('bills')->where($condition)->select();
         $title = array(
             array(
