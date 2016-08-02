@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2016-08-01 22:50:53
+Date: 2016-08-02 11:18:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -24,12 +24,12 @@ CREATE TABLE `dr_adminuser` (
   `user` varchar(50) DEFAULT NULL,
   `password` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dr_adminuser
 -- ----------------------------
-INSERT INTO `dr_adminuser` VALUES ('1', 'admin', '123456');
+INSERT INTO `dr_adminuser` VALUES ('2', 'admin', 'e10adc3949ba59abbe56e057f20f883e');
 
 -- ----------------------------
 -- Table structure for dr_bills
