@@ -17,6 +17,7 @@ return array(
         '__AEDITOR__'   => __ROOT__.'/Public/Admin/editor',
         '__ADATEPICK__' => __ROOT__.'/Public/Admin/datepick'
     ),
+    'PAY_AREA'  => 'http://www.gkdao.com',
     'DB_TYPE'   => 'mysql',
     'DB_PREFIX' => 'dr_',
     'DB_HOST'   => 'localhost',

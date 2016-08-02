@@ -241,7 +241,7 @@ class IndexController extends Controller
         $ordera_num = 'DRKC'.time().rand('1000','9999');
         
         /* 订单信息 */
-        $arr = array(
+        $order = array(
             'users_id'      => $user_id,
             'course_id'     => I('course_id'),
             'order_num'     => $ordera_num,
@@ -249,21 +249,45 @@ class IndexController extends Controller
             'user_phone'    => I('user_phone'),
             'course_price'  => $course['current_price'],
             'pay_type'      => I('pay_type'),
-            'status'        => 0
+            'status'        => 0,
+            'order_time'    => date('Y-m-d H:i:s')
         );
-        $result = M('bills')->add($arr);
+        $result = M('bills')->add($order);
+
+        /* 课程详情页面名称 */
+        switch ($course['type']) {
+            case '1':
+                $pagename = "offline";
+                $type = '线下课';
+                break;
+            case '2':
+                $pagename = "video";
+                $type = '视频课';
+                break;
+            case '3':
+                $pagename = "audio";
+                $type = '音频课';
+                break;
+            default:
+                $pagename = "offline";
+                $type = '线下课';
+                break;
+        }
 
         /* 支付信息 */
         $data = array(
-            'id'    =>$course['id'],
             'sign'  => '[德仁商学院]',              // 签名
             'bills' => $ordera_num,                 // 订单号
             'title' => $course['course_name'],      // 商品名
             'price' => $course['current_price'],    // 支付价格
-            'type'  => $course['type'],      // 课程类型
-            'realm'      => 'http://www.gkdao.com/temps/heroslider/deren', // 支付回调域名URL
-            'successurl' => U('gotocourse') // 成功跳转URL
+            'type'  => $type,                       // 课程类型
+            'course_url' => C('PAY_AREA').U($pagename, array('id' => $order['course_id'])) // 支付成功回调-课程路径
         );
+
+        // 支付成功回调-课程路径
+        session('showurl', $data['course_url']);
+
+        // 支付信息
         session('orderData',$data);
 
         /* 跳转支付 */

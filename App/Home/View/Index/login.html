@@ -20,7 +20,7 @@
 				</label>
 			</div>
 			<div class="weui_cell_bd weui_cell_primary">
-				<input class="weui_input" type="number" pattern="[0-9]*" placeholder="请输入手机号" id="phone">
+				<input class="weui_input" type="tel" pattern="[0-9]*" placeholder="请输入手机号" id="phone">
 			</div>
 			<div class="weui_cell_ft">
 				<i class="weui_icon_warn" id="phoneIsWrong"></i>
@@ -34,7 +34,7 @@
 				</label>
 			</div>
 			<div class="weui_cell_bd weui_cell_primary">
-				<input class="weui_input" type="text" placeholder="请输入密码" id="password">
+				<input class="weui_input" type="password" placeholder="请输入密码" id="password">
 			</div>
 			<div class="weui_cell_ft">
 				<i class="weui_icon_warn" id="passwordIsWrong"></i>
@@ -54,9 +54,9 @@
 	var goToIndex = "{:U('index')}";
 	var loginHandle = "{:U('Login/loginhandle')}";
 	// 记录页面名称
-	var url = window.location.href.toString().split("/");
-	var pageName = ((url.slice(url.length -1,url.length))[0].split("."))[0];
-	localStorage.pageName = pageName;
+	// var url = window.location.href.toString().split("/");
+	// var pageName = ((url.slice(url.length -1,url.length))[0].split("."))[0];
+	// localStorage.pageName = pageName;
 	
 </script>
 <script src="__JS__/jquery.js"></script>

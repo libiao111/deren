@@ -109,6 +109,9 @@ class LoginController extends Controller
         /*返回状态*/
         if ($result) {
             $data = array('status'=>1);
+            $arr['id'] = $result;
+            unset($arr['password']);
+            session('user', $arr);
         } else {
             $data = array('status'=>0);
         }
