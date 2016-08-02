@@ -6,21 +6,11 @@ use Think\Controller;
 */
 class LoginController extends Controller 
 {
-    // public function _initialize() {
-    //     $user = session('openid');
-    //     if (count($user) == 0) {
-    //         if (getOpenID()['status'] == 0) {
-    //             $this->redirect('Open/index');
-    //         }
-    //     }
-    // }
-
     /*
     用户登录
     */
     public function loginhandle()
     {
-        
         if(IS_AJAX){
             $user = I('user_mobi');
             $pass = I('password');

@@ -153,31 +153,27 @@
 	            [current_price] => value (课程现价),
 	            [course_price] => value (课程原价),
 	            [teach_name] => value (老师名),
-	            [classtime] => value (课时总长),
-	            [offline_url] => value (线下课图片路径),
-	            [video_url] => value (音视频路径),
+	            [class_time] => value (课时总长),
 	            [class_num] => value (总课节),
-	            [addtime] => value (添加时间),
-	            [status] 		=> value (0:未购买, 1:已购买),
-	            [picture] 		=> value (图文简介),
+	            [adate] 	=> value (添加时间),
+	            [status] 	=> value (0:未购买, 1:已购买),
+	            [picture] 	=> value (图文简介),
 	            [class] => array( //课时
-                    [0] => array(
-                        [id] => 1
-                        [class_name] => value (课时名),
-                        [class_time] => value (上课时间),
-                        [class_add] => vlaue (课时地址),
-                        [course_id] => value (课程id),
-                        [class_mins] => value (课时长),
-                        [paixu] => value (课时排序)
-                    ),
+                    [0] => Array(
+	                    [id] => 课节ID
+	                    [course_id] => 课程ID
+	                    [class_name] => 课节名称
+	                    [class_day] => 开始日期
+	                    [class_hour] => 时
+	                    [class_min] => 分
+	                    [assets_url] => 视频/音频路径
+	                )
 					...
                 ),
-                [bigpho]=>array( //轮播图
+                [img] => array( //轮播图
 						[0]=>array(
-							[id] => value (轮播图id),
 							[pho_url] =>value (图片路径),
-							[course] =>value (课程id)
-							),
+						),
 						...
 					)
 				}

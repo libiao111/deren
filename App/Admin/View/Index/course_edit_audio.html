@@ -1,396 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-	<meta charset="UTF-8">
-	<title>编辑音频课</title>
-	<link rel="stylesheet" href="__ACSS__/main.css">
-	<link rel="stylesheet" href="__ACSS__/index.css">
-	<link rel="stylesheet" href="__ACSS__/upload.css">
-	<link rel="stylesheet" href="__ADATEPICK__/js/datetimepicker/datepicker.min.css" type="text/css">
-	<link rel="stylesheet" href="__ACSS__/font-awesome.min.css" type="text/css">
+    <meta charset="UTF-8">
+    <title>编辑音频课</title>
+    <link rel="stylesheet" href="__ACSS__/main.css">
+    <link rel="stylesheet" href="__ACSS__/index.css">
+    <link rel="stylesheet" href="__ACSS__/upload.css">
+    <link rel="stylesheet" href="__ACSS__/font-awesome.min.css" type="text/css">
 </head>
-
 <body class="bf2">
 
-	<!-- sub nav -->
-	<div class="sub_nav pl20 pt10">
-		<span class="route">
-        <span class="router router1">业务管理/课程管理</span>
-		</span>
-	</div>
+    <!-- sub nav -->
+    <div class="sub_nav pl20 pt10">
+        <span class="router router1">
+            业务管理/{$va['id'] ? '编辑':'添加'}
+            <switch name="type = I('type')">
+                <case value="1">线下课</case>
+                <case value="2">视频课</case>
+                <case value="3">音频课</case>
+            </switch>
+        </span>
+    </div>
 
-	<div class="sub_nav pl20 pt10 mt20">
-		<span class="route">
+    <div class="sub_nav pl20 pt10 mt20">
+        <span class="route">
         <span class="router router1">课程信息</span>
-		</span>
-	</div>
+        </span>
+    </div>
 
+    <!-- 基本信息 -->
+    <form class="editor" action="{:U('newAudioHandler')}" method="post" target="post-handler" enctype="multipart/form-data">
+        <input type="hidden" name="callback" value="returnHandler">
+        <input type="hidden" name="id" value="{$va.id}">
+        <section class="widget_wrp h170">
+            <div class="f_l w500">
+                <div class="mb15">
+                    <span class="i_block w100 texy_a_r ">课程名称:</span>
+                    <input type="text" class="w250 courses_name" name='course_name' value="{$va.course_name}">
+                </div>
+                <div class="mb15">
+                    <span class="i_block w100 texy_a_r ">讲师姓名:</span>
+                    <input type="text" class="w250 teacher_name" name="teach_name" value="{$va.teach_name}">
+                </div>
+                <div>
+                    <span class="i_block w100 texy_a_r">现价:</span>
+                    <input type="number" class="w80 current_price" name="current_price" value="{$va.current_price}">
+                    <span class="ml50">原价:</span>
+                    <input type="number" class="w80 course_price" name="course_price" value="{$va.course_price}">
+                </div>
+            </div>
 
-	<form class="editor" action="{:U('newVideoHandler')}" method="post" target="post-handler" enctype="multipart/form-data">
-		<input type="hidden" name="id" value="{$va.id}">
-		<section class="widget_wrp h170">
-			<div class="f_l w500">
-				<div class="mb15">
-					<span class="i_block w100 texy_a_r ">课程名称:</span>
-					<input type="text" class="w250 courses_name" name='course_name' value="{$va.course_name}">
-				</div>
-				<div class="mb15">
-					<span class="i_block w100 texy_a_r ">讲师姓名:</span>
-					<input type="text" class="w250 teacher_name" name="teach_name" value="{$va.teach_name}">
-				</div>
-				<div>
-					<span class="i_block w100 texy_a_r">现价:</span>
-					<input type="text" class="w80 current_price" name="current_price" value="{$va.current_price}">
-					<span class="ml50">原价:</span>
-					<input type="text" class="w80 course_price" name="course_price" value="{$va.course_price}">
-				</div>
-			</div>
-
-			<div class="f_l w500">
-				<div class="mb15">
-					<span class="i_block w100 texy_a_r">课程总时长:</span>
-					<input type="text" id="startTime" class="am-form-field w250" name="class_time" value="{$va.class_time}">
-				</div>
-				<div class="mb15">
-					<span class="i_block w100 texy_a_r ">课节数量:</span>
-					<input type="text" class="w250 courses_num" maxlength="5" name="class_num" value="{$va.class_num}">
-				</div>
-				<div class="mb15 relative ">
-					<span class="i_block w100 texy_a_r ">上传封面:</span>
-					<div class="dib bg" style="background-image: url(__UPFILE__/{$va.course_photo})">
-						<input type="file" name="course_photo">
-						<span class="upload">上传</span>
-					</div>
-				</div>
-			</div>
-		</section>
-		<div class="sub_nav pl20 pt10">
-			<span class="route">
+            <div class="f_l w500">
+                <div class="mb15">
+                    <span class="i_block w100 texy_a_r">课程总时长:</span>
+                    <input type="text" id="startTime" class="am-form-field w250" name="class_time" value="{$va.class_time}" placeholder="00时00分">
+                </div>
+                <div class="mb15">
+                    <span class="i_block w100 texy_a_r ">课节数量:</span>
+                    <input type="number" class="w250 courses_num" maxlength="5" name="class_num" value="{$va.class_num}">
+                </div>
+                <div class="mb15 relative ">
+                    <span class="i_block w100 texy_a_r ">上传封面:</span>
+                    <div class="dib bg" style="background-image: url(__UPFILE__/{$va.course_photo})">
+                        <input type="file" name="course_photo">
+                        <span class="upload">+ 图片</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="sub_nav pl20 pt10">
+            <span class="route">
             <span class="router router1">课程简介</span>
 
-			</span>
-		</div>
-		<section class="widget_wrp h460">
-			<textarea id="editor" name="picture" type="text/plain" style="width:800px;height:300px;">{$va.picture}</textarea>
-		</section>
-	</form>
+            </span>
+        </div>
+        <section class="widget_wrp h460">
+            <textarea id="editor" name="picture" type="text/plain" style="width:800px;height:300px;">{$va.picture}</textarea>
+        </section>
+    </form>
 
-
-
-
-
-	<div class="sub_nav pl20 pt10">
-		<span class="route">
+    <!-- 课节列表 -->
+    <div class="sub_nav pl20 pt10">
+        <span class="route">
         <span class="router router1">课程表</span>
-		<span class="router router1 float_r mr20 red addvideo pointer">添加课节</span>
-		</span>
-	</div>
+        <span class="router router1 float_r mr20 red addvideo pointer">添加课节</span>
+        </span>
+    </div>
 
-	<section class="widget_wrp">
-		<!-- 表格主体 -->
-		<table class="table_default">
-			<tr>
-				<th width="12%">课程名称</th>
-				<th width="10%">课节时长</th>
-				<th width="11%">操作</th>
-			</tr>
-			<foreach name='va.class' item='v'>
-				<tr class="h50 clone">
-					<td>
-						{$v.class_name}
-					</td>
-					<td>{$v.time_length}</td>
-					<td class="operation">
-						<a href="" class="mr2 edit">
-							<i class="fa fa-edit vm"></i> 编辑
-						</a>
-						<span class="ccc">|</span>
-						<span class="pointer ml2 remove">
-    					<i class="fa fa-trash vm"></i>
-    					删除
-    				</span>
-						<!-- 删除提示 -->
-						<div class="deleConfirm">
-							<span class="mbutton trans confirm mt10">
+    <section class="widget_wrp">
+        <!-- 表格主体 -->
+        <table class="table_default">
+            <tr>
+                <th width="12%">课程名称</th>
+                <th width="10%">课节时长</th>
+                <th width="11%">操作</th>
+            </tr>
+            <foreach name='va.class' item='v'>
+                <tr class="h50 clone" data-row="{$v.id}">
+                    <td>
+                        {$v.class_name}
+                    </td>
+                    <td>{$v.class_hour}时{$v.class_min}分</td>
+                    <td class="operation">
+                        <a href="javascript:;" class="mr2 edit" open_id="{$v.id}">
+                            <i class="fa fa-edit vm"></i> 编辑
+                        </a>
+                        <span class="ccc">|</span>
+                        <span class="pointer ml2 remove">
+                            <i class="fa fa-trash vm"></i> 删除
+                        </span>
+                        <!-- 删除提示 -->
+                        <div class="deleConfirm">
+                            <span class="mbutton trans confirm mt10">
                             <input name="" class="zxc" type="hidden" value="{$v.id}"><i class="fa fa-check mr4"></i>确认
                             </span>
-							<span class="mbutton trans cancel"><i class="fa fa-times mr4"></i>取消</span>
-						</div>
-					</td>
-				</tr>
-			</foreach>
+                            <span class="mbutton trans cancel"><i class="fa fa-times mr4"></i>取消</span>
+                        </div>
+                    </td>
+                </tr>
+            </foreach>
 
-		</table>
+        </table>
 
-		<!-- 尾部 -->
-		<div class="table_footer mb30">
-			<div class="operate_btn_box f_r mr30">
-				<input type="button" class="button btn_middle btn_primary trans pointer saveall" value="保存">
-			</div>
-		</div>
-	</section>
-
-	<!-- 弹窗 -->
-	<div class="modal">
-		<form action="{:U('newOfflineDot')}" method="post" target="post-handler" accept-charset="utf-8">
-			<input type="hidden" name="course_id" value="{$va.id}">
-			<input type="hidden" name="open_id" value="">
-			<div class="back"></div>
-			<div class="audio_modal_main_edit">
-				<h2>编辑课节</h2>
-
-				<div class="m_m_video">
-					<p><span>课节名称：</span>
-						<input type="text" class="w200" name="class_name">
-					</p>
-
-					<p>
-						<span>课节时长：</span>
-						<input type="text" class="w50 hour" name="class_hour">
-						<span class="">小时</span>
-						<input type="text" class="w50 minute" name="class_min">
-						<span class="">分</span>
-					</p>
-					<p>
-						<span>上传音频：</span>
-						<input type="file" name="assets">
-						<button type="button" class="uploadbtn">选择音频</button>
-					</p>
-					<div class="duotudabao">
-						<span class="dib duotuzi">上传图片：</span>
-						<div class="duotubao">
-							<div class="dib bg duotu" style="background-image: url(__UPFILE__/{$va.course_photo})">
-								<!--                       上传-->
-								<input type="file" name="course_photo">
-								<span class="editupload">上传</span>
-							</div>
-							<div class="dib bg duotu" style="background-image: url(__UPFILE__/{$va.course_photo})">
-								<!--                       上传-->
-								<input type="file" name="course_photo">
-								<span class="editupload">上传</span>
-							</div>
-							<div class="dib bg duotu" style="background-image: url(__UPFILE__/{$va.course_photo})">
-								<!--                       上传-->
-								<input type="file" name="course_photo">
-								<span class="editupload">上传</span>
-							</div>
-							<div class="dib bg duotu" style="background-image: url(__UPFILE__/{$va.course_photo})">
-								<!--                       上传-->
-								<input type="file" name="course_photo">
-								<span class="editupload">上传</span>
-							</div>
-							<div class="dib bg duotu" style="background-image: url(__UPFILE__/{$va.course_photo})">
-								<!--                       上传-->
-								<input type="file" name="course_photo">
-								<span class="editupload">上传</span>
-							</div>
-							<div class="dib bg duotu" style="background-image: url(__UPFILE__/{$va.course_photo})">
-								<!--                       上传-->
-								<input type="file" name="course_photo">
-								<span class="editupload">上传</span>
-							</div>
-							<div class="dib bg duotu" style="background-image: url(__UPFILE__/{$va.course_photo})">
-								<!--                       上传-->
-								<input type="file" name="course_photo">
-								<span class="editupload">上传</span>
-							</div>
-							<div class="dib bg duotu" style="background-image: url(__UPFILE__/{$va.course_photo})">
-								<!--                       上传-->
-								<input type="file" name="course_photo">
-								<span class="editupload">上传</span>
-							</div>
-							<div class="dib bg duotu" style="background-image: url(__UPFILE__/{$va.course_photo})">
-								<!--                       上传-->
-								<input type="file" name="course_photo">
-								<span class="editupload">上传</span>
-							</div>
-							<div class="dib bg duotu" style="background-image: url(__UPFILE__/{$va.course_photo})">
-								<!--                       上传-->
-								<input type="file" name="course_photo">
-								<span class="editupload">上传</span>
-							</div>
-							<div class="dib bg duotu" style="background-image: url(__UPFILE__/{$va.course_photo})">
-								<!--                       上传-->
-								<input type="file" name="course_photo">
-								<span class="editupload">上传</span>
-							</div>
-							<div class="dib bg duotu" style="background-image: url(__UPFILE__/{$va.course_photo})">
-								<!--                       上传-->
-								<input type="file" name="course_photo">
-								<span class="editupload">上传</span>
-							</div>
-
-						</div>
-
-					</div>
-				</div>
-				<span class="videosave pointer">保存</span><span class="videocancel pointer">取消</span>
-			</div>
-		</form>
-	</div>
-	<iframe name="post-handler" class="dn"></iframe>
-
-	<script type="text/javascript" src="__AJS__/jquery.js"></script>
-	<script type="text/javascript" src="__AJS__/jquery.easing.js"></script>
-	<script type="text/javascript" src="__AJS__/deleconfirm.js"></script>
-	<script type="text/javascript" src="__AEDITOR__/ueditor.config.js"></script>
-	<script type="text/javascript" src="__AEDITOR__/ueditor.all.min.js"></script>
-	<script type="text/javascript" src="__AEDITOR__/lang/zh-cn/zh-cn.js"></script>
-	<script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.min.js"></script>
-	<script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.zh-CN.js"></script>
-	<script type="text/javascript">
-		// var uploadActionUrl = "{:U('Audio/uploadimg')}";
-		// var uploadActionSilder = "{:U('Audio/uploada')}";
-		// var uploadActionVideo = "{:U('Audio/uploa')}";
-		var ue = UE.getEditor('editor');
-		'use strict';
-		var option = {
-			dateFormat: "yyyy-m-d",
-			autoClose: true,
-			weekStart: 7
-		};
-		$("#startTime").datepicker(option);
-		$("#startTime1").datepicker(option);
-		$("#endTime").datepicker(option);
-
-		var courses_name = document.querySelector('.courses_name'),
-			teacher_name = document.querySelector('.teacher_name'),
-			courses_num = document.querySelector('.courses_num');
-		$(function () {
-			$('.upaudio').click(function () {
-				$(this).siblings('input').click(function () {});
-			})
-
-			//判断浏览器是否支持FileReader接口  
-			if (typeof FileReader == 'undefined') {
-				alert('你的浏览器不支持FileReader接口，图片上传预览功能将无法使用!');
-				//使选择控件不可操作
-				// file.setAttribute("disabled","disabled");
-			} else {
-				$('input[name="course_photo"]').change(function (e) {
-					var _this = $(this);
-					var file = e.target.files[0] || e.dataTransfer.files[0];
-					// var file = document.getElementById("file").files[0];  
-					// console.log(file);
-					if (file) {
-						var reader = new FileReader();
-						reader.onload = function () {
-							var url = this.result;
-							_this.parent().css("background-image", "url(" + url + ")");
-						}
-						reader.readAsDataURL(file);
-					}
-				});
-			}
+        <!-- 尾部 -->
+        <div class="table_footer mb30">
+            <div class="operate_btn_box f_r mr30">
+                <input type="button" class="button btn_middle btn_primary trans pointer saveall" value="保存">
+            </div>
+        </div>
+    </section>
 
 
-			/*上传视频*/
-			$('.courses_num').keyup(function () {
-				'use strict';
-				let num = $('.courses_num').val(),
-					strnum = num.split('');
-				if (strnum.length >= 3) {
-					let newstr = num.split('', 3).join('');
-					console.log(newstr)
-					$('.courses_num').val(newstr)
-				}
-			});
+    <!-- 弹窗 -->
+    <div class="modal">
+        <form action="{:U('newAudioDot')}" method="post" target="post-handler" enctype="multipart/form-data">
+            <input type="hidden" name="callback" value="returnDotHandler">
+            <input type="hidden" name="course_id" value="{$va.id}">
+            <input type="hidden" name="open_id" value="">
+            <div class="back"></div>
+            <div class="audio_modal_main_edit">
+                <h2>编辑课节</h2>
 
-			$('.addvideo').click(function () {
-				'use strict';
-				$('.modal').show();
-				$('.audio_modal_main_edit').show();
-				$('.m_m_offline').hide()
-				$('.m_m_audio').hide()
-				$('.videocancel').click(function () {
-					$('.modal').hide()
-				})
-			});
-			$('.videosave').click(function () {
-				'use strict';
-				$('.modal').hide();
-				var app = $('.table_default tr.clone').eq(0).clone(true);
-				app.find('td').eq(0).text($('.coursename').val());
-				app.find('td').eq(1).text($('.hour').val() + ':' + $('.minute').val());
-				app.appendTo('.table_default');
-				$.post("{:U('Admin/Class/addAudioClass')}", {
-					'class_name': $('.coursename').val(),
-					'class_time': $('.class_time').val()
-				}, function (data) {
-					if (data.status) {
+                <div class="m_m_video">
+                    <p><span>课节名称：</span>
+                        <input type="text" class="w200" name="class_name">
+                    </p>
 
-					}
-				});
-			});
+                    <p>
+                        <span>课节时长：</span>
+                        <input type="number" class="w50 hour" name="class_hour">
+                        <span class="">小时</span>
+                        <input type="number" class="w50 minute" name="class_min">
+                        <span class="">分</span>
+                    </p>
+                    <p>
+                        <span>上传音频：</span>
+                        <input type="file" name="assets" accept="audio/mp3">
+                        <button type="button" class="uploadbtn">选择音频</button>
+                    </p>
+                    <div class="duotudabao">
+                        <span class="dib duotuzi">上传图片：</span>
+                        <div class="duotubao">
+                            <div class="dib bg duotu">
+                                <!-- 上传 -->
+                                <input type="file" name="class_img[]" accept="image/jpeg,image/png">
+                                <input type="hidden" name="class_image[]">
+                                <span class="editupload">+ 图片</span>
+                            </div>
+                            <div class="dib bg duotu">
+                                <!-- 上传 -->
+                                <input type="file" name="class_img[]" accept="image/jpeg,image/png">
+                                <input type="hidden" name="class_image[]">
+                                <span class="editupload">+ 图片</span>
+                            </div>
+                            <div class="dib bg duotu">
+                                <!-- 上传 -->
+                                <input type="file" name="class_img[]" accept="image/jpeg,image/png">
+                                <input type="hidden" name="class_image[]">
+                                <span class="editupload">+ 图片</span>
+                            </div>
+                            <div class="dib bg duotu">
+                                <!-- 上传 -->
+                                <input type="file" name="class_img[]" accept="image/jpeg,image/png">
+                                <input type="hidden" name="class_image[]">
+                                <span class="editupload">+ 图片</span>
+                            </div>
+                            <div class="dib bg duotu">
+                                <!-- 上传 -->
+                                <input type="file" name="class_img[]" accept="image/jpeg,image/png">
+                                <input type="hidden" name="class_image[]">
+                                <span class="editupload">+ 图片</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <span class="videosave pointer">保存</span>
+                <span class="videocancel pointer">取消</span>
+            </div>
+        </form>
+    </div>
 
+    <!-- 成功提示 -->
+    <div class="hint">
+        <div class="hintmain">
+            <p></p>
+        </div>
+    </div>
 
-			$('.saveall').click(function () {
-				$.post("{:U('Admin/Audio/index')}", {
-					'id': handle1_id,
-					'type': $('#table_id').val(),
-					'course_name': $('.courses_name').val(),
-					'course_photo': $('.fengmian').val(),
-					'course_price': $('.course_price').val(),
-					'current_price': $('.current_price').val(),
-					'teach_name': $('.teacher_name').val(),
-					'picture': $('#fnull').val(),
-					'offline_url': $('#fprimarykey').val(),
-					'class_num': $('#fincre').val(),
-					'addtime': $('#fincre').val(),
-					'status': $('#fincre').val(),
-				}, function (data) {
-					if (data.status) {}
-				})
-			})
-
-
-			$('.saveall').click(function (e) {
-				e.preventDefault();
-				var editor = $('.view').html();
-				console.log(editor);
-				$('form.editor').submit();
-			})
-			$("span.confirm").click(function () {
-				var id = $(this).find('.zxc').attr('value')
-				console.log(id);
-				$.post('{:U("Admin/Class/delClass")}', {
-					id: id
-				}, function () {})
-			})
-
-
-			$('.back').click(function () {
-				$('.modal').hide()
-			});
-
-			$('.operation .edit').click(function (e) {
-				'use strict';
-				e.preventDefault();
-				$('.modal').show();
-				$('.video_modal_main_edit').show();
-				$('.m_m_offline').hide()
-				$('.m_m_audio').hide()
-				$('.videocancel').click(function () {
-					$('.modal').hide()
-				})
-				$('.videosave').click(function () {
-					$('.modal').hide()
-				})
-			});
-
-			//上传按钮
-			$('.dib>span.upload').click(function () {
-				$(this).siblings('input').click()
-			})
-			$('.uploadbtn').click(function () {
-				$(this).siblings('input').click()
-			})
-			$('.dib>span.editupload').click(function () {
-				$(this).siblings('input').click()
-			})
-		})
-	</script>
+    <iframe name="post-handler" class="dn"></iframe>
+    <script type="text/javascript" src="__AJS__/jquery.js"></script>
+    <script type="text/javascript" src="__AJS__/jquery.easing.js"></script>
+    <script type="text/javascript" src="__AJS__/deleconfirm.js"></script>
+    <script type="text/javascript" src="__AJS__/course_details.js"></script>
+    <script type="text/javascript" src="__AEDITOR__/ueditor.config.js"></script>
+    <script type="text/javascript" src="__AEDITOR__/ueditor.all.min.js"></script>
+    <script type="text/javascript" src="__AEDITOR__/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript">
+        var ue = UE.getEditor('editor');
+        var deleUrl = "{:U('deleDotList')}";
+        var pullUrl = "{:U('pullAudioDot')}";
+        var imageUrl = "__UPFILE__/";
+    </script>
 </body>
 
 </html>

@@ -230,7 +230,7 @@
                 setTimeout(function () {
                     $('.hint').hide();
                 }, 1000);
-                let id = [],
+                var id = [],
                     tid = $('td>input[type="checkbox"]:checked');
                 tid.each(function () {
                     id.push(parseInt($(this).attr('id')));

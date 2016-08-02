@@ -1,6 +1,6 @@
 <?php
 namespace Admin\Controller;
-use Think\Controller;、
+use Think\Controller;
 /**
 * 订单
 */
@@ -10,7 +10,7 @@ class OrderController extends Controller
     {
         $users_id = I('users_id');
          /*分页*/
-        $table = 'course';
+        $table = 'bills';
         $condition = "";
         $tiao = 5;
         $type = I('type');
@@ -22,10 +22,10 @@ class OrderController extends Controller
         }
         $this->type=$type;
         /*查询记录*/
-        $result = M('ordera')->where($where)->limit($data['limit'])->select();
+        $result = M('bills')->where($where)->limit($data['limit'])->select();
         $this->assign('ordera',$result);
         $this->assign('page',$data['pages']['pages']);
-        $this->display('index/bill_management');
+        $this->display('Index/bill_management');
     }
 
     /*删除订单*/
@@ -37,7 +37,7 @@ class OrderController extends Controller
         $where = array(
             'id'=>array('in',$id)
         );
-        $result = M('ordera')->where($where)->delete();
+        $result = M('bills')->where($where)->delete();
         if($result){
             $data = array('status'=>1);
         }else{
@@ -57,7 +57,7 @@ class OrderController extends Controller
         $arr = array(
             'status'=>2
         );
-        $result = M('ordera')->where($where)->save($arr);
+        $result = M('bills')->where($where)->save($arr);
         if($result){
             $data = array('status'=>1);
         }else{
@@ -72,7 +72,7 @@ class OrderController extends Controller
         $condition = array(
             'id'=>array('in',$id)
         ); 
-        $data = M('ordera')->where($condition)->select();
+        $data = M('bills')->where($condition)->select();
         $title = array(
             array(
                 'id' => 'id',

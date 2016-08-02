@@ -21,6 +21,13 @@ class VideoController extends Controller
             $this->error('页面不存在');
         }
     }
+    // form post return
+    private function selfReturn($return)
+    {
+        $callback = I('callback');
+        $return = json_encode($return);
+        exit("<script>parent.$callback($return)</script>");
+    }
 
 
     /* 页面(新建编辑) */
@@ -55,22 +62,34 @@ class VideoController extends Controller
         );
 
         /* 上传封面 */
-        // $img = $_FILES['course_photo'];
-        // if (!$img['error']) {
-        //     $img = loadOneImageHandler($img);
-        //     image_cut($img, 320, 180);
-        //     $data['course_photo'] = $img;
-        // }
+        $img = $_FILES['course_photo'];
+        if (!$img['error']) {
+            $load = loadOneImageHandler($img);
+            if ($load['status']) {
+                /* 成功 */
+                $img = $load['assets'];
+                image_cut($img, 320, 180);
+                $data['course_photo'] = $img;
+            } else {
+                /* 失败 */
+                $return = array(
+                    'status' => 0,
+                    'info' => $load['error']
+                );
+                $this->selfReturn($return);
+            }
+        }
 
         /* 执行保存 */
-        // $id = I('id');
-        // if ($id !== '') {
-        //     $data['id'] = $id;
-        //     $result = M('course')->save($data);
-        // } else {
-        //     $data['addtime'] = date('Y-m-d H:i:s');
-        //     $result = M('course')->add($data);
-        // }
+        $id = I('id');
+        if ($id !== '') {
+            $data['id'] = $id;
+            $data['udate'] = time();
+            $result = M('course')->save($data);
+        } else {
+            $data['adate'] = time();
+            $result = M('course')->add($data);
+        }
 
         /*反馈数据*/
         $return = array(
@@ -78,8 +97,7 @@ class VideoController extends Controller
             'info' => $id ? '编辑视频课' : '新建视频课',
             'course_id' => $id ? $id : $result
         );
-        $return = json_encode($return);
-        echo "<script>parent.returnHandler($return)</script>";
+        $this->selfReturn($return);
     }
 
 
@@ -88,31 +106,46 @@ class VideoController extends Controller
     {
         $this->checkPost();
         $data = array(
-            'course_id' => I('course_id'),
+            'course_id'  => I('course_id'),
             'class_name' => I('class_name'),
-            'class_day' => I('class_day'),
             'class_hour' => I('class_hour'),
-            'class_min' => I('class_min')
+            'class_min'  => I('class_min')
         );
+        
+        /* 上传视频 */
+        $vid = $_FILES['assets'];
+        if (!$vid['error']) {
+            $load = loadVideoHandler($vid);
+            if ($load['status']) {
+                $vid = $load['assets'];
+                $data['assets_url'] = $vid;
+            } else {
+                /* 失败 */
+                $return = array(
+                    'status' => 0,
+                    'info' => $load['error']
+                );
+                $this->selfReturn($return);
+            }
+        }
 
         /* 执行保存 */
-        // $id = I('open_id');
-        // if ($id !== '') {
-        //     $data['id'] = $id;
-        //     $data['udate'] = time();
-        //     $result = M('class')->save($data);
-        // } else {
-        //     $data['adate'] = time();
-        //     $result = M('class')->add($data);
-        // }
+        $id = I('open_id');
+        if ($id !== '') {
+            $data['id'] = $id;
+            $data['udate'] = time();
+            $result = M('class')->save($data);
+        } else {
+            $data['adate'] = time();
+            $result = M('class')->add($data);
+        }
 
         /*反馈数据*/
         $return = array(
             'status' => $result ? 1 : 0,
             'info' => $id ? '编辑课节' : '新建课节'
         );
-        $return = json_encode($return);
-        echo "<script>parent.returnDotHandler($return)</script>";
+        $this->selfReturn($return);
     }
 
 
@@ -121,13 +154,12 @@ class VideoController extends Controller
     {
         $this->checkAjax();
         $id = I('id');
-        // $result = M('class')->where(array('id' => $id))->find();
+        $result = M('class')->where(array('id' => $id))->find();
         if ($result) {
             $data = array(
                 'open_id'    => $result['id'],
                 'course_id'  => $result['course_id'],
                 'class_name' => $result['class_name'],
-                'class_day'  => $result['class_day'],
                 'class_hour' => $result['class_hour'],
                 'class_min'  => $result['class_min']
             );
@@ -135,6 +167,20 @@ class VideoController extends Controller
         $return = array(
             'data' => $data,
             'status' => $result ? 1:0
+        );
+        $this->ajaxReturn($return, 'json');
+    }
+
+
+    /* 删除课节 */
+    public function deleDotList()
+    {
+        $this->checkAjax();
+        $id = I('id');
+        $result = M('class')->where(array('id' => $id))->delete();
+        $return = array(
+            'status' => $result ? 1 : 0,
+            'info' => '删除课节'
         );
         $this->ajaxReturn($return, 'json');
     }

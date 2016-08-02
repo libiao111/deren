@@ -16,9 +16,10 @@
 		<!-- ppt -->
 		<div class="swiper-container">
 			<div class="swiper-wrapper">
-				<foreach name="course.bigpho" item="val">
+				<div class="ppt bg swiper-slide" style="background-image:url(__UPFILE__/{$course.course_photo})"></div>
+				<!-- <foreach name="course.img" item="val">
 					<div class="ppt bg swiper-slide" style="background-image:url(__UPFILE__/{$val.pho_url})"></div>
-			    </foreach>
+			    </foreach> -->
 			</div>
 		</div>
 		
@@ -47,7 +48,7 @@
 		<div class="tab_container">
 			<!-- 简介 -->
 			<div class="tab_content pb80" role="1">
-				<p>此处信息由后台编辑上传</p>
+				{$course.picture}
 			</div>
 			<!-- 课表 -->
 			<div class="tab_content pb80" role="2">
@@ -65,7 +66,7 @@
 							</span>
 							<span>
 								<img src="__IMG__/shichang.svg" width="16px" class="vm mr2">
-								<span class="f14 f999">{$val.class_mins}</span>
+								<span class="f14 f999">{$val.class_hour}时{$val.class_min}分</span>
 							</span>
 						</div>
 					</div>

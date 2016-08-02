@@ -13,7 +13,7 @@
 	<!-- 课程内容 -->
 	<div class="content_wrap">
 		<div class="video_wrap">
-			<video width="100%" height="100%" controls="controls" src=""></video>
+			<video width="100%" height="100%" src="" poster="__UPFILE__/{$course.course_photo}"></video>
 		</div>
 		<div class="mt8 mb8 pl10 pr10">
 			<span class="f18 title">{$course.course_name}</span>
@@ -38,7 +38,7 @@
 		<div class="tab_container">
 			<!-- 简介 -->
 			<div class="tab_content pb80" role="1">
-				<p>此处信息由后台编辑上传</p>
+				{$course.picture}
 			</div>
 			<!-- 课表 -->
 			<div class="tab_content pb80" role="2">
@@ -56,12 +56,11 @@
 							</span>
 							<span>
 								<img src="__IMG__/shichang.svg" width="16px" class="vm mr2">
-								<span class="f14 f999">{$val.class_time}</span>
+								<span class="f14 f999">{$val.class_hour}时{$val.class_min}分</span>
 							</span>
 						</div>
 					</div>
 				</foreach>
-
 			</div>
 		</div>
 	</div>
@@ -100,7 +99,7 @@ window.onload = function(){
 	$(".video_wrap").css("height",h + "px");
 
 	/* 课程是否已购买 */
-	var isPurchased = {$course.status};
+	var isPurchased = '{$course.status}';
 
 	/* 未购买课程时，点击课表弹出购买提示 */
 	if(isPurchased == 0){
