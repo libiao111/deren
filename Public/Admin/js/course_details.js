@@ -78,6 +78,10 @@ $(function () {
                 return false;
             };
         };
+		if($('.dataup').val()==''){
+			$('.dataup').click();
+			return false;
+		}
         $('form.editor').submit();
     })
 
