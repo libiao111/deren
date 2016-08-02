@@ -6,7 +6,21 @@ use Think\Controller;
 */
 class LoginController extends Controller
 {
-
+    // check
+    // check post
+    private function checkPost()
+    {
+        if (!IS_POST) {
+            $this->error('页面不存在');
+        }
+    }
+    // check ajax
+    private function checkAjax()
+    {
+        if (!IS_AJAX) {
+            $this->error('页面不存在');
+        }
+    }
     /* 显示页面 */
     public function index()
     {
@@ -16,9 +30,7 @@ class LoginController extends Controller
     /* 提交登录 */
     public function login()
     {
-        if (!IS_AJAX) {
-            $this->error('页面不存在');
-        }
+        $this->checkAjax();
         $user = I('username');
         $pass = I('password');
         $arr = array(
@@ -27,11 +39,9 @@ class LoginController extends Controller
         );
         $result = M('adminuser')->where($arr)->field('password', true)->find();
         if($result){
-            $data = array('status' => 1);
             session('user', $result);
-        } else {
-            $data = array('status' => 0);
         }
+        $data = array('status' => $result ? 1:0);
         $this->ajaxReturn($data, 'json');
     }
 

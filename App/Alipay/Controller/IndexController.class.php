@@ -9,7 +9,7 @@ class IndexController extends Controller
     
     public function index()
     {
-        header('Content-Type:text/html; charset=utf-8');
+       
         /**************************请求参数**************************/
         
         //商户订单号，商户网站订单系统中唯一订单号，必填
@@ -53,6 +53,7 @@ class IndexController extends Controller
 
         // $alipaySubmit = new AlipaySubmit($alipay_config);
         // $alipaySubmit = A('AlipaySubmit', 'Event');
+        header('Content-Type:text/html; charset=utf-8');
         $alipaySubmit = new \Alipay\Event\AlipaySubmitEvent($alipay_config);
         $html_text = $alipaySubmit->buildRequestForm($parameter,"get", "确认");
         echo $html_text;

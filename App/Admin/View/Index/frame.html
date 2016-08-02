@@ -203,26 +203,6 @@
             modal.style.display = "none";
             //to do
         }
-        /*验证密码*/
-        $('.oldpass').blur(function () {
-            var oldpass =  $('.oldpass').val();
-            $.post("{:U('Index/oldpass')}",{oldpass:oldpass},function(data){
-                if (data.status) {
-                    $('.hint').show();
-                    $('.hint p').text('密码正确');
-                    setTimeout(function () {
-                    $('.hint').hide();
-                    }, 1000);
-                } else {
-                    $('.hint').show();
-                    $('.hint p').text('密码不正确');
-                    setTimeout(function () {
-                    $('.hint').hide();
-                    $('.oldpass').focus();
-                    }, 1000);
-                }
-            });
-        });
         /*修改密码*/
         $('.psdsave').click(function(){
             var oldpass =  $('.oldpass').val();
@@ -235,14 +215,14 @@
                         $('.hint p').text('修改成功');
                         setTimeout(function () {
                         $('.hint').hide();
-                        }, 1000);
+                        }, 2000);
                     } else {
                         $('.hint').show();
                         $('.hint p').text('两次密码不一致或不能为空');
                         setTimeout(function () {
                         $('.hint').hide();
-                        }, 1000);
-                        $('.pass').focus();
+                        }, 2000);
+                        
                     }
                 })
             }
