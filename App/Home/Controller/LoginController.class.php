@@ -86,7 +86,7 @@ class LoginController extends Controller
         if (!IS_AJAX) {
             $this->error('页面不存在!');die;
         }
-        $user = session('user');
+        $user = session('openid');
         /*session 获取验证码*/
         $str = session('str');
         /*赋值变量*/

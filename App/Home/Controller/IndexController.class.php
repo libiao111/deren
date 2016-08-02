@@ -10,15 +10,6 @@ class IndexController extends Controller
     public function _initialize()
     {
         /* 关注公众号 */
-<<<<<<< HEAD
-        /*$openid = session('openid');
-        if (count($openid) == 0) {
-            $openid = getOpenID();
-            if ($openid['status'] == 0) {
-                $this->redirect('Open/index');
-            }
-        }*/
-=======
         // $openid = session('openid');
         // if (count($openid) == 0) {
         //     $openid = getOpenID();
@@ -26,7 +17,7 @@ class IndexController extends Controller
         //         $this->redirect('Open/index');
         //     }
         // }
->>>>>>> d7a3cd3d654f93481ef75ca6883fcc025dc56d90
+        
 
         /* 登录验证 */
         $user = session('user');
