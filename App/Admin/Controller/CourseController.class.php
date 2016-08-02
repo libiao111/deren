@@ -75,31 +75,16 @@ class CourseController extends Controller
     public function deleCourseHandler()
     {
         $this->checkAjax();
-        
         $id = I('id');
-        $in = array('id' => array('in', $id));
     
         /*关联查询课时表id*/    
-        $sql = D('course')->relation('class')->where($in)->select();
-        foreach ($sql as $k => $v) {
-            foreach ($v['class'] as $key => $va) {
-                /*课时id赋值数组*/
-               $arr1[] = $va['id'];
-            }
-        }
-
-        /* 删除子类 */
-        if($arr1){
-            $where1= array('id' => array('in', $arr1));
-            $sql2 = D('class')->relation('bigpho')->where($where1)->delete();
-        }
-
-        /* 删除课程 */
-        $result = M('course')->where($where)->delete();
+        $result = D('course')->relation(array('class','img'))->where(array('id' => $id))->delete();
 
         /* 反馈数据 */
-        $data = array('status'=> $result ? 1:0);
+        $data = array('status' => $result ? 1:0);
         $this->ajaxReturn($data,'json');
     }
-   
+
+
+
 }

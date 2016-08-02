@@ -803,6 +803,8 @@ section.about {
     height: 100%;
     line-height: 40px;
     text-align: center;
+    border: #ccc solid 1px;
+    color: #CCC;
 }
 
 .duotubao {
@@ -810,6 +812,8 @@ section.about {
     height: 40px;
     display: inline-block;
     overflow: auto;
+    position: relative;
+    top: -10px;
 }
 
 .duotuzi {

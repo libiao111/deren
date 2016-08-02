@@ -30,6 +30,7 @@
 
 
     <form class="editor" action="{:U('newOfflineHandler')}" method="post" target="post-handler" enctype="multipart/form-data">
+        <input type="hidden" name="callback" value="returnHandler">
         <input type="hidden" name="id" value="{$va.id}">
         <section class="widget_wrp h170">
             <div class="f_l w500">
@@ -95,7 +96,7 @@
                 <th width="11%">操作</th>
             </tr>
             <foreach name='va.class' item='v'>
-                <tr class="h50 clone">
+                <tr class="h50 clone" data-row="{$v.id}">
                     <td>
                         {$v.class_name}
                     </td>
@@ -131,6 +132,7 @@
     <!-- 弹窗 -->
     <div class="modal">
         <form action="{:U('newOfflineDot')}" method="post" target="post-handler" accept-charset="utf-8">
+            <input type="hidden" name="callback" value="returnDotHandler">
             <input type="hidden" name="course_id" value="{$va.id}">
             <input type="hidden" name="open_id" value="">
             <div class="back"></div>
@@ -163,14 +165,16 @@
     <script type="text/javascript" src="__AJS__/jquery.js"></script>
     <script type="text/javascript" src="__AJS__/jquery.easing.js"></script>
     <script type="text/javascript" src="__AJS__/deleconfirm.js"></script>
+    <script type="text/javascript" src="__AJS__/course_details.js"></script>
     <script type="text/javascript" src="__AEDITOR__/ueditor.config.js"></script>
     <script type="text/javascript" src="__AEDITOR__/ueditor.all.min.js"></script>
     <script type="text/javascript" src="__AEDITOR__/lang/zh-cn/zh-cn.js"></script>
     <script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.min.js"></script>
     <script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.zh-CN.js"></script>
-<!--    <script type="text/javascript" src="__AJS__/require.js" data-main="__AJS__/main.js"></script>-->
     <script type="text/javascript">
         var ue = UE.getEditor('editor');
+        var deleUrl = "{:U('deleDotList')}";
+        var pullUrl = "{:U('pullOfflineDot')}";
 
         /* 加载日期选择 */
         var option = {
@@ -180,127 +184,6 @@
         };
         $("#startTime").datepicker(option);
         $("#startTime1").datepicker(option);
-
-        /* 提交-课程回调 */
-        function returnHandler(data)
-        {
-            if (data.status) {
-                alert(data.info);
-                var obj = $('.modal');
-                obj.find('input[name="course_id"]').val(data.course_id);
-            };
-        }
-
-        /* 提交-课节回调 */
-        function returnDotHandler(data)
-        {
-            if (data.status) {
-                alert(data.info);
-                /* init */
-                var obj = $('.modal');
-                obj.find('input[name="open_id"]').val('');
-                obj.find('input[name="class_name"]').val('');
-                obj.find('input[name="class_day"]').val('');
-                obj.find('input[name="class_hour"]').val('');
-                obj.find('input[name="class_min"]').val('');
-                obj.hide();
-            };
-        }
-
-        $(function () {
-            /* 提交表单 */
-            $('.saveall').click(function () {
-                $('form.editor').submit();
-            })
-
-            //判断浏览器是否支持FileReader接口  
-            if(typeof FileReader == 'undefined'){  
-                alert('你的浏览器不支持FileReader接口，图片上传预览功能将无法使用!');  
-                //使选择控件不可操作
-                // file.setAttribute("disabled","disabled");
-            } else {
-                $('input[name="course_photo"]').change(function(e){
-                    var _this = $(this);
-                    var file = e.target.files[0] || e.dataTransfer.files[0];
-                    // var file = document.getElementById("file").files[0];  
-                    // console.log(file);
-                    if(file){
-                        var reader = new FileReader();
-                        reader.onload = function(){
-                            var url = this.result;
-                            _this.parent().css("background-image","url("+url+")");
-                        }
-                        reader.readAsDataURL(file);
-                    }
-                });
-            }
-
-
-            /* 关闭 */
-            $('.back').click(function () {
-                $('.modal').hide()
-            });
-
-            /* 显示添加课时 */
-            $('.addvideo').click(function () {
-                var obj = $('.modal');
-                var course_id = obj.find('input[name="course_id"]').val();
-                if (course_id === '') {
-                    alert('请先保存课程');
-                    return false;
-                };
-
-                obj.find('input[name="open_id"]').val('');
-                obj.show();
-                $('.video_modal_main_edit').show();
-            });
-            /* 取消 */
-            $('.videocancel').click(function () {
-                $('.modal').hide()
-            });
-            /* 保存 */
-            $('.videosave').click(function () {
-                $(this).parents('form').submit();
-            });
-
-            /* 删除课节 */
-            // $("span.confirm").click(function () {
-            //     var id = $(this).find('.zxc').attr('value')
-            //     console.log(id);
-            //     $.post('{:U("Admin/Class/delClass")}', {
-            //         id: id
-            //     }, function () {
-
-            //     })
-            // })
-
-            /* 显示编辑课节 */
-            $('.operation .edit').click(function (e) {
-                var id = $(this).attr('open_id');
-                $.post('{:U("pullOfflineDot")}', {id: id}, function(data){
-                    if (data.status) {
-                        var obj = $('.modal');
-                        var va = data.data;
-                        obj.find('input[name="course_id"]').val(va.course_id);
-                        obj.find('input[name="open_id"]').val(va.open_id);
-                        obj.find('input[name="class_name"]').val(va.class_name);
-                        obj.find('input[name="class_day"]').val(va.class_day);
-                        obj.find('input[name="class_hour"]').val(va.class_hour);
-                        obj.find('input[name="class_min"]').val(va.class_min);
-                        obj.show();
-                        $('.video_modal_main_edit').show();
-                    };
-                })
-            });
-			
-			//上传按钮
-			$('.dib>span.upload').click(function(){
-				$(this).siblings('input').click()
-			})
-
-
-
-        })
     </script>
 </body>
 
