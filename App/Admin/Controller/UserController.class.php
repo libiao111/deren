@@ -39,7 +39,7 @@ class UserController extends Controller
     {
         $this->checkAjax();
         /*赋值*/
-        $where = array('id'=>array('in',I('id')));
+        $where = array('id'=>I('id'));
         /*执行删除操作*/
         $result = M('users')->where($where)->delete();
         /*反馈*/
@@ -50,7 +50,7 @@ class UserController extends Controller
     public function statusStop()
     {
         $this->checkAjax();
-        $where = array('id'=>array('in',I('id')));
+        $where = array('id'=>I('id'));
         $arr = array('status'=>1);
         /*执行操作*/
         $result = M('users')->where($where)->save($arr);

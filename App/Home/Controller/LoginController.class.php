@@ -91,8 +91,6 @@ class LoginController extends Controller
         $str = session('str');
         /*赋值变量*/
         $code = md5(I('code'));
-        $username = '李飞';
-        
         /*判断验证码是否正确*/
         if($code !=$str){
             $data = array('status'=>2);

@@ -43,7 +43,7 @@ class OrderController extends Controller
     public function deleteOrder(){
         $this->checkAjax();
         /*赋值数组*/
-        $where = array('id'=>array('in',I('id')));
+        $where = array('id'=>I('id'));
         /*执行删除操作*/
         $result = M('bills')->where($where)->delete();
         /*反馈*/
