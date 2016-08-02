@@ -4,7 +4,7 @@ return array(
     'URL_HTML_SUFFIX'       => '.ogv',                  // 设置文件后缀方式
     'TMPL_VAR_IDENTIFY'     => 'array',                 // 点语法默认解析
     'URL_MODEL'             => 1,                       // 设置URL显示方式
-    'MODULE_ALLOW_LIST'     => array('Home','Admin','Pay','Uploads'),           // 访问模板设置
+    'MODULE_ALLOW_LIST'     => array('Home','Admin','Pay','Alipay'),           // 访问模板设置
     'TMPL_PARSE_STRING' => array(
         '__UP__'        => __ROOT__.'/Public',
         '__CSS__'       => __ROOT__.'/Public/Home/css',
@@ -23,8 +23,8 @@ return array(
     'DB_USER'   => 'root',
     'DB_PWD'    => '',
     'DB_NAME'   => 'deren',
-    // 'DB_HOST' => 'qdm100230239.my3w.com',
-    // 'DB_USER' => 'qdm100230239',
-    // 'DB_PWD'  => 'stevewins1023',
-    // 'DB_NAME' => 'qdm100230239_db',
+    'DB_HOST' => 'qdm100230239.my3w.com',
+    'DB_USER' => 'qdm100230239',
+    'DB_PWD'  => 'stevewins1023',
+    'DB_NAME' => 'qdm100230239_db'
 );

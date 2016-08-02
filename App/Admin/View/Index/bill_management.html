@@ -2,319 +2,324 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<title>组件</title>
-	<link rel="stylesheet" href="__ACSS__/main.css">
-	<link rel="stylesheet" href="__ACSS__/index.css" />
-	<link rel="stylesheet" type="text/css" href="__ACSS__/font-awesome.min.css">
+    <meta charset="UTF-8">
+    <title>组件</title>
+    <link rel="stylesheet" href="__ACSS__/main.css">
+    <link rel="stylesheet" href="__ACSS__/index.css" />
+    <link rel="stylesheet" type="text/css" href="__ACSS__/font-awesome.min.css">
 </head>
 
 <body class="bf2">
 
-	<!-- sub nav -->
-	<div class="sub_nav pl20 pt10">
-		<span class="route">
+    <!-- sub nav -->
+    <div class="sub_nav pl20 pt10">
+        <span class="route">
             <a href="dash.html" target="frame"><i class="fa fa-home fa-lg"></a></i>
             <span class="slashes slashes1 ml8 mr8 rel"></span>
-		<span class="router router1">业务管理/订单管理</span>
-		</span>
-	</div>
+        <span class="router router1">业务管理/订单管理</span>
+        </span>
+    </div>
 
-	<section class="widget_wrp">
-		<div class="table_header mt30">
-			<!-- 下拉列表组件 -->
-			<form action="{:U('Order/index')}" method="get" name="frm" class="frm" enctype="multipart/form-data">
-				<span class="select_wrap ml30 mt15 dib">
+    <section class="widget_wrp">
+        <div class="table_header mt30">
+            <!-- 下拉列表组件 -->
+            <form action="{:U('Order/index')}" method="get" name="frm" class="frm" enctype="multipart/form-data">
+                <span class="select_wrap ml30 mt15 dib">
         		<span>课程类型：</span>
-				<select class="ipt_default btn_large type" name="type">
+                <select class="ipt_default btn_large type" name="type">
 					<option value="0" <if condition="$type eq 0">selected</if>>全部</option>
 					<option value="1" <if condition="$type eq 1">selected</if>>线下课</option>
 					<option value="2" <if condition="$type eq 2">selected</if>>视频课</option>
 					<option value="3" <if condition="$type eq 3">selected</if>>音频课</option>
 				</select>
-				<i class="fa fa-caret-down"></i>
-				</span>
-			</form>
-		</div>
+                <i class="fa fa-caret-down"></i>
+                </span>
+            </form>
+        </div>
 
 
-		<!-- 表格主体 -->
-		<form action="{:U('Order/daochu2')}" method="post" name="frm" class="frm1" enctype="multipart/form-data">
-			<table class="table_default">
-				<tr>
-					<th width="10%">
-						<input type="checkbox" class="checkall">
-					</th>
-					<th width="25%">订单内容</th>
-					<th width="10%">课程类型</th>
-					<th width="12%">购买时间</th>
-					<th width="12%">购买人姓名</th>
-					<th width="12%">手机号码</th>
-					<th width="10%">金额</th>
-					<th width="11%">状态</th>
-				</tr>
-				<foreach name="ordera" item="v">
-					<tr>
-						<td>
-							<input type="checkbox" id="{$v.id}" value="{$v.id}" name ="id[]">
-						</td>
-						<td><img src="__UPFILE__/{$v.course_photo}" height="60px" class="mt8 mb8"><span class="in-span">{$v.course_num}</span></td>
-						<td>
-							<if condition="$v.type eq 1">下线课
-								<elseif condition="$v.type eq 2" />音频课
-								<elseif condition="$v.type eq 3" /> 视频课
-								<else />全部
-							</if>
-						</td>
-						<td>{$v.order_time}</td>
-						<td>{$v.ordera_name}</td>
-						<td>{$v.ordera_mobi}</td>
-						<td>{$v.current_price}</td>
-						<td>
-							<if condition="$v.status eq 0">未支付
-								<elseif condition="$v.status eq 1" />已支付
-								<elseif condition="$v.status eq 2" />已退款
-								<else />
-							</if>
-						</td>
-					</tr>
-				</foreach>
-			</table>
-<!--		</form>-->
-		<!-- 尾部 -->
-		<div class="table_footer mb30">
-			<div class="operate_btn_box">
-				<input type="button" class="button btn_middle btn_primary trans pointer delete" value="删除订单">
-				<input type="button" class="button btn_middle btn_primary trans pointer refund" value="退款">
-				<input type="button" class="button btn_middle btn_primary trans pointer output_xls" value="导出excel表格">
+        <!-- 表格主体 -->
+        <form action="{:U('Order/daochu2')}" method="post" name="frm" class="frm1" enctype="multipart/form-data">
+            <table class="table_default">
+                <tr>
+                    <th width="10%">
+                        <input type="checkbox" class="checkall">
+                    </th>
+                    <th width="25%">订单内容</th>
+                    <th width="10%">课程类型</th>
+                    <th width="12%">购买时间</th>
+                    <th width="12%">购买人姓名</th>
+                    <th width="12%">手机号码</th>
+                    <th width="10%">金额</th>
+                    <th width="11%">状态</th>
+                </tr>
+                <foreach name="ordera" item="v">
+                    <tr>
+                        <td>
+                            <input type="checkbox" id="{$v.id}" value="{$v.id}" name="id[]">
+                        </td>
+                        <td><img src="{$v.course_photo}" height="60px" class="mt8 mb8"><span class="in-span">{$v.course_num}</span></td>
+                        <td>
+                            <if condition="$v.type eq 1">下线课
+                                <elseif condition="$v.type eq 2" />音频课
+                                <elseif condition="$v.type eq 3" /> 视频课
+                                <else />全部
+                            </if>
+                        </td>
+                        <td>{$v.order_time}</td>
+                        <td>{$v.ordera_name}</td>
+                        <td>{$v.ordera_mobi}</td>
+                        <td>{$v.current_price}</td>
+                        <td>
+                            <if condition="$v.status eq 0">未支付
+                                <elseif condition="$v.status eq 1" />已支付
+                                <elseif condition="$v.status eq 2" />已退款
+                                <else />
+                            </if>
+                        </td>
+                    </tr>
+                </foreach>
+            </table>
+            <!--		</form>-->
+            <!-- 尾部 -->
+            <div class="table_footer mb30">
+                <div class="operate_btn_box">
+                    <input type="button" class="button btn_middle btn_primary trans pointer delete" value="删除订单">
+                    <input type="button" class="button btn_middle btn_primary trans pointer refund" value="退款">
+                    <input type="button" class="button btn_middle btn_primary trans pointer output_xls" value="导出excel表格">
 
-			</div>
-			<!-- 分页 -->
-			<div class="pagination mr30" name="page">
-				{$page}
-			</div>
-		</div>
-	</section>
+                </div>
+                <!-- 分页 -->
+                <div class="pagination mr30" name="page">
+                    {$page}
+                </div>
+            </div>
+    </section>
 
-	<div class="modal">
-		<div class="back"></div>
-		<div class="modal_main_edit">
-			<h2>编辑课节</h2>
+    <div class="modal">
+        <div class="back"></div>
+        <div class="modal_main_edit">
+            <h2>编辑课节</h2>
 
-			<div class="m_m_video">
-				<p><span></span>
-					<input type="text">
-				</p>
-				<p>
-					<span></span>
-					<input type="text" class="w80">
-					<span class=""></span>
-					<input type="text" class="w80">
-				</p>
-				<p><span></span><span></span><span class=""></span></p>
-			</div>
+            <div class="m_m_video">
+                <p><span></span>
+                    <input type="text">
+                </p>
+                <p>
+                    <span></span>
+                    <input type="text" class="w80">
+                    <span class=""></span>
+                    <input type="text" class="w80">
+                </p>
+                <p><span></span><span></span><span class=""></span></p>
+            </div>
 
-			<div class="m_m_offline">
-				<p><span></span>
-					<input type="text">
-				</p>
-				<p><span></span>
-					<input type="text" id="startTime" class="am-form-field w250" data-am-datepicker>
-				</p>
-			</div>
+            <div class="m_m_offline">
+                <p><span></span>
+                    <input type="text">
+                </p>
+                <p><span></span>
+                    <input type="text" id="startTime" class="am-form-field w250" data-am-datepicker>
+                </p>
+            </div>
 
-			<div class="m_m_audio">
-				<p><span></span>
-					<input type="text">
-				</p>
-				<p>
-					<span></span>
-					<input type="text" class="w80">
-					<span class=""></span>
-					<input type="text" class="w80">
-				</p>
-				<p><span></span><span></span><span class=""></span></p>
-				<p><span></span></p>
-			</div>
+            <div class="m_m_audio">
+                <p><span></span>
+                    <input type="text">
+                </p>
+                <p>
+                    <span></span>
+                    <input type="text" class="w80">
+                    <span class=""></span>
+                    <input type="text" class="w80">
+                </p>
+                <p><span></span><span></span><span class=""></span></p>
+                <p><span></span></p>
+            </div>
 
-			<span>保存</span><span>取消</span>
-		</div>
+            <span>保存</span><span>取消</span>
+        </div>
 
 
-		<!--        table底部三个按钮-->
-		<div class="modal_main_three">
-			<p></p>
-			<div>
-				<span class="cancel">取消</span>
-				<span class="confirm">确认</span>
-			</div>
-		</div>
+        <!--        table底部三个按钮-->
+        <div class="modal_main_three">
+            <p></p>
+            <div>
+                <span class="cancel">取消</span>
+                <span class="confirm">确认</span>
+            </div>
+        </div>
 
-		<div class="modal_add_course">
-			<div class="top">
-				<span>选择课程分类：</span>
-				<select name="" id="">
+        <div class="modal_add_course">
+            <div class="top">
+                <span>选择课程分类：</span>
+                <select name="" id="">
 					<option value="">1</option>
 					<option value="">2</option>
 					<option value="">3</option>
 				</select>
-			</div>
-			<div class="bottom">
-				<span class="cancel">取消</span>
-				<span class="confirm">确认</span>
-			</div>
-		</div>
-		<div class="modal_mian_add">
-			<h2></h2>
+            </div>
+            <div class="bottom">
+                <span class="cancel">取消</span>
+                <span class="confirm">确认</span>
+            </div>
+        </div>
+        <div class="modal_mian_add">
+            <h2></h2>
 
-			<div class="add_audio">
-				<p><span></span>
-					<input type="text">
-				</p>
-				<p>
-					<span></span>
-					<input type="text" class="w80">
-					<span class=""></span>
-					<input type="text" class="w80">
-				</p>
-				<p>
-					<span></span>
-					<input type="file" class="w80">
-				</p>
-				<p>
-					<span></span>
-					<input type="file" class="w80">
-				</p>
-			</div>
+            <div class="add_audio">
+                <p><span></span>
+                    <input type="text">
+                </p>
+                <p>
+                    <span></span>
+                    <input type="text" class="w80">
+                    <span class=""></span>
+                    <input type="text" class="w80">
+                </p>
+                <p>
+                    <span></span>
+                    <input type="file" class="w80">
+                </p>
+                <p>
+                    <span></span>
+                    <input type="file" class="w80">
+                </p>
+            </div>
 
-			<div class="add_video">
-				<p><span></span>
-					<input type="text">
-				</p>
-				<p>
-					<span></span>
-					<input type="text" class="w80">
-					<span class=""></span>
-					<input type="text" class="w80">
-				</p>
-				<p>
-					<span></span>
-					<input type="file" class="w80">
-				</p>
-			</div>
+            <div class="add_video">
+                <p><span></span>
+                    <input type="text">
+                </p>
+                <p>
+                    <span></span>
+                    <input type="text" class="w80">
+                    <span class=""></span>
+                    <input type="text" class="w80">
+                </p>
+                <p>
+                    <span></span>
+                    <input type="file" class="w80">
+                </p>
+            </div>
 
-			<div class="add_offline">
-				<p><span></span>
-					<input type="text">
-				</p>
-				<p><span></span>
-					<input type="text" id="startTime" class="am-form-field w250" data-am-datepicker>
-				</p>
-			</div>
+            <div class="add_offline">
+                <p><span></span>
+                    <input type="text">
+                </p>
+                <p><span></span>
+                    <input type="text" id="startTime" class="am-form-field w250" data-am-datepicker>
+                </p>
+            </div>
 
-			<div><span></span><span></span></div>
-		</div>
-	</div>
+            <div><span></span><span></span></div>
+        </div>
+    </div>
 
-	<div class="hint">
-		<!--        <div class="hintback"></div>-->
-		<div class="hintmain">
-			<p></p>
-		</div>
-	</div>
+    <div class="hint">
+        <!--        <div class="hintback"></div>-->
+        <div class="hintmain">
+            <p></p>
+        </div>
+    </div>
 
-	<script src="__AJS__/jquery.js"></script>
-	<script src="__AJS__/jquery.easing.js"></script>
-	<script src="__AJS__/deleconfirm.js"></script>
-	<script>
-		$(function () {
-			$('.checkall').click(function () {
-				this_ = $(this);
-				if (this_.prop('checked')) {
-					this_.parents('tr').siblings('tr').find('td:eq(0)>input[type="checkbox"]').prop("checked", true);
-				} else {
-					this_.parents('tr').siblings('tr').find('td:eq(0)>input[type="checkbox"]').prop("checked", false);
-				}
-			})
+    <script src="__AJS__/jquery.js"></script>
+    <script src="__AJS__/jquery.easing.js"></script>
+    <script src="__AJS__/deleconfirm.js"></script>
+    <script>
+        $(function() {
+            //移除分页a标签之间的4px间距
+            $('.pagination>div').contents().filter(function() {
+                return this.nodeType === 3;
+            }).remove();
 
-			$('.type').change(function () {
-				$('.frm').submit();
-			});
-			$('.output_xls').click(function () {
-				$('.frm1').submit();
-				// var id = [],
-				// 	tid = $('td>input[type="checkbox"]:checked');
-				// tid.each(function () {
-				// 	id.push(parseInt($(this).attr('id')));
-				// });
-				// console.log(id);
-				// $('.frm1').attr('action',"{:U("Order/daochu2",array('id'=>id))}");
-				// $('.frm1').submit();
-			});
-			//delete operation
-			$('.delete').click(function () {
-				'use strict';
+            $('.checkall').click(function() {
+                this_ = $(this);
+                if (this_.prop('checked')) {
+                    this_.parents('tr').siblings('tr').find('td:eq(0)>input[type="checkbox"]').prop("checked", true);
+                } else {
+                    this_.parents('tr').siblings('tr').find('td:eq(0)>input[type="checkbox"]').prop("checked", false);
+                }
+            })
 
-				var id = [],
-					tid = $('td>input[type="checkbox"]:checked');
-				tid.each(function () {
-					id.push(parseInt($(this).attr('id')));
-				});
-				$.post('{:U("Admin/Order/deleteOrder")}', {
-					id: id
-				}, function (data) {
-					if (data.status) {
-						$('.hint').show();
-						$('.hintmain').show();
-						$('.hintmain>p').text('操作成功!');
-						setTimeout(function () {
-							setTimeout(function () {
-								$('.hint').hide();
-							}, 1000);
-							window.location.reload();
-						}, 1000)
-					}
-				});
-			})
+            $('.type').change(function() {
+                $('.frm').submit();
+            });
+            $('.output_xls').click(function() {
+                $('.frm1').submit();
+                // var id = [],
+                // 	tid = $('td>input[type="checkbox"]:checked');
+                // tid.each(function () {
+                // 	id.push(parseInt($(this).attr('id')));
+                // });
+                // console.log(id);
+                // $('.frm1').attr('action',"{:U("Order/daochu2",array('id'=>id))}");
+                // $('.frm1').submit();
+            });
+            //delete operation
+            $('.delete').click(function() {
+                'use strict';
 
-			//refund operation
-			$('.refund').click(function () {
-				'use strict';
-				$('.hint').show();
-				$('.hintmain').show();
-				$('.hintmain>p').text('操作成功!');
-				setTimeout(function () {
-					$('.hint').hide();
-				}, 1000);
-				var id = [],
-					tid = $('td>input[type="checkbox"]:checked');
-				tid.each(function () {
-					id.push(parseInt($(this).attr('id')));
-				});
-				$.post('{:U("Admin/Order/rebate")}', {
-					id: id
-				}, function (data) {
-					if (data.status) {
-						setTimeout(function () {
-							$('.hint').hide();
-							window.location.reload();
-						}, 1000)
-					}
-				});
-			})
-		})
+                var id = [],
+                    tid = $('td>input[type="checkbox"]:checked');
+                tid.each(function() {
+                    id.push(parseInt($(this).attr('id')));
+                });
+                $.post('{:U("Admin/Order/deleteOrder")}', {
+                    id: id
+                }, function(data) {
+                    if (data.status) {
+                        $('.hint').show();
+                        $('.hintmain').show();
+                        $('.hintmain>p').text('操作成功!');
+                        setTimeout(function() {
+                            setTimeout(function() {
+                                $('.hint').hide();
+                            }, 1000);
+                            window.location.reload();
+                        }, 1000)
+                    }
+                });
+            })
 
-		var modal_main_three_cancel = document.querySelector('.modal_main_three').querySelector('div').querySelector('.cancel'),
-			modal_main_three_confirm = document.querySelector('.modal_main_three').querySelector('div').querySelector('.confirm');
+            //refund operation
+            $('.refund').click(function() {
+                'use strict';
+                $('.hint').show();
+                $('.hintmain').show();
+                $('.hintmain>p').text('操作成功!');
+                setTimeout(function() {
+                    $('.hint').hide();
+                }, 1000);
+                var id = [],
+                    tid = $('td>input[type="checkbox"]:checked');
+                tid.each(function() {
+                    id.push(parseInt($(this).attr('id')));
+                });
+                $.post('{:U("Admin/Order/rebate")}', {
+                    id: id
+                }, function(data) {
+                    if (data.status) {
+                        setTimeout(function() {
+                            $('.hint').hide();
+                            window.location.reload();
+                        }, 1000)
+                    }
+                });
+            })
+        })
 
-		modal_main_three_cancel.onclick = function () {
-			modal.style.display = 'none';
-			three_box.style.display = 'none';
-		}
-		modal_main_three_confirm.onclick = function () {
-			//to do
-		}
-	</script>
+        var modal_main_three_cancel = document.querySelector('.modal_main_three').querySelector('div').querySelector('.cancel'),
+            modal_main_three_confirm = document.querySelector('.modal_main_three').querySelector('div').querySelector('.confirm');
+
+        modal_main_three_cancel.onclick = function() {
+            modal.style.display = 'none';
+            three_box.style.display = 'none';
+        }
+        modal_main_three_confirm.onclick = function() {
+            //to do
+        }
+    </script>
 </body>
 
 </html>

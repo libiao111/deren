@@ -271,7 +271,7 @@ div.table_footer .pagination {
     height: 32px;
     float: right;
     margin-top: 14px;
-    border: 1px solid #e2e2e2;
+    border: 1px solid #4a89dc;
     font-size: 0;
     overflow: hidden;
 }
@@ -289,11 +289,14 @@ div.table_footer .pagination {
     height: 32px;
     line-height: 32px;
     text-align: center;
-    border-right: 1px solid #efefef;
+    border-right: 1px solid #4a89dc;
     cursor: pointer;
-    color: #999;
+    color: #4a89dc;
     margin: 0;
     padding: 0;
+}
+.pagination>div>.end-no{
+    border-right:none
 }
 
 .pagination>div>.prev-no,
