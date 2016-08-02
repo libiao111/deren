@@ -24,7 +24,7 @@
 
 
         <!-- 表格主体 -->
-        <form class= "frm" method="post" action="{:U('User/daochu')}"enctype="multipart/form-data">
+        <form class="frm" method="post" action="{:U('User/daochu')}" enctype="multipart/form-data">
             <table class="table_default">
                 <tr>
                     <th width="10%">
@@ -211,8 +211,13 @@
     <script src="__AJS__/jquery.easing.js"></script>
     <script src="__AJS__/deleconfirm.js"></script>
     <script>
-        $(function () {
-            $('.checkall').click(function () {
+        $(function() {
+            //移除分页a标签之间的4px间距
+            $('.pagination>div').contents().filter(function(){
+                return this.nodeType===3;
+            }).remove();
+
+            $('.checkall').click(function() {
                 this_ = $(this);
                 if (this_.prop('checked')) {
                     this_.parents('tr').siblings('tr').find('td:eq(0)>input[type="checkbox"]').prop("checked", true);
@@ -222,53 +227,53 @@
             })
 
             //enable operation
-            $('.enable').click(function () {
+            $('.enable').click(function() {
+                    'use strict';
+                    $('.hint').show();
+                    $('.hintmain').show();
+                    $('.hintmain>p').text('操作成功!');
+                    setTimeout(function() {
+                        $('.hint').hide();
+                    }, 1000);
+                    let id = [],
+                        tid = $('td>input[type="checkbox"]:checked');
+                    tid.each(function() {
+                        id.push(parseInt($(this).attr('id')));
+                    });
+                    $.post('{:U("Admin/User/statusUsing")}', {
+                        id: id
+                    }, function(data) {
+                        if (data.status) {
+                            setTimeout(function() {
+                                $('.hint').hide();
+                                window.location.reload();
+                            }, 1000)
+                        }
+                    });
+                })
+                //导出exl
+            $('.output_xls').click(function() {
+                    $('.frm').submit();
+                })
+                //disable operation
+            $('.disable').click(function() {
                 'use strict';
                 $('.hint').show();
                 $('.hintmain').show();
                 $('.hintmain>p').text('操作成功!');
-                setTimeout(function () {
+                setTimeout(function() {
                     $('.hint').hide();
                 }, 1000);
                 let id = [],
                     tid = $('td>input[type="checkbox"]:checked');
-                tid.each(function () {
-                    id.push(parseInt($(this).attr('id')));
-                });
-                $.post('{:U("Admin/User/statusUsing")}', {
-                    id: id
-                }, function (data) {
-                    if (data.status) {
-                        setTimeout(function () {
-                            $('.hint').hide();
-                            window.location.reload();
-                        }, 1000)
-                    }
-                });
-            })
-            //导出exl
-            $('.output_xls').click(function(){
-                $('.frm').submit();
-            })
-            //disable operation
-            $('.disable').click(function () {
-                'use strict';
-                $('.hint').show();
-                $('.hintmain').show();
-                $('.hintmain>p').text('操作成功!');
-                setTimeout(function () {
-                    $('.hint').hide();
-                }, 1000);
-                let id = [],
-                    tid = $('td>input[type="checkbox"]:checked');
-                tid.each(function () {
+                tid.each(function() {
                     id.push(parseInt($(this).attr('id')));
                 });
                 $.post('{:U("Admin/User/statusStop")}', {
                     id: id
-                }, function (data) {
+                }, function(data) {
                     if (data.status) {
-                        setTimeout(function () {
+                        setTimeout(function() {
                             $('.hint').hide();
                             window.location.reload();
                         }, 1000)
@@ -277,24 +282,24 @@
             })
 
             //delete operation
-            $('.delete').click(function () {
+            $('.delete').click(function() {
                 'use strict';
                 $('.hint').show();
                 $('.hintmain').show();
                 $('.hintmain>p').text('操作成功!');
-                setTimeout(function () {
+                setTimeout(function() {
                     $('.hint').hide();
                 }, 1000);
                 let id = [],
                     tid = $('td>input[type="checkbox"]:checked');
-                tid.each(function () {
+                tid.each(function() {
                     id.push(parseInt($(this).attr('id')));
                 });
                 $.post('{:U("Admin/User/deleteUser")}', {
                     id: id
-                }, function (data) {
+                }, function(data) {
                     if (data.status) {
-                        setTimeout(function () {
+                        setTimeout(function() {
                             $('.hint').hide();
                             window.location.reload();
                         }, 1000)
@@ -303,36 +308,35 @@
             })
 
             //reset_psd operation
-            $('.reset_psd').click(function () {
+            $('.reset_psd').click(function() {
                 'use strict';
                 //                $('.hint').show();
                 //                $('.hintmain').show();
                 //                $('.hintmain>p').text('操作成功!');
-                setTimeout(function () {
+                setTimeout(function() {
                     $('.hint').hide();
                 }, 1000);
                 let id = [],
                     tid = $('td>input[type="checkbox"]:checked');
-                tid.each(function () {
+                tid.each(function() {
                     id.push(parseInt($(this).attr('id')));
                 });
                 $.post('{:U("Admin/User/rpassword")}', {
                     id: id
-                }, function (data) {
+                }, function(data) {
                     if (data.status) {
                         $('.hint').show();
                         $('.hintmain').show();
                         $('.hintmain>p').text('操作成功!');
-                        setTimeout(function () {
+                        setTimeout(function() {
                             $('.hint').hide();
                             window.location.reload();
                         }, 1000)
-                    }
-                    else{
+                    } else {
                         $('.hint').show();
                         $('.hintmain').show();
                         $('.hintmain>p').text('操作失败!');
-                        setTimeout(function () {
+                        setTimeout(function() {
                             $('.hint').hide();
                             window.location.reload();
                         }, 1000)
@@ -346,11 +350,11 @@
         var modal_main_three_cancel = document.querySelector('.modal_main_three').querySelector('div').querySelector('.cancel'),
             modal_main_three_confirm = document.querySelector('.modal_main_three').querySelector('div').querySelector('.confirm');
 
-        modal_main_three_cancel.onclick = function () {
+        modal_main_three_cancel.onclick = function() {
             modal.style.display = 'none';
             three_box.style.display = 'none'
         }
-        modal_main_three_confirm.onclick = function () {
+        modal_main_three_confirm.onclick = function() {
             //to do
         }
     </script>
