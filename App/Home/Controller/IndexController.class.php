@@ -191,9 +191,6 @@ class IndexController extends Controller
         $users_id = session('user')['id'];
         /*获取课程id*/
         $id = I('id');
-        $arr = array(
-            
-        );
         $arr2 = array(
             'course_id' => $id,
             'users_id'=>$users_id
@@ -202,8 +199,6 @@ class IndexController extends Controller
         /*关联查询课程表*/
         $result = M("course")->where(array('id' => $id))->find();
         $result['class'] = D("class")->relation('img')->where(array('course_id' => $id))->select();
-        /*赋值*/
-        $result['bigpho']=$arr4;
         /*查询订单表*/
         $bills = M('bills')->where($arr2)->find();
         /*判断是否购买*/
@@ -215,9 +210,7 @@ class IndexController extends Controller
     public function order()
     {   
         $id = I('id');
-        $arr = array(
-            'id'=>$id
-        );
+        $arr = array('id'=>$id);
         $result = M('course')->where($arr)->find();
         $this->assign('course',$result);
         $this->display();

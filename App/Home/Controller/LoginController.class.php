@@ -96,7 +96,6 @@ class LoginController extends Controller
             $data = array('status'=>2);
             $this -> ajaxReturn($data,'json');
         }
-
         $password = I('password') ? I('password') : 123456;
         $arr = array(
             'password'      => md5($password),

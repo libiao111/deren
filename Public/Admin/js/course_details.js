@@ -78,6 +78,10 @@ $(function () {
                 return false;
             };
         };
+		if($('.dataup').val()==''){
+			$('.dataup').click();
+			return false;
+		}
         $('form.editor').submit();
     })
 
@@ -93,7 +97,13 @@ $(function () {
         var obj = $('.modal');
         var course_id = obj.find('input[name="course_id"]').val();
         if (course_id === '') {
-            alert('请先保存课程');
+			$('.hint').show();
+			$('.hintmain').show();
+			$('.hint p').text('请先保存课程');
+			setTimeout(function(){
+				$('.hint').hide()
+			},1000)
+//            alert('请先保存课程');
             return false;
         };
         obj.find('input[name="class_image[]"]').parent('div').attr('style','');

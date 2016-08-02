@@ -50,7 +50,7 @@ class UserController extends Controller
     public function statusStop()
     {
         $this->checkAjax();
-        $where = array('id'=>I('id'));
+        $where = array('id'=>array('in',I('id')));
         $arr = array('status'=>1);
         /*执行操作*/
         $result = M('users')->where($where)->save($arr);
