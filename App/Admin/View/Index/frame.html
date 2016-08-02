@@ -160,15 +160,15 @@
             <div class="m_m_video">
                 <p>
                     <span class="w120 inline-block f_s20 texy_a_r mr20">旧密码</span>
-                    <input type="text" class="w200">
+                    <input type="text" class="w200 oldpass">
                 </p>
                 <p>
                     <span class="w120 inline-block f_s20 texy_a_r mr20">新密码</span>
-                    <input type="text" class="w200">
+                    <input type="text" class="w200 pass">
                 </p>
                 <p>
                     <span class="w120 inline-block f_s20 texy_a_r mr20">确认新密码</span>
-                    <input type="text" class="w200">
+                    <input type="text" class="w200 repass">
                 </p>
             </div>
 
@@ -202,6 +202,18 @@
             modal.style.display = "none";
             //to do
         }
+        /*修改密码*/
+        $('.psdsave').click(function(){
+            var oldpass =  $('.oldpass').val();
+            var pass = $('.pass').val();
+            var repass = $('.repass').val();
+            if(pass == repass && !pass){
+                $.post('{:U('Index/index')}',{pass:pass},function(){
+                    
+                })
+            }
+        });
+        /*退出*/
         $(function () {
             $('.logout').click(function () {
                 $.post('{:U('index/tuichu')}',{},function () {
