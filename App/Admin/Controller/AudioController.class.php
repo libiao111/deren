@@ -115,6 +115,7 @@ class AudioController extends Controller
         if (!$aud['error']) {
             $load = loadAudioHandler($aud);
             if ($load['status']) {
+                /* 成功 */
                 $aud = $load['assets'];
                 $data['assets_url'] = $aud;
             } else {
@@ -127,17 +128,19 @@ class AudioController extends Controller
             }
         }
 
-        /* 重组信息 */
+        /* 重组(去除空的/不完整的文件) */
         $check = $_FILES['class_img'];
+        $loadNum = 0;
         $img = array();
         foreach ($check['error'] as $k => $va) {
-            $checkError += $va;
             if (!$va) {
                 $img['name'][] = $check['name'][$k];
                 $img['type'][] = $check['type'][$k];
                 $img['tmp_name'][] = $check['tmp_name'][$k];
                 $img['error'][] = $check['error'][$k];
                 $img['size'][] = $check['size'][$k];
+                /* 记录旧KEY和新KEY */
+                $upImgKey[$k] = $loadNum;
                 $loadNum ++;
             }
         }
@@ -146,15 +149,11 @@ class AudioController extends Controller
         if ($loadNum) {
             $load = loadImageHandler($img);
             if ($load['status']) {
-                $img = $load['assets'];
-                foreach ($img as $k => $va) {
-                    $item = array(
-                        'course_id' => $data['course_id'],
-                        'pho_url' => $va
-                    );
-                    $img[$k] = $item;
+                /* 成功 */
+                $newImg = $load['assets'];
+                foreach ($newImg as $key => $va) {
+                    image_cut($va, 320, 180);
                 }
-                $data['img'] = $img;
             } else {
                 /* 失败 */
                 $return = array(
@@ -165,11 +164,29 @@ class AudioController extends Controller
             }
         }
 
+        /* KEY组合重新排序 */
+        $img = I('class_image');
+        foreach ($upImgKey as $k => $v) {
+            $img[$k] = $newImg[$v];
+        }
+
+        /* 赋值数组 */
+        foreach ($img as $k => $va) {
+            if ($va) {
+                $item = array(
+                    'course_id' => $data['course_id'],
+                    'pho_url' => $va
+                );
+                $data['img'][] = $item;
+            }
+        }
+        
         /* 执行保存 */
         $id = I('open_id');
         if ($id !== '') {
             $data['id'] = $id;
             $data['udate'] = time();
+            M('class_img')->where(array('class_id' => $id))->delete();
             $result = D('class')->relation('img')->save($data);
         } else {
             $data['adate'] = time();
@@ -190,14 +207,15 @@ class AudioController extends Controller
     {
         $this->checkAjax();
         $id = I('id');
-        $result = M('class')->where(array('id' => $id))->find();
+        $result = D('class')->relation('img')->where(array('id' => $id))->find();
         if ($result) {
             $data = array(
                 'open_id'    => $result['id'],
                 'course_id'  => $result['course_id'],
                 'class_name' => $result['class_name'],
                 'class_hour' => $result['class_hour'],
-                'class_min'  => $result['class_min']
+                'class_min'  => $result['class_min'],
+                'image'      => $result['img']
             );
         }
         $return = array(

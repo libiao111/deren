@@ -34,7 +34,7 @@ class CourseController extends Controller
         $this->status = $status ? $condition['status'] = $status: '';
 
         /* 页码 */
-        $page = pageHandle('course',$condition, 5);
+        $page = pageHandle('course',$condition, 10);
         $limit = $page['limit'];
         
         /*查询记录*/

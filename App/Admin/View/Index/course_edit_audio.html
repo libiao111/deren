@@ -96,13 +96,13 @@
                 <th width="11%">操作</th>
             </tr>
             <foreach name='va.class' item='v'>
-                <tr class="h50 clone">
+                <tr class="h50 clone" data-row="{$v.id}">
                     <td>
                         {$v.class_name}
                     </td>
                     <td>{$v.class_hour}时{$v.class_min}分</td>
                     <td class="operation">
-                        <a href="" class="mr2 edit">
+                        <a href="javascript:;" class="mr2 edit" open_id="{$v.id}">
                             <i class="fa fa-edit vm"></i> 编辑
                         </a>
                         <span class="ccc">|</span>
@@ -164,31 +164,31 @@
                             <div class="dib bg duotu">
                                 <!-- 上传 -->
                                 <input type="file" name="class_img[]" accept="image/jpeg,image/png">
-                                <input type="hidden" name="class_img[]">
+                                <input type="hidden" name="class_image[]">
                                 <span class="editupload">+ 图片</span>
                             </div>
                             <div class="dib bg duotu">
                                 <!-- 上传 -->
                                 <input type="file" name="class_img[]" accept="image/jpeg,image/png">
-                                <input type="hidden" name="class_img[]">
+                                <input type="hidden" name="class_image[]">
                                 <span class="editupload">+ 图片</span>
                             </div>
                             <div class="dib bg duotu">
                                 <!-- 上传 -->
                                 <input type="file" name="class_img[]" accept="image/jpeg,image/png">
-                                <input type="hidden" name="class_img[]">
+                                <input type="hidden" name="class_image[]">
                                 <span class="editupload">+ 图片</span>
                             </div>
                             <div class="dib bg duotu">
                                 <!-- 上传 -->
                                 <input type="file" name="class_img[]" accept="image/jpeg,image/png">
-                                <input type="hidden" name="class_img[]">
+                                <input type="hidden" name="class_image[]">
                                 <span class="editupload">+ 图片</span>
                             </div>
                             <div class="dib bg duotu">
                                 <!-- 上传 -->
                                 <input type="file" name="class_img[]" accept="image/jpeg,image/png">
-                                <input type="hidden" name="class_img[]">
+                                <input type="hidden" name="class_image[]">
                                 <span class="editupload">+ 图片</span>
                             </div>
                         </div>
@@ -198,6 +198,13 @@
                 <span class="videocancel pointer">取消</span>
             </div>
         </form>
+    </div>
+
+    <!-- 成功提示 -->
+    <div class="hint">
+        <div class="hintmain">
+            <p></p>
+        </div>
     </div>
 
     <iframe name="post-handler" class="dn"></iframe>
@@ -212,6 +219,7 @@
         var ue = UE.getEditor('editor');
         var deleUrl = "{:U('deleDotList')}";
         var pullUrl = "{:U('pullAudioDot')}";
+        var imageUrl = "__UPFILE__/";
     </script>
 </body>
 

@@ -6,17 +6,38 @@ use Think\Controller;
 */
 class IndexController extends Controller
 {
+    // init check
+    public function _initialize()
+    {
+        /* 关注公众号 */
+        $openid = session('openid');
+        if (count($openid) == 0) {
+            $openid = getOpenID();
+            if ($openid['status'] == 0) {
+                $this->redirect('Open/index');
+            }
+        }
 
-    // public function _initialize() {
-    //     $user = session('openid');
-    //     if (count($user) == 0) {
-    //         if (getOpenID()['status'] == 0) {
-    //             $this->redirect('Open/index');
-    //         }
-    //     }
-    //     $this->login = session('user') ? 1: 0;
-    //     $this->user_content = session('user');
-    // }
+        /* 登录验证 */
+        $user = session('user');
+        if (isset($user['id']) && isset($user['user_mobi'])) {
+            $this->assign('login', 1);
+            $this->assign('user_content', $user);
+        } else {
+            $this->assign('login', 0);
+            $this->assign('user_content', array());
+        }
+    }
+
+    /* 登录页面 */
+    public function login()
+    {
+        $this->display();
+    }
+
+    /* ----------------------------------列表-------------------------------- */
+    /* ----------------------------------列表-------------------------------- */
+    /* ----------------------------------列表-------------------------------- */
 
     /*查询所有课程*/
     public function index()
@@ -108,6 +129,11 @@ class IndexController extends Controller
         $this->assign('course',$result);
         $this->display();
     }
+
+    /* ----------------------------------详情-------------------------------- */
+    /* ----------------------------------详情-------------------------------- */
+    /* ----------------------------------详情-------------------------------- */
+
     /*线下课详情*/
     public function offline()
     {
@@ -137,20 +163,19 @@ class IndexController extends Controller
         //获取用户id
         $users_id = session('user')['id'];
         $id = I('id');
-        $arr = array(
-            'id'=>$id
-        );
-        $arr1 = array(
-            'class'
-        );
-        $arr2 = array(
-            'course_id'=>$id,
-            'users_id'=>$users_id
-        );
+
         /*关联查询*/
-        $result = D("course")->relation($arr1)->where($arr)->find();
+        $field = 'id,course_photo,course_name,teach_name,current_price,course_price,picture';
+        $result = D("course")->relation('class')->where(array('id' => $id))->field($field)->find();
+
+        $arr2 = array(
+            'course_id' => $id,
+            'users_id' => $users_id
+        );
         $bills = M('bills')->where($arr2)->find();
+
         $result['status'] = $bills['status'] ? 1: 0;
+
         $this->assign('course',$result);
         $this->display();
     } 
@@ -160,25 +185,18 @@ class IndexController extends Controller
         //获取用户id
         $users_id = session('user')['id'];
         /*获取课程id*/
-        //$id = I('id');
-        $id= 3;
+        $id = I('id');
         $arr = array(
-            'id'=>$id
+            
         );
         $arr2 = array(
-            'course_id'=>$id,
+            'course_id' => $id,
             'users_id'=>$users_id
         );
-        /*以course_id查询课时id*/
-        $sql = M('class')->where(array('course_id'=>3))->order('paixu')->field('paixu','id')->find();
-        $arr3 = array(
-            'id'=>$sql['id']
-        );
-        //关联查询轮播图
-        $sql2 = D("class")->relation('bigpho')->where($arr3)->find();
-        $arr4 = $sql2['bigpho'];
+        
         /*关联查询课程表*/
-        $result = D("course")->relation('class')->where($arr)->find();
+        $result = M("course")->where(array('id' => $id))->find();
+        $result['class'] = D("class")->relation('img')->where(array('course_id' => $id))->select();
         /*赋值*/
         $result['bigpho']=$arr4;
         /*查询订单表*/
@@ -199,46 +217,49 @@ class IndexController extends Controller
         $this->assign('course',$result);
         $this->display();
     }
+
+    /* ----------------------------------订单-------------------------------- */
+    /* ----------------------------------订单-------------------------------- */
+    /* ----------------------------------订单-------------------------------- */
+
     /*订单表*/
     public function ordera()
     {   
-        /*获取数据*/
-        $users_id = session('user')['id'];
-        /*以id= course_id查询课程表*/
-        $sql = M('course')->where(array('id'=>2))->field('id','type','course_photo','course_name','current_price')->find();
+        $user_id = session('user')['id'];
+        $id = I('course_id');
+        
+        /* 课程信息 */
+        $filed = 'course_name,current_price';
+        $course = M('course')->where(array('id' => $id))->field($filed)->find();
+        
         /*生成订单号*/
-        $time = time();
-        $str = rand('1000','9999');
-        $ordera_num = 'DR'.$time.$str;
-        /*数组赋值订单表*/
+        $ordera_num = 'DRKC'.time().rand('1000','9999');
+        
+        /* 订单信息 */
         $arr = array(
-            'ordera_name' => I('ordera_name'),
-            'ordera_mobi' => I('order_mobi'),
-            'course_id' => I('course_id'),
-            'users_id' => $users_id,
-            'type'=>$sql['type'],
-            'course_photo'=>$sql['course_photo'],
-            'current_price'=>$sql['current_price'],
-            'course_name'=>$sql['course_name'],
-            'status' => 0,
-            'ordera_num' => $ordera_num,
-            'pay_type' => I('radio1')
+            'users_id'      => $user_id,
+            'course_id'     => I('course_id'),
+            'order_num'     => $ordera_num,
+            'user_name'     => I('user_name'),
+            'user_phone'    => I('user_phone'),
+            'course_price'  => $course['current_price'],
+            'pay_type'      => I('pay_type'),
+            'status'        => 0
         );
-        $result = M('ordera')->add($arr);
+        $result = M('bills')->add($arr);
+
         /*传递到支付数组*/
-        $arr1 = array(
-            'sign'      => '[德仁商学院]',
-            'title'     => $sql['course_name'],
-            'bills'     => $ordera_num,
-            'price'     => $sql['current_price'],
-            'realm'      => 'http://www.gkdao.com/temps/heroslider/deren',
-            'successurl' => U('gotocourse')
+        $data = array(
+            'sign'  => '[德仁商学院]',              // 签名
+            'bills' => $ordera_num,                 // 订单号
+            'title' => $course['course_name'],      // 商品名
+            'price' => $course['current_price'],    // 支付价格
+            'realm'      => 'http://www.gkdao.com/temps/heroslider/deren', // 支付回调域名URL
+            'successurl' => U('gotocourse') // 成功跳转URL
         );
-        session('arr',$arr1);
-        $this->redirect(U("Pay/Index/index"));
+        session('arr',$data);
+        $this->redirect("Pay/Index/index");
     }
-
-
 
 
 }

@@ -84,9 +84,10 @@ class VideoController extends Controller
         $id = I('id');
         if ($id !== '') {
             $data['id'] = $id;
+            $data['udate'] = time();
             $result = M('course')->save($data);
         } else {
-            $data['addtime'] = date('Y-m-d H:i:s');
+            $data['adate'] = time();
             $result = M('course')->add($data);
         }
 

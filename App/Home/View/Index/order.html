@@ -21,7 +21,7 @@
 				</label>
 			</div>
 			<div class="weui_cell_bd weui_cell_primary">
-				<input class="weui_input" type="text" name="ordera_name" value="{$user_content.username}" placeholder="请输入姓名" id="name">
+				<input class="weui_input" type="text" name="user_name" value="{$user_content.username}" placeholder="请输入姓名" id="name">
 			</div>
 			<div class="weui_cell_ft">
 				<i class="weui_icon_warn" value="{$user_content.user_mobi}" id="nameRequired"></i>
@@ -34,7 +34,7 @@
 				</label>
 			</div>
 			<div class="weui_cell_bd weui_cell_primary">
-				<input class="weui_input" name="order_mobi" type="number" pattern="[0-9]*" value="{$user_content.user_mobi}" id="phone">
+				<input class="weui_input" name="user_phone" type="number" pattern="[0-9]*" value="{$user_content.user_mobi}" id="phone">
 			</div>
 			<div class="weui_cell_ft">
 				<i class="weui_icon_warn" id="phoneIsWrong"></i>
@@ -83,7 +83,7 @@
 	                <p>微信支付</p>
 	            </div>
 	            <div class="weui_cell_ft">
-	                <input type="radio" class="weui_check" name="radio1" id="x11" checked="checked" value="微信支付">
+	                <input type="radio" class="weui_check" name="pay_type" id="x11" checked="checked" value="微信支付">
 	                <span class="weui_icon_checked"></span>
 	            </div>
 	        </label>
@@ -92,7 +92,7 @@
 	                <p>支付宝支付</p>
 	            </div>
 	            <div class="weui_cell_ft">
-	                <input type="radio" name="radio1" class="weui_check" id="x12" value="支付宝">
+	                <input type="radio" name="pay_type" class="weui_check" id="x12" value="支付宝">
 	                <span class="weui_icon_checked"></span>
 	            </div>
 	        </label>

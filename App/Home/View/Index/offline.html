@@ -12,7 +12,7 @@
 
 	<!-- 课程内容 -->
 	<div class="content_wrap">
-		<div class="ppt bg" style="background-image:url(__UPFILE__/{$course.offline_url})"></div>
+		<div class="ppt bg" style="background-image:url(__UPFILE__/{$course.course_photo})"></div>
 		<div class="mt8 mb8 pl10 pr10">
 			<span class="f18">{$course.course_name}</span>
 			<strong class="red f18 dib r">￥{$course.current_price}</strong>
@@ -36,37 +36,21 @@
 		<div class="tab_container">
 			<!-- 简介 -->
 			<div class="tab_content pb80" role="1">
-				<p>此处信息由后台编辑上传</p>
+				{$course.picture}
 			</div>
 			<!-- 课表 -->
 			<div class="tab_content pb80" role="2">
-				<div class="timetable">
-					<div class="left">
-						<div class="xuhao">1</div>
+				<foreach name="course.class" item="k">
+					<div class="timetable">
+						<div class="left">
+							<div class="xuhao">{$key+1}</div>
+						</div>
+						<div class="right">
+							<p>{$k.class_name}</p>
+							<p>上课时间：{$k.class_day} &nbsp; {$k.class_hour}:{$k.class_min}</p>
+						</div>
 					</div>
-					<div class="right">
-						<p>您把防溺水你的份上v的快女</p>
-						<p>上课时间：2016-6-8 4:00</p>
-					</div>
-				</div>
-				<div class="timetable">
-					<div class="left">
-						<div class="xuhao">2</div>
-					</div>
-					<div class="right">
-						<p>您把防溺水你的份上v的快女</p>
-						<p>上课时间：2016-6-8 4:00</p>
-					</div>
-				</div>
-				<div class="timetable">
-					<div class="left">
-						<div class="xuhao">3</div>
-					</div>
-					<div class="right">
-						<p>您把防溺水你的份上v的快女</p>
-						<p>上课时间：2016-6-8 4:00</p>
-					</div>
-				</div>
+				</foreach>
 			</div>
 		</div>
 	</div>

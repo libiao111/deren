@@ -19,7 +19,7 @@ class UserController extends Controller
         $result = M('users')->limit($data['limit'])->select();
         $this->assign('page',$data['pages']['pages']);
         $this->assign('users',$result);
-        $this->display('index/member_man_reg');
+        $this->display('Index/member_man_reg');
     }
     /*用户删除*/
     public function deleteUser()
