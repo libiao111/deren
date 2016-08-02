@@ -56,11 +56,7 @@
                         </td>
                         <td>{$v.user_mobi}</td>
                         <td>{$v.logintime}</td>
-                        <td>
-                            <if condition="$v.status eq 0">启用
-                                <else />停用
-                            </if>
-                        </td>
+                        <td class="status"><if condition="$v.status eq 0">启用<else />停用</if></td>
                         <td class="operation">
 							<span class="pointer ml2 remove">
                             <i class="fa fa-trash vm"></i> 删除
@@ -247,6 +243,7 @@
                     $('.hintmain').show();
                     $('.hintmain>p').text('操作成功!');
                     setTimeout(function() {
+						$('input[name="id"]:checked').parents('tr').find('.status').text('启用');
                         $('.hint').hide();
                     }, 1000);
                     let id = [],
@@ -259,8 +256,9 @@
                     }, function(data) {
                         if (data.status) {
                             setTimeout(function() {
+								$('input:checked').parents('tr').find('.status').text('启用');
+								$('input:checked').prop('checked',false);
                                 $('.hint').hide();
-                                window.location.reload();
                             }, 1000)
                         }
                     });
@@ -276,6 +274,7 @@
                 $('.hintmain').show();
                 $('.hintmain>p').text('操作成功!');
                 setTimeout(function() {
+//					$('input[name="id"]:checked').parents('tr').find('.status').text('停用');
                     $('.hint').hide();
                 }, 1000);
                 let id = [],
@@ -288,8 +287,11 @@
                 }, function(data) {
                     if (data.status) {
                         setTimeout(function() {
+							$('input:checked').parents('tr').find('.status').text('停用');
+							$('input:checked').prop('checked',false);
                             $('.hint').hide();
-                            window.location.reload();
+//                            window.location.reload();
+//							$('input[name="id"]:checked').parent('td').siblings('.status').text('');
                         }, 1000)
                     }
                 });
@@ -345,7 +347,6 @@
                         $('.hintmain>p').text('操作成功!');
                         setTimeout(function() {
                             $('.hint').hide();
-                            window.location.reload();
                         }, 1000)
                     } else {
                         $('.hint').show();
@@ -353,7 +354,6 @@
                         $('.hintmain>p').text('操作失败!');
                         setTimeout(function() {
                             $('.hint').hide();
-                            window.location.reload();
                         }, 1000)
                     }
                 });
