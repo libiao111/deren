@@ -36,34 +36,35 @@
             <div class="f_l w500">
                 <div class="mb15">
                     <span class="i_block w100 texy_a_r ">课程名称:</span>
-                    <input type="text" class="w250 courses_name" name='course_name' value="{$va.course_name}">
+                    <input type="text" class="w250 courses_name datas" name='course_name' value="{$va.course_name}" placeholder="不能超过12个字">
                 </div>
                 <div class="mb15">
                     <span class="i_block w100 texy_a_r ">讲师姓名:</span>
-                    <input type="text" class="w250 teacher_name" name="teach_name" value="{$va.teach_name}">
+                    <input type="text" class="w250 teacher_name datas" name="teach_name" value="{$va.teach_name}" placeholder="不能超过3个字">
                 </div>
                 <div>
                     <span class="i_block w100 texy_a_r">现价:</span>
-                    <input type="number" class="w80 current_price" name="current_price" value="{$va.current_price}">
+                    <input type="number" class="w80 current_price datas" name="current_price" value="{$va.current_price}">
                     <span class="ml50">原价:</span>
-                    <input type="number" class="w80 course_price" name="course_price" value="{$va.course_price}">
+                    <input type="number" class="w80 course_price datas" name="course_price" value="{$va.course_price}">
                 </div>
             </div>
 
             <div class="f_l w500">
                 <div class="mb15">
                     <span class="i_block w100 texy_a_r">课程总时长:</span>
-                    <input type="text" id="startTime" class="am-form-field w250" name="class_time" value="{$va.class_time}" placeholder="00时00分">
+                    <input type="text" class="am-form-field w250 datas" name="class_time" value="{$va.class_time}" placeholder="00时00分">
                 </div>
                 <div class="mb15">
-                    <span class="i_block w100 texy_a_r ">课节数量:</span>
-                    <input type="number" class="w250 courses_num" maxlength="5" name="class_num" value="{$va.class_num}">
+                    <span class="i_block w100 texy_a_r">课节数量:</span>
+                    <input type="number" class="w250 courses_num datas" maxlength="5" name="class_num" value="{$va.class_num}">
                 </div>
                 <div class="mb15 relative ">
-                    <span class="i_block w100 texy_a_r ">上传封面:</span>
+                    <span class="i_block w100 texy_a_r">上传封面:</span>
                     <div class="dib bg" style="background-image: url(__UPFILE__/{$va.course_photo})">
+                        <!-- 上传 -->
                         <input type="file" name="course_photo">
-                        <span class="upload">+ 图片</span>
+                        <span class="upload">上传</span>
                     </div>
                 </div>
             </div>

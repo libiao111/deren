@@ -198,6 +198,7 @@
                         succeeAlt('启用成功');
                         setTimeout(function () {
                             $('input[name="id"]:checked').parents('tr').find('.status').text('启用');
+							$('input:checked').prop('checked',false);
                         }, 1000)
                     }
                 });
@@ -215,6 +216,7 @@
                         succeeAlt('停用成功');
                         setTimeout(function () {
                             $('input[name="id"]:checked').parents('tr').find('.status').text('停用');
+							$('input:checked').prop('checked',false);
                         }, 1000)
                     }
                 });

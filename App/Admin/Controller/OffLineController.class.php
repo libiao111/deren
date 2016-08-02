@@ -52,7 +52,7 @@ class OffLineController extends Controller
         /* 数组赋值 */
         $data =array(
             'type'          => 1,
-            'status'        => 1,
+            'status'        => 2,
             'course_name'   => I('course_name'),
             'current_price' => I('current_price'),
             'course_price'  => I('course_price'),

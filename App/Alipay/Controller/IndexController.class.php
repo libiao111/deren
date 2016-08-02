@@ -21,7 +21,7 @@ class IndexController extends Controller
         //付款金额，必填
         // $total_fee = $data['price'];
         $total_fee = 0.01;
-        $area = "http://www.gkdao.com/temps/heroslider";
+
         //收银台页面上，商品展示的超链接，必填
         switch ($data['type']) {
             case '1':
@@ -38,8 +38,10 @@ class IndexController extends Controller
                 break;
         }
         $id = $data['id'];
+        $area = "http://www.gkdao.com/temps/heroslider";
         $show_url = "$area/home/index/$pagename/id/$id";
         session('showurl',$showurl);
+
         //商品描述，可空
         switch ($data['type']) {
             case 1:
@@ -115,7 +117,6 @@ class IndexController extends Controller
             $result = M('bills')->save($arr);
             $this->showurl=$showurl;
             $this->display('Index/gotocourse');
-
         }
         else {
             echo "验证失败";
@@ -140,8 +141,6 @@ class IndexController extends Controller
             //交易状态
             //$trade_status = $_POST['trade_status'];
             $showurl = session('showurl');
-            //交易状态
-            //$trade_status = $_GET['trade_status'];
             $where = array('ordera_num'=>$out_trade_no);
             $sql = M('bills')->where($where)->select();
             $arr = array(
@@ -149,12 +148,10 @@ class IndexController extends Controller
                 'trade' => $trade_no
             );
             $result = M('bills')->save($arr);
-            $this->showurl=$showurl;
+            $this->showurl = $showurl;
             $this->display('Index/gotocourse');
         } else {
-            
             echo "fail";
-
         }
     }
 

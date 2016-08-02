@@ -290,8 +290,8 @@
 						setTimeout(function () {
 							setTimeout(function () {
 								$('.hint').hide();
+								$('input:checked').prop('checked',false);
 							}, 1000);
-							window.location.reload();
 						}, 1000)
 					}
 				});
@@ -317,7 +317,8 @@
 					if (data.status) {
 						setTimeout(function () {
 							$('.hint').hide();
-							window.location.reload();
+
+							$('input:checked').prop('checked',false);
 						}, 1000)
 					}
 				});

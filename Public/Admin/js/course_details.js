@@ -71,6 +71,13 @@ $(function () {
 
     /* 提交保存课程 */
     $('.saveall').click(function (e) {
+		var vals = $('.datas');
+        for (var i = 0; i < vals.length; i++) {
+            if (vals.eq(i).val() === '') {
+                vals.eq(i).focus();
+                return false;
+            };
+        };
         $('form.editor').submit();
     })
 
