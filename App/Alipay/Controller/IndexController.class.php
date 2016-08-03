@@ -26,7 +26,7 @@ class IndexController extends Controller
         $show_url = $data['course_url'];
 
         //商品描述，可空
-        $body = $data['type']
+        $body = $data['type'];
 
         /************************************************************/
 
@@ -44,14 +44,15 @@ class IndexController extends Controller
             "subject"       => $subject,
             "total_fee"     => $total_fee,
             "show_url"      => $show_url,
-            "body"          => $body,
+            "body"          => $body
         );
 
         //建立请求
         header('Content-Type:text/html; charset=utf-8');
         $alipaySubmit = new \Alipay\Event\AlipaySubmitEvent($alipay_config);
         $html_text = $alipaySubmit->buildRequestForm($parameter,"get", "确认");
-        echo $html_text;
+        $this->assign('href', $html_text);
+        $this->display();
     }
 
 

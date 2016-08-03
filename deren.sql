@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2016-08-02 11:18:46
+Date: 2016-08-03 10:30:42
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -40,39 +40,19 @@ CREATE TABLE `dr_bills` (
   `users_id` int(11) NOT NULL COMMENT '用户id',
   `course_id` int(11) NOT NULL COMMENT '课程id',
   `order_num` char(32) DEFAULT NULL COMMENT '订单号',
+  `trade` char(64) DEFAULT NULL COMMENT '交易号',
   `user_name` varchar(20) DEFAULT NULL COMMENT '购买人',
   `user_phone` varchar(11) DEFAULT NULL COMMENT '购买人手机',
   `course_price` int(8) DEFAULT NULL COMMENT '付款金额',
   `pay_type` char(3) DEFAULT NULL COMMENT '支付类型',
   `status` int(1) DEFAULT NULL COMMENT '订单状态（支付状态）',
-  `order_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '购买时间',
+  `order_time` datetime DEFAULT NULL COMMENT '购买时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=64 DEFAULT CHARSET=utf8 COMMENT='订单表';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='订单表';
 
 -- ----------------------------
 -- Records of dr_bills
 -- ----------------------------
-INSERT INTO `dr_bills` VALUES ('2', '1', '2', 'DRKC14683857772318', 'ert', '18735071432', null, null, '1', '2016-08-01 22:26:45');
-INSERT INTO `dr_bills` VALUES ('3', '1', '3', 'DRKC14683857772318', 'ret', '11111111111', null, '', '1', '2016-08-01 22:26:46');
-INSERT INTO `dr_bills` VALUES ('4', '2', '4', 'DRKC14683859463426', 'sdf', '18734832258', null, '', '1', '2016-08-01 22:26:48');
-INSERT INTO `dr_bills` VALUES ('46', '1', '27', 'DRKC14700619591480', '', '', '100', '微信支', '0', '2016-08-01 22:32:39');
-INSERT INTO `dr_bills` VALUES ('47', '1', '27', 'DRKC14700619634409', '', '', '100', '微信支', '0', '2016-08-01 22:32:43');
-INSERT INTO `dr_bills` VALUES ('48', '1', '27', 'DRKC14700619901446', '李飞a', '18301165215', '100', '微信支', '0', '2016-08-01 22:33:10');
-INSERT INTO `dr_bills` VALUES ('49', '1', '27', 'DRKC14700620419016', '李飞a', '18301165215', '100', '微信支', '0', '2016-08-01 22:34:01');
-INSERT INTO `dr_bills` VALUES ('50', '1', '27', 'DRKC14700620509419', '李飞a', '18301165215', '100', '微信支', '0', '2016-08-01 22:34:10');
-INSERT INTO `dr_bills` VALUES ('51', '1', '27', 'DRKC14700620724162', '李飞a', '18301165215', '100', '微信支', '0', '2016-08-01 22:34:32');
-INSERT INTO `dr_bills` VALUES ('52', '1', '27', 'DRKC14700620883177', '李飞a', '18301165215', '100', '微信支', '0', '2016-08-01 22:34:48');
-INSERT INTO `dr_bills` VALUES ('53', '1', '1', 'DRKC14700621457122', '李飞a', '18301165215', '122', '微信支', '0', '2016-08-01 22:35:45');
-INSERT INTO `dr_bills` VALUES ('54', '1', '1', 'DRKC14700621628862', '李飞a', '18301165215', '122', '微信支', '0', '2016-08-01 22:36:02');
-INSERT INTO `dr_bills` VALUES ('55', '1', '1', 'DRKC14700622198554', '李飞a', '18301165215', '122', '', '0', '2016-08-01 22:36:59');
-INSERT INTO `dr_bills` VALUES ('56', '1', '1', 'DRKC14700622481936', '李飞a', '18301165215', '122', '', '0', '2016-08-01 22:37:28');
-INSERT INTO `dr_bills` VALUES ('57', '1', '1', 'DRKC14700623044076', '李飞a', '18301165215', '122', '', '0', '2016-08-01 22:38:24');
-INSERT INTO `dr_bills` VALUES ('58', '1', '1', 'DRKC14700623649592', '李飞a', '18301165215', '122', '', '0', '2016-08-01 22:39:24');
-INSERT INTO `dr_bills` VALUES ('59', '1', '1', 'DRKC14700623684179', '李飞a', '18301165215', '122', '', '0', '2016-08-01 22:39:28');
-INSERT INTO `dr_bills` VALUES ('60', '1', '1', 'DRKC14700624054560', '李飞a', '18301165215', '122', '', '0', '2016-08-01 22:40:05');
-INSERT INTO `dr_bills` VALUES ('61', '1', '1', 'DRKC14700624154941', '李飞a', '18301165215', '122', '', '0', '2016-08-01 22:40:15');
-INSERT INTO `dr_bills` VALUES ('62', '1', '1', 'DRKC14700624204673', '李飞a', '18301165215', '122', '', '0', '2016-08-01 22:40:20');
-INSERT INTO `dr_bills` VALUES ('63', '1', '1', 'DRKC14700624591264', '李飞a', '18301165215', '122', '', '0', '2016-08-01 22:40:59');
 
 -- ----------------------------
 -- Table structure for dr_class
@@ -188,7 +168,7 @@ CREATE TABLE `dr_users` (
 -- ----------------------------
 -- Records of dr_users
 -- ----------------------------
-INSERT INTO `dr_users` VALUES ('1', '18301165215', 'e10adc3949ba59abbe56e057f20f883e', 'http://www.gkdao.cn/resource/2016-07-05/20160705183330-9879.png', '李飞a', '1', '0', '2016-07-31 12:14:25');
-INSERT INTO `dr_users` VALUES ('2', '18734832258', 'e10adc3949ba59abbe56e057f20f883e', 'http://www.gkdao.cn/resource/2016-07-05/20160705183330-9879.png', '李四', '0', '0', '2016-07-31 12:14:24');
-INSERT INTO `dr_users` VALUES ('4', '13693251041', 'e10adc3949ba59abbe56e057f20f883e', 'http://www.gkdao.cn/resource/2016-07-05/20160705183330-9879.png', '李飞飞', '0', '0', '2016-07-20 16:48:32');
-INSERT INTO `dr_users` VALUES ('5', '13716779617', 'e10adc3949ba59abbe56e057f20f883e', 'http://www.gkdao.cn/resource/2016-07-05/20160705183330-9879.png', '李飞b', '1', '0', '2016-07-31 12:14:26');
+INSERT INTO `dr_users` VALUES ('1', '18383291536', 'e10adc3949ba59abbe56e057f20f883e', 'http://www.gkdao.cn/resource/2016-07-05/20160705183330-9879.png', '李飞a', '1', '0', '2016-08-03 10:16:09');
+INSERT INTO `dr_users` VALUES ('2', '18734832258', 'e10adc3949ba59abbe56e057f20f883e', 'http://www.gkdao.cn/resource/2016-07-05/20160705183330-9879.png', '李四', '0', '0', '2016-08-02 22:11:41');
+INSERT INTO `dr_users` VALUES ('4', '13693251041', 'e10adc3949ba59abbe56e057f20f883e', 'http://www.gkdao.cn/resource/2016-07-05/20160705183330-9879.png', '李飞飞', '0', '0', '2016-08-02 22:11:41');
+INSERT INTO `dr_users` VALUES ('5', '13716779617', 'e10adc3949ba59abbe56e057f20f883e', 'http://www.gkdao.cn/resource/2016-07-05/20160705183330-9879.png', '李飞b', '1', '0', '2016-08-02 22:11:41');
