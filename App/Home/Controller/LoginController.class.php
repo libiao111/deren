@@ -13,16 +13,26 @@ class LoginController extends Controller
     {
         if(IS_AJAX){
             $user = I('user_mobi');
-            $pass = I('password');
+            $pass = md5(I('password'));
             $arr = array(
                 'user_mobi' =>$user,
-                'password'  =>md5($pass),
             );
-            $result = M('users')->where($arr)->field('password', true)->find();
-            if($result){
+            $result = M('users')->where($arr)->find();
+            /*密码是否正确*/
+            if ($pass != $result['password']) {
+                 $data = array('status'=>3);
+                 $this->ajaxReturn($data,'json');
+            }
+            /*用户是否被停用*/
+            if ($result['status'] != 1){
+                $data = array('status'=>2);
+                $this->ajaxReturn($data,'json');
+            }
+            /*反馈*/
+            if ($result) {
                 $data = array('status' =>1);
                 session('user',$result);
-            }else{
+            } else {
                 $data = array('status'=>0);
             }
             $this->ajaxReturn($data,'json');

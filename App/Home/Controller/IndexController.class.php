@@ -46,7 +46,7 @@ class IndexController extends Controller
         //获取用户id
         $users_id = session('user')['id'];
         // 查询课程表
-        $course = M("course")->where()->order('id')->select();
+        $course = M("course")->where(array('status'=>2))->order('id')->select();
         // 查询已支付订单
         $bills = M('bills')->where(array('users_id' => $users_id, 'status' => 1))->field('course_id')->select();
         foreach ($course as $k => $kc) {

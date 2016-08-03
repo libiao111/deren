@@ -51,7 +51,7 @@ class UserController extends Controller
     {
         $this->checkAjax();
         $where = array('id'=>array('in',I('id')));
-        $arr = array('status'=>1);
+        $arr = array('status'=>0);
         /*执行操作*/
         $result = M('users')->where($where)->save($arr);
         /*反馈*/
@@ -63,7 +63,7 @@ class UserController extends Controller
     {
         $this->checkAjax();
         $where = array('id'=>array('in',I('id')));
-        $arr = array('status'=>0);
+        $arr = array('status'=>1);
         /*执行操作*/
         $result = M('users')->where($where)->save($arr);
         /*反馈*/
