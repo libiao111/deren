@@ -225,9 +225,15 @@ class IndexController extends Controller
     /*订单表*/
     public function ordera()
     {   
+        /* check login */
         $user_id = session('user')['id'];
+        if (!$user_id) {
+            $this->login();
+            die;
+        }
+
         $id = I('course_id');
-        
+
         /* 课程信息 */
         $filed = 'course_name,current_price,type';
         $course = M('course')->where(array('id' => $id))->field($filed)->find();
@@ -283,10 +289,17 @@ class IndexController extends Controller
         session('showurl', $data['course_url']);
 
         // 支付信息
-        session('orderData',$data);
+        session('orderData', $data);
 
         /* 跳转支付 */
-        if(I('pay_type') == 1){
+        if (I('pay_type') == 1) {
+            $info = array(
+                'user_name' => $order['user_name'],
+                'user_phone' => $order['user_phone'],
+                'course_name' => $course['course_name'],
+                'course_price' => $course['current_price']
+            );
+            session('pay_info', $info);
             $this->redirect("Pay/Index/index");
         } else {
             $this->redirect("Alipay/Index/index");

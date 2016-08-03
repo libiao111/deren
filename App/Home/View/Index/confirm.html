@@ -15,28 +15,28 @@
 	<div class="weui_cells">
 		<div class="weui_cell">
 			<div class="weui_cell_bd weui_cell_primary">
-				<p>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</p>
+				<p>姓　　名：{$info.user_name}</p>
 			</div>
 		</div>
 		<div class="weui_cell">
 			<div class="weui_cell_bd weui_cell_primary">
-				<p>手机号码：</p>
+				<p>手机号码：{$info.user_phone}</p>
 			</div>
 		</div>
 		<div class="weui_cell">
 			<div class="weui_cell_bd weui_cell_primary">
-				<p>课程名称：</p>
+				<p>课程名称：{$info.course_name}</p>
 			</div>
 		</div>
 		<div class="weui_cell">
 			<div class="weui_cell_bd weui_cell_primary">
-				<p>支付价格：</p>
+				<p>支付价格：¥{$info.course_price}</p>
 			</div>
 		</div>
 	</div>
 
 	<div class="pl15 pr15 mt20">
-		<a class="weui_btn weui_btn_warn" style="background-color: #B7469D">
+		<a class="weui_btn weui_btn_warn" style="background-color: #B7469D" onclick="_submit()">
 			立即支付
 		</a>
 		<a class="weui_btn weui_btn_warn" style="background-color: #fff;color:#B7469D;border:1px solid #B7469D" onclick="goBack()">
@@ -47,6 +47,31 @@
 	function goBack(){
 		window.history.go(-1);
 	}
+	var successUrl =  "{$success_url}";
+    function jsApiCall() {
+        WeixinJSBridge.invoke(
+            'getBrandWCPayRequest',
+            {$jsApiParameters},
+            function(res){
+                if (res.err_msg == "get_brand_wcpay_request:ok") {
+                    /* 跳转成功提示页面 */
+                    window.location.href = successUrl;
+                }
+            }
+        );
+    }
+    function _submit() {
+        if (typeof WeixinJSBridge == "undefined"){
+            if( document.addEventListener ){
+                document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+            }else if (document.attachEvent){
+                document.attachEvent('WeixinJSBridgeReady', jsApiCall); 
+                document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+            }
+        }else{
+            jsApiCall();
+        }
+    }
 </script>
 </body>
 </html>

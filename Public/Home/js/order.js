@@ -1,12 +1,3 @@
-/* 切换跳转方式 */
-$('#x12').click(function () {
-	$('form').attr('target', 'post-handler');
-});
-$('#x11').click(function () {
-	$('form').removeAttr('target');
-});
-
-/* 提交订单 */
 function submitOrder(){
 
 	var nameIpt = document.getElementById('name'),
@@ -31,11 +22,6 @@ function submitOrder(){
         phoneIpt.addEventListener("blur",clear);
 	}else{
 		// 支付订单
-		var type = $('input[name="pay_type"]:checked').val()/1;
-		if (type === 2) {
-			$('form').css('overflow', 'hidden');
-			$('iframe').show().animate({'left':'0'});
-		};
 		form.submit();
 	}
 

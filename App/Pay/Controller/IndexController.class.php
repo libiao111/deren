@@ -22,10 +22,13 @@ class IndexController extends Controller
         $this->assign('jsApiParameters', $result);
 
         /* 支付成功跳转路径 */
-        $this->assign('successurl', $arr['course_url']);
+        $this->assign('success_url', $arr['course_url']);
+
+        /* 确认信息 */
+        $this->assign('info', session('pay_info'));
 
         /* 显示页面 */
-        $this->display();
+        $this->display('Home@Index/confirm');
     }
 
 
