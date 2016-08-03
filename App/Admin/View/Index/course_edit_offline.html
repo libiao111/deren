@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>编辑线下课</title>
-    <link rel="stylesheet" href="__ACSS__/main.css">
-    <link rel="stylesheet" href="__ACSS__/index.css">
-    <link rel="stylesheet" href="__ACSS__/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="__ADATEPICK__/js/datetimepicker/datepicker.min.css" type="text/css">
+	<meta charset="UTF-8">
+	<title>编辑线下课</title>
+	<link rel="stylesheet" href="__ACSS__/main.css">
+	<link rel="stylesheet" href="__ACSS__/index.css">
+	<link rel="stylesheet" href="__ACSS__/font-awesome.min.css" type="text/css">
+	<link rel="stylesheet" href="__ADATEPICK__/js/datetimepicker/datepicker.min.css" type="text/css">
 </head>
+
 <body class="bf2">
 
-    <!-- sub nav -->
-    <div class="sub_nav pl20 pt10">
-        <span class="router router1">
+	<!-- sub nav -->
+	<div class="sub_nav pl20 pt10">
+		<span class="router router1">
             业务管理/{$va['id'] ? '编辑':'添加'}
             <switch name="type = I('type')">
                 <case value="1">线下课</case>
@@ -20,179 +22,195 @@
                 <case value="3">音频课</case>
             </switch>
         </span>
-    </div>
+	</div>
 
-    <div class="sub_nav pl20 pt10 mt20">
-        <span class="route">
+	<div class="sub_nav pl20 pt10 mt20">
+		<span class="route">
         <span class="router router1">课程信息</span>
-        </span>
-    </div>
+		</span>
+	</div>
 
 
-    <form class="editor" action="{:U('newOfflineHandler')}" method="post" target="post-handler" enctype="multipart/form-data">
-        <input type="hidden" name="callback" value="returnHandler">
-        <input type="hidden" name="id" value="{$va.id}">
-        <section class="widget_wrp h170">
-            <div class="f_l w500">
-                <div class="mb15">
-                    <span class="i_block w100 texy_a_r ">课程名称:</span>
-                    <input type="text" class="w250 courses_name datas" name='course_name' value="{$va.course_name}" placeholder="不能超过12个字">
-                </div>
-                <div class="mb15">
-                    <span class="i_block w100 texy_a_r ">讲师姓名:</span>
-                    <input type="text" class="w250 teacher_name datas" name="teach_name" value="{$va.teach_name}" placeholder="不能超过3个字">
-                </div>
-                <div>
-                    <span class="i_block w100 texy_a_r">现价:</span>
-                    <input type="number" class="w80 current_price datas" name="current_price" value="{$va.current_price}">
-                    <span class="ml50">原价:</span>
-                    <input type="number" class="w80 course_price datas" name="course_price" value="{$va.course_price}">
-                </div>
-            </div>
+	<form class="editor" action="{:U('newOfflineHandler')}" method="post" target="post-handler" enctype="multipart/form-data">
+		<input type="hidden" name="callback" value="returnHandler">
+		<input type="hidden" name="id" value="{$va.id}">
+		<section class="widget_wrp h170">
+			<div class="f_l w500">
+				<div class="mb15">
+					<span class="i_block w100 texy_a_r ">课程名称:</span>
+					<input type="text" class="w250 courses_name datas" name='course_name' value="{$va.course_name}" placeholder="不能超过12个字" maxlength="12">
+				</div>
+				<div class="mb15">
+					<span class="i_block w100 texy_a_r ">讲师姓名:</span>
+					<input type="text" class="w250 teacher_name datas" name="teach_name" value="{$va.teach_name}" placeholder="不能超过3个字" maxlength="3">
+				</div>
+				<div>
+					<span class="i_block w100 texy_a_r">现价:</span>
+					<input type="number" class="w80 current_price datas" name="current_price" value="{$va.current_price}">
+					<span class="ml50">原价:</span>
+					<input type="number" class="w80 course_price datas" name="course_price" value="{$va.course_price}">
+				</div>
+			</div>
 
-            <div class="f_l w500">
-                <div class="mb15">
-                    <span class="i_block w100 texy_a_r">课程总时长:</span>
-                    <input type="text" class="am-form-field w250 datas" name="class_time" value="{$va.class_time}" placeholder="00时00分">
-                </div>
-                <div class="mb15">
-                    <span class="i_block w100 texy_a_r">课节数量:</span>
-                    <input type="number" class="w250 courses_num datas" maxlength="5" name="class_num" value="{$va.class_num}" placeholder="填写数字">
-                </div>
-                <div class="mb15 relative ">
-                    <span class="i_block w100 texy_a_r">上传封面:</span>
-                    <div class="dib bg" style="background-image: url(__UPFILE__/{$va.course_photo})">
-                        <!-- 上传 -->
-                        <input type="file" name="course_photo" class="dataup">
-                        <span class="upload">上传</span>
-                    </div>
-                </div>
-            </div>
-        </section>
+			<div class="f_l w500">
+				<div class="mb15">
+					<span class="i_block w100 texy_a_r">课程总时长:</span>
+					<input type="text" class="am-form-field w250 datas" name="class_time" value="{$va.class_time}" placeholder="00时00分">
+				</div>
+				<div class="mb15">
+					<span class="i_block w100 texy_a_r">课节数量:</span>
+					<input type="number" class="w250 courses_num datas" maxlength="5" name="class_num" value="{$va.class_num}" placeholder="填写数字">
+				</div>
+				<div class="mb15 relative ">
+					<span class="i_block w100 texy_a_r">上传封面:</span>
+					<div class="dib bg" style="background-image: url(__UPFILE__/{$va.course_photo})">
+						<!-- 上传 -->
+						<input type="file" name="course_photo" class="dataup">
+						<span class="upload">上传</span>
+					</div>
+				</div>
+			</div>
+		</section>
 
-        <div class="sub_nav pl20 pt10">
-            <span class="route">
+		<div class="sub_nav pl20 pt10">
+			<span class="route">
             <span class="router router1">课程简介</span>
 
-            </span>
-        </div>
-        <section class="widget_wrp h460">
-            <textarea id="editor" name="picture" type="text/plain" style="width:800px; height:300px;">{$va.picture}</textarea>
-        </section>
-    </form>
+			</span>
+		</div>
+		<section class="widget_wrp h460">
+			<textarea id="editor" name="picture" type="text/plain" style="width:800px; height:300px;">{$va.picture}</textarea>
+		</section>
+	</form>
 
-    <div class="sub_nav pl20 pt10">
-        <span class="route">
+	<div class="sub_nav pl20 pt10">
+		<span class="route">
         <span class="router router1">课程表</span>
-        <span class="router router1 float_r mr20 red addvideo pointer">添加课节</span>
-        </span>
-    </div>
+		<span class="router router1 float_r mr20 red addvideo pointer">添加课节</span>
+		</span>
+	</div>
 
-    <section class="widget_wrp">
-        <!-- 表格主体 -->
-        <table class="table_default">
-            <tr>
-                <th width="12%">课程名称</th>
-                <th width="10%">上课时间</th>
-                <th width="11%">操作</th>
-            </tr>
-            <foreach name='va.class' item='v'>
-                <tr class="h50 clone" data-row="{$v.id}">
-                    <td>
-                        {$v.class_name}
-                    </td>
-                    <td>{$v.class_day} {$v.class_hour}:{$v.class_min}</td>
-                    <td class="operation">
-                        <a href="javascript:;" class="mr2 edit" open_id="{$v.id}">
-                            <i class="fa fa-edit vm bian"></i> 编辑
-                        </a>
-                        <span class="ccc">|</span>
-                        <span class="pointer ml2 remove">
+	<section class="widget_wrp">
+		<!-- 表格主体 -->
+		<table class="table_default">
+			<tr>
+				<th width="12%">课程名称</th>
+				<th width="10%">上课时间</th>
+				<th width="11%">操作</th>
+			</tr>
+			<foreach name='va.class' item='v'>
+				<tr class="h50 clone" data-row="{$v.id}">
+					<td>
+						{$v.class_name}
+					</td>
+					<td>{$v.class_day} {$v.class_hour}:{$v.class_min}</td>
+					<td class="operation">
+						<a href="javascript:;" class="mr2 edit" open_id="{$v.id}">
+							<i class="fa fa-edit vm bian"></i> 编辑
+						</a>
+						<span class="ccc">|</span>
+						<span class="pointer ml2 remove">
                             <i class="fa fa-trash vm"></i> 删除
                         </span>
-                        <!-- 删除提示 -->
-                        <div class="deleConfirm">
-                            <span class="mbutton trans confirm mt10">
+						<!-- 删除提示 -->
+						<div class="deleConfirm">
+							<span class="mbutton trans confirm mt10">
                             <input name="" class="zxc" type="hidden" value="{$v.id}"><i class="fa fa-check mr4"></i>确认
                             </span>
-                            <span class="mbutton trans cancel"><i class="fa fa-times mr4"></i>取消</span>
-                        </div>
-                    </td>
-                </tr>
-            </foreach>
-        </table>
+							<span class="mbutton trans cancel"><i class="fa fa-times mr4"></i>取消</span>
+						</div>
+					</td>
+				</tr>
+			</foreach>
+		</table>
 
-        <!-- 尾部 -->
-        <div class="table_footer mb30">
-            <div class="operate_btn_box f_r mr30">
-                <input type="button" class="button btn_middle btn_primary trans pointer saveall" value="保存">
-            </div>
-        </div>
-    </section>
+		<!-- 尾部 -->
+		<div class="table_footer mb30">
+			<div class="operate_btn_box f_r mr30">
+				<input type="button" class="button btn_middle btn_primary trans pointer saveall" value="保存">
+			</div>
+		</div>
+	</section>
 
-    <!-- 弹窗 -->
-    <div class="modal">
-        <form action="{:U('newOfflineDot')}" method="post" target="post-handler" accept-charset="utf-8">
-            <input type="hidden" name="callback" value="returnDotHandler">
-            <input type="hidden" name="course_id" value="{$va.id}">
-            <input type="hidden" name="open_id" value="">
-            <div class="back"></div>
-            <div class="video_modal_main_edit">
-                <h2>编辑课节</h2>
-                <div class="m_m_video">
-                    <p><span>课节名称：</span>
-                        <input type="text" name="class_name" class="w200 editdata" placeholder="不超过15个字">
-                    </p>
-                    <p>
-                        <span>上课时间：</span>
-                        <input type="text" name="class_day" id="startTime1" class="am-form-field w200 editdata">
-                    </p>
-                    <p>
-                        <span class="inline-block w70"></span>
-                        <input type="number" name="class_hour" class="w50 hour editdata">
-                        <span class="">小时</span>
-                        <input type="number" name="class_min" class="w50 minute editdata">
-                        <span class="">分</span>
-                    </p>
-                </div>
+	<!-- 弹窗 -->
+	<div class="modal">
+		<form action="{:U('newOfflineDot')}" method="post" target="post-handler" accept-charset="utf-8">
+			<input type="hidden" name="callback" value="returnDotHandler">
+			<input type="hidden" name="course_id" value="{$va.id}">
+			<input type="hidden" name="open_id" value="">
+			<div class="back"></div>
+			<div class="video_modal_main_edit">
+				<h2>编辑课节</h2>
+				<div class="m_m_video">
+					<p><span>课节名称：</span>
+						<input type="text" name="class_name" class="w200 editdata" placeholder="不超过15个字">
+					</p>
+					<p>
+						<span>上课时间：</span>
+						<input type="text" name="class_day" id="startTime1" class="am-form-field w200 editdata">
+					</p>
+					<p>
+						<span class="inline-block w70"></span>
+						<input type="number" name="class_hour" class="w50 hour editdata">
+						<span class="">小时</span>
+						<input type="number" name="class_min" class="w50 minute editdata">
+						<span class="">分</span>
+					</p>
+				</div>
 
-                <span class="videosave pointer">保存</span>
-                <span class="videocancel pointer">取消</span>
-            </div>
-        </form>
-    </div>
+				<span class="videosave pointer">保存</span>
+				<span class="videocancel pointer">取消</span>
+			</div>
+		</form>
+	</div>
 
-    <!-- 成功提示 -->
-    <div class="hint">
-        <div class="hintmain">
-            <p></p>
-        </div>
-    </div>
+	<!-- 成功提示 -->
+	<div class="hint">
+		<div class="hintmain">
+			<p></p>
+		</div>
+	</div>
 
-    <iframe name="post-handler" class="dn"></iframe>
-    <script type="text/javascript" src="__AJS__/jquery.js"></script>
-    <script type="text/javascript" src="__AJS__/jquery.easing.js"></script>
-    <script type="text/javascript" src="__AJS__/deleconfirm.js"></script>
-    <script type="text/javascript" src="__AJS__/course_details.js"></script>
-    <script type="text/javascript" src="__AEDITOR__/ueditor.config.js"></script>
-    <script type="text/javascript" src="__AEDITOR__/ueditor.all.min.js"></script>
-    <script type="text/javascript" src="__AEDITOR__/lang/zh-cn/zh-cn.js"></script>
-    <script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.min.js"></script>
-    <script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.zh-CN.js"></script>
-    <script type="text/javascript">
-        var ue = UE.getEditor('editor');
-        var deleUrl = "{:U('deleDotList')}";
-        var pullUrl = "{:U('pullOfflineDot')}";
+	<iframe name="post-handler" class="dn"></iframe>
+	<script type="text/javascript" src="__AJS__/jquery.js"></script>
+	<script type="text/javascript" src="__AJS__/jquery.easing.js"></script>
+	<script type="text/javascript" src="__AJS__/deleconfirm.js"></script>
+	<script type="text/javascript" src="__AJS__/course_details.js"></script>
+	<script type="text/javascript" src="__AEDITOR__/ueditor.config.js"></script>
+	<script type="text/javascript" src="__AEDITOR__/ueditor.all.min.js"></script>
+	<script type="text/javascript" src="__AEDITOR__/lang/zh-cn/zh-cn.js"></script>
+	<script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.min.js"></script>
+	<script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.zh-CN.js"></script>
+	<script type="text/javascript">
+		$('input[name="class_time"]').blur(function () {
+			var re = /^[0-9]{2}[时]{1}[0-9]{2}[分]{1}$/;
+			var reg = $(this).val();
 
-        /* 加载日期选择 */
-        var option = {
-            dateFormat: "yyyy-m-d",
-            autoClose: true,
-            weekStart: 7
-        };
-        $("#startTime").datepicker(option);
-        $("#startTime1").datepicker(option);
-    </script>
+			if (!re.test(reg)) {
+				$('.hint').show();
+				$('.hintmain').show();
+				$('.hintmain>p').text('格式不正确');
+				setTimeout(function () {
+					$('.hint').hide()
+				}, 1000);
+				$('input[name="class_time"]').focus();
+			}
+		});
+
+
+		var ue = UE.getEditor('editor');
+		var deleUrl = "{:U('deleDotList')}";
+		var pullUrl = "{:U('pullOfflineDot')}";
+
+		/* 加载日期选择 */
+		var option = {
+			dateFormat: "yyyy-m-d",
+			autoClose: true,
+			weekStart: 7
+		};
+		$("#startTime").datepicker(option);
+		$("#startTime1").datepicker(option);
+	</script>
 </body>
 
 </html>
