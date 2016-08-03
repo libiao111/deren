@@ -17,7 +17,6 @@ class IndexController extends Controller
         //         $this->redirect('Open/index');
         //     }
         // }
-        
 
         /* 登录验证 */
         $user = session('user');
@@ -46,7 +45,7 @@ class IndexController extends Controller
         //获取用户id
         $users_id = session('user')['id'];
         // 查询课程表
-        $course = M("course")->where(array('status'=>2))->order('id')->select();
+        $course = M("course")->where(array('status' => 1))->order('id')->select();
         // 查询已支付订单
         $bills = M('bills')->where(array('users_id' => $users_id, 'status' => 1))->field('course_id')->select();
         foreach ($course as $k => $kc) {
@@ -71,6 +70,7 @@ class IndexController extends Controller
         $users_id = session('user')['id'];
         /*查询所有线下课*/
         $where['type'] = 1;
+        $where['status'] = 1;
         $result = M("course")->where($where)->order('id desc')->select();
         //查询已支付订单
         $bills = M('bills')->where(array('users_id' => $users_id, 'status' => 1))->field('course_id')->select();
@@ -96,6 +96,7 @@ class IndexController extends Controller
         $users_id = session('user')['id'];
         /*查询所有线下课*/
         $where['type'] = 2;
+        $where['status'] = 1;
         $result = M("course")->where($where)->order('id desc')->select();
         //查询已支付订单
         $bills = M('bills')->where(array('users_id' => $users_id, 'status' => 1))->field('course_id')->select();
@@ -119,6 +120,7 @@ class IndexController extends Controller
         $users_id = session('user')['id'];
         /*查询所有线下课*/
         $where['type'] = 3;
+        $where['status'] = 1;
         $result = M("course")->where($where)->order('id desc')->select();
         //查询已支付订单
         $bills = M('bills')->where(array('users_id' => $users_id, 'status' => 1))->field('course_id')->select();
@@ -223,9 +225,15 @@ class IndexController extends Controller
     /*订单表*/
     public function ordera()
     {   
+        /* check login */
         $user_id = session('user')['id'];
+        if (!$user_id) {
+            $this->login();
+            die;
+        }
+
         $id = I('course_id');
-        
+
         /* 课程信息 */
         $filed = 'course_name,current_price,type';
         $course = M('course')->where(array('id' => $id))->field($filed)->find();
@@ -281,10 +289,17 @@ class IndexController extends Controller
         session('showurl', $data['course_url']);
 
         // 支付信息
-        session('orderData',$data);
+        session('orderData', $data);
 
         /* 跳转支付 */
-        if(I('pay_type') == 1){
+        if (I('pay_type') == 1) {
+            $info = array(
+                'user_name' => $order['user_name'],
+                'user_phone' => $order['user_phone'],
+                'course_name' => $course['course_name'],
+                'course_price' => $course['current_price']
+            );
+            session('pay_info', $info);
             $this->redirect("Pay/Index/index");
         } else {
             $this->redirect("Alipay/Index/index");

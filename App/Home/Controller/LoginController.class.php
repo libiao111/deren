@@ -11,31 +11,31 @@ class LoginController extends Controller
     */
     public function loginhandle()
     {
-        if(IS_AJAX){
+        if (IS_AJAX) {
+            /* 获取信息 */
             $user = I('user_mobi');
             $pass = md5(I('password'));
-            $arr = array(
-                'user_mobi' =>$user,
-            );
+            $arr = array( 'user_mobi' => $user);
+
+            /* 查询账户 */
             $result = M('users')->where($arr)->find();
-            /*密码是否正确*/
+            if (!$result) {
+                $this->ajaxReturn(array('status' => 0),'json');
+            }
+
+            /* 密码不正确 */
             if ($pass != $result['password']) {
-                 $data = array('status'=>3);
-                 $this->ajaxReturn($data,'json');
+                $this->ajaxReturn(array('status' => 3),'json');
             }
-            /*用户是否被停用*/
+
+            /* 账户被停用 */
             if ($result['status'] != 1){
-                $data = array('status'=>2);
-                $this->ajaxReturn($data,'json');
+                $this->ajaxReturn(array('status' => 2),'json');
             }
-            /*反馈*/
-            if ($result) {
-                $data = array('status' =>1);
-                session('user',$result);
-            } else {
-                $data = array('status'=>0);
-            }
-            $this->ajaxReturn($data,'json');
+
+            /* 登录成功 */
+            session('user',$result);
+            $this->ajaxReturn(array('status' => 1),'json');
         } else {
             $this->error('页面不存在!');die;
         }
@@ -52,9 +52,9 @@ class LoginController extends Controller
         $arr = array('user_mobi'=>I('user_mobi'));
         $result = M('users')->where($arr)->find();
         if($result){
-            $data = array('status'=>1);
+            $data = array('status' => 1);
         }else{
-            $data = array('status'=>0);
+            $data = array('status' => 0);
         }
         $this->ajaxReturn($data,'json');
     }
@@ -103,10 +103,10 @@ class LoginController extends Controller
         $code = md5(I('code'));
         /*判断验证码是否正确*/
         if($code !=$str){
-            $data = array('status'=>2);
+            $data = array('status' => 2);
             $this -> ajaxReturn($data,'json');
         }
-        $password = I('password') ? I('password') : 123456;
+        $password = I('password');
         $arr = array(
             'password'      => md5($password),
             'user_mobi'     => I('user_mobi'),
@@ -151,9 +151,9 @@ class LoginController extends Controller
         $result = M('users')->save($arr);
         /*返回值*/
         if($result){
-            $data = array('status'=>1);
+            $data = array('status' => 1);
         } else {
-            $data = array('status'=>0);
+            $data = array('status' => 0);
         }
         $this->ajaxReturn($data,'json');
     }
@@ -176,8 +176,8 @@ class LoginController extends Controller
         $phone = I('phone');
         /*判断验证码是否正确*/
         if($code !=$str){
-            $data = array('status'=>2);
-            $this -> ajaxReturn($data,'json');
+            $data = array('status' => 2);
+            $this -> ajaxReturn($data, 'json');
         }
         /*执行修改*/
         $arr['id']= $users['id'];
@@ -186,12 +186,12 @@ class LoginController extends Controller
         $user = M('users')->where($arr)->field('password', true)->find();
         /*返回值*/
         if($result){
-            $data = array('status'=>1);
+            $data = array('status' => 1);
             session('user',$user);
         }else{
-            $data = array('status'=>0);
+            $data = array('status' => 0);
         }
-        $this->ajaxReturn($data,'json');
+        $this->ajaxReturn($data, 'json');
     }
 
 }
