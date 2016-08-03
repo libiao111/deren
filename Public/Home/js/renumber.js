@@ -29,7 +29,6 @@ function getValidation() {
         oldPhone_w = document.getElementById('oldPhone_w'),
 
         validate = document.getElementById('validate'),
-        validateNum = validate.value,
         validate_w = document.getElementById('vali_w'),
 
 	    btnValidate = document.getElementById('btnValidate'),
@@ -81,7 +80,7 @@ function getValidation() {
                         function sendMsg(){
                             if(!(/^1[3|4|5|7|8]\d{9}$/.test(oldPhoneNum)) || !(/^1[3|4|5|7|8]\d{9}$/.test(phoneNum))){
                                 return false;
-                            }else if(validateNum == ''){
+                            }else if(validate.value == ''){
                                 // 验证码为空
                                 validate_w.style.display = "block";
                                 validate.focus();

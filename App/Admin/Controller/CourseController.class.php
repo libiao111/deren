@@ -51,7 +51,7 @@ class CourseController extends Controller
         $this->checkAjax();
         $id = I('id');
         $in = array('id' => array('in', $id));
-        $result = M('course')->where($in)->save(array('status' => 2));
+        $result = M('course')->where($in)->save(array('status' => 1));
         
         /*反馈数据*/
         $data = array('status'=> $result ? 1:0);
@@ -64,7 +64,7 @@ class CourseController extends Controller
         $this->checkAjax();
         $id = I('id');
         $in = array('id' => array('in', $id));
-        $result = M('course')->where($in)->save(array('status' => 1));
+        $result = M('course')->where($in)->save(array('status' => 2));
 
         /*反馈数据*/
         $data = array('status'=> $result ? 1:0);

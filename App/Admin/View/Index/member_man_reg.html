@@ -40,7 +40,7 @@
                     <!--                <th width="15%">操作</th>-->
                 </tr>
                 <foreach name="users" item="v">
-                    <tr>
+                    <tr data-row="{$v.id}">
                         <td>
                             <input type="checkbox" id="{$v.id}" value="{$v.id}" name="id[]">
                         </td>
@@ -221,6 +221,7 @@
     <script src="__AJS__/jquery.easing.js"></script>
     <script src="__AJS__/deleconfirm.js"></script>
     <script>
+        var deleUrl = "{:U('deleteUser')}";
         $(function() {
             //移除分页a标签之间的4px间距
             $('.pagination>div').contents().filter(function(){

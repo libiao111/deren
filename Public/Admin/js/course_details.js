@@ -5,6 +5,7 @@ function returnHandler(data)
         succeeAlt((data.info + '成功 ^_^'));
         /* 赋值课程ID */
         var obj = $('.modal');
+        $('input[name="id"]').val(data.course_id);
         obj.find('input[name="course_id"]').val(data.course_id);
     } else {
         succeeAlt((data.info + '失败 ！'));

@@ -23,19 +23,18 @@ class OrderController extends Controller
     }
     public function index()
     {
-        $users_id = I('users_id');
-         /*分页*/
-        $condition = "";
-        /*调用分页函数返回*/
-        $data = pageHandle('bills',$condition,15);
-        /*按分类查询*/
-        $this->type = $type ? $condition['type'] = $type: '';
-        $this->type=$type;
+        
+        $condition = array();
+        $type = I('type');
+        $this->type = $type ? $condition['type'] = $type:'';
+        /*分页*/
+        $page = pageHandle('bills', $condition, 10);
+        $limit = $page['limit'];
         /*查询记录*/
-        $result = M('bills')->where($condition)->limit($data['limit'])->select();
-
-        $this->assign('ordera',$result);
-        $this->assign('page',$data['pages']['pages']);
+        $info = D('bills')->relation('course')->where($condition)->limit($limit)->select();
+        /* 显示页面 */
+        $this->assign('ordera', $info);
+        $this->assign('page', $page['pages']);
         $this->display('Index/bill_management');
     }
 

@@ -15,10 +15,8 @@ function logHand($arr){
     $sign       = $arr['sign'];
     $title      = $arr['title'];
     $bills      = $arr['bills'];
-    $price      = $arr['price'];
-    $realm      = $arr['realm'];
-    $successurl = $arr['successurl'];
-    $data       = $arr['data'] ? $arr['data'] : '';
+    $price      = $arr['price'] * 100;
+    $data       = $arr['type'];
 
     /*初始化日志*/
     $logHandler= new CLogFileHandler("$url/logs/".date('Y-m-d').'.log');
@@ -29,10 +27,7 @@ function logHand($arr){
     $openId = $tools->GetOpenid();
 
     /*通告回调路径*/
-    $notify_url = "$realm/index.php/pay/index/notifyHandle.ogv";
-    // if (!$bills) {
-    //     $bills = WxPayConfig::MCHID.date("YmdHis");
-    // }
+    $notify_url = C('PAY_AREA').U('notifyHandle');
 
     /*统一下单*/
     $input = new WxPayUnifiedOrder();
@@ -81,11 +76,16 @@ function notify(){
                 && $result["return_code"] == "SUCCESS"
                 && $result["result_code"] == "SUCCESS")
             {
-                /*修改支付状态 $result["out_trade_no"]订单号*/
-                $cd = array(
-                    'order_num' => $result["out_trade_no"]
-                );
-                M('bills')->where($cd)->save(array('status' => 1));
+                /* 修改支付状态 $result["out_trade_no"]订单号 */
+                $cd = array('order_num' => $result["out_trade_no"]);
+                $id = M('bills')->where($cd)->getField('id');
+                if ($id) {
+                    $data = array(
+                        'id' => $id,
+                        'status' => 1
+                    );
+                    M('bills')->save($data);
+                }
                 return true;
             }
             return false;

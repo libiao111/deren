@@ -12,23 +12,23 @@ class IndexController extends Controller
     {
         /*生成订单数据*/
         $arr = session('orderData');
-        $arr['sign'] ? $arr['sign'] : $this->error('缺少商品签名');
-        $arr['title'] ? $arr['title'] : $this->error('缺少商品名称');
-        $arr['bills'] ? $arr['bills'] : $this->error('缺少商品订单号');
-        $arr['price'] ? ($arr['price'] * 100) : $this->error('缺少商品价格');
-        $arr['realm'] ? $arr['realm'] : $this->error('缺少通告回调域名(/index.php 之前的路径)');
-        $arr['successurl'] ? $arr['successurl'] : $this->error('缺少支付成功跳转路径');
-        $arr['data'] ? $arr['data'] : 'data';
+        $arr['sign'] ? '' : $this->error('缺少商品签名');
+        $arr['title'] ? '' : $this->error('缺少商品名称');
+        $arr['bills'] ? '' : $this->error('缺少商品订单号');
+        $arr['price'] ? '' : $this->error('缺少商品价格');
 
         /* 下单 */
         $result = logHand($arr);
         $this->assign('jsApiParameters', $result);
 
         /* 支付成功跳转路径 */
-        $this->assign('successurl', $arr['successurl']);
+        $this->assign('success_url', $arr['course_url']);
+
+        /* 确认信息 */
+        $this->assign('info', session('pay_info'));
 
         /* 显示页面 */
-        $this->display();
+        $this->display('Home@Index/confirm');
     }
 
 

@@ -17,7 +17,6 @@
  */
 function getConfig()
 {
-    $area = 'http://www.gkdao.com/temps/heroslider';
     //↓↓↓↓↓↓↓↓↓↓请在这里配置您的基本信息↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
     //合作身份者ID，签约账号，以2088开头由16位纯数字组成的字符串，查看地址：https://b.alipay.com/order/pidAndKey.htm
     $alipay_config['partner']       = '2088611223040175';
@@ -29,10 +28,10 @@ function getConfig()
     $alipay_config['key']           = '8t7rgxuj6qdqhwyask1lrvj9i91tfe9i';
 
     // 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-    $alipay_config['notify_url'] = $area.U('Alipay/notify_url');
+    $alipay_config['notify_url'] = C('PAY_AREA').U('Alipay/Index/notify_url');
 
     // 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-    $alipay_config['return_url'] = $area.U('Alipay/return_url');
+    $alipay_config['return_url'] = C('PAY_AREA').U('Alipay/Index/return_url');
 
     //签名方式
     $alipay_config['sign_type']    = strtoupper('MD5');

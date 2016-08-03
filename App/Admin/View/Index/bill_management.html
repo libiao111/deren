@@ -55,11 +55,11 @@
 					<th width="25%">状态</th>
 				</tr>
 				<foreach name="ordera" item="v">
-					<tr>
+					<tr data-row="{$v.id}">
 						<td>
 							<input type="checkbox" id="{$v.id}" value="{$v.id}" name="id[]">
 						</td>
-						<td><img src="{$v.course_photo}" height="60px" class="mt8 mb8"><span class="in-span">{$v.course_num}</span></td>
+						<td><img src="__UPFILE__/{$v.course.course_photo}" height="60px" class="mt8 mb8"><span class="in-span">{$v.course_num}</span></td>
 						<td>
 							<if condition="$v.type eq 1">下线课
 								<elseif condition="$v.type eq 2" />音频课
@@ -68,9 +68,9 @@
 							</if>
 						</td>
 						<td>{$v.order_time}</td>
-						<td>{$v.ordera_name}</td>
-						<td>{$v.ordera_mobi}</td>
-						<td>{$v.current_price}</td>
+						<td>{$v.user_name}</td>
+						<td>{$v.user_phone}</td>
+						<td>{$v.course_price}</td>
 						<td>
 							<if condition="$v.status eq 0">未支付
 								<elseif condition="$v.status eq 1" />已支付
@@ -242,6 +242,7 @@
 	<script src="__AJS__/jquery.easing.js"></script>
 	<script src="__AJS__/deleconfirm.js"></script>
 	<script>
+		var deleUrl = "{:U('deleteOrder')}";
 		$(function () {
 			//移除分页a标签之间的4px间距
 			$('.pagination>div').contents().filter(function () {

@@ -21,7 +21,7 @@
 			<p>
 				<span class="daojishi">3</span>
 				秒后跳转至课程详情页
-				<a href="{$showurl}" class="purple ml15">立即前往</a>
+				<a href="{$showurl}" target="parent" class="purple ml15">立即前往</a>
 			</p>
 		</div>
 	</div>
@@ -37,8 +37,8 @@
 	},2000);
 	setTimeout(function(){
 		sec.textContent = 0;
-		window.location.href = "{:U('video')}";
-	},3000)		
+		parent.location.href = "{$showurl}";
+	},3000)
 })();
 </script>	
 </body>

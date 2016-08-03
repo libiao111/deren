@@ -3,14 +3,17 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>登录页</title>
+	<title>登录</title>
 	<link rel="stylesheet" type="text/css" href="__CSS__/weui.min.css">
 	<link rel="stylesheet" type="text/css" href="__CSS__/main.css">
 	<link rel="stylesheet" type="text/css" href="__CSS__/phocus.css">
 </head>
 <body class="bfa">
 
+	<!-- 欢迎语 -->
 	<div class="weui_cells_title">欢迎来到德仁微课</div>
+
+	<!-- 账号密码 -->
 	<div class="weui_cells weui_cells_form">
 		<div class="weui_cell">
 			<div class="weui_cell_hd">
@@ -20,7 +23,7 @@
 				</label>
 			</div>
 			<div class="weui_cell_bd weui_cell_primary">
-				<input class="weui_input" type="number" pattern="[0-9]*" placeholder="请输入手机号" id="phone">
+				<input class="weui_input" type="tel" pattern="[0-9]*" placeholder="请输入手机号" id="phone">
 			</div>
 			<div class="weui_cell_ft">
 				<i class="weui_icon_warn" id="phoneIsWrong"></i>
@@ -34,32 +37,38 @@
 				</label>
 			</div>
 			<div class="weui_cell_bd weui_cell_primary">
-				<input class="weui_input" type="text" placeholder="请输入密码" id="password">
+				<input class="weui_input" type="password" placeholder="请输入密码" id="password">
 			</div>
 			<div class="weui_cell_ft">
 				<i class="weui_icon_warn" id="passwordIsWrong"></i>
 			</div>
 		</div>
 	</div>
+
+	<!-- 跳转注册 -->
 	<div class="mt10">
 		<a href="{:U('repassword')}" class="pl15 f999">忘记密码</a>
 		<a href="{:U('sign')}" class="r pr15">用户注册</a>
 	</div>
-
+	
+	<!-- 提交登录 -->
 	<div class="weui_btn_area">
 		<a class="weui_btn weui_btn_primary" onclick="checkPhone()">登录</a>
 	</div>
 
-<script>
-	var goToIndex = "{:U('index')}";
-	var loginHandle = "{:U('Login/loginhandle')}";
-	// 记录页面名称
-	var url = window.location.href.toString().split("/");
-	var pageName = ((url.slice(url.length -1,url.length))[0].split("."))[0];
-	localStorage.pageName = pageName;
-	
-</script>
-<script src="__JS__/jquery.js"></script>
-<script src="__JS__/login.js"></script>	
+	<!-- 停用提示 -->
+	<div class="weui_toptips weui_warn js_tooltips">账户被冻结</div>
+
+	<script>
+		var goToIndex = "{:U('index')}";
+		var loginHandle = "{:U('Login/loginhandle')}";
+		// 记录页面名称
+		// var url = window.location.href.toString().split("/");
+		// var pageName = ((url.slice(url.length -1,url.length))[0].split("."))[0];
+		// localStorage.pageName = pageName;
+
+	</script>
+	<script src="__JS__/jquery.js"></script>
+	<script src="__JS__/login.js"></script>	
 </body>
 </html>
