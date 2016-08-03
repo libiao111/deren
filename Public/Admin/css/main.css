@@ -493,15 +493,15 @@ div.table_footer .pagination .pagination_item_on {
 
 /* menu box */
 .sign_out{
-			float: left;
-			width: 90px;
-			height: 40px;
-			line-height: 40px;
-			margin-top: 4px;
-			background-color: #3078D7;
-			margin: 4px 5px 0;
-			color: white
-		}
+	float: right;
+	width: 90px;
+	height: 35px;
+	line-height: 35px;
+	margin-top: 4px;
+	background-color: #3078D7;
+	margin: 4px 5px 0;
+	color: white
+}
 
 .menu_box {
     display: none;
