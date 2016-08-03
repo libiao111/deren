@@ -33,7 +33,7 @@ class OrderController extends Controller
         $this->type=$type;
         /*查询记录*/
         $result = M('bills')->where($condition)->limit($data['limit'])->select();
-
+        p($result);
         $this->assign('ordera',$result);
         $this->assign('page',$data['pages']['pages']);
         $this->display('Index/bill_management');
