@@ -183,7 +183,7 @@
 	<script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.zh-CN.js"></script>
 	<script type="text/javascript">
 		$('input[name="class_time"]').blur(function () {
-			var re = /^[0-9]{2}[时]{1}[0-9]{2}[分]{1}$/;
+			var re = /^[0-9]{2}时{1}[0-9]{2}分{1}$/;
 			var reg = $(this).val();
 
 			if (!re.test(reg)) {

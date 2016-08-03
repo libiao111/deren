@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="__ACSS__/index.css">
     <link rel="stylesheet" href="__ACSS__/upload.css">
     <link rel="stylesheet" href="__ACSS__/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="__ADATEPICK__/js/datetimepicker/datepicker.min.css" type="text/css">
 </head>
 <body class="bf2">
 
@@ -53,7 +54,7 @@
             <div class="f_l w500">
                 <div class="mb15">
                     <span class="i_block w100 texy_a_r">课程总时长:</span>
-                    <input type="text" class="am-form-field w250 datas" name="class_time" value="{$va.class_time}" placeholder="00时00分">
+                    <input type="text" class="am-form-field w250 datas" name="class_time" value="{$va.class_time}" placeholder="00时00分" id="startTime" data-am-datepicker>
                 </div>
                 <div class="mb15">
                     <span class="i_block w100 texy_a_r">课节数量:</span>
@@ -216,11 +217,19 @@
     <script type="text/javascript" src="__AEDITOR__/ueditor.config.js"></script>
     <script type="text/javascript" src="__AEDITOR__/ueditor.all.min.js"></script>
     <script type="text/javascript" src="__AEDITOR__/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.min.js"></script>
+	<script type="text/javascript" src="__ADATEPICK__/js/datetimepicker/datepicker.zh-CN.js"></script>
     <script type="text/javascript">
         var ue = UE.getEditor('editor');
         var deleUrl = "{:U('deleDotList')}";
         var pullUrl = "{:U('pullAudioDot')}";
         var imageUrl = "__UPFILE__/";
+		var option = {
+			dateFormat: "yyyy-m-d",
+			autoClose: true,
+			weekStart: 7
+		};
+		$("#startTime").datepicker(option);
     </script>
 </body>
 
