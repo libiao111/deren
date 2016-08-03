@@ -250,6 +250,7 @@ class IndexController extends Controller
             'user_phone'    => I('user_phone'),
             'course_price'  => $course['current_price'],
             'pay_type'      => I('pay_type'),
+            'type'          => $course['type'],
             'status'        => 0,
             'order_time'    => date('Y-m-d H:i:s')
         );

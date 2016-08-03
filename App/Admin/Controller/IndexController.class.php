@@ -7,13 +7,13 @@ use Think\Controller;
 class IndexController extends Controller
 {
     // check login
-//    public function _initialize()
-//    {
-//        $user = session('user');
-//        if(!isset($user['id']) && !isset($user['user'])) {
-//            $this->redirect("Login/index");
-//        }
-//    }
+    public function _initialize()
+    {
+        $user = session('user');
+        if(!isset($user['id']) && !isset($user['user'])) {
+            $this->redirect("Login/index");
+        }
+    }
 
     /*默认显示页面*/
     public function index()
@@ -21,7 +21,6 @@ class IndexController extends Controller
         $this->assign('user', session('user'));
         $this->display('Index/frame');
     }
-
 
     /*修改密码*/
     public function savepass()
