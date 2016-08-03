@@ -119,6 +119,17 @@ $(function () {
     })
     /* 保存 */
     $('.videosave').click(function () {
+		var vals = $('.editdata');
+        for (var i = 0; i < vals.length; i++) {
+            if (vals.eq(i).val() === '') {
+                vals.eq(i).focus();
+                return false;
+            };
+        };
+		if($('.dataup').val()==''){
+			$('.dataup').click();
+			return false;
+		}
         $(this).parents('form').submit();
     });
 

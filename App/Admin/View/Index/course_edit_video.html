@@ -59,7 +59,7 @@
                 </div>
                 <div class="mb15">
                     <span class="i_block w100 texy_a_r">课节数量:</span>
-                    <input type="number" class="w250 courses_num datas" maxlength="5" name="class_num" value="{$va.class_num}">
+                    <input type="number" class="w250 courses_num datas" maxlength="5" name="class_num" value="{$va.class_num}" placeholder="填写数字">
                 </div>
                 <div class="mb15 relative ">
                     <span class="i_block w100 texy_a_r">上传封面:</span>
@@ -146,18 +146,18 @@
 
                 <div class="m_m_video">
                     <p><span>课节名称：</span>
-                        <input type="text" name="class_name" class="w200">
+                        <input type="text" name="class_name" class="w200 editdata" placeholder="不超过15个字">
                     </p>
                     <p>
                         <span>课节时长：</span>
-                        <input type="number" class="w50 hour" name="class_hour">
+                        <input type="number" class="w50 hour editdata" name="class_hour">
                         <span class="">小时</span>
-                        <input type="number" class="w50 minute" name="class_min">
+                        <input type="number" class="w50 minute editdata" name="class_min">
                         <span class="">分</span>
                     </p>
                     <p>
                         <span>上传视频：</span>
-                        <input type="file" name="assets" accept="video/mp4,video/ogv,video/webm">
+                        <input type="file" name="assets" accept="video/mp4,video/ogv,video/webm" class="dataup">
                         <button type="button" class="uploadbtn">选择视频</button>
                     </p>
                 </div>
