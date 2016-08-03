@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2016-08-03 10:30:42
+Date: 2016-08-03 15:55:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -39,6 +39,7 @@ CREATE TABLE `dr_bills` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `users_id` int(11) NOT NULL COMMENT '用户id',
   `course_id` int(11) NOT NULL COMMENT '课程id',
+  `type` tinyint(1) DEFAULT NULL COMMENT '课程类型',
   `order_num` char(32) DEFAULT NULL COMMENT '订单号',
   `trade` char(64) DEFAULT NULL COMMENT '交易号',
   `user_name` varchar(20) DEFAULT NULL COMMENT '购买人',
@@ -70,23 +71,11 @@ CREATE TABLE `dr_class` (
   `adate` int(11) DEFAULT NULL,
   `udate` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COMMENT='课时表';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='课时表';
 
 -- ----------------------------
 -- Records of dr_class
 -- ----------------------------
-INSERT INTO `dr_class` VALUES ('2', '1', 'PS简单应运', '2016-07-31', '3', '49', null, null, null, null);
-INSERT INTO `dr_class` VALUES ('3', '1', 'PS的基础进阶', '2016-07-31', '3', '49', null, null, null, null);
-INSERT INTO `dr_class` VALUES ('4', '1', 'PS的基础进阶', '2016-07-31', '3', '49', null, null, null, null);
-INSERT INTO `dr_class` VALUES ('5', '6', 'php简介', '2016-07-31', '3', '49', null, null, null, null);
-INSERT INTO `dr_class` VALUES ('6', '6', 'php简单应运', '2016-07-31', '3', '49', null, null, null, null);
-INSERT INTO `dr_class` VALUES ('7', '2', 'php基础进阶', '2016-07-31', '3', '49', 'video/579f06c18051f.mp4', null, null, null);
-INSERT INTO `dr_class` VALUES ('8', '8', 'php基础进阶', '2016-07-31', '3', '49', null, null, null, null);
-INSERT INTO `dr_class` VALUES ('11', '2', 'php简介', null, '1', '20', 'video/579f06c18051f.mp4', null, '1470037009', null);
-INSERT INTO `dr_class` VALUES ('13', '2', 'sdfsdf', null, '2', '33', 'video/579f06c18051f.mp4', null, '1470039745', '1470040185');
-INSERT INTO `dr_class` VALUES ('14', '3', '声音的魅力', null, '0', '30', 'audio/579f1ed60b5ce.mp3', null, '1470045910', null);
-INSERT INTO `dr_class` VALUES ('15', '3', '声音的魅力sdf', null, '1', '10', null, null, '1470049711', '1470051341');
-INSERT INTO `dr_class` VALUES ('16', '27', '课程课节', null, '1', '22', 'video/579f35fb63e62.mp4', null, '1470051835', null);
 
 -- ----------------------------
 -- Table structure for dr_class_img
@@ -98,19 +87,11 @@ CREATE TABLE `dr_class_img` (
   `course_id` int(11) NOT NULL COMMENT '课程ID',
   `pho_url` varchar(255) DEFAULT NULL COMMENT '图片路径',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=46 DEFAULT CHARSET=utf8 COMMENT='音频课图片';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='音频课图片';
 
 -- ----------------------------
 -- Records of dr_class_img
 -- ----------------------------
-INSERT INTO `dr_class_img` VALUES ('45', '15', '3', 'image/579f32e42a110.jpg');
-INSERT INTO `dr_class_img` VALUES ('44', '15', '3', 'image/579f2daf0df77.jpg');
-INSERT INTO `dr_class_img` VALUES ('43', '15', '3', 'image/579f2daf0ef8b.jpg');
-INSERT INTO `dr_class_img` VALUES ('42', '15', '3', 'image/579f2daf0e7ae.png');
-INSERT INTO `dr_class_img` VALUES ('34', '14', '3', 'image/579f1ed60d387.jpg');
-INSERT INTO `dr_class_img` VALUES ('33', '14', '3', 'image/579f1ed60cafa.jpg');
-INSERT INTO `dr_class_img` VALUES ('32', '14', '3', 'image/579f1ed60c423.png');
-INSERT INTO `dr_class_img` VALUES ('41', '15', '3', 'image/579f2daf0df77.jpg');
 
 -- ----------------------------
 -- Table structure for dr_course
@@ -131,23 +112,11 @@ CREATE TABLE `dr_course` (
   `adate` int(11) DEFAULT NULL COMMENT '添加时间',
   `udate` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COMMENT='课程表';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='课程表';
 
 -- ----------------------------
 -- Records of dr_course
 -- ----------------------------
-INSERT INTO `dr_course` VALUES ('1', '1', '思维口才50天速成课', '579da796492bd.jpg', '122', '300', '王老师', '3', '2016-7-19', '<p>兔兔图图图</p>', '1', null, '1470052783');
-INSERT INTO `dr_course` VALUES ('2', '2', '思维口才50天速成课', '579eea574df2d.jpg', '4545', '5656', '王老师', '7', '2时10分', '<p>兔兔图图图s<span style=\"font-size: 14px;\"></span></p>', '1', null, '1470052856');
-INSERT INTO `dr_course` VALUES ('3', '3', '思维口才50天速成课', '2016-05-27/20160527153420-8996.jpg', '5500', '7000', '王老师', '5', '2时10分', '<p>兔兔图图图</p>', '1', null, null);
-INSERT INTO `dr_course` VALUES ('27', '2', '添加音频', 'image/579f35d4526c6.jpg', '100', '200', '小波', '3', '3时10分', '<p>添加音频课程</p>', '1', '1470051796', null);
-INSERT INTO `dr_course` VALUES ('5', '1', '思维口才50天速成课', '2016-05-27/20160527153420-8996.jpg', '500', '600', '王老师', '5', '2016-7-19', '<p>兔兔图图图</p><img src=\"2016-05-27/20160527153420-8996.jpg\"/>', '2', null, null);
-INSERT INTO `dr_course` VALUES ('6', '2', '思维口才50天速成课', '2016-05-27/20160527153420-8996.jpg', '700', '800', '王老师', '5', '3时10分', '<p>兔兔图图图</p><img src=\"2016-05-27/20160527153420-8996.jpg\"/>', '1', null, null);
-INSERT INTO `dr_course` VALUES ('7', '1', '思维口才50天速成课', '579da796492bd.jpg', '122', '300', '王老师', '5', '2016-7-19', '<p>兔兔图图图</p>', '2', null, null);
-INSERT INTO `dr_course` VALUES ('8', '2', '思维口才50天速成课', '579eea574df2d.jpg', '4545', '5656', '王老师', '3', '2时10分', '<p>兔兔图图图s<span style=\"font-size: 14px;\"></span></p>', '2', null, null);
-INSERT INTO `dr_course` VALUES ('9', '3', '思维口才50天速成课', '2016-05-27/20160527153420-8996.jpg', '5500', '7000', '王老师', '5', '2时10分', '<p>兔兔图图图</p><img src=\"2016-05-27/20160527153420-8996.jpg\"/>', '1', null, null);
-INSERT INTO `dr_course` VALUES ('10', '1', '思维口才50天速成课', '2016-05-27/20160527153420-8996.jpg', '200', '230', '王老师', '5', '2016-7-19', '<p>兔兔图图图</p><img src=\"2016-05-27/20160527153420-8996.jpg\"/>', '1', null, null);
-INSERT INTO `dr_course` VALUES ('11', '1', '思维口才50天速成课', '2016-05-27/20160527153420-8996.jpg', '500', '600', '王老师', '5', '2016-7-19', '<p>兔兔图图图</p><img src=\"2016-05-27/20160527153420-8996.jpg\"/>', '2', null, null);
-INSERT INTO `dr_course` VALUES ('12', '2', '思维口才50天速成课', '2016-05-27/20160527153420-8996.jpg', '700', '800', '王老师', '5', '3时10分', '<p>兔兔图图图</p><img src=\"2016-05-27/20160527153420-8996.jpg\"/>', '1', null, null);
 
 -- ----------------------------
 -- Table structure for dr_users
@@ -163,12 +132,8 @@ CREATE TABLE `dr_users` (
   `status` int(1) DEFAULT NULL COMMENT '用户状态',
   `logintime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '注册时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='用户表';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 -- ----------------------------
 -- Records of dr_users
 -- ----------------------------
-INSERT INTO `dr_users` VALUES ('1', '18383291536', 'e10adc3949ba59abbe56e057f20f883e', 'http://www.gkdao.cn/resource/2016-07-05/20160705183330-9879.png', '李飞a', '1', '0', '2016-08-03 10:16:09');
-INSERT INTO `dr_users` VALUES ('2', '18734832258', 'e10adc3949ba59abbe56e057f20f883e', 'http://www.gkdao.cn/resource/2016-07-05/20160705183330-9879.png', '李四', '0', '0', '2016-08-02 22:11:41');
-INSERT INTO `dr_users` VALUES ('4', '13693251041', 'e10adc3949ba59abbe56e057f20f883e', 'http://www.gkdao.cn/resource/2016-07-05/20160705183330-9879.png', '李飞飞', '0', '0', '2016-08-02 22:11:41');
-INSERT INTO `dr_users` VALUES ('5', '13716779617', 'e10adc3949ba59abbe56e057f20f883e', 'http://www.gkdao.cn/resource/2016-07-05/20160705183330-9879.png', '李飞b', '1', '0', '2016-08-02 22:11:41');

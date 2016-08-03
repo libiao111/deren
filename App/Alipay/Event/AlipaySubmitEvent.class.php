@@ -94,14 +94,16 @@ class AlipaySubmitEvent
 		//待请求参数数组
 		$para = $this->buildRequestPara($para_temp);
 		
-		$sHtml = "<form id='alipaysubmit' name='alipaysubmit' action='".$this->alipay_gateway_new."_input_charset=".trim(strtolower($this->alipay_config['input_charset']))."' method='".$method."'>";
+		$sHtml = "<form id='alipaysubmit' target='post-handler' name='alipaysubmit' action='".$this->alipay_gateway_new."_input_charset=".trim(strtolower($this->alipay_config['input_charset']))."' method='".$method."'>";
 		while (list ($key, $val) = each ($para)) {
             $sHtml.= "<input type='hidden' name='".$key."' value='".$val."'/>";
         }
 
 		//submit按钮控件请不要含有name属性
-        $sHtml = $sHtml."<input type='submit'  value='".$button_name."' style='display:none;'></form>";
+        $sHtml = $sHtml."<input type='submit' value='".$button_name."' style='display:none;'></form>";
 		
+		$sHtml = $sHtml."<iframe name='post-handler' style='position:fixed; width:100%; height:100%; top:0; left:0; border: none; background: #FFF; z-index: 10;'></iframe>";
+
 		$sHtml = $sHtml."<script>document.forms['alipaysubmit'].submit();</script>";
 		
 		return $sHtml;
