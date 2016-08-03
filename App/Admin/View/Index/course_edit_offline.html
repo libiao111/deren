@@ -57,7 +57,7 @@
                 </div>
                 <div class="mb15">
                     <span class="i_block w100 texy_a_r">课节数量:</span>
-                    <input type="number" class="w250 courses_num datas" maxlength="5" name="class_num" value="{$va.class_num}">
+                    <input type="number" class="w250 courses_num datas" maxlength="5" name="class_num" value="{$va.class_num}" placeholder="填写数字">
                 </div>
                 <div class="mb15 relative ">
                     <span class="i_block w100 texy_a_r">上传封面:</span>
@@ -141,17 +141,17 @@
                 <h2>编辑课节</h2>
                 <div class="m_m_video">
                     <p><span>课节名称：</span>
-                        <input type="text" name="class_name" class="w200">
+                        <input type="text" name="class_name" class="w200 editdata" placeholder="不超过15个字">
                     </p>
                     <p>
                         <span>上课时间：</span>
-                        <input type="text" name="class_day" id="startTime1" class="am-form-field w200">
+                        <input type="text" name="class_day" id="startTime1" class="am-form-field w200 editdata">
                     </p>
                     <p>
                         <span class="inline-block w70"></span>
-                        <input type="number" name="class_hour" class="w50 hour">
+                        <input type="number" name="class_hour" class="w50 hour editdata">
                         <span class="">小时</span>
-                        <input type="number" name="class_min" class="w50 minute">
+                        <input type="number" name="class_min" class="w50 minute editdata">
                         <span class="">分</span>
                     </p>
                 </div>
