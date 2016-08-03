@@ -48,7 +48,6 @@ class IndexController extends Controller
         );
 
         //建立请求
-        header('Content-Type:text/html; charset=utf-8');
         $alipaySubmit = new \Alipay\Event\AlipaySubmitEvent($alipay_config);
         $html_text = $alipaySubmit->buildRequestForm($parameter,"get", "确认");
         $this->assign('href', $html_text);

@@ -17,7 +17,6 @@ class IndexController extends Controller
         //         $this->redirect('Open/index');
         //     }
         // }
-        
 
         /* 登录验证 */
         $user = session('user');
@@ -46,7 +45,7 @@ class IndexController extends Controller
         //获取用户id
         $users_id = session('user')['id'];
         // 查询课程表
-        $course = M("course")->where(array('status'=>2))->order('id')->select();
+        $course = M("course")->where(array('status' => 1))->order('id')->select();
         // 查询已支付订单
         $bills = M('bills')->where(array('users_id' => $users_id, 'status' => 1))->field('course_id')->select();
         foreach ($course as $k => $kc) {
@@ -71,6 +70,7 @@ class IndexController extends Controller
         $users_id = session('user')['id'];
         /*查询所有线下课*/
         $where['type'] = 1;
+        $where['status'] = 1;
         $result = M("course")->where($where)->order('id desc')->select();
         //查询已支付订单
         $bills = M('bills')->where(array('users_id' => $users_id, 'status' => 1))->field('course_id')->select();
@@ -96,6 +96,7 @@ class IndexController extends Controller
         $users_id = session('user')['id'];
         /*查询所有线下课*/
         $where['type'] = 2;
+        $where['status'] = 1;
         $result = M("course")->where($where)->order('id desc')->select();
         //查询已支付订单
         $bills = M('bills')->where(array('users_id' => $users_id, 'status' => 1))->field('course_id')->select();
@@ -119,6 +120,7 @@ class IndexController extends Controller
         $users_id = session('user')['id'];
         /*查询所有线下课*/
         $where['type'] = 3;
+        $where['status'] = 1;
         $result = M("course")->where($where)->order('id desc')->select();
         //查询已支付订单
         $bills = M('bills')->where(array('users_id' => $users_id, 'status' => 1))->field('course_id')->select();
