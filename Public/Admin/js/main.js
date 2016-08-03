@@ -34,10 +34,10 @@ require(["jquery"],function($){
 			}	
 		});
 		// 鼠标移出菜单时隐藏
-		menu.onmouseleave = function(){
-			this.style.display = "none";
-			head.setAttribute("status",0);
-		};
+//		menu.onmouseleave = function(){
+//			this.style.display = "none";
+//			head.setAttribute("status",0);
+//		};
 		
 	})();
 

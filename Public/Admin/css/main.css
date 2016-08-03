@@ -459,10 +459,10 @@ div.table_footer .pagination .pagination_item_on {
 .admin_head {
     display: inline-block;
     float: right;
-    width: 250px;
+    width: 213px;
     height: 49.5px;
     line-height: 49.5px;
-    padding: 0 16px;
+/*    padding: 0 16px;*/
     text-align: center;
     cursor: pointer;
 }
