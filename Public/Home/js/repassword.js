@@ -76,10 +76,8 @@ function vali(){
     	password_w = document.getElementById('password_w'),
 
     	repassword = document.getElementById('repassword'),
-    	repasswordNum = repassword.value;
-    	repassword_w = document.getElementById('repassword_w'),
-
-        pageName = localStorage.pageName;
+    	repasswordNum = repassword.value,
+    	repassword_w = document.getElementById('repassword_w');
    
     /* 验证 */
     if (!(/^1[3|4|5|7|8]\d{9}$/.test(phoneNum))){ 
@@ -129,11 +127,7 @@ function vali(){
 		},function(status){
 			if(status.status){
 				// 验证成功，跳转到提示页面
-                if(pageName == "user"){
-                    window.location.href = goToIndex;
-                }else if(pageName == "login"){
-                    window.location.href = goToLogin;
-                }
+                window.location.href = goToLogin;
 			}else{
 				// 验证失败，显示验证码错误提示图标
 				password_w.style.display = "block";

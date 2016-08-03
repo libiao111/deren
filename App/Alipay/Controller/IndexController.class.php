@@ -23,41 +23,10 @@ class IndexController extends Controller
         $total_fee = 0.01;
 
         //收银台页面上，商品展示的超链接，必填
-        switch ($data['type']) {
-            case '1':
-                $pagename = "offline";
-                break;
-            case '2':
-                $pagename = "video";
-                break;
-            case '3':
-                $pagename = "audio";
-                break;
-            default:
-                 $pagename = "offline";
-                break;
-        }
-        $id = $data['id'];
-        $area = "http://www.gkdao.com/temps/heroslider";
-        $show_url = "$area/home/index/$pagename/id/$id";
-        session('showurl',$showurl);
+        $show_url = $data['course_url'];
 
         //商品描述，可空
-        switch ($data['type']) {
-            case 1:
-                $body =  '线下课';
-                break;
-            case 2:
-                $body =  '视频课';
-                break;
-            case 3:
-                $body =  '音频课';
-                break;
-            
-            default:
-                $body =  '线下课';
-                break;
-        };
+        $body = $data['type'];
 
         /************************************************************/
 
@@ -75,20 +44,15 @@ class IndexController extends Controller
             "subject"       => $subject,
             "total_fee"     => $total_fee,
             "show_url"      => $show_url,
-            "body"          => $body,
-            //其他业务参数根据在线开发文档，添加参数.
-            //文档地址:https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.2Z6TSk&treeId=60&articleId=103693&docType=1
-            //如"参数名"    => "参数值"   注：上一个参数末尾需要“,”逗号。
+            "body"          => $body
         );
 
         //建立请求
-
-        // $alipaySubmit = new AlipaySubmit($alipay_config);
-        // $alipaySubmit = A('AlipaySubmit', 'Event');
         header('Content-Type:text/html; charset=utf-8');
         $alipaySubmit = new \Alipay\Event\AlipaySubmitEvent($alipay_config);
         $html_text = $alipaySubmit->buildRequestForm($parameter,"get", "确认");
-        echo $html_text;
+        $this->assign('href', $html_text);
+        $this->display();
     }
 
 
@@ -98,27 +62,37 @@ class IndexController extends Controller
         $alipay_config = getConfig();
         //计算得出通知验证结果
         // $alipayNotify = new AlipayNotify($alipay_config);
-        $alipayNotify = new \Alipay\Event\AlipayNotify($alipay_config);
+        $alipayNotify = new \Alipay\Event\AlipayNotifyEvent($alipay_config);
         $verify_result = $alipayNotify->verifyReturn();
-        if($verify_result) {
+        if ($verify_result) {
+
             //商户订单号
             $out_trade_no = $_GET['out_trade_no'];
+
             //支付宝交易号
             $trade_no = $_GET['trade_no'];
-            $showurl = session('showurl');
+
             //交易状态
             //$trade_status = $_GET['trade_status'];
-            $where = array('ordera_num'=>$out_trade_no);
-            $sql = M('bills')->where($where)->select();
-            $arr = array(
-                'id'    => $sql['id'],
-                'trade' => $trade_no
-            );
-            $result = M('bills')->save($arr);
-            $this->showurl=$showurl;
-            $this->display('Index/gotocourse');
-        }
-        else {
+
+            /* 更新订单状态 */
+            $where = array('order_num' => $out_trade_no);
+            $id = M('bills')->where($where)->getField('id');
+            if ($id) {
+                $data = array(
+                    'id' => $id,
+                    'status' => 1,
+                    'trade'  => $trade_no
+                );
+                M('bills')->save($data);
+            }
+
+            /* 显示页面 */
+            $showurl = session('showurl');
+            $this->assign('showurl', $showurl);
+            $this->display('Home@Index/gotocourse');
+        } else {
+            header('Content-Type:text/html; charset=utf-8');
             echo "验证失败";
         }
     }
@@ -128,29 +102,36 @@ class IndexController extends Controller
     public function notify_url()
     {
         $alipay_config = getConfig();
-        //计算得出通知验证结果
-        // $alipayNotify = new AlipayNotify($alipay_config);
-        $alipayNotify = new \Alipay\Event\AlipayNotify($alipay_config);
+        $alipayNotify = new \Alipay\Event\AlipayNotifyEvent($alipay_config);
         $verify_result = $alipayNotify->verifyNotify();
 
-        if($verify_result) {//验证成功
-            //商户订单号
+        // 验证成功
+        if ($verify_result) {
+            // 商户订单号
             $out_trade_no = $_POST['out_trade_no'];
-            //支付宝交易号
+
+            // 支付宝交易号
             $trade_no = $_POST['trade_no'];
-            //交易状态
-            //$trade_status = $_POST['trade_status'];
-            $showurl = session('showurl');
-            $where = array('ordera_num'=>$out_trade_no);
-            $sql = M('bills')->where($where)->select();
-            $arr = array(
-                'id'    => $sql['id'],
-                'trade' => $trade_no
-            );
-            $result = M('bills')->save($arr);
-            $this->showurl = $showurl;
-            $this->display('Index/gotocourse');
+
+            // 交易状态
+            $trade_status = $_POST['trade_status'];
+
+            /* 更新订单状态 */
+            $where = array('order_num' => $out_trade_no);
+            $id = M('bills')->where($where)->getField('id');
+            if ($id) {
+                $data = array(
+                    'id' => $id,
+                    'status' => 1,
+                    'trade'  => $trade_no
+                );
+                M('bills')->save($data);
+            }
+
+            // 请不要修改或删除
+            echo "success";     
         } else {
+            // 验证失败
             echo "fail";
         }
     }

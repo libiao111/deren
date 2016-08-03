@@ -13,18 +13,20 @@ return array(
         '__ACSS__'      => __ROOT__.'/Public/Admin/css',
         '__AIMG__'      => __ROOT__.'/Public/Admin/img',
         '__AJS__'       => __ROOT__.'/Public/Admin/js',
-        '__UPFILE__'    => __ROOT__.'/Public/upfile',
+        // '__UPFILE__'    => __ROOT__.'/Public/upfile',
+        '__UPFILE__'    => 'http://www.gkdao.com/temps/heroslider'.__ROOT__.'/Public/upfile',
         '__AEDITOR__'   => __ROOT__.'/Public/Admin/editor',
         '__ADATEPICK__' => __ROOT__.'/Public/Admin/datepick'
     ),
+    'PAY_AREA'  => 'http://www.gkdao.com',
     'DB_TYPE'   => 'mysql',
     'DB_PREFIX' => 'dr_',
     'DB_HOST'   => 'localhost',
     'DB_USER'   => 'root',
     'DB_PWD'    => '',
     'DB_NAME'   => 'deren',
-    // 'DB_HOST' => 'qdm100230239.my3w.com',
-    // 'DB_USER' => 'qdm100230239',
-    // 'DB_PWD'  => 'stevewins1023',
-    // 'DB_NAME' => 'qdm100230239_db'
+    'DB_HOST' => 'qdm100230239.my3w.com',
+    'DB_USER' => 'qdm100230239',
+    'DB_PWD'  => 'stevewins1023',
+    'DB_NAME' => 'qdm100230239_db'
 );
